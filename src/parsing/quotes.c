@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:50:19 by abastida          #+#    #+#             */
-/*   Updated: 2023/09/19 15:10:13 by abastida         ###   ########.fr       */
+/*   Updated: 2023/09/19 18:44:37 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,22 @@ bool paired_quotes(t_master *master)
     return (status);
 }
 
+int memory_alloc(t_master *master)
+{
+    int len; 
+
+    len = ft_strlen(master->line);
+    master->clean_line = ft_calloc(len+1, sizeof(t_master));
+    if (!master->clean_line)
+        return (0);
+    else
+        return (1);
+}
+
 
 char *clean_line(t_master *master)
 {
-    int length;
+    //int length;
     int i;
     int j;
     bool double_quote;
@@ -51,25 +63,31 @@ char *clean_line(t_master *master)
 
     i = 0;
     j = 0;
-    length = ft_strlen(master->line);
+    //length = ft_strlen(master->line);
     double_quote = false;
     simple_quote = false;
-    master->clean_line = ft_calloc(length + 1, sizeof(t_master));
-    if (!master->clean_line)
-        return (0);
+    //master->clean_line = ft_calloc(length + 1, sizeof(t_master));
+   
+   // if (!master->clean_line)
+   //     return (0); 
+   if (memory_alloc(master) == 1)
+   {
     while (master->line[i])
     {
-        if ((master->line[i] == '\"' && simple_quote == false) || (master->line[i] == '\'' && double_quote == false))
-        {
-            if (master->line[i] == '\"')
-                double_quote = !double_quote;
-            else if (master->line[i] == '\'')
-                simple_quote = !simple_quote;
-            i++;
-        }
+      if ((master->line[i] == '\"' && simple_quote == false) || (master->line[i] == '\'' && double_quote == false))
+      {
+        if (master->line[i] == '\"')
+            double_quote = !double_quote;
+        else if (master->line[i] == '\'')
+            simple_quote = !simple_quote;
+        i++;
+      }
         master->clean_line[j++] = master->line[i++];
     }
     return (master->clean_line);
+   }
+   else
+    exit(1);
 }
 
 //TO-DO:

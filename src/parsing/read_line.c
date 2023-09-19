@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:13:11 by abastida          #+#    #+#             */
-/*   Updated: 2023/09/19 15:14:16 by abastida         ###   ########.fr       */
+/*   Updated: 2023/09/19 18:22:52 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,14 @@
 
 void *read_line(t_master *master)
 {
+   
     master->line = readline(BBLU "Bashtida: "RESET);
-    
     if(!master->line)
     {
         printf("Exit\n");
         free(master);
         exit(1);
     }
-    //printf("%s\n", master->line);
-    free(master->line);
-    // free (master);
     return (0);
 }
 
