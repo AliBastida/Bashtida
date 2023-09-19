@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:50:19 by abastida          #+#    #+#             */
-/*   Updated: 2023/09/18 15:42:59 by abastida         ###   ########.fr       */
+/*   Updated: 2023/09/19 15:10:13 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ bool paired_quotes(t_master *master)
         }
         i++;
     }
+     
     return (status);
 }
+
 
 char *clean_line(t_master *master)
 {
@@ -68,9 +70,9 @@ char *clean_line(t_master *master)
         master->clean_line[j++] = master->line[i++];
     }
     return (master->clean_line);
-  //  free (master);
 }
 
 //TO-DO:
 //Norm
-//arreglar problema de memoria con: "hola ' hola ' hola "
+//hacer una funcion que ponga uan variable  a 1 si son comillas dobles o 2 si son simples. 
+//hacer una funcion split que separe las palabras cuando encuentre "+sp o '+sp.
