@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abastida <abastida@student.42.fr>          +#+  +:+       +#+         #
+#    By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/20 11:24:34 by abastida          #+#    #+#              #
-#    Updated: 2023/09/18 14:54:19 by abastida         ###   ########.fr        #
+#    Updated: 2023/09/22 14:36:18 by pabastid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ DFLAGS_MAIN	= -MMD -MP -MF $(DEP_DIR_MAIN)/$*.d
 DFLAGS_PARS	= -MMD -MP -MF $(DEP_DIR_PARS)/$*.d
 
 SRC_MAIN	:=	src/main/main.c src/main/utils.c
-SRC_PARS	:=	src/parsing/read_line.c src/parsing/quotes.c
+SRC_PARS	:=	src/parsing/read_line.c src/parsing/quotes.c src/parsing/split.c 
 		
 SRC_DIR := src
 OBJ_DIR := .obj
