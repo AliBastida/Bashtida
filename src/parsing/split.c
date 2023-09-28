@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 TODO : Rehacer split primero por pipes y despues por espacios.Ha de ser una funcion que reciba ppor parametro un char c y una string.TODO : Tb he de hacer una funcion que cree nodos nuevos y lo que retorne split de pipe lo guarde en nodos mnuevos.
-
+TODO :
 																																			int
 																																			is_space(t_master *master)
 {
