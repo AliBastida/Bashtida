@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2023/09/22 15:10:58 by pabastid         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:28:45 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,26 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <readline/readline.h>
-// # include <readline/history.h>
+//# include <readline/history.h>
 # include <stdbool.h>
 
-#define METACHARACTERS " \n\t|<>&()" // `;' not implemented
+
+
 
 //===== MAIN =====//
 int main(int ac, char **av, char **env);
 
 
-//===== READ_LINE =====//
+//===== READLINE =====//
 void *read_line(t_master *master);
-int is_word(t_master *master);
 
-//===== SPLIT =====//
-int is_space(t_master *master);
-int count_words(t_master *master);
-char *saved_word(t_master *master, int start, int end);
-char **split_line(t_master *master);
-int count_char(t_master *master);
-
-//===== QUOTES =====//
+//===== CHECK_SYNTAX =====//
 bool paired_quotes(t_master *master);
 char *clean_line(t_master *master);
 int memory_alloc(t_master *master);
-bool what_type_ofquotes(t_master *master);
+//******PIPE_SYNTAX******//
+bool something_before(char *str);
+bool there_is_sth(char *str);
+bool something_after(char *str);
+bool sth_inside_pipes(char *str);
 #endif
