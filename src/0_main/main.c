@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/11 14:28:02 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/11 16:06:17 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main(int ac, char **av, char **env)
         read_line(master);
         if (paired_quotes(master) == 1)
         {
-            if (sth_inside_pipes(master->line))
+            if (check_syntax_pipes(master->line))
             {
                 printf("Lo habeeis hecho bien\n");
                 printf("%s\n", clean_line(master));

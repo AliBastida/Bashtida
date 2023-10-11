@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:38:29 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/11 14:33:41 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/11 16:04:03 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ bool there_is_sth(char *str)
         str = str + 1;
         if(!something_before(str))
             return (0);
-        printf("2%s\n", str);
         str = ft_strchr(str, '|');
-        printf ("3%s\n", str);
     }
     return (1);
 }
@@ -60,12 +58,12 @@ bool something_after(char *str)
     return (1);
 }
 
-bool sth_inside_pipes(char *str)
+bool check_syntax_pipes(char *str)
 {
     if (!there_is_sth(str))
-        return(0);
+        return (0);
     else if (!something_after(str))
-        return  (0);
+        return (0);
     else
         return (1);
 }
