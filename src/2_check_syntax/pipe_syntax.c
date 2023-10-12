@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_syntax.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:38:29 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/11 16:04:03 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:30:45 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ bool something_before(char *str)
     while (str[i] == ' ')
         i++;
     if (str[i] == '|')
-    {
-        ft_putstr_fd("Syntax Error\n", 2);
-        return (0);
-    }
+        syntax_error(0);
     return (1);
 }
 
@@ -51,10 +48,7 @@ bool something_after(char *str)
     while (str[len] == ' ')
         len--;
     if (str[len] == '|')
-    {
-        ft_putstr_fd("Syntax Error\n", 2);
-        return (0);
-    }
+        syntax_error(0);
     return (1);
 }
 
