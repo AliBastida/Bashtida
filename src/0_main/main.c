@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/12 14:56:08 by pabastid         ###   ########.fr       */
+/*   Updated: 2023/10/12 15:09:45 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int main(int ac, char **av)
     {
         read_line(master);
         printf("el valor de return es: %d\n", check_redir_1(master->line));
+        printf("el valor de return es: %d\n", check_redir_2(master->line));
     }
     free (master);
     return (0);

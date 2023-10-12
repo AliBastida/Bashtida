@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/12 14:59:12 by pabastid         ###   ########.fr       */
+/*   Updated: 2023/10/12 15:08:48 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ bool something_after(char *str);
 bool check_syntax_pipes(char *str);
 //******REDIR_SYNTAX******//
 int check_redir_1(char *str);
+int check_redir_2(char *str);
 #endif
