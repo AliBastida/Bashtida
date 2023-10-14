@@ -3,12 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:31:30 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/11 12:11:59 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:43:57 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int syntax_error(int n)
+{
+    if (n == 3)
+    {
+        ft_putstr_fd("Syntax Error\n", 2);
+    }
+    return (n);
+}
