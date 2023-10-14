@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:30:43 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/12 15:18:07 by pabastid         ###   ########.fr       */
+/*   Updated: 2023/10/14 09:18:26 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,19 @@ int check_redir_2(char *str)
     }
     return (0);
 }
-TODO
 
-char *redir(char *str)
+int redir(char *str)
 {
-    while (str[i])
+    //int i;
+    
+    //i = 0;
+    while (str)
     {
-        if (str[i] == '>')
-            check_redir_1;
-        else if (str[i] == '<')
-            check_redir_2;
+        if (*str == '>')
+            return(check_redir_1(str));
+        else if (*str == '<')
+            return(check_redir_2(str));
+        str++;    
     }
+    return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/12 15:09:45 by pabastid         ###   ########.fr       */
+/*   Updated: 2023/10/14 08:57:48 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ int main(int ac, char **av)
     while (1)
     {
         read_line(master);
-        printf("el valor de return es: %d\n", check_redir_1(master->line));
-        printf("el valor de return es: %d\n", check_redir_2(master->line));
+        printf("return de redir: %d\n", redir(master->line));
+       // printf("el valor de return es: %d\n", check_redir_1(master->line));
+       // printf("el valor de return es: %d\n", check_redir_2(master->line));
     }
     free (master);
     return (0);
