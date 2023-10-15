@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 13:31:30 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/15 20:32:55 by abastida         ###   ########.fr       */
+/*   Created: 2023/10/15 20:32:26 by abastida          #+#    #+#             */
+/*   Updated: 2023/10/15 20:32:51 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int syntax_error(int n)
+void checking_syntax(char *str)
 {
-    if (n == 3)
-        ft_putstr_fd("Syntax Error\n", 2);
-    else if (n == 0)
-        ft_putstr_fd("Syntax Error 2 \n", 2);
-
-    return (n);
+    if (paired_quotes(str) == 1)
+        {
+            if (check_syntax_pipes(str) == 1)
+            {
+                if (redir(str) == 1)
+                //printf("Lo habeeis hecho bien\n");
+                    printf("%s\n", clean_line(str));
+            }
+        }
+        else
+            printf("syntax error :<\n");
 }

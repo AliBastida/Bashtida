@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/14 08:57:48 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/15 20:31:39 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*int main(int ac, char **av, char **env)
+int main(int ac, char **av, char **env)
 {
     (void) ac;
     (void) av;
@@ -23,22 +23,13 @@
     while (1)
     {
         read_line(master);
-        if (paired_quotes(master) == 1)
-        {
-            if (check_syntax_pipes(master->line))
-            {
-                printf("Lo habeeis hecho bien\n");
-                printf("%s\n", clean_line(master));
-            }
-        }
-        else
-            printf("Not paired quotes\n");
+        checking_syntax(master->line);
     }
     free (master);
     return (0);
-}*/
+}
 
-int main(int ac, char **av)
+/*int main(int ac, char **av)
 {
     (void) ac;
     (void) av;
@@ -56,5 +47,5 @@ int main(int ac, char **av)
     }
     free (master);
     return (0);
-}
+}*/
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/14 08:50:51 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/15 20:34:49 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 # include <stdbool.h>
 
 //===== MAIN =====//
-int main(int ac, char **av);
+int main(int ac, char **av, char **env);
+
 //******UTILS******//
 int syntax_error(int n);
 
@@ -32,8 +33,9 @@ int syntax_error(int n);
 void *read_line(t_master *master);
 
 //===== CHECK_SYNTAX =====//
-bool paired_quotes(t_master *master);
-char *clean_line(t_master *master);
+//******QUOTES_SYNTAX******//
+bool paired_quotes(char *line);
+char *clean_line(char *line);
 int memory_alloc(t_master *master);
 
 //******PIPE_SYNTAX******//
@@ -46,5 +48,8 @@ bool check_syntax_pipes(char *str);
 int check_redir_1(char *str);
 int check_redir_2(char *str);
 int redir(char *str);
+
+//******UTILS_SYNTAX******//
+void checking_syntax(char *str);
 
 #endif

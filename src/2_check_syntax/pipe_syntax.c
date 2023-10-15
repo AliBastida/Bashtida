@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_syntax.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:38:29 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/12 14:30:45 by pabastid         ###   ########.fr       */
+/*   Updated: 2023/10/15 20:31:17 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool something_before(char *str)
     while (str[i] == ' ')
         i++;
     if (str[i] == '|')
-        syntax_error(0);
+        return (syntax_error(0));
     return (1);
 }
 
@@ -29,8 +29,11 @@ bool there_is_sth(char *str)
     if(!something_before(str))
         return (0);
     str = ft_strchr(str, '|');
+
     while (str != NULL)
     {  
+        if (str == str + 1)
+            return (syntax_error(3));
         str = str + 1;
         if(!something_before(str))
             return (0);
@@ -47,8 +50,8 @@ bool something_after(char *str)
     len = len - 1;
     while (str[len] == ' ')
         len--;
-    if (str[len] == '|')
-        syntax_error(0);
+    if ((str[len] == '|') || (str[len - 1] == '|' && str[len == '\"']) || (str[len - 1] == '|' && str[len == '\'']))
+        return (syntax_error(0));
     return (1);
 }
 
@@ -61,3 +64,5 @@ bool check_syntax_pipes(char *str)
     else
         return (1);
 }
+
+//TODO: tenemos que revisar el caso en el que haya un | seguido de "". Eso deberia dar error tb.
