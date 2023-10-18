@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/16 10:47:54 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:43:12 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ int main(int ac, char **av, char **env)
     while (1)
     {
         read_line(master);
-        checking_syntax(master->line, master);
+        if (checking_syntax(master->line, master) == 0)
+            checking_pipe_quoted(master->line);
     }
     free (master);
     return (0);
 }
-
-/*int main(int ac, char **av)
+/*
+int main(int ac, char **av)
 {
     (void) ac;
     (void) av;
@@ -41,9 +42,10 @@ int main(int ac, char **av, char **env)
     while (1)
     {
         read_line(master);
-        printf("return de redir: %d\n", redir(master->line));
-       // printf("el valor de return es: %d\n", check_redir_1(master->line));
-       // printf("el valor de return es: %d\n", check_redir_2(master->line));
+        printf("%d\n", checking_pipe_quoted(master->line));
+    //    printf("%d\n", how_many_pipes(master->line));
+    //    printf("valor token %d\n",token_length(master->line));
+        //printf("return de redir: %d\n", redir(master->line));
     }
     free (master);
     return (0);

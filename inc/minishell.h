@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/16 10:59:45 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/18 20:32:20 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 
 //===== MAIN =====//
 int main(int ac, char **av, char **env);
-
+//int main(int ac, char **av);
 //******UTILS******//
-int syntax_error(int n);
+char *memory_alloc(t_master *master);
 
 //===== READLINE =====//
 void *read_line(t_master *master);
@@ -36,7 +36,7 @@ void *read_line(t_master *master);
 //******QUOTES_SYNTAX******//
 bool paired_quotes(char *line);
 char *clean_line(char *line, t_master *master);
-char *memory_alloc(t_master *master);
+
 
 //******PIPE_SYNTAX******//
 bool something_before(char *str);
@@ -50,6 +50,19 @@ int check_redir_2(char *str);
 int redir(char *str);
 
 //******UTILS_SYNTAX******//
-void checking_syntax(char *str, t_master *master);
+int checking_syntax(char *str, t_master *master);
+int syntax_error(int n);
+
+//===== SPLIT_PER_PIPES =====//
+//******GENERAL_SPLIT******//
+
+char *checking_pipe_quoted(char *str);
+//int token_length(char *str);
+int pipe_quoted(char *str, int i);
+char *substring_frompipe(char *str, int pipe, int i);
+
+
+
+
 
 #endif
