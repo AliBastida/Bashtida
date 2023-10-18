@@ -6,13 +6,13 @@
 /*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:32:26 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/15 20:32:51 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:05:06 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void checking_syntax(char *str)
+void checking_syntax(char *str, t_master *master)
 {
     if (paired_quotes(str) == 1)
         {
@@ -20,7 +20,7 @@ void checking_syntax(char *str)
             {
                 if (redir(str) == 1)
                 //printf("Lo habeeis hecho bien\n");
-                    printf("%s\n", clean_line(str));
+                    printf("%s\n", clean_line(str, master));
             }
         }
         else

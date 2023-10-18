@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:38:29 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/15 20:31:17 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:08:59 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ bool something_after(char *str)
     len = len - 1;
     while (str[len] == ' ')
         len--;
-    if ((str[len] == '|') || (str[len - 1] == '|' && str[len == '\"']) || (str[len - 1] == '|' && str[len == '\'']))
+    if (str[len] == '|')
         return (syntax_error(0));
     return (1);
 }

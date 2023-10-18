@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:30:43 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/15 19:38:22 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/16 10:34:12 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ int check_redir_1(char *str)
         {
             if (str[i+2] == '<' || str[i+2] == '>')
                 return (syntax_error(3));
-            //    else
-            //       return(2);
         }
-            //return(1);
     }
     return (0);
 }
@@ -72,10 +69,7 @@ int check_redir_2(char *str)
         {
             if (str[i+2] == '>' || str[i+2] == '<')
                 return (syntax_error(3));
-            //    else
-            //       return(2);
         }
-            //return(1);
     }
     return (0);
 }
@@ -85,7 +79,7 @@ int redir(char *str)
     int i;
     
     i = 0;
-    while (str[i]) //&& (*str == '>' || *str == '<'))
+    while (str[i])
     {
         if (str[i] == '>' && check_redir_1(&str[i]) == 3)
             return (3);    

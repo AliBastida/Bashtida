@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/15 20:34:49 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/16 10:59:45 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void *read_line(t_master *master);
 //===== CHECK_SYNTAX =====//
 //******QUOTES_SYNTAX******//
 bool paired_quotes(char *line);
-char *clean_line(char *line);
-int memory_alloc(t_master *master);
+char *clean_line(char *line, t_master *master);
+char *memory_alloc(t_master *master);
 
 //******PIPE_SYNTAX******//
 bool something_before(char *str);
@@ -50,6 +50,6 @@ int check_redir_2(char *str);
 int redir(char *str);
 
 //******UTILS_SYNTAX******//
-void checking_syntax(char *str);
+void checking_syntax(char *str, t_master *master);
 
 #endif

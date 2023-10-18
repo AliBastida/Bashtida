@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:50:19 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/15 20:19:15 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:09:01 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,38 +39,31 @@ bool paired_quotes(char *line)
     return (status);
 }
 
-int memory_alloc(t_master *master)
+char *memory_alloc(t_master *master)
 {
     int len; 
 
     len = ft_strlen(master->line);
     master->clean_line = ft_calloc(len+1, sizeof(t_master));
     if (!master->clean_line)
-        return (0);
+        return (NULL);
     else
-        return (1);
+        return (master->clean_line);
 }
 
 
-char *clean_line(char *str)
+char *clean_line(char *str, t_master *master)
 {
-
     int i;
     int j;
-    char *clean_line;
     bool double_quote;
     bool simple_quote;
-    int len = 0;
     
     i = 0;
     j = 0;
-    len = ft_strlen(str);
-    clean_line = ft_calloc(len + 1, sizeof(char));
-    if (!clean_line)
-        return (NULL);
+    master->clean_line = memory_alloc(master);
     double_quote = false;
     simple_quote = false;
-
     while (str[i])
     {
       if ((str[i] == '\"' && simple_quote == false) || (str[i] == '\'' && double_quote == false))
@@ -81,10 +74,8 @@ char *clean_line(char *str)
             simple_quote = !simple_quote;
         i++;
       }
-        clean_line[j++] = str[i++];
+      master->clean_line[j++] = str[i++];
     }
-    return (clean_line);
+    return (master->clean_line);
 }
-
-//TODO:la funcion clean line hay que acortarla.
 

@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/15 20:31:39 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/16 10:47:54 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(int ac, char **av, char **env)
     while (1)
     {
         read_line(master);
-        checking_syntax(master->line);
+        checking_syntax(master->line, master);
     }
     free (master);
     return (0);
