@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:25:30 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/18 20:31:33 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/21 10:03:25 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,54 +42,69 @@ int pipe_quoted(char *str, int i)
         {
             if (str[j] == str[aux])
             {
-                return(syntax_error(1));
+                return(1);
             }
             j++;
         }     
     }
     return (0);
 }
+
 char *substring_frompipe(char *str, int pipe, int i)
 {
-    char *content_node;
-   
-    if (str[i] == '\0')
-        content_node = ft_substr(str, pipe, (i - 1) - pipe);
+    char *content;
+    
+    if (str[i + 1] == '\0')
+        content = ft_substr(str, pipe, i+1 - pipe);
     else
-        content_node = ft_substr(str, pipe, i - pipe);
-    return (content_node);
+        content = ft_substr(str, pipe, i - pipe);
+    return(content);
 }
 
-char *checking_pipe_quoted(char *str)
+char *checking_pipe_quoted(char *str, bool start_point)
 {
-    int i;
-    int pipe;
+    int i = 0;
+    int pipe = 0;
     char *content;
-
-    i = 0;
-    pipe = 0;
+    
+    if (start_point)
+    {
+        i = 0;
+        pipe = 0;
+    }
     content = NULL;
     while (str[i])
     {
-        if (str[i] == '|' || str[i + 1] == '\0')
+        if ((str[i] == '|'  && !pipe_quoted(str, i)) || str[i + 1] == '\0')
         {
-            if (!pipe_quoted(str, i))
-            {
-                content = substring_frompipe(str, pipe, i);
-                pipe = i + 1;
-               // break;
-                i++;
-                printf("content: %s\n", content);
-            }
-            //i++;
+            content = substring_frompipe(str, pipe, i);
+            pipe = i + 1;
+            printf("content: %s\n", content);
+            i++;
+            
         }
         i++;
     }
     return (content);
 }
 
+int num_pipes(char *str)
+{
+    int i;
+    int n_pipes;
 
+    i = 0;
+    n_pipes = 0;
+    while (str[i])
+    {
+        if (str[i] == '|' && (!pipe_quoted(str,i)))
+            n_pipes++;
+        i++;    
+    }
+    return (n_pipes + 1);
+}
 
+//TODOrevisar la separacion de contenidos por pipes. si pongo 2 pipes, me imprime el segund y en el ultimo, se come la ultima posicion.
 
 
 //TODOcreate_token_list
