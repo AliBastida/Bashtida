@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+         #
+#    By: abastida <abastida@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/20 11:24:34 by abastida          #+#    #+#              #
-#    Updated: 2023/10/16 11:44:34 by abastida         ###   ########.fr        #
+#    Updated: 2023/10/22 09:32:03 by abastida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS := -Wall -Werror -Wextra -g -MMD
 SRC :=  0_main/main.c 0_main/utils.c\
 			1_readline/read_line.c\
 			2_check_syntax/quotes_syntax.c 2_check_syntax/pipe_syntax.c \
-			2_check_syntax/redir_syntax.c 2_check_syntax/utils_syntax.c\
+			2_check_syntax/redir_syntax.c 2_check_syntax/utils_syntax.c \
 			3_split_per_pipes/general_split.c
 		
 SRC_DIR := src/

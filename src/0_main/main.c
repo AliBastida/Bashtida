@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/17 10:43:12 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/23 09:29:04 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(int ac, char **av, char **env)
+/*int main(int ac, char **av, char **env)
 {
     (void) ac;
     (void) av;
@@ -23,13 +23,12 @@ int main(int ac, char **av, char **env)
     while (1)
     {
         read_line(master);
-        if (checking_syntax(master->line, master) == 0)
-            checking_pipe_quoted(master->line);
+        checking_syntax(master->line, master);
     }
     free (master);
     return (0);
-}
-/*
+}*/
+
 int main(int ac, char **av)
 {
     (void) ac;
@@ -42,12 +41,12 @@ int main(int ac, char **av)
     while (1)
     {
         read_line(master);
-        printf("%d\n", checking_pipe_quoted(master->line));
-    //    printf("%d\n", how_many_pipes(master->line));
-    //    printf("valor token %d\n",token_length(master->line));
+        look_for_char(master->line);
         //printf("return de redir: %d\n", redir(master->line));
+       // printf("el valor de return es: %d\n", check_redir_1(master->line));
+       // printf("el valor de return es: %d\n", check_redir_2(master->line));
     }
     free (master);
     return (0);
-}*/
+}
 

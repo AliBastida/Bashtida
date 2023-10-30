@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:38:29 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/16 11:18:32 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:08:59 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,3 +64,5 @@ bool check_syntax_pipes(char *str)
     else
         return (1);
 }
+
+//TODO: tenemos que revisar el caso en el que haya un | seguido de "". Eso deberia dar error tb.

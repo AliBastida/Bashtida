@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/21 09:55:35 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/23 09:27:39 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,12 @@
 # include <readline/history.h>
 # include <stdbool.h>
 
-
-
 //===== MAIN =====//
 //int main(int ac, char **av, char **env);
 int main(int ac, char **av);
+
 //******UTILS******//
-char *memory_alloc(t_master *master);
+int syntax_error(int n);
 
 //===== READLINE =====//
 void *read_line(t_master *master);
@@ -38,7 +37,7 @@ void *read_line(t_master *master);
 //******QUOTES_SYNTAX******//
 bool paired_quotes(char *line);
 char *clean_line(char *line, t_master *master);
-
+char *memory_alloc(t_master *master);
 
 //******PIPE_SYNTAX******//
 bool something_before(char *str);
@@ -52,27 +51,10 @@ int check_redir_2(char *str);
 int redir(char *str);
 
 //******UTILS_SYNTAX******//
-int checking_syntax(char *str, t_master *master);
-int syntax_error(int n);
-
-//===== SPLIT_PER_PIPES =====//
-//******GENERAL_SPLIT******//
-
-char *checking_pipe_quoted(char *str, bool start_point);
-//int token_length(char *str);
+void checking_syntax(char *str, t_master *master);
+void checking_pipe_quoted(char *str);
 int pipe_quoted(char *str, int i);
-char *substring_frompipe(char *str, int pipe, int i);
-int num_pipes(char *str);
-
-//******LIST_PIPES******//
-
-t_token	*ft_newnode(void *content);
-void create_list(char *str);
-
-void print_result(char *str);
-
-
-
-
+int next_quote(char *str, int i, char c);
+void look_for_char(char *str);
 
 #endif

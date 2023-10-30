@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:47:58 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/16 13:27:15 by abastida         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:22:41 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,5 @@ typedef struct s_master
     char *clean_line;
 	
 }t_master;
-
-typedef struct s_token
-{
-    char *content_token;
-    struct s_token *next;
-    struct s_token *previous;
-
-
-}t_token;
-
-
 
 #endif
