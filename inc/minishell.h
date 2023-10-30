@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/23 09:27:39 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/30 10:41:40 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,11 @@ int redir(char *str);
 
 //******UTILS_SYNTAX******//
 void checking_syntax(char *str, t_master *master);
-void checking_pipe_quoted(char *str);
-int pipe_quoted(char *str, int i);
+
+//===== SPLIT_PER_PIPES =====//
+//******GENERAL_SPLIT******//
+char *substr_token(char *str, int pipe, int i);
 int next_quote(char *str, int i, char c);
-void look_for_char(char *str);
+char *look_for_char(char *str);
 
 #endif

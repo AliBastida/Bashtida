@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   general_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:25:30 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/23 12:57:47 by abastida         ###   ########.fr       */
+/*   Updated: 2023/10/30 10:41:05 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+
+char *substr_token(char *str, int pipe, int i)
+{
+    char *token;
+	if (str[i + 1] == '\0')
+		token = ft_substr(str, pipe, i + 1 - pipe);
+	else
+		token = ft_substr(str, pipe, i - pipe);
+	return (token);
+}
 
 /*esta funcion mira donde esta la siguiente quote para saltar todo lo que hay dentro*/
 int next_quote(char *str, int i, char c)
@@ -27,22 +37,30 @@ int next_quote(char *str, int i, char c)
     return (0);
 }
 /*esta funcion busca el char y despues del if, va otro que busca el |*/
-void look_for_char(char *str)
+char *look_for_char(char *str)
 {
     int i = 0;
-    int next = 0;
+    int pipe = 0;
+    char *line_by_pipes = NULL;
     
     while (str[i])
     {
         if (str[i] == '\'' || str[i] == '\"')
         {
             printf("el caracter es: %c La posicion de i: %d\n", str[i], i);
-            next = next_quote(str, i + 1, str[i]);
-            printf("la siguiente posicion es: %d\n", next);
+            i = next_quote(str, i + 1, str[i]);
+            printf("la siguiente posicion es: %d\n", i);
         }
-        //si str[i] es |, haz substr de lo qeu hay antes. TEngo que hacer una funcion que haga substr segun su posicion. 
+        else if (str[i + 1] == '\0' || str[i] == '|')
+        {    
+            line_by_pipes = substr_token(str, pipe, i);
+            printf("line_by_pipes: %s\n", line_by_pipes);
+			pipe = i + 1;
+			
+        }
         i++;
     }
+    return (line_by_pipes);
 }
-//TODO: la funcion que recorre la str en busca de su match, esta funcionando.
-//TODO:  Falta hace substr desde | hasta el inicio o el siguiente |, tengo que ver como calcular la len;
+
+//TODO: AHORA LO QUE TENGO QUE HACER ES QUE LO QUE RETORNA(LINE_BY_PIPES) GUARDARLO EN NODOS.
