@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/23 09:29:04 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/02 13:34:36 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
     {
         read_line(master);
         checking_syntax(master->line, master);
+        line_divided_in_tokens(master->line);
     }
     free (master);
     return (0);
@@ -41,7 +42,9 @@ int main(int ac, char **av)
     while (1)
     {
         read_line(master);
-        look_for_char(master->line);
+        line_divided_in_tokens(master->line);
+        create_list(master->line, master);
+       // create_list(master->line, master);
         //printf("return de redir: %d\n", redir(master->line));
        // printf("el valor de return es: %d\n", check_redir_1(master->line));
        // printf("el valor de return es: %d\n", check_redir_2(master->line));
@@ -49,4 +52,3 @@ int main(int ac, char **av)
     free (master);
     return (0);
 }
-

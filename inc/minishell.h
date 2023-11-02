@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/30 10:41:40 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/02 13:32:47 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,14 @@ void checking_syntax(char *str, t_master *master);
 //******GENERAL_SPLIT******//
 char *substr_token(char *str, int pipe, int i);
 int next_quote(char *str, int i, char c);
-char *look_for_char(char *str);
+char **line_divided_in_tokens(char *str);
+
+int how_many_pipes(char *str);
+
+//******LIST_PER_PIPES******//
+t_token	*ft_newnode(void *content);
+void *create_list(char *str, t_master *master);
+void *trying(char *str, t_master *master);
+
 
 #endif

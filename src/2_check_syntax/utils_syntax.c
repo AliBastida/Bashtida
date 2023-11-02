@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:32:26 by abastida          #+#    #+#             */
-/*   Updated: 2023/10/16 11:05:06 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/02 11:31:35 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ void checking_syntax(char *str, t_master *master)
             if (check_syntax_pipes(str) == 1)
             {
                 if (redir(str) == 1)
-                //printf("Lo habeeis hecho bien\n");
+                    //printf("Lo habeeis hecho bien\n");
                     printf("%s\n", clean_line(str, master));
             }
         }
         else
             printf("syntax error :<\n");
 }
+//FIXME la linea limpia la tiene que devolver despues de divir la str.
