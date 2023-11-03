@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 13:47:58 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/03 12:08:55 by abastida         ###   ########.fr       */
+/*   Created: 2023/11/02 16:23:56 by abastida          #+#    #+#             */
+/*   Updated: 2023/11/03 13:48:33 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 
-#ifndef STRUCT_H
-# define STRUCT_H
-
-typedef struct s_token
+t_token	*lst_last(t_token **lst)
 {
-    char *content_token;
-    struct s_token *next;
-}t_token;
+	t_token	*temp;
 
-typedef struct s_master
+	temp = *lst;
+	if (temp != NULL)
+	{
+		while (temp->next != NULL)
+			temp = temp->next;
+	}
+	return (temp);
+}
+void	lst_add_back(t_token **first, t_token *new_node)
 {
-	char *line;
-    char *clean_line;
-	int n_pipes;
-    t_token *node;
-}t_master;
+	t_token	*temp;
 
-#endif
+	if (*first == NULL)
+		*first = new_node;
+	else
+	{
+		temp = lst_last(first);
+		temp->next = new_node;
+	}
+}

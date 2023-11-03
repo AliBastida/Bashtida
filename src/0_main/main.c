@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/02 13:34:36 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/03 14:32:30 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,9 @@ int main(int ac, char **av)
     while (1)
     {
         read_line(master);
-        line_divided_in_tokens(master->line);
-        create_list(master->line, master);
-       // create_list(master->line, master);
-        //printf("return de redir: %d\n", redir(master->line));
-       // printf("el valor de return es: %d\n", check_redir_1(master->line));
-       // printf("el valor de return es: %d\n", check_redir_2(master->line));
+       // line_divided_in_tokens(master->line);
+        create_node(master->line, master);
+        printf ("resultado de check_dolar: %d\n", check_dollar(master));
     }
     free (master);
     return (0);

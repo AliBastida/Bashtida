@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:25:30 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/02 14:37:02 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/02 16:23:19 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char **line_divided_in_tokens(char *str)
             i = next_quote(str, i + 1, str[i]);
         else if (str[i + 1] == '\0' || str[i] == '|')
         { 
-            // TODO PODEMOS QUITAR ESTE IF? y por qu'e entra dos veces aqui??
+            // TODO PODEMOS QUITAR ESTE IF?
            // if (j < num_pipe)  
            // {
                 line_by_pipes[j] = substr_token(str, pipe, i); 

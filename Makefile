@@ -6,7 +6,7 @@
 #    By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/20 11:24:34 by abastida          #+#    #+#              #
-#    Updated: 2023/10/31 09:26:39 by abastida         ###   ########.fr        #
+#    Updated: 2023/11/03 14:05:44 by abastida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,9 @@ SRC :=  0_main/main.c 0_main/utils.c\
 			1_readline/read_line.c\
 			2_check_syntax/quotes_syntax.c 2_check_syntax/pipe_syntax.c \
 			2_check_syntax/redir_syntax.c 2_check_syntax/utils_syntax.c \
-			3_split_per_pipes/general_split.c 3_split_per_pipes/list_pipes.c
+			3_split_per_pipes/general_split.c 3_split_per_pipes/list_pipes.c \
+			3_split_per_pipes/list_utils.c \
+			4_check_nodes/found_dollar.c
 SRC_DIR := src/
 BUILD_DIR := build/
 OBJ := $(addprefix $(BUILD_DIR), $(SRC:.c=.o))
