@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/03 14:32:49 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/06 16:26:10 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int     main(int ac, char **av);
 
 //******UTILS******//
 int     syntax_error(int n);
+void ft_free_single(char *str);
 
 //===== READLINE =====//
 void    *read_line(t_master *master);
@@ -68,6 +69,15 @@ t_token *ft_newnode(void *content);
 t_token	*lst_last(t_token **lst);
 void	lst_add_back(t_token **first, t_token *new_el);
 
-bool check_dollar(t_master *line);
+//===== CHECK_NODES =====//
+//******UTILS_NODES******//
+int len_nodes(char *token);
+int	ft_strcmp(char *s1, char *s2);
+char *clean_word(char *str);
+
+//******FOUND_DOLLAR******//
+
+
+//bool check_dollar(t_master *line);
 
 #endif

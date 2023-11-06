@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:25:30 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/02 16:23:19 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/06 16:29:44 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ char **line_divided_in_tokens(char *str)
             // TODO PODEMOS QUITAR ESTE IF?
            // if (j < num_pipe)  
            // {
-                line_by_pipes[j] = substr_token(str, pipe, i); 
+                line_by_pipes[j] = substr_token(str, pipe, i);
                 pipe = i + 1;
-                printf("j : %d, line_by_pipes: %s\n", j, line_by_pipes[j]);	
+                printf("j : %d, line_by_pipes: <%s>\n", j, line_by_pipes[j]);	
                 j++;
                
           //  }

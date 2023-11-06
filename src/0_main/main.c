@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/03 14:32:30 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/06 15:46:01 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ int main(int ac, char **av)
         read_line(master);
        // line_divided_in_tokens(master->line);
         create_node(master->line, master);
-        printf ("resultado de check_dolar: %d\n", check_dollar(master));
+       // printf ("resultado de check_dolar: %d\n", check_dollar(master));
+
+       return(0);
     }
     free (master);
     return (0);

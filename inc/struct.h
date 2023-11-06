@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:47:58 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/03 12:08:55 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/06 11:31:48 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,18 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
+typedef struct s_word
+{
+    char *word;
+    int single_quotes;
+    struct s_word *next;
+}t_word;
+
 typedef struct s_token
 {
-    char *content_token;
-    struct s_token *next;
+    char    *content_token;
+    t_word  *words;
+    struct s_token  *next;
 }t_token;
 
 typedef struct s_master
