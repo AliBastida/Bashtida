@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/06 15:46:01 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:05:23 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
         read_line(master);
         checking_syntax(master->line, master);
         line_divided_in_tokens(master->line);
+        free(master->line);
     }
     free (master);
     return (0);
@@ -41,12 +42,13 @@ int main(int ac, char **av)
         return (0);
     while (1)
     {
-        read_line(master);
+        if (read_line(master))
+            continue ;
        // line_divided_in_tokens(master->line);
         create_node(master->line, master);
+        free(master->line);
+        // return (0);
        // printf ("resultado de check_dolar: %d\n", check_dollar(master));
-
-       return(0);
     }
     free (master);
     return (0);

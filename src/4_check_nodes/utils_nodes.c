@@ -2,7 +2,7 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   utils_nodes.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
+/*                                                    +:+ +:+         +:+     */ 
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:17:06 by abastida          #+#    #+#             */
@@ -29,63 +29,39 @@ int len_nodes(char *token)
     i = 0;
     while (token[i])
     {
-        if (token[i] == ' ')
+        if (token[i] == '\'' || token[i] == '\"')
+           i = next_quote(token, i + 1, token[i]);
+        else if (token[i] == ' ')
+        {
+            while (token[i] == ' ')
+                i++;
+            if (token[i] != '\0' && token[i] != '<' && token[i] != '>')
+                len++;
+            i--;
+        }
+        else if (token[i] == '>' || token[i] == '<')
+        {
+            if (token[i] == token[i + 1])
+                i++;
+            if (token[i + 1] != ' ')
+                len++;
             len++;
-        else if ((token[i] == '<') || ((token[i] == '<') 
-            && (token[i + 1] == '<'))
-            || (token[i] == '>') || (token[i] == '>' && token[i + 1] == '>'))
-            len ++;
+        }
         i++;
     }
     return (len);
 }
-//TODO: tengo que arregar esta funcion porque me cuenta por cada > 1, lo que quiero es que cuente 1 si es > o 1 si es >>.
 //TODO: lo siguiente a hacer es: sabiendo la len de nodos, lo que haremos es crear un char ** donde guardaremos lo qye hay dentro de cada nodo. Necesitamos calloc para reservar memoria.
 //cuando tngamos reservado, recorreremos la str analizando si hay $, si hay '', y sabiendo que la primera posicion del array ** es cmd. (son todos los del env.).
 
 
-/*
-int len_nodes(char *token)
-{
-    int len;
-    int i;
-
-    len = 1;
-    i = 0;
-    while (token[i])
-    {
-        if (ft_strcmp(token, " ") == 0)
-        {
-            len++;
-            printf("ENTRA EN ESPACIO\n");
-        }
-        else if ((ft_strcmp(&token[i], ">") == 0) ||
-        (ft_strcmp(token, ">>") == 0) ||
-        (ft_strcmp(&token[i], "<") == 0) ||
-        (ft_strcmp(&token[i], "<<") == 0))
-        {
-            printf("ENTRA EN REDIRECCION\n");
-            len += 2;
-        }
-        i++;
-    }
-    return (len);
-}*/
-
-
-
-
-
-
-/*
-
-char **divided_by_word(t_master *master)
+/*char **divided_by_word(t_master *master)
 {
     
     t_token *tmp; 
     char **word;
     int len;
 
+    len = len_nodes(tmp->content_token);
     
-    word = ft_calloc((sizeof(char *), ))
 }*/

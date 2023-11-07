@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/06 16:26:10 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:58:50 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int     syntax_error(int n);
 void ft_free_single(char *str);
 
 //===== READLINE =====//
-void    *read_line(t_master *master);
+int     read_line(t_master *master);
 
 //===== CHECK_SYNTAX =====//
 //******QUOTES_SYNTAX******//
@@ -68,6 +68,8 @@ t_token *ft_newnode(void *content);
 //******LIST_UTILS******//
 t_token	*lst_last(t_token **lst);
 void	lst_add_back(t_token **first, t_token *new_el);
+void	lstdelone(t_token *lst, void (*del)(void*));
+void	lstclear(t_token **lst, void (*del)(void*));
 
 //===== CHECK_NODES =====//
 //******UTILS_NODES******//
