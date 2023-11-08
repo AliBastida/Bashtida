@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:13:11 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/08 15:19:31 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:06:49 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int read_line(t_master *master)
     else if(!master->line)
     {
         printf("Exit\n");
-        free(master);
+       // free(master);
         exit(1);
     }
     return (0);

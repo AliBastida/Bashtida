@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:25:30 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/08 14:51:39 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:12:40 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,14 @@ char **line_divided_in_tokens(char *str)
             x = next_quote(str, i + 1, str[i]);
             line_by_pipes[j] = substr_token(str, i, x - i+1);
             printf("j %d\n", j);
-            j = j + 1;
+             j = j + 1;
          //   PRINT_ARRAY(line_by_pipes);
             i = x;
             printf("i %d\n", i);
             /*if (str[i + 1] == '\0')
                 line_by_pipes[j] = ft_strdup("");*/
         }
-        else if (str[i + 1] == '\0' || str[i] == '|')        
+        else if (str[i + 1] == '\0' || str[i] == '|')
         { 
             // TODO PODEMOS QUITAR ESTE IF?
            // if (j < num_pipe)  
@@ -106,7 +106,6 @@ char **line_divided_in_tokens(char *str)
     }
     line_by_pipes[j] = NULL;
     PRINT_ARRAY(line_by_pipes);
-    
     return (line_by_pipes);
 }
 

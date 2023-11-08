@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:38:29 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/08 15:28:39 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:07:40 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,6 @@ bool something_after(char *str)
     int len;
 
     len = ft_strlen(str);
-   // len = len - 1;
-    printf("%d\n", len);
-    printf("%s\n", str);
     while (str[len] == ' ')
         len--;
     if (str[len] == '|')
