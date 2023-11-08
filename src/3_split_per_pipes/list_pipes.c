@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:40:43 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/07 15:00:55 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/08 13:35:48 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 char *clean_word(char *str)
 {
     char *clean_line;
+    
     clean_line = ft_strtrim(str, " ");
     free(str);
     return (clean_line);
@@ -43,33 +44,41 @@ void *create_node(char *str, t_master *master)
  
     char **line_divided;
     int n;
-    int len = 0;
+    //int len = 0;
     
-   
     master -> n_pipes = how_many_pipes(str) + 1;
     //printf("n_pipes %d\n", master->n_pipes);
     line_divided = line_divided_in_tokens(str);
     n = 0;
     while (master -> n_pipes > n)
     { 
+        if (!line_divided[n])
+        {
+            //FIXME: esto esta para proteger la linea cuando es nula. Mas adelante, tenemos qe limpiar las comillas y ver que cuando limpiamos la linea, que el nodo no se queda nulo, porque en ese
+            //FIXME: tenemos que hacer el strdup para llenar el nodo de "nada" 
+            line_divided[n] = ft_strdup("");
+        }
+
         new_node = ft_newnode(clean_word(line_divided[n]));
        // printf("list-> <%s>\n", new_node->content_token);
         lst_add_back(&master->node, new_node);
         n++;
     }
     tmp = master->node;
-    while (tmp != NULL)
-    {
+    printf("Content token: **%s**\n", tmp->content_token);
+    divided_by_word(master->node);
+    //PRINT_TOKENS(master->node)
+    /*while (tmp!= NULL)
+    {  
+        
         printf("list-> **%s**\n", tmp->content_token);
         len = len_nodes(tmp->content_token);
         printf("len: %d\n", len);
         tmp = tmp->next;
-    }
+    }*/
     free(line_divided);
     lstclear(&master->node, free);
-    //ft_free_single(*line_divided);
     return (0);
 }
 
-//FIXME: borro demas... chequear esto. 
 //FIXME: BORRAR TMP Y EL WHILE QUE IMPRIME LA LISTA

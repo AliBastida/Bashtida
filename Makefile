@@ -6,13 +6,13 @@
 #    By: abastida <abastida@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/20 11:24:34 by abastida          #+#    #+#              #
-#    Updated: 2023/11/06 13:16:57 by abastida         ###   ########.fr        #
+#    Updated: 2023/11/08 12:13:36 by abastida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := minishell
 CC := gcc
-CFLAGS := -Wall -Werror -Wextra -g -MMD
+CFLAGS := -Wall -Werror -Wextra -g -MMD -fsanitize='address,undefined'
 SRC :=  0_main/main.c 0_main/utils.c\
 			1_readline/read_line.c\
 			2_check_syntax/quotes_syntax.c 2_check_syntax/pipe_syntax.c \

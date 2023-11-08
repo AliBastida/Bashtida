@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/07 14:58:50 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:17:22 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,27 @@
 # include <readline/history.h>
 # include <stdbool.h>
 
+#define PRINT_TOKENS(list) \
+t_token *random_tmp = list; \
+printf("----------------------\n"); \
+while (random_tmp != NULL) { \
+    printf("random_tmp: *%s*\n", random_tmp->content_token); \
+    printf("len: %d\n", len_nodes(random_tmp->content_token)); \
+    random_tmp = random_tmp->next; } printf("----------------------\n");
+
+#define PRINT_ARRAY(cadena) \
+printf("----------------------\n"); \
+int random_i = 0; \
+while (cadena[random_i] != NULL) { \
+    printf("cadena: %s\n", cadena[random_i]); \
+    random_i++; } printf("----------------------\n");
+
+
+
+
 //===== MAIN =====//
-//int main(int ac, char **av, char **env);
-int     main(int ac, char **av);
+int main(int ac, char **av, char **env);
+//int     main(int ac, char **av);
 
 //******UTILS******//
 int     syntax_error(int n);
@@ -52,7 +70,7 @@ int     check_redir_2(char *str);
 int     redir(char *str);
 
 //******UTILS_SYNTAX******//
-void    checking_syntax(char *str, t_master *master);
+int    checking_syntax(char *str, t_master *master);
 
 //===== SPLIT_PER_PIPES =====//
 //******GENERAL_SPLIT******//
@@ -76,6 +94,7 @@ void	lstclear(t_token **lst, void (*del)(void*));
 int len_nodes(char *token);
 int	ft_strcmp(char *s1, char *s2);
 char *clean_word(char *str);
+int divided_by_word(t_token *node);
 
 //******FOUND_DOLLAR******//
 

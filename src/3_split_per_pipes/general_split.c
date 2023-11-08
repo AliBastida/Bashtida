@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:25:30 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/06 16:29:44 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:51:39 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,12 @@ int how_many_pipes(char *str)
 }
 
 /*En esta funcion miramos el num de pipes que estan fuera de quotes (next quote)y con substr_token
-lo guarda en la variable line_by_pipes, que nos retornara tantos como pipes + 1 */
+guarda en la variable line_by_pipes el cotenido. Nos retornara tantos como pipes + 1 */
 char **line_divided_in_tokens(char *str)
 {
     int i;
     int j;
+    int x;
     int pipe;
     int num_pipe;
     
@@ -67,6 +68,7 @@ char **line_divided_in_tokens(char *str)
       
     i = 0;
     j = 0;
+    x = 0;
     pipe = 0;
     num_pipe = how_many_pipes(str) + 2;
     line_by_pipes = ft_calloc(sizeof(char *), num_pipe);
@@ -75,22 +77,36 @@ char **line_divided_in_tokens(char *str)
     while (str[i])
     {
         if (str[i] == '\'' || str[i] == '\"')
-            i = next_quote(str, i + 1, str[i]);
-        else if (str[i + 1] == '\0' || str[i] == '|')
+        {
+            printf("i %d\n", i);
+            x = next_quote(str, i + 1, str[i]);
+            line_by_pipes[j] = substr_token(str, i, x - i+1);
+            printf("j %d\n", j);
+            j = j + 1;
+         //   PRINT_ARRAY(line_by_pipes);
+            i = x;
+            printf("i %d\n", i);
+            /*if (str[i + 1] == '\0')
+                line_by_pipes[j] = ft_strdup("");*/
+        }
+        else if (str[i + 1] == '\0' || str[i] == '|')        
         { 
             // TODO PODEMOS QUITAR ESTE IF?
            // if (j < num_pipe)  
            // {
                 line_by_pipes[j] = substr_token(str, pipe, i);
                 pipe = i + 1;
-                printf("j : %d, line_by_pipes: <%s>\n", j, line_by_pipes[j]);	
+              //  printf("j : %d, line_by_pipes: <%s>\n", j, line_by_pipes[j]);	
                 j++;
                
           //  }
         }
-        i++;
+        i++;    
+       
     }
     line_by_pipes[j] = NULL;
+    PRINT_ARRAY(line_by_pipes);
+    
     return (line_by_pipes);
 }
 

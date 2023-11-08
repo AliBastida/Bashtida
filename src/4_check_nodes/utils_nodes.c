@@ -54,14 +54,30 @@ int len_nodes(char *token)
 //TODO: lo siguiente a hacer es: sabiendo la len de nodos, lo que haremos es crear un char ** donde guardaremos lo qye hay dentro de cada nodo. Necesitamos calloc para reservar memoria.
 //cuando tngamos reservado, recorreremos la str analizando si hay $, si hay '', y sabiendo que la primera posicion del array ** es cmd. (son todos los del env.).
 
-
-/*char **divided_by_word(t_master *master)
+int divided_by_word(t_token *tmp)
 {
     
-    t_token *tmp; 
-    char **word;
+    int n_word;
     int len;
+    int i;
 
+    n_word = 0;
+    i = 0;
     len = len_nodes(tmp->content_token);
     
-}*/
+    while (tmp != NULL)
+    {
+        tmp->word_node = ft_calloc(sizeof(char *), len + 1);
+        if (!tmp->word_node)
+            return (0);
+        i = 0;
+        while (tmp->content_token[i] != '\0')
+        {
+            printf("i : %d, content_token %c\n", i, tmp->content_token[i]);
+            i++;     
+           
+        }
+        tmp = tmp->next;
+    }
+    return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:13:11 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/07 14:46:10 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:19:31 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ int read_line(t_master *master)
     {
         while (master->line[i] == ' ')
             i++;
-        if (master->line[i] == '\0')
+   /*     if (master->line[i] == '\0')
         {
             free(master->line); // Para quitar el leak del readline
-            return (1);
-        }
+            return (0);
+        }*/
     }
-    if (!ft_strncmp(master->line, "", 1))
+    else if (!ft_strncmp(master->line, "", 1))
     {
-        free(master->line); // Para quitar el leak del readline
+        //free(master->line); // Para quitar el leak del readline
         return (1);
     }
     else if(!master->line)
