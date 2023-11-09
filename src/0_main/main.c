@@ -6,12 +6,12 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/08 15:20:28 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/09 15:04:53 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/*
 int main(int ac, char **av, char **env)
 {
     (void) ac;
@@ -33,11 +33,11 @@ int main(int ac, char **av, char **env)
     free (master);
     return (0);
 }
-/*
+*/
 int main(int ac, char **av)
 {
     (void) ac;
-    (void) av;e
+    (void) av;
     
     t_master    *master;
     master = ft_calloc(1, sizeof(t_master));
@@ -48,11 +48,13 @@ int main(int ac, char **av)
         if (read_line(master))
             continue ;
        // line_divided_in_tokens(master->line);
-        create_node(master->line, master);
+    //    printf("valor de strchar: %d\n", ft_strchar(master->line, '|'));
+       line_divided_in_tokens(master->line);
+       // create_node(master->line, master);
         free(master->line);
         // return (0);
        // printf ("resultado de check_dolar: %d\n", check_dollar(master));
     }
     free (master);
     return (0);
-}*/
+}

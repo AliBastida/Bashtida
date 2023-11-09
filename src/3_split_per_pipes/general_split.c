@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:25:30 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/08 16:12:40 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/09 15:11:05 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,23 @@ int how_many_pipes(char *str)
     return (n_pipes);
 }
 
+
+int ft_copy_line(char *line_divided, char *str)
+{
+    int len; 
+
+    len = ft_strchar(str, '|') + 1; // Porque el calloc y el strlcpy necesitan un valor mas para funcionar
+    printf("len: %d, str: %s\n", len, str);
+    line_divided = ft_calloc(sizeof(char), len);
+    ft_strlcpy(line_divided, str, len);
+  
+    printf("line divided: -%s-\n", line_divided);
+    
+    return (len);
+}
 /*En esta funcion miramos el num de pipes que estan fuera de quotes (next quote)y con substr_token
 guarda en la variable line_by_pipes el cotenido. Nos retornara tantos como pipes + 1 */
-char **line_divided_in_tokens(char *str)
+/*char **line_divided_in_tokens(char *str)
 {
     int i;
     int j;
@@ -70,7 +84,7 @@ char **line_divided_in_tokens(char *str)
     j = 0;
     x = 0;
     pipe = 0;
-    num_pipe = how_many_pipes(str) + 2;
+    num_pipe = how_many_pipes(str) + 2;// mas dos porque necesitamos una posicion mas y para el nulo;
     line_by_pipes = ft_calloc(sizeof(char *), num_pipe);
     if (!line_by_pipes)
         return (NULL);
@@ -78,28 +92,29 @@ char **line_divided_in_tokens(char *str)
     {
         if (str[i] == '\'' || str[i] == '\"')
         {
-            printf("i %d\n", i);
-            x = next_quote(str, i + 1, str[i]);
-            line_by_pipes[j] = substr_token(str, i, x - i+1);
-            printf("j %d\n", j);
-             j = j + 1;
-         //   PRINT_ARRAY(line_by_pipes);
-            i = x;
-            printf("i %d\n", i);
-            /*if (str[i + 1] == '\0')
-                line_by_pipes[j] = ft_strdup("");*/
+          //  printf("i %d\n", i);
+            i = next_quote(str, i + 1, str[i]);
+          //  line_by_pipes[j] = substr_token(str, i, x - i+1);
+          //  printf("j %d\n", j);
+          //  j = j + 1;
+          printf("hola\n");
+          PRINT_ARRAY(line_by_pipes);
+          //  i = x;
+           // printf("i %d\n", i);
+            if (str[i + 1] == '\0')
+                line_by_pipes[j] = ft_strdup("");
         }
         else if (str[i + 1] == '\0' || str[i] == '|')
         { 
             // TODO PODEMOS QUITAR ESTE IF?
-           // if (j < num_pipe)  
-           // {
+          // if (j < num_pipe)  
+           //{
                 line_by_pipes[j] = substr_token(str, pipe, i);
                 pipe = i + 1;
-              //  printf("j : %d, line_by_pipes: <%s>\n", j, line_by_pipes[j]);	
+                printf("j : %d, line_by_pipes: <%s>\n", j, line_by_pipes[j]);	
                 j++;
                
-          //  }
+            //}
         }
         i++;    
        
@@ -107,7 +122,31 @@ char **line_divided_in_tokens(char *str)
     line_by_pipes[j] = NULL;
     PRINT_ARRAY(line_by_pipes);
     return (line_by_pipes);
+}*/
+
+char **line_divided_in_tokens(char *str)
+{
+    char **line_divided;
+    int i;
+    int j;
+    int position;
+    int n_box;
+
+    n_box = how_many_pipes(str) + 1;
+    line_divided = ft_calloc(sizeof(char *), n_box + 1);
+    i = 0;
+    j = 0;
+    position = 0;
+    while (n_box > j)
+    {         
+        printf("position: %d\n", position);//aqui vamos a grabar en line_divided[j] lo que saquemos de str[i].
+        position += (ft_copy_line(line_divided[j], str + position));
+        j++;
+    }
+    line_divided[j] = NULL;
+    return  (line_divided);
 }
+
 
 //TODO: Tenemos que dividir esta funcion. 
 

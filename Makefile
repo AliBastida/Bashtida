@@ -6,7 +6,7 @@
 #    By: abastida <abastida@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/20 11:24:34 by abastida          #+#    #+#              #
-#    Updated: 2023/11/08 12:13:36 by abastida         ###   ########.fr        #
+#    Updated: 2023/11/09 13:29:58 by abastida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC :=  0_main/main.c 0_main/utils.c\
 			2_check_syntax/quotes_syntax.c 2_check_syntax/pipe_syntax.c \
 			2_check_syntax/redir_syntax.c 2_check_syntax/utils_syntax.c \
 			3_split_per_pipes/general_split.c 3_split_per_pipes/list_pipes.c \
-			3_split_per_pipes/list_utils.c \
+			3_split_per_pipes/list_utils.c 3_split_per_pipes/split_utils.c  \
 			4_check_nodes/found_dollar.c 4_check_nodes/utils_nodes.c 
 SRC_DIR := src/
 BUILD_DIR := build/

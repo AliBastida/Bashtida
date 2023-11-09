@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/08 15:17:22 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/09 13:34:53 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ while (cadena[random_i] != NULL) { \
 
 
 //===== MAIN =====//
-int main(int ac, char **av, char **env);
-//int     main(int ac, char **av);
+//int main(int ac, char **av, char **env);
+int     main(int ac, char **av);
 
 //******UTILS******//
 int     syntax_error(int n);
@@ -89,12 +89,16 @@ void	lst_add_back(t_token **first, t_token *new_el);
 void	lstdelone(t_token *lst, void (*del)(void*));
 void	lstclear(t_token **lst, void (*del)(void*));
 
+//******SPLIT_UTILS******//
+int	ft_strchar(char *s, int c);
+
 //===== CHECK_NODES =====//
 //******UTILS_NODES******//
 int len_nodes(char *token);
 int	ft_strcmp(char *s1, char *s2);
 char *clean_word(char *str);
 int divided_by_word(t_token *node);
+int ft_copy_line(char *dest, char *str);
 
 //******FOUND_DOLLAR******//
 
