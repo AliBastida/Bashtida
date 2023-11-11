@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/09 13:34:53 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/10 13:49:10 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ while (cadena[random_i] != NULL) { \
 
 
 //===== MAIN =====//
-//int main(int ac, char **av, char **env);
-int     main(int ac, char **av);
+int main(int ac, char **av, char **env);
+//int     main(int ac, char **av);
 
 //******UTILS******//
 int     syntax_error(int n);
@@ -81,7 +81,7 @@ int     how_many_pipes(char *str);
 
 //******LIST_PER_PIPES******//
 t_token *ft_newnode(void *content);
- void    *create_node(char *str, t_master *master);
+ void    *create_nodeandlist(char *str, t_master *master);
 
 //******LIST_UTILS******//
 t_token	*lst_last(t_token **lst);
@@ -98,7 +98,7 @@ int len_nodes(char *token);
 int	ft_strcmp(char *s1, char *s2);
 char *clean_word(char *str);
 int divided_by_word(t_token *node);
-int ft_copy_line(char *dest, char *str);
+int ft_copy_line(char **dest, char *str);
 
 //******FOUND_DOLLAR******//
 
