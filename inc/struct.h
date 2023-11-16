@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:47:58 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/08 11:42:15 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/15 15:51:30 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,19 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
+enum e_token_type
+{
+    WORD,
+    REDIR,
+    EXPANSION
+
+};
+
 typedef struct s_word
 {
     char *word;
     int single_quotes;
+    enum e_token_type type;
     struct s_word *next;
 }t_word;
 
@@ -33,7 +42,6 @@ typedef struct s_master
 {
 	char *line;
     char *clean_line;
-   
 	int n_pipes;
     t_token *node;
 }t_master;

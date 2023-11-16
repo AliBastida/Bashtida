@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_pipes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:40:43 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/10 13:49:47 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/15 15:34:01 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_token	*ft_newnode(void *content)
 // Esta es nuestra funcion para crear la lista con el rdo de line_divided_in_tokens nos lo guardara en un nuevo nodo
 // (new_node) en funcion de los pipes que encuentra (n). 
 
-void *create_nodeandlist(char *str, t_master *master)
+t_token *create_nodeandlist(char *str, t_master *master)
 {
     t_token *new_node;
     t_token *tmp;
@@ -69,8 +69,7 @@ void *create_nodeandlist(char *str, t_master *master)
         tmp = tmp->next;
     }
     free(line_divided);
-    lstclear(&master->node, free);
-    return (0);
+    return (new_node);
 }
 
 //FIXME: BORRAR TMP Y EL WHILE QUE IMPRIME LA LISTA

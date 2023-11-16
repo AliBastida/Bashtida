@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:31:30 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/09 13:16:54 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/15 15:34:35 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,3 +38,11 @@ void ft_free_single(char *str)
     free (str);
 }
 
+bool is_space(unsigned char c)
+{
+    if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' 
+        || c == '\r')
+        return (true);
+    else
+        return (false);
+}

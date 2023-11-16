@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/10 13:49:10 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/15 15:34:39 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int main(int ac, char **av, char **env);
 //******UTILS******//
 int     syntax_error(int n);
 void ft_free_single(char *str);
+bool is_space(unsigned char c);
 
 //===== READLINE =====//
 int     read_line(t_master *master);
@@ -81,7 +82,7 @@ int     how_many_pipes(char *str);
 
 //******LIST_PER_PIPES******//
 t_token *ft_newnode(void *content);
- void    *create_nodeandlist(char *str, t_master *master);
+t_token *create_nodeandlist(char *str, t_master *master);
 
 //******LIST_UTILS******//
 t_token	*lst_last(t_token **lst);

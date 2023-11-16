@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/10 07:58:54 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/15 15:28:20 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int main(int ac, char **av, char **env)
         if(checking_syntax(master->line, master) == 1)   
         {
             line_divided_in_tokens(master->line);
-            create_node(master->line, master);
+            create_nodeandlist(master->line, master);
         }
         free(master->line);
     }
