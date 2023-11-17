@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:47:58 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/15 15:51:30 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/16 11:23:56 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_word
 {
     char *word;
     int single_quotes;
-    enum e_token_type type;
+    int type;
     struct s_word *next;
 }t_word;
 

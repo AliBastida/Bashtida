@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:40:43 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/15 15:34:01 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:56:38 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,36 @@ t_token	*ft_newnode(void *content)
 // Esta es nuestra funcion para crear la lista con el rdo de line_divided_in_tokens nos lo guardara en un nuevo nodo
 // (new_node) en funcion de los pipes que encuentra (n). 
 
-t_token *create_nodeandlist(char *str, t_master *master)
+t_token *create_nodeandlist(char *str)
 {
     t_token *new_node;
     t_token *tmp;
+    t_token *new_list;
+    int n_pipes;
     int len;
     char **line_divided;
-    
     int n;
+
     len = 0;
-    master->n_pipes = how_many_pipes(str) + 1;
+    // n_pipes = 0; lo dejamos por si norminette nos lo pide mas adekante.
+    n_pipes = how_many_pipes(str) + 1;
     line_divided = line_divided_in_tokens(str);
+    new_list = NULL;
     printf("---line divided: %s---\n", *line_divided);
     n = 0;
-    while (master -> n_pipes > n)
+    while (n_pipes > n)
     { 
-        if (!line_divided[n])
-            line_divided[n] = ft_strdup("");
+        /*if (!new_list)
+            new_list = ft_newnode(clean_word(line_divided[n]));*/
         new_node = ft_newnode(clean_word(line_divided[n]));
         //printf("Content token: **%s**\n", new_node->content_token);
-        lst_add_back(&master->node, new_node);
+        if (new_list == NULL)
+            new_list = new_node;
+        else
+         lst_add_back(&new_list, new_node);
         n++;
     }
-    tmp = master->node;
+    tmp = new_list;
     while (tmp!= NULL)
     {  
         printf("list-> **%s**\n", tmp->content_token);
@@ -69,7 +76,7 @@ t_token *create_nodeandlist(char *str, t_master *master)
         tmp = tmp->next;
     }
     free(line_divided);
-    return (new_node);
+    return (new_list);
 }
 
 //FIXME: BORRAR TMP Y EL WHILE QUE IMPRIME LA LISTA

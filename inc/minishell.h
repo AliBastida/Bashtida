@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/15 15:34:39 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/17 11:30:18 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int     check_redir_2(char *str);
 int     redir(char *str);
 
 //******UTILS_SYNTAX******//
-int    checking_syntax(char *str, t_master *master);
+int    checking_syntax(char *str);
 
 //===== SPLIT_PER_PIPES =====//
 //******GENERAL_SPLIT******//
@@ -82,7 +82,7 @@ int     how_many_pipes(char *str);
 
 //******LIST_PER_PIPES******//
 t_token *ft_newnode(void *content);
-t_token *create_nodeandlist(char *str, t_master *master);
+t_token *create_nodeandlist(char *str);
 
 //******LIST_UTILS******//
 t_token	*lst_last(t_token **lst);
@@ -102,6 +102,10 @@ int divided_by_word(t_token *node);
 int ft_copy_line(char **dest, char *str);
 
 //******FOUND_DOLLAR******//
+
+//===== NODES =====//
+//******SPLIT_WORDS******//
+t_word *running_through_nodes(t_token *token);
 
 
 //bool check_dollar(t_master *line);

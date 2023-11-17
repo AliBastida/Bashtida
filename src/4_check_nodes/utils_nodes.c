@@ -20,7 +20,7 @@ int ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }*/
 
-int len_nodes(char *token)
+int len_nodes(char *token) /*esta funcion tal ccual esta da error si le pasamos ** espacio > espacio | espacio >   no lo gestionamos porquee sera syntax error*/
 {
     int len;
     int i;
@@ -33,11 +33,13 @@ int len_nodes(char *token)
            i = next_quote(token, i + 1, token[i]);
         else if (token[i] == ' ')
         {
+            
             while (token[i] == ' ')
                 i++;
             if (token[i] != '\0' && token[i] != '<' && token[i] != '>')
                 len++;
-            i--;
+                // len++; lo hemos silenciado porque nos sumaba uno de mas xq entraba dos veces;
+           i--;
         }
         else if (token[i] == '>' || token[i] == '<')
         {
