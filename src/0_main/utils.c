@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:31:30 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/15 15:34:35 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:11:45 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void ft_free_single(char *str)
 
 bool is_space(unsigned char c)
 {
-    if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' 
-        || c == '\r')
+    if (c == ' ' || c == '\t') //|| c == '\n' || c == '\v' || c == '\f' 
+       // || c == '\r')
         return (true);
     else
         return (false);

@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:47:58 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/16 11:23:56 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:14:00 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 enum e_token_type
 {
     WORD,
-    REDIR,
+    REDIR, //vamos a ampliar estas etiquetas con todas las opciones posibles > < >> <<
     EXPANSION
 
 };
