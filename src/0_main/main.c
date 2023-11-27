@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/17 11:30:34 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:14:01 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,15 @@ int main(int ac, char **av, char **env)
             if (!create_nodeandlist(master->line))
                 free(master->line);
             else
-                running_through_nodes(create_nodeandlist(master->line));
+                divided_by_word(master->node);
+                //running_through_nodes(create_nodeandlist(master->line));
         }
         free(master->line);
     }
     free (master);
     return (0);
 }
-
+//TODO meter Gitignore
 /*int main(int ac, char **av)
 {
     (void) ac;
