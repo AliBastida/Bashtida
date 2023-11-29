@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:35:41 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/27 15:17:17 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:36:09 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,3 +41,109 @@ t_word *running_through_nodes(t_token *token)
     printf("%s\n", tmp->content_token);
     return (0);
 } */
+t_word	*lst_last_word(t_word **lst)
+{
+	t_word	*temp;
+
+	temp = *lst;
+	if (temp != NULL)
+	{
+		while (temp->next != NULL)
+			temp = temp->next;
+	}
+	return (temp);
+}
+
+
+void	lst_add_back_word(t_word **first, t_word *new_node)
+{
+	t_word	*temp;
+
+	if (*first == NULL)
+		*first = new_node;
+	else
+	{
+		temp = lst_last_word(first);
+		temp->next = new_node;
+	}
+}
+
+
+t_word	*ft_newnode_word(void *content)
+{
+	t_word	*new;
+
+	new = ft_calloc(sizeof(t_token), 1);
+	if (!new)
+		return (NULL);
+	new ->word = content;
+	new -> next = NULL;
+	return (new);
+}
+char *divided_by_word(t_token *node)
+{
+    int i;
+    t_token *tmp;
+    char *new;
+    int start;
+
+    i = 0;
+    tmp = node;
+    start = 0;
+    new = NULL;
+    while(tmp->content_token[i])
+    {
+        while (tmp->content_token[i] == ' ' || tmp->content_token[i] == '\t')
+            i++;
+        if ((i == 0 || (is_space(tmp->content_token[i - 1]))) && !is_space(tmp->content_token[i]))
+            start = i;
+        else if (is_space(tmp->content_token[i + 1]) || tmp->content_token[i + 1] == '\0')
+        {
+            new = ft_substr(tmp->content_token, start, i - start + 1);
+            break;
+            }
+        i++;
+    }
+   return(new);
+}
+
+t_word *create_nodeandlist_word(t_token *token)
+{
+    int     n;
+    int     n_words;
+    t_word  *new_list;
+    t_word  *new;
+    t_token *tmp;
+
+    tmp = token;
+    while (tmp)
+    {
+        n = 0;
+        new_list = NULL;
+        n_words = len_nodes(tmp->content_token);
+        while(n_words > n)
+        {
+            new = ft_newnode_word(divided_by_word(token));
+            if (!new)
+                return (NULL);
+            if (new_list == NULL)
+                new_list = new;                
+            else
+                lst_add_back_word(&new_list, new);
+            n++;
+        }
+        tmp->words = new_list;
+        new = new_list;
+        while (new != NULL)
+        {  
+            printf("list-> **%s**\n", new->word);
+            printf("n_words: %d\n", n_words);
+            new = new->next;
+        }
+        tmp = tmp->next;
+    }
+    return(new_list);
+}
+//TODO: lo siguiente a hacer es: sabiendo la len de nodos, lo que haremos es crear un char ** donde guardaremos lo qye hay dentro de cada nodo. Necesitamos calloc para reservar memoria.
+//cuando tngamos reservado, recorreremos la str analizando si hay $, si hay '', y sabiendo que la primera posicion del array ** es cmd. (son todos los del env.).
+

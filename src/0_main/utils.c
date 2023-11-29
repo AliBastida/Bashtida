@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:31:30 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/17 12:11:45 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:09:49 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,24 @@ bool is_space(unsigned char c)
         return (true);
     else
         return (false);
+}
+
+void    *free_all(t_master *line) 
+{
+    if (!line_divided_in_tokens(line->line))
+        {
+            free (line->line);
+            return (NULL);
+        }
+    if (!create_nodeandlist(line, line->line))
+        {
+            free (line);
+            return (NULL);
+        }
+    if (!divided_by_word(line->node))
+        {
+            free (line->node);
+            return (NULL);
+        }
+    return (NULL);
 }

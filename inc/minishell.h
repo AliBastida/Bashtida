@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/27 15:10:36 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:37:02 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ int main(int ac, char **av, char **env);
 
 //******UTILS******//
 int     syntax_error(int n);
-void ft_free_single(char *str);
-bool is_space(unsigned char c);
+void    ft_free_single(char *str);
+bool    is_space(unsigned char c);
+void    *free_all(t_master *line);
 
 //===== READLINE =====//
 int     read_line(t_master *master);
@@ -82,7 +83,7 @@ int     how_many_pipes(char *str);
 
 //******LIST_PER_PIPES******//
 t_token *ft_newnode(void *content);
-t_token *create_nodeandlist(char *str);
+t_token *create_nodeandlist(t_master *master, char *str);
 
 //******LIST_UTILS******//
 t_token	*lst_last(t_token **lst);
@@ -98,7 +99,7 @@ int	ft_strchar(char *s, int c);
 int len_nodes(char *token);
 int	ft_strcmp(char *s1, char *s2);
 char *clean_word(char *str);
-char *divided_by_word(t_token *node);
+
 int ft_copy_line(char **dest, char *str);
 
 //******FOUND_DOLLAR******//
@@ -106,6 +107,11 @@ int ft_copy_line(char **dest, char *str);
 //===== NODES =====//
 //******SPLIT_WORDS******//
 t_word *running_through_nodes(t_token *token);
+t_word *ft_newnode_word(void *content);
+char *divided_by_word(t_token *node);
+t_word	*lst_last_word(t_word **lst);
+void	lst_add_back_word(t_word **first, t_word *new_node);
+t_word *create_nodeandlist_word(t_token *token);
 
 
 //bool check_dollar(t_master *line);

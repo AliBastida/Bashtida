@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:25:30 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/16 12:39:07 by abastida         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:52:58 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,11 +131,12 @@ char **line_divided_in_tokens(char *str)
 
     n_box = how_many_pipes(str) + 1;
     line_divided = ft_calloc(sizeof(char *), n_box + 1);
+    if(!line_divided)
+        return(NULL);
     j = 0;
     position = 0;
     while (n_box > j)
     {         
-        printf("position: %d\n", position);//aqui vamos a grabar en line_divided[j] lo que saquemos de str[i].
         position += ft_copy_line(&line_divided[j], str + position);
         printf("line divided: =====%s======\n", line_divided[j]);
         j++;
