@@ -2,7 +2,7 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   utils_nodes.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */ 
+/*                                                    +:+ +:+         +:+     */
 /*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:17:06 by abastida          #+#    #+#             */
@@ -33,13 +33,12 @@ int len_nodes(char *token)//TODO /*esta funcion tal cual esta da error si le pas
            i = next_quote(token, i + 1, token[i]);
         else if (token[i] == ' ' || token[i] == '\t')
         {
-            
-            while (token[i] == ' '|| token[i] == '\t')
+
+			while (token[i] == ' '|| token[i] == '\t')
                 i++;
             if (token[i] != '\0' && token[i] != '<' && token[i] != '>')
-                len++;
-                // len++; lo hemos silenciado porque nos sumaba uno de mas xq entraba dos veces;
-           i--;
+				len++;
+		   i--;
         }
         else if (token[i] == '>' || token[i] == '<')
         {
@@ -50,6 +49,6 @@ int len_nodes(char *token)//TODO /*esta funcion tal cual esta da error si le pas
             len++;
         }
         i++;
-    }   
-    return (len);
+	}
+	return (len);
 }

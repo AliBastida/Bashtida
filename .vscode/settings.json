@@ -1,8 +1,12 @@
 {
   "C_Cpp.errorSquiggles": "disabled",
   "files.associations": {
+    "*.js": "javascriptreact",
+    "*.hbs": "handlebars",
+    "*.c": "c",
     "memory": "c",
-    "utility": "c"
+    "utility": "c",
+    "__node_handle": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "clang",

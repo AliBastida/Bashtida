@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:16:33 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/10 09:27:30 by abastida         ###   ########.fr       */
+/*   Updated: 2023/12/04 14:31:40 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,14 @@ int	ft_strchar(char *str, int c)
     i = 0;
    // printf("Check: %c\n", c);
     while (str[i] != '\0')
-    {
-        printf("Char: %c\tI: %d\n", str[i], i);
-        if (str[i] == '\'' || str[i] == '\"')
-        {
-            i = next_quote(str, i + 1, str[i]);
-            printf("Char: %c\tI: %d\n", str[i], i);
-        }
-        if (str[i] == c)
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+		{
+			i = next_quote(str, i + 1, str[i]);
+		}
+		if (str[i] == c)
             return (i);
         i++;
-    }
-    return (i);
+	}
+	return (i);
 }

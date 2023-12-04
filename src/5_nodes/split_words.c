@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:35:41 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/30 13:15:24 by pabastid         ###   ########.fr       */
+/*   Updated: 2023/12/04 15:09:18 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,16 @@ char *divided_by_word(t_token *node)
 	new = NULL;
 	while (tmp->content_token[i])
 	{
-		while (tmp->content_token[i] == ' ' || tmp->content_token[i] == '\t')
-			i++;
+		// while (tmp->content_token[i] == ' ' || tmp->content_token[i] == '\t')
+		//		i++;
 		if ((i == 0 || (is_space(tmp->content_token[i - 1]))) && !is_space(tmp->content_token[i]))
 			start = i;
-		else if (is_space(tmp->content_token[i + 1]) || tmp->content_token[i + 1] == '\0')
+		if (!is_space(tmp->content_token[i]) && (is_space(tmp->content_token[i + 1]) || tmp->content_token[i + 1] == '\0'))
 		{
 			new = ft_substr(tmp->content_token, start, i - start + 1); // hemos hecho un sbstr de new y obtendremos rest que es lo que usaremos como nuevo tmp en la funcion create_nodeand list_word
+			printf("new: ***%s***\n", new);
 			rest = ft_substr(tmp->content_token, i + 1, ft_strlen(tmp->content_token));
+			printf("resto: %s\n", rest);
 			free(tmp->content_token);
 			tmp->content_token = rest;
 			break;
@@ -133,14 +135,18 @@ t_word *create_nodeandlist_word(t_token *token)
 			if (new_list == NULL)
 				new_list = new;
 			else
+			{
 				lst_add_back_word(&new_list, new);
+			}
 			n++;
 		}
 		tmp->words = new_list;
 		new = new_list;
-		while (new != NULL)
+		while (new)
 		{
 			printf("list-> **%s**\n", new->word);
+			categorizing_words(new);
+			printf("--%d--\n", new->type);
 			printf("n_words: %d\n", n_words);
 			new = new->next;
 		}
