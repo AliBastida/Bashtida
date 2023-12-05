@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/30 12:47:08 by pabastid         ###   ########.fr       */
+/*   Updated: 2023/12/05 11:55:26 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(int ac, char **av, char **env)
 	while (1)
 	{
 		read_line(master);
-		if (checking_syntax(master->line) == 1) // TODO check syntax nodos, concretamente este ejemplo:   >|
+		if (checking_syntax(master->line) == 1)
 		{
 			if (line_divided_in_tokens(master->line) == NULL || (!create_nodeandlist(master, master->line)) || !create_nodeandlist_word(master->node))
 			{
