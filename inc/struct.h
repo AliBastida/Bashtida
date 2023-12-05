@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:47:58 by abastida          #+#    #+#             */
-/*   Updated: 2023/12/04 12:47:32 by pabastid         ###   ########.fr       */
+/*   Updated: 2023/12/05 14:46:26 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ enum e_token_type
 	REDIR_B,
 	REDIR_C,
 	REDIR_D,
-	EXPANSION,
+	DOLLAR,
 };
 
 typedef struct s_word
@@ -28,6 +28,7 @@ typedef struct s_word
 	char *word;
 	int single_quotes;
 	int type;
+	int flag_quote;
 	struct s_word *next;
 } t_word;
 

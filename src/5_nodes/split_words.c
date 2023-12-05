@@ -3,44 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   split_words.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:35:41 by abastida          #+#    #+#             */
-/*   Updated: 2023/12/04 15:09:18 by pabastid         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:12:41 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-t_word *running_through_nodes(t_token *token)
-{
-	t_token *tmp;
-	int i;
 
-	tmp = token;
-	i = 0;
-	while (tmp != NULL)
-	{
-		while (tmp->content_token[i])
-		{
-
-			if (tmp->content_token[i] == '>')
-				printf("Holaaaaaaaaaa1\n");
-			else if (tmp->content_token[i] == '$')
-				printf("ciaooooooo2\n");
-			i++;
-		}
-		i = 0;
-		printf("numero de palabras por nodo:%s\n", divided_by_word(tmp));
-		tmp = tmp->next;
-	}
-	if(!tmp)
-		tmp = create_nodeandlist(token->content_token);
-	else
-		tmp = create_nodeandlist(token->content_token);
-	printf("%s\n", tmp->content_token);
-	return (0);
-} */
 t_word	*lst_last_word(t_word **lst)
 {
 	t_word	*temp;
@@ -80,6 +51,7 @@ t_word	*ft_newnode_word(void *content)
 	new -> next = NULL;
 	return (new);
 }
+
 char *divided_by_word(t_token *node)
 {
 	int i;
@@ -94,10 +66,10 @@ char *divided_by_word(t_token *node)
 	new = NULL;
 	while (tmp->content_token[i])
 	{
-		// while (tmp->content_token[i] == ' ' || tmp->content_token[i] == '\t')
-		//		i++;
 		if ((i == 0 || (is_space(tmp->content_token[i - 1]))) && !is_space(tmp->content_token[i]))
 			start = i;
+		if (tmp->content_token[i] == '\'' || tmp->content_token[i] == '\"')
+			i = next_quote(tmp->content_token, i + 1, tmp->content_token[i]);
 		if (!is_space(tmp->content_token[i]) && (is_space(tmp->content_token[i + 1]) || tmp->content_token[i + 1] == '\0'))
 		{
 			new = ft_substr(tmp->content_token, start, i - start + 1); // hemos hecho un sbstr de new y obtendremos rest que es lo que usaremos como nuevo tmp en la funcion create_nodeand list_word
@@ -111,6 +83,27 @@ char *divided_by_word(t_token *node)
 		i++;
 	}
    return(new);
+}
+
+void check_dollar(t_token *token) // TODO esta funcion va en found_dollar.c
+{
+	t_token *tmp;
+	t_word *node;
+
+	tmp = token;
+	node = token->words;
+	while (tmp)
+	{
+		while (node)
+		{
+			categorizing_words(node);
+			check_to_expand(node);
+			printf("--%d--\n", node->type);
+			node = node->next;
+		}
+
+		tmp = tmp->next;
+	}
 }
 
 t_word *create_nodeandlist_word(t_token *token)
@@ -142,16 +135,19 @@ t_word *create_nodeandlist_word(t_token *token)
 		}
 		tmp->words = new_list;
 		new = new_list;
-		while (new)
+		check_dollar(tmp);
+		/*while (new) // TODO: quitar el while con cariño porque da segfault si lo quitamos sin mas.
 		{
 			printf("list-> **%s**\n", new->word);
 			categorizing_words(new);
+			check_to_expand(new);
+
 			printf("--%d--\n", new->type);
 			printf("n_words: %d\n", n_words);
-			new = new->next;
-		}
+			new = new->next;*/
 		tmp = tmp->next;
 	}
 	return (new_list);
 }
 // TODO: cuando tngamos reservado, recorreremos la str analizando si hay $, si hay '', y sabiendo que la primera posicion del array ** es cmd. (son todos los del env.).
+

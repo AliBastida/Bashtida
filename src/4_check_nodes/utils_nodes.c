@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:17:06 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/06 16:46:16 by abastida         ###   ########.fr       */
+/*   Updated: 2023/12/05 14:54:39 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,31 @@ int len_nodes(char *token)//TODO /*esta funcion tal cual esta da error si le pas
         i++;
 	}
 	return (len);
+}
+
+void categorizing_words(t_word *node)
+{
+	int i;
+
+	i = 0;
+	while (node->word[i] != '\0')
+	{
+		if (node->word[i] == '<' && node->word[i + 1] == '<')
+		{
+			node->type = REDIR_A;
+			i++;
+		}
+		else if (node->word[i] == '>' && node->word[i + 1] == '>')
+		{
+			node->type = REDIR_B;
+			i++;
+		}
+		else if (node->word[i] == '<')
+			node->type = REDIR_C;
+		else if (node->word[i] == '>')
+			node->type = REDIR_D;
+		else if (node->word[i] == '$')
+			node->type = DOLLAR;
+		i++;
+	}
 }
