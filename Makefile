@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abastida <abastida@student.42.fr>          +#+  +:+       +#+         #
+#    By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/20 11:24:34 by abastida          #+#    #+#              #
-#    Updated: 2023/11/16 11:37:50 by abastida         ###   ########.fr        #
+#    Updated: 2023/12/04 11:29:37 by pabastid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC :=  0_main/main.c 0_main/utils.c\
 			2_check_syntax/redir_syntax.c 2_check_syntax/utils_syntax.c \
 			3_split_per_pipes/general_split.c 3_split_per_pipes/list_pipes.c \
 			3_split_per_pipes/list_utils.c 3_split_per_pipes/split_utils.c  \
-			4_check_nodes/found_dollar.c 4_check_nodes/utils_nodes.c \
+			4_check_nodes/found_dollar.c 4_check_nodes/parsing_nodeword.c 4_check_nodes/utils_nodes.c \
 			5_nodes/split_words.c
 
 SRC_DIR := src/
