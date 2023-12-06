@@ -6,20 +6,24 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2023/12/05 11:55:26 by pabastid         ###   ########.fr       */
+/*   Updated: 2023/12/06 17:12:19 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(int ac, char **av, char **env)
+int main(int ac, char **av, const char **env)
 {
 	(void)ac;
 	(void)av;
 	(void)env;
 
 	t_master *master;
+
 	master = ft_calloc(1, sizeof(t_master));
+	// TODO dup env.
+	ft_dup_env(master, env);
+	PRINT_LIST(master->env);
 	while (1)
 	{
 		read_line(master);
@@ -30,13 +34,17 @@ int main(int ac, char **av, char **env)
 				free_all(master);
 				exit(1);
 			}
+			if (master->line && *master->line != '\0')
+				add_history(master->line);
 			// running_through_nodes(create_nodeandlist(master->line));
 		}
 		free(master->line);
 	}
+	ft_lstclear(&master->env, &free);
 	free(master);
 	return (0);
 }
+
 // TODO meter Gitignore
 /*int main(int ac, char **av)
 {

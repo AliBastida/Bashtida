@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2023/12/05 14:58:05 by abastida         ###   ########.fr       */
+/*   Updated: 2023/12/06 17:11:38 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
+
+#define PRINT_LIST(list)                                   \
+	t_list *random_tmp = list;                             \
+	printf("----------------------\n");                    \
+	while (random_tmp != NULL)                             \
+	{                                                      \
+		printf("random_tmp: *%s*\n", random_tmp->content); \
+		random_tmp = random_tmp->next;                     \
+	}                                                      \
+	printf("----------------------\n");
 
 #define PRINT_TOKENS(list) \
 t_token *random_tmp = list; \
@@ -39,7 +49,7 @@ while (cadena[random_i] != NULL) { \
     random_i++; } printf("----------------------\n");
 
 //=====0_MAIN =====//
-int main(int ac, char **av, char **env);
+int main(int ac, char **av, const char **env);
 //int     main(int ac, char **av);
 
 //******UTILS******//
@@ -95,6 +105,8 @@ int	ft_strchar(char *s, int c);
 //===== 4_CHECK_NODES =====//
 //******FOUND_DOLLAR******//
 void check_to_expand(t_word *node);
+void check_dollar(t_token *token);
+void ft_dup_env(t_master *token, const char **envp);
 
 //******UTILS_NODES******//
 int len_nodes(char *token);

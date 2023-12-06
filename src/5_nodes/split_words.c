@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_words.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:35:41 by abastida          #+#    #+#             */
-/*   Updated: 2023/12/05 15:12:41 by abastida         ###   ########.fr       */
+/*   Updated: 2023/12/06 13:38:04 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,27 +85,6 @@ char *divided_by_word(t_token *node)
    return(new);
 }
 
-void check_dollar(t_token *token) // TODO esta funcion va en found_dollar.c
-{
-	t_token *tmp;
-	t_word *node;
-
-	tmp = token;
-	node = token->words;
-	while (tmp)
-	{
-		while (node)
-		{
-			categorizing_words(node);
-			check_to_expand(node);
-			printf("--%d--\n", node->type);
-			node = node->next;
-		}
-
-		tmp = tmp->next;
-	}
-}
-
 t_word *create_nodeandlist_word(t_token *token)
 {
 	int n;
@@ -150,4 +129,3 @@ t_word *create_nodeandlist_word(t_token *token)
 	return (new_list);
 }
 // TODO: cuando tngamos reservado, recorreremos la str analizando si hay $, si hay '', y sabiendo que la primera posicion del array ** es cmd. (son todos los del env.).
-
