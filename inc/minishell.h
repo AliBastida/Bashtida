@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2023/12/06 17:11:38 by pabastid         ###   ########.fr       */
+/*   Updated: 2023/12/13 13:13:12 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ int	ft_strchar(char *s, int c);
 //******FOUND_DOLLAR******//
 void check_to_expand(t_word *node);
 void check_dollar(t_token *token);
-void ft_dup_env(t_master *token, const char **envp);
 
 //******UTILS_NODES******//
 int len_nodes(char *token);
@@ -114,6 +113,10 @@ int ft_strcmp(char *s1, char *s2); // TODO buscar donde va esta funcion
 char *clean_word(char *str);	   // TODO Buscar donde va esta funcion
 void categorizing_words(t_word *node);
 int ft_copy_line(char **dest, char *str); // TODO buscar donde va esta funcion
+
+//******UTILS_ENVP******//
+void ft_dup_envp(t_master *token, const char **envp);
+char *ft_getenvp(const char *name, const char **envp);
 
 //===== 5_NODES =====//
 //******SPLIT_WORDS******//

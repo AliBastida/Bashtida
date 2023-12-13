@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:05:23 by abastida          #+#    #+#             */
-/*   Updated: 2023/12/06 17:12:58 by pabastid         ###   ########.fr       */
+/*   Updated: 2023/12/13 12:53:21 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,23 +63,6 @@ void check_to_expand(t_word *node)
 	}
 }
 
-void ft_dup_env(t_master *master, const char **envp)
-{
-	int i;
-	char *dup;
-	(void)master;
-
-	i = 0;
-	while (envp != NULL && envp[i])
-	{
-		dup = ft_strdup(envp[i]);
-		if (master->env == NULL)
-			master->env = ft_lstnew(dup);
-		else
-			ft_lstadd_back(&master->env, ft_lstnew(dup));
-		i++;
-	}
-}
 // Si en la linea hay un dolar, chequea sin esta entre comillas dobles o no, y devuelve 1 si
 // esta entre comillas dobles. Si el retorno es 1, llamaremos a otra funcion (check_after_dollar)que compruebe el siguiente caracter
 // para saber lo que hay que hacer despues.
