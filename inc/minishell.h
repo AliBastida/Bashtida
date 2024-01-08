@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2023/12/13 13:13:12 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:40:21 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,9 @@ int	ft_strchar(char *s, int c);
 
 //===== 4_CHECK_NODES =====//
 //******FOUND_DOLLAR******//
-void check_to_expand(t_word *node);
-void check_dollar(t_token *token);
+void check_to_expand(t_word *node, const char **env);
+void check_dollar(t_token *token, const char **env);
+void ft_expand_dollar(t_word *node, const char **env);
 
 //******UTILS_NODES******//
 int len_nodes(char *token);
@@ -114,9 +115,10 @@ char *clean_word(char *str);	   // TODO Buscar donde va esta funcion
 void categorizing_words(t_word *node);
 int ft_copy_line(char **dest, char *str); // TODO buscar donde va esta funcion
 
-//******UTILS_ENVP******//
-void ft_dup_envp(t_master *token, const char **envp);
-char *ft_getenvp(const char *name, const char **envp);
+//******UTILS_ENV******//
+void ft_dup_env(t_master *token, const char **env);
+char *ft_getenv(const char *name, const char **env);
+char *clean_vble(char *str);
 
 //===== 5_NODES =====//
 //******SPLIT_WORDS******//
@@ -124,6 +126,6 @@ t_word *ft_newnode_word(void *content);
 char *divided_by_word(t_token *node);
 t_word *lst_last_word(t_word **lst);
 void lst_add_back_word(t_word **first, t_word *new_node);
-t_word *create_nodeandlist_word(t_token *token);
+t_word *create_nodeandlist_word(t_token *token, const char **env);
 
 #endif

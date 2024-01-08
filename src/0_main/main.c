@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2023/12/13 13:08:22 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:19:25 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@ int main(int ac, char **av, const char **env)
 
 	master = ft_calloc(1, sizeof(t_master));
 	// TODO dup env.
-	ft_dup_envp(master, env);
+	ft_dup_env(master, env);
 	PRINT_LIST(master->env);
 	while (1)
 	{
-		read_line(master);
+		if (read_line(master) == 1)
+			continue;
 		if (checking_syntax(master->line) == 1)
 		{
-			if (line_divided_in_tokens(master->line) == NULL || (!create_nodeandlist(master, master->line)) || !create_nodeandlist_word(master->node))
+			if (line_divided_in_tokens(master->line) == NULL || (!create_nodeandlist(master, master->line)) || !create_nodeandlist_word(master->node, env))
 			{
 				free_all(master);
 				exit(1);

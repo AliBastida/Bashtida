@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_syntax.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:50:19 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/08 15:05:38 by abastida         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:15:47 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ bool paired_quotes(char *line)
 
 char *memory_alloc(t_master *master)
 {
-    int len; 
+	int len;
 
-    len = ft_strlen(master->line);
+	len = ft_strlen(master->line);
     master->clean_line = ft_calloc(len+1, sizeof(t_master));
     if (!master->clean_line)
         return (NULL);
@@ -51,15 +51,15 @@ char *memory_alloc(t_master *master)
         return (master->clean_line);
 }
 
-
+// Esta funcion detecta si hay comillas y las quita de la linea.
 char *clean_line(char *str, t_master *master)
 {
     int i;
     int j;
     bool double_quote;
     bool simple_quote;
-    
-    i = 0;
+
+	i = 0;
     j = 0;
     master->clean_line = memory_alloc(master);
     double_quote = false;

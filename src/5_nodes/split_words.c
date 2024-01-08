@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:35:41 by abastida          #+#    #+#             */
-/*   Updated: 2023/12/06 13:38:04 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/08 13:34:17 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char *divided_by_word(t_token *node)
    return(new);
 }
 
-t_word *create_nodeandlist_word(t_token *token)
+t_word *create_nodeandlist_word(t_token *token, const char **env)
 {
 	int n;
 	int n_words;
@@ -114,7 +114,7 @@ t_word *create_nodeandlist_word(t_token *token)
 		}
 		tmp->words = new_list;
 		new = new_list;
-		check_dollar(tmp);
+		check_dollar(tmp, env);
 		/*while (new) // TODO: quitar el while con cariño porque da segfault si lo quitamos sin mas.
 		{
 			printf("list-> **%s**\n", new->word);

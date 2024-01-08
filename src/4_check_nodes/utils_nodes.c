@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:17:06 by abastida          #+#    #+#             */
-/*   Updated: 2023/12/05 14:54:39 by abastida         ###   ########.fr       */
+/*   Updated: 2024/01/08 12:52:28 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int ft_strcmp(char *s1, char *s2)
 		i++;
 	return (s1[i] - s2[i]);
 }*/
-/* len_nodes calcula cuantos palabras hay entre pipes. Recoge una char * (content_token) y nos retorna la len que vamos a necesitar para crear los nodos nuevos de t_word*/
-int len_nodes(char *token)//TODO /*esta funcion tal cual esta da error si le pasamos ** espacio > espacio | espacio >   no lo gestionamos porque sera syntax error*/
+// TODO /*esta funcion tal cual esta da error si le pasamos ** espacio > espacio | espacio >   no lo gestionamos porque sera syntax error*//* len_nodes calcula cuantos palabras hay entre pipes. Recoge una char * (content_token) y nos retorna la len que vamos a necesitar para crear los nodos nuevos de t_word*/
+int len_nodes(char *token)
 {
     int len;
     int i;

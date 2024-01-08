@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:05:23 by abastida          #+#    #+#             */
-/*   Updated: 2023/12/13 12:53:21 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:42:31 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // check_dollar(t_word *node)
 // esta funcio chequea si el dolar esta entre comillas simples, y si no lo esta, expandir dollar.
 
-void check_dollar(t_token *token)
+void check_dollar(t_token *token, const char **env)
 {
 	t_token *tmp;
 	t_word *node;
@@ -27,16 +27,21 @@ void check_dollar(t_token *token)
 		while (node)
 		{
 			categorizing_words(node);
-			check_to_expand(node);
+			check_to_expand(node, env);
 			printf("--%d--\n", node->type);
 			node = node->next;
 		}
-
 		tmp = tmp->next;
 	}
 }
 
-void check_to_expand(t_word *node)
+void ft_expand_dollar(t_word *node, const char **env)
+{
+	// TODO: tenemos que limpiar antes de passar a getenv de comillas dobles.
+	printf("%s\n", ft_getenv(node->word, env));
+}
+
+void check_to_expand(t_word *node, const char **env)
 {
 	int i;
 
@@ -49,43 +54,18 @@ void check_to_expand(t_word *node)
 			node->flag_quote = 1;
 			printf("node->flag_quote %d **el valor de i: %d\n", node->flag_quote, i);
 		}
+		else if (node->word[i] == '\"' && node->flag_quote == 0)
+			node->flag_quote = 2;
 		else if (node->word[i] == '$' && (is_space(node->word[i + 1]) == 0) && node->word[i + 1] != '\0' && node->flag_quote != 1)
 		{
-			// ft_expand_dollar;
-			printf("Funcion expand dollar\n");
+			ft_expand_dollar(node, env);
 		}
 		else if (node->word[i] == '\'' && node->flag_quote == 1)
 		{
+			// TODO: Devuelve lo mismo que cogio.
 			node->flag_quote = 0;
 			printf("end_node->flag_quote %d ----> el valor de i: %d\n", node->flag_quote, i);
 		}
 		i++;
 	}
 }
-
-// Si en la linea hay un dolar, chequea sin esta entre comillas dobles o no, y devuelve 1 si
-// esta entre comillas dobles. Si el retorno es 1, llamaremos a otra funcion (check_after_dollar)que compruebe el siguiente caracter
-// para saber lo que hay que hacer despues.
-/*
-bool check_dollar(t_master *line)
-{
-	int i;
-	t_master *tmp;
-
-	i = 0;
-	tmp = line->node;
-	while (tmp != NULL)
-	{
-		// Mirar si el char * del nodo tiene comillas simples
-		if (tmp ->line[i] == '$')
-		{
-			printf("hemos encontrado $\n", tmp->line[i]);
-			return (1);
-		}
-		i++;
-		//tmp = tmp->node->next;
-	}
-	return (0);
-}
-*/
-// FIXME No se como plantear esta funcion!!!!!
