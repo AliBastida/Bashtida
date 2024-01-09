@@ -6,19 +6,28 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:17:06 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/08 12:52:28 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:24:51 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-int ft_strcmp(char *s1, char *s2)
+
+// Esta funcion retorna 1 si es redireccion y 0 si no es.
+bool is_redir(char c)
 {
-	int i = 0;
-	while(s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
-}*/
+	if ((c == '>') || (c == '<'))
+	{
+		if (*(&c + 1) != '\0' && *(&c + 1) == c)
+		{
+			printf("Doble redir\n");
+			return (true);
+		}
+		printf("Simple redir\n");
+		return (true);
+	}
+	return (false);
+}
+
 // TODO /*esta funcion tal cual esta da error si le pasamos ** espacio > espacio | espacio >   no lo gestionamos porque sera syntax error*//* len_nodes calcula cuantos palabras hay entre pipes. Recoge una char * (content_token) y nos retorna la len que vamos a necesitar para crear los nodos nuevos de t_word*/
 int len_nodes(char *token)
 {

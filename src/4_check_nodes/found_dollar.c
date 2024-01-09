@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:05:23 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/08 14:42:31 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/09 14:34:38 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ void check_dollar(t_token *token, const char **env)
 	t_word *node;
 
 	tmp = token;
-	node = token->words;
 	while (tmp)
 	{
+		node = tmp->words;
 		while (node)
 		{
+			printf("Categorize: -%s-\t-%p-\n", node->word, node);
 			categorizing_words(node);
 			check_to_expand(node, env);
 			printf("--%d--\n", node->type);
@@ -38,7 +39,7 @@ void check_dollar(t_token *token, const char **env)
 void ft_expand_dollar(t_word *node, const char **env)
 {
 	// TODO: tenemos que limpiar antes de passar a getenv de comillas dobles.
-	printf("%s\n", ft_getenv(node->word, env));
+	printf("Getenv: -%s-\n", ft_getenv(node->word, env));
 }
 
 void check_to_expand(t_word *node, const char **env)
@@ -69,3 +70,4 @@ void check_to_expand(t_word *node, const char **env)
 		i++;
 	}
 }
+// TODO: despues de un $ solo puede ir una vble de entorno. + metacaracterres. redir o |

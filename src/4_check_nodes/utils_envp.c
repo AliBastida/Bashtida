@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:51:12 by pabastid          #+#    #+#             */
-/*   Updated: 2024/01/08 15:21:33 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/09 11:43:31 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,22 @@ char *clean_vble(char *node)
 	char *new_line;
 
 	i = 0;
-	new_line = malloc(sizeof(char) * ft_strlen(node) + 1);
+	if (node[0] == '\"' && ++i)
+		new_line = malloc(sizeof(char) * (ft_strlen(node) - 1));
+	else
+		new_line = malloc(sizeof(char) * (ft_strlen(node) + 1));
 	if (!new_line)
 		return (NULL);
-	while (node[i])
+	while ((node[0] == '\"' && node[i] != '\"') || (node[0] != '\"' && node[i] != '\0'))
 	{
-		if ((node[i] == '$') && (node[i - 1] == '\"'))
-		{
-			while (node[i] != '\"')
-			{
-				new_line[i] = node[i];
-				i++;
-			}
-		}
+		if (node[0] == '\"')
+			new_line[i - 1] = node[i];
+		else
+			new_line[i] = node[i];
 		i++;
 	}
+	if (node[0] == '\"')
+		i--;
 	new_line[i] = '\0';
 	return (new_line);
 }
