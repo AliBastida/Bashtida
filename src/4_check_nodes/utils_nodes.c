@@ -6,20 +6,22 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:17:06 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/09 15:24:51 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/11 13:43:21 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // Esta funcion retorna 1 si es redireccion y 0 si no es.
-bool is_redir(char c)
+bool is_redir(char *str, int i)
 {
-	if ((c == '>') || (c == '<'))
+	if (str[i] != '\0' && (str[i] == '>' || str[i] == '<'))
 	{
-		if (*(&c + 1) != '\0' && *(&c + 1) == c)
+		if ((str[i + 1]) != '\0' && (str[i + 1] == str[i]))
 		{
 			printf("Doble redir\n");
+			i++;
+			printf("valor de i en redir%d\n", i);
 			return (true);
 		}
 		printf("Simple redir\n");

@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/09 15:21:44 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/11 13:29:19 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void ft_expand_dollar(t_word *node, const char **env);
 //******UTILS_NODES******//
 int len_nodes(char *token);
 void categorizing_words(t_word *node);
-bool is_redir(char c);
+bool is_redir(char *str, int i);
 
 //******UTILS_ENV******//
 void ft_dup_env(t_master *token, const char **env);

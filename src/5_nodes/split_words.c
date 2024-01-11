@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:35:41 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/09 16:06:57 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/11 13:38:53 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,26 @@ char *divided_by_word(t_token *node)
 	char *new;
 	int start;
 	char *rest;
+	int flag;
 
 	i = 0;
 	tmp = node;
 	start = 0;
 	new = NULL;
+	flag = 0;
 	while (tmp->content_token[i])
 	{
-		if ((i == 0 || (is_space(tmp->content_token[i - 1]))) && !is_space(tmp->content_token[i]))
+		if (i == 0)
+		{
+			while (tmp->content_token[i] == ' ')
+				i++;
 			start = i;
+			if (is_redir(tmp->content_token, i))
+				flag = 1;
+		}
 		if (tmp->content_token[i] == '\'' || tmp->content_token[i] == '\"')
 			i = next_quote(tmp->content_token, i + 1, tmp->content_token[i]);
-		if (!is_space(tmp->content_token[i]) && (is_space(tmp->content_token[i + 1]) || tmp->content_token[i + 1] == '\0'))
+		if (flag == 1 || (!is_space(tmp->content_token[i]) && (is_space(tmp->content_token[i + 1]) || is_redir(tmp->content_token, i + 1) || tmp->content_token[i + 1] == '\0')))
 		{
 			new = ft_substr(tmp->content_token, start, i - start + 1); // hemos hecho un sbstr de new y obtendremos rest que es lo que usaremos como nuevo tmp en la funcion create_nodeand list_word
 			printf("new: ***%s***\n", new);
@@ -83,51 +91,6 @@ char *divided_by_word(t_token *node)
 	return (new);
 }
 
-/*char *divided_by_word(t_token *node)
-{
-	int i;
-	t_token *tmp;
-	char *new;
-	int start;
-	char *rest;
-
-	i = 0;
-	tmp = node;
-	start = 0;
-	new = NULL;
-	while (tmp->content_token[i])
-	{
-		printf("Word: ++%s++\n tmp->content_tokenChar: ++%c++\n valor i:++%d++\n", tmp->content_token, tmp->content_token[i], i);
-		if ((i == 0) || is_redir(tmp->content_token[i]) || (is_space(tmp->content_token[i - 1]) && !is_space(tmp->content_token[i])))
-			start = i;
-		if (tmp->content_token[i] == '\'' || tmp->content_token[i] == '\"')
-			i = next_quote(tmp->content_token, i + 1, tmp->content_token[i]);
-		printf("Start: ++%d++\t valor i: ++%d++\t siguient char++%c++\n", start, i, tmp->content_token[i + 1]);
-		if ((!is_space(tmp->content_token[i]) && (is_redir(tmp->content_token[i + 1]) || is_space(tmp->content_token[i + 1]) || tmp->content_token[i + 1] == '\0')) || is_redir(tmp->content_token[i]))
-		{
-			printf("entra\n");
-			new = ft_substr(tmp->content_token, start, i - start + 1); // hemos hecho un sbstr de new y obtendremos rest que es lo que usaremos como nuevo tmp en la funcion create_nodeand list_word
-			printf("new: ***%s***\n", new);
-			rest = ft_substr(tmp->content_token, i + 1, ft_strlen(tmp->content_token));
-			printf("resto: -%s-\n", rest);
-			free(tmp->content_token);
-			tmp->content_token = rest;
-			break;
-		}
-		i++;
-	}
-	return (new);
-}*/
-
-/*char *divide_if_redir(t_token *node)
-{
-	int i;
-
-	i = 0;
-	while (tmp->content_token[i])
-}*/
-
-// TODO: tenemos que separar las palabras por redirecciones tb, sin espacios.
 // TODO: separar cmd + argumentos. Si el argumento esta "" hacemos NULL y pasamos al siguinte nodo
 // TODO: Gestionar comillas simples. Que devuelva lo que hemos metiddo
 
@@ -162,17 +125,7 @@ t_word *create_nodeandlist_word(t_token *token, const char **env)
 		tmp->words = new_list;
 		new = new_list;
 		check_dollar(tmp, env);
-		/*while (new) // TODO: quitar el while con cariño porque da segfault si lo quitamos sin mas.
-		{
-			printf("list-> **%s**\n", new->word);
-			categorizing_words(new);
-			check_to_expand(new);
-
-			printf("--%d--\n", new->type);
-			printf("n_words: %d\n", n_words);
-			new = new->next;*/
 		tmp = tmp->next;
 	}
 	return (new_list);
 }
-// TODO: cuando tngamos reservado, recorreremos la str analizando si hay $, si hay '', y sabiendo que la primera posicion del array ** es cmd. (son todos los del env.).
