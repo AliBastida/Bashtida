@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:17:06 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/11 15:09:35 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/12 13:40:17 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,50 +29,34 @@ int is_redir(char *str, int i)
 	return (0);
 }
 
-/*
-char *substr_words(t_token *tmp, int start, int i)
-{
-	char *new;
-	char *rest;
-	new = ft_substr(tmp->content_token, start, i - start + 1); // hemos hecho un sbstr de new y obtendremos rest que es lo que usaremos como nuevo tmp en la funcion create_nodeand list_word
-	printf("new: ***%s***\n", new);
-	rest = ft_substr(tmp->content_token, i + 1, ft_strlen(tmp->content_token));
-	printf("resto: -%s-\n", rest);
-	free(tmp->content_token);
-	tmp->content_token = rest;
-	return new;
-}*/
-// TODO /*esta funcion tal cual esta da error si le pasamos ** espacio > espacio | espacio >   no lo gestionamos porque sera syntax error*//* len_nodes calcula cuantos palabras hay entre pipes. Recoge una char * (content_token) y nos retorna la len que vamos a necesitar para crear los nodos nuevos de t_word*/
+/* len_nodes calcula cuantos palabras hay entre pipes. Recoge una char * (content_token) y nos retorna la len que vamos a necesitar para crear los nodos nuevos de t_word*/
 int len_nodes(char *token)
 {
     int len;
     int i;
 
-	len = 1; // TODO: TENEMOS QUE VER QUE VALOR DARLE A LEN O COMO GESTIONAR SU VALOR PORQUE SI PONEMOS LEN 0 NOS DEJA UN NODO FUERA Y SI PONEMOS LEN 1 NOS DA SEGFAULT SI HACEMOS >A.
+	len = 1;
 	i = 0;
+
 	while (token[i])
 	{
-        if (token[i] == '\'' || token[i] == '\"')
-           i = next_quote(token, i + 1, token[i]);
-		else if (token[i] == ' ' || token[i] == '\t') // is_space(token[i])
+		if (token[i + 1] && (token[i] == '\'' || token[i] == '\"'))
+			i = next_quote(token, i + 1, token[i]);
+		if (!is_space(token[i]) && is_space(token[i + 1]) && !is_redir(token, i))
+			len++;
+		if (is_redir(token, i) != 0)
 		{
-
-			while (token[i] == ' '|| token[i] == '\t')
-                i++;
-            if (token[i] != '\0' && token[i] != '<' && token[i] != '>')
+			if (i != 0 && !is_space(token[i - 1]))
 				len++;
-		   i--;
-		}
-		else if (token[i] == '>' || token[i] == '<') // is_redir(token[i]))
-		{
-			if (token[i] == token[i + 1])
+			if (is_redir(token, i) == 2)
 				i++;
-			if (token[i + 1] != ' ')
-                len++;
-            len++;
+			if (token[i + 1] == '\0')
+				len--;
+			len++;
 		}
 		i++;
 	}
+	printf("%d\n", len);
 	return (len);
 }
 

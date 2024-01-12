@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/08 14:19:25 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/12 10:58:39 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ int main(int ac, char **av, const char **env)
 	(void)env;
 
 	t_master *master;
-
 	master = ft_calloc(1, sizeof(t_master));
-	// TODO dup env.
 	ft_dup_env(master, env);
-	PRINT_LIST(master->env);
+	// PRINT_LIST(master->env);
 	while (1)
 	{
 		if (read_line(master) == 1)
@@ -45,29 +43,3 @@ int main(int ac, char **av, const char **env)
 	free(master);
 	return (0);
 }
-
-// TODO meter Gitignore
-/*int main(int ac, char **av)
-{
-	(void) ac;
-	(void) av;
-
-	t_master    *master;
-	master = ft_calloc(1, sizeof(t_master));
-	if (!master)
-		return (0);
-	while (1)
-	{
-		if (read_line(master))
-			continue ;
-	   // line_divided_in_tokens(master->line);
-	//    printf("valor de strchar: %d\n", ft_strchar(master->line, '|'));
-		line_divided_in_tokens(master->line);
-		create_node(master->line, master);
-		free(master->line);
-		// return (0);
-	   // printf ("resultado de check_dolar: %d\n", check_dollar(master));
-	}
-	free (master);
-	return (0);
-}*/

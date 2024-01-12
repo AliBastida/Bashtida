@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_pipes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:40:43 by abastida          #+#    #+#             */
-/*   Updated: 2023/12/04 14:40:57 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/12 10:59:13 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,11 @@ t_token *create_nodeandlist(t_master *master, char *str)
     t_token *new_node;
 	// t_token *tmp;
 	t_token *new_list;
-    int n_pipes;
-    int len;
-    char **line_divided;
+	int n_pipes;
+	char **line_divided;
     int n;
 
-    len = 0;
-    n_pipes = how_many_pipes(str) + 1;
+	n_pipes = how_many_pipes(str) + 1;
     line_divided = line_divided_in_tokens(str);
 	new_list = NULL;
 	n = 0;
