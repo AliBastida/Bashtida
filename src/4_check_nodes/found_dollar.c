@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   found_dollar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:05:23 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/15 09:56:07 by abastida         ###   ########.fr       */
+/*   Updated: 2024/01/15 11:54:42 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void check_dollar(t_token *token, const char **env)
 	t_word *node;
 	tmp = token;
 	printf("1@@@@@@\n");
-	while (token && tmp->next != NULL)
+	while (tmp)
 	{
-		printf("2@@@@@\n");
+		printf("2@@@@@@\n");
 		node = token->words;
 		while (node)
 		{
@@ -37,9 +37,9 @@ void check_dollar(t_token *token, const char **env)
 	}
 }
 
-void ft_expand_dollar(t_word *node, const char **env)
+void ft_expand_dollar(t_word *node, const char **env, int idx)
 {
-	printf("Getenv: -%s-\n", ft_getenv(node->word, env));
+	printf("Getenv: -%s-\n", ft_getenv(node->word, env, idx));
 }
 
 void check_to_expand(t_word *node, const char **env)
@@ -63,7 +63,7 @@ void check_to_expand(t_word *node, const char **env)
 			node->flag_quote = 2;
 		else if (node->word[i] == '$' && (is_space(node->word[i + 1]) == 0) && node->word[i + 1] != '\0' && node->flag_quote != 1)
 		{
-			ft_expand_dollar(node, env);
+			ft_expand_dollar(node, env, i);
 		}
 		else if (node->word[i] == '\'' && node->flag_quote == 1)
 		{

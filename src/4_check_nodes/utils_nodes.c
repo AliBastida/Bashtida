@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:17:06 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/12 13:40:17 by abastida         ###   ########.fr       */
+/*   Updated: 2024/01/15 11:32:08 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int len_nodes(char *token)
 		}
 		i++;
 	}
-	printf("%d\n", len);
+	printf("Len: %d\n", len);
 	return (len);
 }
 

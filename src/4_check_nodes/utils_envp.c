@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:51:12 by pabastid          #+#    #+#             */
-/*   Updated: 2024/01/09 11:43:31 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/15 12:11:53 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,53 @@ void ft_dup_env(t_master *master, const char **env)
 }
 
 // FIXME:  No funciona!!
-char *clean_vble(char *node)
+char *clean_vble(char *node, int idx)
 {
 	int i;
+	int j;
+	int len;
 	char *new_line;
 
-	i = 0;
-	if (node[0] == '\"' && ++i)
-		new_line = malloc(sizeof(char) * (ft_strlen(node) - 1));
-	else
-		new_line = malloc(sizeof(char) * (ft_strlen(node) + 1));
+	j = 0;
+	len = 0;
+	// DONDE ESTA EL DOLAR EN LA NODE->WORD
+	i = idx + 1;
+	// if (node[0] == '\"' && ++i)
+	// {
+	// 	printf("One\n");
+	// 	new_line = malloc(sizeof(char) * (ft_strlen(node) - 1));
+	// }
+	// else
+	// {
+	// 	printf("Two\n");
+	// 	new_line = malloc(sizeof(char) * (ft_strlen(node) + 1));
+	// }
+	while (ft_isalpha(node[i]))
+	{
+		i++;
+		len++;
+	}
+	new_line = malloc(sizeof(char) * (len + 1)); // LEN DE EL NOMBRE DE LA VARIABLE HASTA QUE NO ENCUENTRAS UN CARACTER ALFABETICO
 	if (!new_line)
 		return (NULL);
-	while ((node[0] == '\"' && node[i] != '\"') || (node[0] != '\"' && node[i] != '\0'))
+	i = idx + 1;
+	while (j < len)
 	{
-		if (node[0] == '\"')
-			new_line[i - 1] = node[i];
-		else
-			new_line[i] = node[i];
+		new_line[j] = node[i];
+		// if (node[0] == '\"')
+		// 	new_line[i - 1] = node[i];
+		// else
+		// 	new_line[i] = node[i];
+		j++;
 		i++;
 	}
-	if (node[0] == '\"')
-		i--;
-	new_line[i] = '\0';
+	// if (node[0] == '\"')
+	// 	i--;
+	new_line[j] = '\0';
 	return (new_line);
 }
 /* Esta funcioon getenv recibe un char *(con el nombre qque queremos comparar) y qque junto con el "=" lo meeteremos en vble y es lo que usaremos para comparar*/
-char *ft_getenv(const char *name, const char **env)
+char *ft_getenv(const char *name, const char **env, int idx)
 {
 	char *vble;
 	const char *new_name;
@@ -66,9 +86,9 @@ char *ft_getenv(const char *name, const char **env)
 	int i;
 
 	i = 0;
-	new_name = clean_vble((char *)name);
-	vble = ft_strjoin(new_name + 1, "="); // le unimos el "=" para asegurar todos los casos.
-	printf("%s\n", vble);
+	new_name = clean_vble((char *)name, idx);
+	vble = ft_strjoin(new_name, "="); // le unimos el "=" para asegurar todos los casos.
+	printf("Vble: %s\n", vble);
 	vble_len = ft_strlen(vble);
 	while (env != NULL && env[i] != NULL)
 	{

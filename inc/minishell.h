@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/11 14:53:56 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/15 12:03:37 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	ft_strchar(char *s, int c);
 //******FOUND_DOLLAR******//
 void check_to_expand(t_word *node, const char **env);
 void check_dollar(t_token *token, const char **env);
-void ft_expand_dollar(t_word *node, const char **env);
+void ft_expand_dollar(t_word *node, const char **env, int idx);
 
 //******UTILS_NODES******//
 int len_nodes(char *token);
@@ -126,8 +126,8 @@ char *substr_words(t_token *tmp, int start, int i);
 
 //******UTILS_ENV******//
 void ft_dup_env(t_master *token, const char **env);
-char *ft_getenv(const char *name, const char **env);
-char *clean_vble(char *str);
+char *ft_getenv(const char *name, const char **env, int idx);
+char *clean_vble(char *str, int idx);
 
 //===== 5_NODES =====//
 //******SPLIT_WORDS******//

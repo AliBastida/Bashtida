@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_words.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:35:41 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/15 09:56:05 by abastida         ###   ########.fr       */
+/*   Updated: 2024/01/15 11:44:41 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ char *substr_words(t_token *tmp, int start, int i)
 	tmp->content_token = rest;
 	return new;
 }
-// TODO: separar cmd + argumentos. Si el argumento esta "" hacemos NULL y pasamos al siguinte nodo
-// TODO: Gestionar comillas simples. Que devuelva lo que hemos metiddo
+// TODO: separar cmd + argumentos. Si el argumento esta "" hacemos NULL y pasamos al siguiente nodo
+// TODO: Gestionar comillas simples. Que devuelva lo que hemos metido
 
 // TODO: NO PODEMOS OLVIDAR QUE ESTA FUNCION HA DE PASAR POR TODOS LOS T_TOKEN QUE CREEMOS, PORQUE HA DE SEPARAR LAS PALABRAS EN TODOS LOS TOKENS.
 
@@ -125,18 +125,16 @@ t_word *create_nodeandlist_word(t_token *token, const char **env)
 			if (new_list == NULL)
 				new_list = new;
 			else
-			{
 				lst_add_back_word(&new_list, new);
-			}
 			n++;
 		}
 		PRINT_WORD(new_list);
 		tmp->words = new_list;
-		new = new_list;
-		tmp = tmp->next;
+		// new = new_list; // TODO: ALICIA, ESTO NO LO NECESITAS PORQUE EL NEW DESPUES NO LO USAS
 		// FIXME: CUANDO LLAMAMOS A CHECK_DOLLAR, NO ENTRA EN EL WHILE QUE HA DE CHEQUEAR QUE EXISTE LA LISTA Y QUE COMPRUEBA QUE EL DOLAR ESTA ENTRE COMILLAS,
 		// FIXME: (continuacion)SIMPLES Y DOBLES. PARECE QUE NO ENTRA PORQUE LAS LISTAS ESTAN VACIAS, POR QUE?LO ULTIMO QUE TOQUE FUE LA LEN DE LOS NODOS(LEN_NODES, EN UTILS_NODES.C).
 		check_dollar(tmp, env);
+		tmp = tmp->next;
 	}
 	return (new_list);
 }
