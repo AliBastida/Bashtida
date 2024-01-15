@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_words.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:35:41 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/11 15:06:33 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/15 09:56:05 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,8 @@ t_word *create_nodeandlist_word(t_token *token, const char **env)
 		tmp->words = new_list;
 		new = new_list;
 		tmp = tmp->next;
+		// FIXME: CUANDO LLAMAMOS A CHECK_DOLLAR, NO ENTRA EN EL WHILE QUE HA DE CHEQUEAR QUE EXISTE LA LISTA Y QUE COMPRUEBA QUE EL DOLAR ESTA ENTRE COMILLAS,
+		// FIXME: (continuacion)SIMPLES Y DOBLES. PARECE QUE NO ENTRA PORQUE LAS LISTAS ESTAN VACIAS, POR QUE?LO ULTIMO QUE TOQUE FUE LA LEN DE LOS NODOS(LEN_NODES, EN UTILS_NODES.C).
 		check_dollar(tmp, env);
 	}
 	return (new_list);
