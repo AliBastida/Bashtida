@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   found_dollar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:05:23 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/15 11:54:42 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:09:48 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ void check_dollar(t_token *token, const char **env)
 	t_token *tmp;
 	t_word *node;
 	tmp = token;
-	printf("1@@@@@@\n");
 	while (tmp)
 	{
-		printf("2@@@@@@\n");
 		node = token->words;
 		while (node)
 		{
@@ -65,9 +63,8 @@ void check_to_expand(t_word *node, const char **env)
 		{
 			ft_expand_dollar(node, env, i);
 		}
-		else if (node->word[i] == '\'' && node->flag_quote == 1)
+		else if ((node->word[i] == '$' && (is_space(node->word[i + 1]) == 0) && node->word[i + 1] != '\0' && node->flag_quote == 1))
 		{
-			// TODO: Devuelve lo mismo que cogio, sin las comillas, incluyendo el $
 			word_quoted = ft_substr(node->word, i, start - i);
 			node->flag_quote = 0;
 			printf("word_quoted: ----%s------,end_node->flag_quote %d ----> el valor de i: %d\n", word_quoted, node->flag_quote, i);
