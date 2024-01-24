@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_envp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:51:12 by pabastid          #+#    #+#             */
-/*   Updated: 2024/01/15 12:11:53 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:09:19 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void ft_dup_env(t_master *master, const char **env)
 			ft_lstadd_back(&master->env, ft_lstnew(dup));
 		i++;
 	}
+	print_env(master);
 }
 
-// FIXME:  No funciona!!
 char *clean_vble(char *node, int idx)
 {
 	int i;
@@ -43,16 +43,6 @@ char *clean_vble(char *node, int idx)
 	len = 0;
 	// DONDE ESTA EL DOLAR EN LA NODE->WORD
 	i = idx + 1;
-	// if (node[0] == '\"' && ++i)
-	// {
-	// 	printf("One\n");
-	// 	new_line = malloc(sizeof(char) * (ft_strlen(node) - 1));
-	// }
-	// else
-	// {
-	// 	printf("Two\n");
-	// 	new_line = malloc(sizeof(char) * (ft_strlen(node) + 1));
-	// }
 	while (ft_isalpha(node[i]))
 	{
 		i++;
@@ -65,15 +55,9 @@ char *clean_vble(char *node, int idx)
 	while (j < len)
 	{
 		new_line[j] = node[i];
-		// if (node[0] == '\"')
-		// 	new_line[i - 1] = node[i];
-		// else
-		// 	new_line[i] = node[i];
 		j++;
 		i++;
 	}
-	// if (node[0] == '\"')
-	// 	i--;
 	new_line[j] = '\0';
 	return (new_line);
 }

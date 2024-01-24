@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/15 12:03:37 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:09:28 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,5 +137,10 @@ t_word *lst_last_word(t_word **lst);
 void lst_add_back_word(t_word **first, t_word *new_node);
 t_word *create_nodeandlist_word(t_token *token, const char **env);
 char *divide_if_redir(t_token *node);
+
+//===== 6_BUILTINS =====//
+//******ENV******//
+
+void print_env(t_master *master);
 
 #endif
