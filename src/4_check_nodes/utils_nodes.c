@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:17:06 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/15 11:32:08 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/01/29 11:24:05 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,7 @@ int is_redir(char *str, int i)
 	if (str[i] != '\0' && (str[i] == '>' || str[i] == '<'))
 	{
 		if ((str[i + 1]) != '\0' && (str[i + 1] == str[i]))
-		{
-			printf("Doble redir\n");
-			printf("valor de i en redir%d\n", i);
 			return (2);
-		}
-		printf("Simple redir\n");
 		return (1);
 	}
 	return (0);
@@ -56,7 +51,6 @@ int len_nodes(char *token)
 		}
 		i++;
 	}
-	printf("Len: %d\n", len);
 	return (len);
 }
 

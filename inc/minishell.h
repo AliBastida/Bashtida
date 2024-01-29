@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/24 14:09:28 by abastida         ###   ########.fr       */
+/*   Updated: 2024/01/29 15:10:58 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,11 @@ char *divide_if_redir(t_token *node);
 //******ENV******//
 
 void print_env(t_master *master);
+
+//===== 7_COMMANDS =====//
+//******CMD.C******//
+t_cmd *saving_cmd(t_word *words);
+int node_counter(t_word *words);
+char *get_path(t_master *master);
 
 #endif

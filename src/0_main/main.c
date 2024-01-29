@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/12 10:58:39 by abastida         ###   ########.fr       */
+/*   Updated: 2024/01/29 11:36:14 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int main(int ac, char **av, const char **env)
 			}
 			if (master->line && *master->line != '\0')
 				add_history(master->line);
-			// running_through_nodes(create_nodeandlist(master->line));
 		}
 		free(master->line);
 	}

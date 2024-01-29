@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:51:12 by pabastid          #+#    #+#             */
-/*   Updated: 2024/01/24 14:09:19 by abastida         ###   ########.fr       */
+/*   Updated: 2024/01/29 14:51:49 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void ft_dup_env(t_master *master, const char **env)
 			ft_lstadd_back(&master->env, ft_lstnew(dup));
 		i++;
 	}
-	print_env(master);
+	// print_env(master);
 }
 
 char *clean_vble(char *node, int idx)
@@ -76,6 +76,7 @@ char *ft_getenv(const char *name, const char **env, int idx)
 	vble_len = ft_strlen(vble);
 	while (env != NULL && env[i] != NULL)
 	{
+		printf("Env: %s\n", env[i]);
 		if (ft_strncmp((char *)env[i], vble, vble_len) == 0)
 		{
 			free(vble);

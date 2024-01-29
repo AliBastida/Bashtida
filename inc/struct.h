@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:47:58 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/24 15:51:20 by abastida         ###   ########.fr       */
+/*   Updated: 2024/01/29 11:34:29 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@ enum e_token_type
 	DOLLAR,
 };
 
-typedef struct s_command
+typedef struct s_cmd
 {
 	int ok;
 	int in_fd;
 	int out_fd;
 	char *cmd;
 	char **args;
-} t_command;
+	struct s_cmd *next;
+} t_cmd;
 
 typedef struct s_word
 {
@@ -54,7 +55,7 @@ typedef struct s_master
 	char *line;
     char *clean_line;
 	int n_pipes;
-	t_command *cmds;
+	t_cmd *cmds;
 	t_token *node;
 	t_list *env;
 }t_master;

@@ -6,14 +6,11 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:05:23 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/23 11:09:48 by abastida         ###   ########.fr       */
+/*   Updated: 2024/01/29 14:53:21 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// check_dollar(t_word *node)
-// esta funcio chequea si el dolar esta entre comillas simples, y si no lo esta, expandir dollar.
 
 void check_dollar(t_token *token, const char **env)
 {
@@ -60,9 +57,7 @@ void check_to_expand(t_word *node, const char **env)
 		else if (node->word[i] == '\"' && node->flag_quote == 0)
 			node->flag_quote = 2;
 		else if (node->word[i] == '$' && (is_space(node->word[i + 1]) == 0) && node->word[i + 1] != '\0' && node->flag_quote != 1)
-		{
 			ft_expand_dollar(node, env, i);
-		}
 		else if ((node->word[i] == '$' && (is_space(node->word[i + 1]) == 0) && node->word[i + 1] != '\0' && node->flag_quote == 1))
 		{
 			word_quoted = ft_substr(node->word, i, start - i);
@@ -73,12 +68,3 @@ void check_to_expand(t_word *node, const char **env)
 	}
 }
 // TODO: despues de un $ solo puede ir una vble de entorno. + metacaracterres. redir o |
-
-/*char *if_single_quote(char *word, int *i)
-{
-	char *word_quoted;
-
-	word_quoted = "null";
-	word_quoted = ft_substr
-}
-*/
