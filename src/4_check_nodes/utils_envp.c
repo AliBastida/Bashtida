@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:51:12 by pabastid          #+#    #+#             */
-/*   Updated: 2024/01/29 14:51:49 by abastida         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:11:09 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,27 +62,29 @@ char *clean_vble(char *node, int idx)
 	return (new_line);
 }
 /* Esta funcioon getenv recibe un char *(con el nombre qque queremos comparar) y qque junto con el "=" lo meeteremos en vble y es lo que usaremos para comparar*/
-char *ft_getenv(const char *name, const char **env, int idx)
+char *ft_getenv(const char *name, t_list *env, int idx)
 {
-	char *vble;
-	const char *new_name;
-	int vble_len;
 	int i;
+	char *vble;
+	int vble_len;
+	t_list *tmp;
+	const char *new_name;
 
 	i = 0;
+	tmp = env;
 	new_name = clean_vble((char *)name, idx);
 	vble = ft_strjoin(new_name, "="); // le unimos el "=" para asegurar todos los casos.
-	printf("Vble: %s\n", vble);
+	// printf("Vble: %s\n", vble);
 	vble_len = ft_strlen(vble);
-	while (env != NULL && env[i] != NULL)
+	while (tmp && tmp->content)
 	{
-		printf("Env: %s\n", env[i]);
-		if (ft_strncmp((char *)env[i], vble, vble_len) == 0)
+		// printf("Env: %s\n", (char *)tmp->content);
+		if (ft_strncmp((char *)tmp->content, vble, vble_len) == 0)
 		{
 			free(vble);
-			return ((char *)env[i] + vble_len); // casteamos el int; y devuelve el puntero a la vable + el = -> USER= pabastid
+			return ((char *)tmp->content + vble_len); // casteamos el int; y devuelve el puntero a la vable + el = -> USER= pabastid
 		}
-		i++;
+		tmp = tmp->next;
 	}
 	free(vble);
 	vble = ft_strdup(""); // Antes devolvia NULL, pero lo hemos cambiado para que nos de cadena vacia.

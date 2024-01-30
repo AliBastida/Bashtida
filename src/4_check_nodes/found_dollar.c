@@ -6,13 +6,13 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:05:23 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/29 14:53:21 by abastida         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:23:55 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void check_dollar(t_token *token, const char **env)
+void check_dollar(t_token *token, t_list *env)
 {
 	t_token *tmp;
 	t_word *node;
@@ -32,12 +32,12 @@ void check_dollar(t_token *token, const char **env)
 	}
 }
 
-void ft_expand_dollar(t_word *node, const char **env, int idx)
+void ft_expand_dollar(t_word *node, t_list *env, int idx)
 {
 	printf("Getenv: -%s-\n", ft_getenv(node->word, env, idx));
 }
 
-void check_to_expand(t_word *node, const char **env)
+void check_to_expand(t_word *node, t_list *env)
 {
 	int i;
 	char *word_quoted;

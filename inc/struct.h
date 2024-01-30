@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:47:58 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/29 11:34:29 by abastida         ###   ########.fr       */
+/*   Updated: 2024/01/30 12:53:05 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,25 @@ enum e_token_type
 	REDIR_C,
 	REDIR_D,
 	DOLLAR,
+};
+
+enum e_error_type
+{
+	OPEN_FAILED,
+	COMMAND_NOT_FOUND,
+	COMMAND_FOUND_NOT_EX,
+	FILE_NOT_FOUND,
+	FILE_NOT_READ,
+	FILE_NOT_WRITE,
+};
+
+const static char *g_error_array[] = {
+	"OPEN ERROR\n",
+	"COMMAND NOT FOUND\n",
+	"PERMISSION DENIED\n",
+	"NO SUCH FILE OR DIRECTORY\n",
+	"FILE NOT READABLE\n",
+	"FILE NOT WRITEABLE\n",
 };
 
 typedef struct s_cmd

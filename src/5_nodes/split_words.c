@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:35:41 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/29 11:51:03 by abastida         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:13:19 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char *substr_words(t_token *tmp, int start, int i)
 
 // TODO: NO PODEMOS OLVIDAR QUE ESTA FUNCION HA DE PASAR POR TODOS LOS T_TOKEN QUE CREEMOS, PORQUE HA DE SEPARAR LAS PALABRAS EN TODOS LOS TOKENS.
 
-t_word *create_nodeandlist_word(t_token *token, const char **env)
+t_word *create_nodeandlist_word(t_master *master, t_token *token)
 {
 	int n;
 	int n_words;
@@ -119,8 +119,8 @@ t_word *create_nodeandlist_word(t_token *token, const char **env)
 
 		PRINT_WORD(new_list);
 		tmp->words = new_list;
-		check_dollar(tmp, env);
-		saving_cmd(new_list);
+		check_dollar(tmp, master->env);
+		saving_cmd(new_list, master);
 		tmp = tmp->next;
 	}
 	return (new_list);

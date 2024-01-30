@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/29 15:10:58 by abastida         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:03:22 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,9 @@ int	ft_strchar(char *s, int c);
 
 //===== 4_CHECK_NODES =====//
 //******FOUND_DOLLAR******//
-void check_to_expand(t_word *node, const char **env);
-void check_dollar(t_token *token, const char **env);
-void ft_expand_dollar(t_word *node, const char **env, int idx);
+void check_to_expand(t_word *node, t_list *env);
+void check_dollar(t_token *token, t_list *env);
+void ft_expand_dollar(t_word *node, t_list *env, int idx);
 
 //******UTILS_NODES******//
 int len_nodes(char *token);
@@ -126,7 +126,7 @@ char *substr_words(t_token *tmp, int start, int i);
 
 //******UTILS_ENV******//
 void ft_dup_env(t_master *token, const char **env);
-char *ft_getenv(const char *name, const char **env, int idx);
+char *ft_getenv(const char *name, t_list *env, int idx);
 char *clean_vble(char *str, int idx);
 
 //===== 5_NODES =====//
@@ -135,7 +135,7 @@ t_word *ft_newnode_word(void *content);
 char *divided_by_word(t_token *node);
 t_word *lst_last_word(t_word **lst);
 void lst_add_back_word(t_word **first, t_word *new_node);
-t_word *create_nodeandlist_word(t_token *token, const char **env);
+t_word *create_nodeandlist_word(t_master *master, t_token *token);
 char *divide_if_redir(t_token *node);
 
 //===== 6_BUILTINS =====//
@@ -144,9 +144,15 @@ char *divide_if_redir(t_token *node);
 void print_env(t_master *master);
 
 //===== 7_COMMANDS =====//
-//******CMD.C******//
-t_cmd *saving_cmd(t_word *words);
+//******CMD******//
+t_cmd *saving_cmd(t_word *words, t_master *master);
 int node_counter(t_word *words);
 char *get_path(t_master *master);
+void ft_take_cmd(t_cmd *new, t_word *words, t_master *master);
+char *checking_path(char **path, char *cmd, int *ok);
+
+//******EXECVE******//
+void exec_cmd(t_master *master);
+char **converting(t_list *env);
 
 #endif

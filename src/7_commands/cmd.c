@@ -6,11 +6,53 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 12:21:32 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/29 15:14:27 by abastida         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:42:21 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char *checking_path(char **path, char *cmd, int *ok)
+{
+	char *new_path;
+	int i;
+
+	i = 0;
+	while (path[i])
+	{
+		new_path = ft_strjoin(path[i], "/");
+		new_path = ft_strjoin(new_path, cmd);
+		if (access(new_path, X_OK) == 0)
+		{
+			printf("este es mi cmd: %s \n", cmd);
+			*ok = 0;
+			return (new_path);
+		}
+		else if (access(new_path, F_OK) == 0)
+		{
+			*ok = 3;
+			printf("%s", g_error_array[*ok - 1]);
+		}
+		i++;
+	}
+	*ok = 2;
+	printf("%s", g_error_array[*ok - 1]);
+	return ((char *)g_error_array[*ok - 1]);
+}
+
+void ft_take_cmd(t_cmd *new, t_word *words, t_master *master)
+{
+	char *cmd;
+	char **split;
+
+	if (words->type == 1 || words->type == 2 || words->type == 3 || words->type == 4)
+		cmd = ft_strdup(words->next->next->word);
+	else
+		cmd = ft_strdup(words->word);
+	split = ft_split(get_path(master), ':');
+	new->cmd = checking_path(split, cmd, &new->ok);
+}
+
 // el contador i que nos devueleve esta funcion es el que nos dice la cantidad de memoria que queremos reservar con el calloc para los args en la funcion saving commands.
 int node_counter(t_word *words)
 {
@@ -36,46 +78,49 @@ int node_counter(t_word *words)
 	return (i);
 }
 
-// esta funcion guarda en un char **(new->args) los args que vamos a necesitar para ejecutar los comandos, saltando las redirecciones y lo siguiente.
-// TODO: ojo que aqui estamos saltando la redireeccion y el next - y nos devuelve la estructura new, con ->arg rellenados.
-t_cmd *saving_cmd(t_word *words)
+// TODO: TENGO QUE HACER UN LOOP QUE RECORRA T_TOKEN ENTERO RECOGIENDO LOS CMDS Y GUARDANDOLOS EN LA LISTA T_CMD, QUE DESPUES DEBE SER RECORRIDA PARA EJECUTAR LOS COMANDOS.
+t_cmd *saving_cmd(t_word *words, t_master *master)
 {
 	t_cmd *new;
 	t_word *wd;
+	t_token *tmp;
 	int j;
 
 	new = ft_calloc(sizeof(t_cmd), 1);
-	wd = words;
+	tmp = master->node;
 	j = 0;
 	if (!new)
 		return (NULL);
 	new->args = ft_calloc(sizeof(char *), (node_counter(words) + 1));
 	if (!new->args)
 		return (NULL);
-
-	while (wd && j < node_counter(words))
+	while (tmp)
 	{
-		if (wd->type == 1 || wd->type == 2 || wd->type == 3 || wd->type == 4)
-			wd = wd->next;
-		else
+		wd = words;
+		while (wd && j < node_counter(words))
 		{
-			new->args[j] = ft_strdup(wd->word);
-			printf("-new list cmd---*%s---- j: %d\n", new->args[j], j);
-			j++;
+			if (wd->type == 1 || wd->type == 2 || wd->type == 3 || wd->type == 4)
+				wd = wd->next;
+			else
+			{
+				new->args[j] = ft_strdup(wd->word);
+				// printf("-new list cmd---*%s---- j: %d\n", new->args[j], j);
+				j++;
+			}
+			wd = wd->next;
 		}
-		wd = wd->next;
+		tmp = tmp->next;
 	}
-	free(wd);
+	ft_take_cmd(new, words, master);
+	master->cmds = new;
+	// converting(master->env);
+	exec_cmd(master);
 	return (new);
 }
-
-// printf("Getenv: -%s-\n", ft_getenv("PATH=", env, idx)); //TODO: Para coger el valor de la variable PATH
-// TODO: HAY QUE COMPROBAR QUUE FUNCIONA
 
 char *get_path(t_master *master)
 {
 	char *path;
-	path = ft_getenv("PATH", master->env, 0);
-	printf("%s\n", path);
+	path = ft_getenv("PATH", master->env, -1);
 	return (path);
 }
