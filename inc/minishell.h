@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/30 14:03:22 by abastida         ###   ########.fr       */
+/*   Updated: 2024/01/31 12:55:14 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
+#include <fcntl.h>
 
 #define PRINT_LIST(list)                                   \
 	t_list *random_tmp = list;                             \
