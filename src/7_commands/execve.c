@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:52:12 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/30 14:14:19 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:34:34 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 // execve(cmd, args, env);
 // tengo que hacer una funcion que me convierta la lista del env a char ** para pasarsela a la funcion exec_ve. Esta funcion sera llamada por exec_cmd y el retorno de la transformacion
 // es lo que le pasare a execve.
-
-int ft_lstsize(t_list *lst);
 
 char **converting(t_list *env)
 {
@@ -37,11 +35,12 @@ char **converting(t_list *env)
 	return (env_char);
 }
 
-void exec_cmd(t_master *master)
+void exec_cmd(t_cmd *cmd, t_master *master)
 {
 	char **env = converting(master->env);
-	// printf("Cmd: %p\n", master->cmds->cmd);
-	// printf("Arg 0: %p\n", master->cmds->args[0]);
-	if (execve(master->cmds->cmd, master->cmds->args, env) == -1)
-		printf("%s", g_error_array[2]);
+	printf("Cmd: %s\n", cmd->cmd);
+	printf("Arg 0: %s\n", cmd->args[0]);
+	printf("Arg 1: %s\n", cmd->args[1]);
+	if (execve(cmd->cmd, cmd->args, env) == -1)
+		printf("%s", g_error_array[1]);
 }

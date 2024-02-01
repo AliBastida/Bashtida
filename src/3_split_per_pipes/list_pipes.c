@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:40:43 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/15 09:31:47 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:05:14 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,18 @@ t_token *create_nodeandlist(t_master *master, char *str)
 	char **line_divided;
     int n;
 
-	n_pipes = how_many_pipes(str) + 1;
-    line_divided = line_divided_in_tokens(str);
-	new_list = NULL;
 	n = 0;
+	new_list = NULL;
+	n_pipes = how_many_pipes(str) + 1;
+	line_divided = line_divided_in_tokens(str);
 	while (n_pipes > n)
 	{
 		new_node = ft_newnode(clean_word(line_divided[n]));
         if (new_list == NULL)
             new_list = new_node;
         else
-         lst_add_back(&new_list, new_node);
-        n++;
+			lst_add_back(&new_list, new_node);
+		n++;
 	}
 	free(line_divided);
     master->node = new_list;

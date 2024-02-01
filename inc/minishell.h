@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/31 13:06:30 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:57:56 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,14 +148,21 @@ void print_env(t_master *master);
 
 //===== 7_COMMANDS =====//
 //******CMD******//
-t_cmd *saving_cmd(t_word *words, t_master *master);
+t_cmd *saving_arg(t_master *master);
 int node_counter(t_word *words);
 char *get_path(t_master *master);
-void ft_take_cmd(t_cmd *new, t_word *words, t_master *master);
+void ft_take_cmd(t_cmd *cmd, t_word *words, t_master *master);
 char *checking_path(char **path, char *cmd, int *ok);
 
+//******CMD_LIST_UTILS******//
+int n_args(t_word *words);
+t_cmd *create_node_cmd(t_word *words, t_master *master);
+t_cmd *create_list_cmd(t_token *token, t_master *master);
+void lst_add_back_cmd(t_cmd *list, t_cmd *node);
+t_cmd *lst_last_cmd(t_cmd *list);
+
 //******EXECVE******//
-void exec_cmd(t_master *master);
+void exec_cmd(t_cmd *cmd, t_master *master);
 char **converting(t_list *env);
 
 #endif
