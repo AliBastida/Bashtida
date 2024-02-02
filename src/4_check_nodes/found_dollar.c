@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:05:23 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/30 11:23:55 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:33:08 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,13 @@ void check_dollar(t_token *token, t_list *env)
 
 void ft_expand_dollar(t_word *node, t_list *env, int idx)
 {
-	printf("Getenv: -%s-\n", ft_getenv(node->word, env, idx));
+	char *tmp;
+
+	tmp = ft_strdup(node->word);
+	free(node->word);
+	printf("Getenv: -%s-\n", ft_getenv(tmp, env, idx));
+	node->word = ft_strdup(ft_getenv(tmp, env, idx));
+	free(tmp);
 }
 
 void check_to_expand(t_word *node, t_list *env)
@@ -46,6 +52,7 @@ void check_to_expand(t_word *node, t_list *env)
 	i = 0;
 	start = 0;
 	node->flag_quote = 0;
+	printf("Node word: %s\n", node->word);
 	while (node->word[i])
 	{
 		if (node->word[i] == '\'' && node->flag_quote == 0)
