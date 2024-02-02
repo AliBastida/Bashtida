@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:35:20 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/02 13:19:23 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/02 14:28:39 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ t_cmd *create_node_cmd(t_word *words, t_master *master)
 	{
 		if (tmp->type == 1 || tmp->type == 2 || tmp->type == 3 || tmp->type == 4)
 		{
-			// TODO gestionar las redirecciones
+			manage_redir(tmp, master);
+			//  TODO gestionar las redirecciones--> manage redir.
 			tmp = tmp->next;
 		}
 		else

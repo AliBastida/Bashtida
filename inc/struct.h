@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:47:58 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/30 12:53:05 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:57:23 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_cmd
 	int ok;
 	int in_fd;
 	int out_fd;
+	char *file_name;
 	char *cmd;
 	char **args;
 	struct s_cmd *next;
