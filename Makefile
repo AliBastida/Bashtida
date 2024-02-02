@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abastida <abastida@student.42barcel>       +#+  +:+       +#+         #
+#    By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/20 11:24:34 by abastida          #+#    #+#              #
-#    Updated: 2024/02/02 13:23:28 by abastida         ###   ########.fr        #
+#    Updated: 2024/02/02 13:33:35 by pabastid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC :=  0_main/main.c 0_main/utils.c\
 			3_split_per_pipes/list_utils.c 3_split_per_pipes/split_utils.c  \
 			4_check_nodes/found_dollar.c 4_check_nodes/utils_nodes.c 4_check_nodes/utils_envp.c\
 			5_nodes/split_words.c 6_builtins/env.c 6_builtins/builtins.c 7_commands/cmd.c 7_commands/execve.c\
-			7_commands/cmd_list_utils.c  7_commands/cmd_errors.c\ 8_redir/input.c\
+			7_commands/cmd_list_utils.c  7_commands/cmd_errors.c 8_redir/input.c\
 
 SRC_DIR := src/
 BUILD_DIR := build/
