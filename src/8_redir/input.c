@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:27:43 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/02 14:38:36 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:01:21 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int redir_input(t_word *redir, t_master *master)
 	if (fd == -1)
 	{
 		*master->cmds->ok = 4;
-		printf(g_error_array[master->cmds->ok - 1]);
+		printf("%s\n", g_error_array[master->cmds->ok - 1]);
 	}
 	master->cmds->in_fd = fd;
 	close(master->cmds->in_fd);
