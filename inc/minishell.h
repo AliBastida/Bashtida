@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/02 14:31:31 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/02 16:07:07 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int     syntax_error(int n);
 void    ft_free_single(char *str);
 bool    is_space(unsigned char c);
 void    *free_all(t_master *line);
+void ft_free_double(char **str);
 
 //===== 1_READLINE =====//
 int     read_line(t_master *master);
@@ -190,10 +191,12 @@ char **converting(t_list *env);
 //===== 8_REDIR =====//
 //******REDIR.C ******//
 void manage_redir(t_word *redir, t_master *master);
+
 //******INPUT < ******//
-int redir_input(t_word *redir, t_master *master);
+void redir_input(t_word *redir, t_master *master);
 
 //******OUTPUT > ******//
+void redir_output(t_word *redir, t_master *master);
 
 //******HEREDOC << ******//
 

@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 12:21:32 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/02 13:31:05 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:52:10 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char *checking_path(char **path, char *cmd, int *ok)
 	free(new_path);
 	return (cmd);
 }
-/**/
+
 void ft_take_cmd(t_cmd *new, t_word *words, t_master *master)
 {
 	char *cmd;
@@ -57,7 +57,7 @@ void ft_take_cmd(t_cmd *new, t_word *words, t_master *master)
 	split = ft_split(get_path(master), ':');
 	new->cmd = checking_path(split, cmd, &new->ok);
 	free(cmd);
-	// TODO: free split
+	ft_free_double(split);
 }
 
 char *get_path(t_master *master)

@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:35:41 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/02 11:42:21 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:03:39 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,23 +73,6 @@ char *divided_by_word(t_token *tmp)
 	}
 	return (NULL);
 }
-// TODO: ESTA VA EN UTILS_NODES.
-char *substr_words(t_token *tmp, int start, int i)
-{
-	char *new;
-	char *rest;
-	new = ft_substr(tmp->content_token, start, i - start + 1); // hemos hecho un sbstr de new y obtendremos rest que es lo que usaremos como nuevo tmp en la funcion create_nodeand list_word
-	printf("new: ***%s***\n", new);
-	rest = ft_substr(tmp->content_token, i + 1, ft_strlen(tmp->content_token));
-	printf("resto: -%s-\n", rest);
-	free(tmp->content_token);
-	tmp->content_token = rest;
-	return new;
-}
-// TODO: separar cmd + argumentos. Si el argumento esta "" hacemos NULL y pasamos al siguiente nodo
-// TODO: Gestionar comillas simples. Que devuelva lo que hemos metido
-
-// TODO: NO PODEMOS OLVIDAR QUE ESTA FUNCION HA DE PASAR POR TODOS LOS T_TOKEN QUE CREEMOS, PORQUE HA DE SEPARAR LAS PALABRAS EN TODOS LOS TOKENS.
 
 t_word *create_nodeandlist_word(t_master *master, t_token *token)
 {
@@ -116,7 +99,6 @@ t_word *create_nodeandlist_word(t_master *master, t_token *token)
 				lst_add_back_word(&new_list, new);
 			n++;
 		}
-
 		PRINT_WORD(new_list);
 		tmp->words = new_list;
 		check_dollar(tmp, master->env);

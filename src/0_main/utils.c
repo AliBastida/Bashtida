@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:31:30 by abastida          #+#    #+#             */
-/*   Updated: 2023/12/06 17:02:15 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:52:41 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int syntax_error(int n)
     return (n);
 }
 
-void ft_free_single(char *str)
+void ft_free_double(char **str)
 {
     int i;
 
@@ -32,10 +32,32 @@ void ft_free_single(char *str)
     while (str[i])
     {
         if (str[i])
-            free (str);
-        i++;
-    }
-    free (str);
+			free(str[i]);
+		i++;
+	}
+	free(str);
+}
+
+void ft_free_single(char *str)
+{
+	if (str == NULL)
+		return;
+	free(str);
+}
+
+void ft_free_doble(char **str)
+{
+	int i;
+
+	i = 0;
+
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str[i]);
+	i++;
 }
 
 bool is_space(unsigned char c)
@@ -66,7 +88,3 @@ void *free_all(t_master *line)
         }
     return (NULL);
 }
-/* funcion: dup env.
-Es la ffuncion que duplica el enviroment.
-le pasas env.
-*/

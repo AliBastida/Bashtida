@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:46:43 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/02 14:31:41 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:57:07 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ void manage_redir(t_word *redir, t_master *master)
 	//	llama a su funcion;
 	if (redir->type == 3)
 		redir_input(redir, master);
-	// else
-	//	llama a la funcion de type 4;
+	else
+		redir_output(redir, master);
 }
