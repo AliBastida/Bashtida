@@ -6,13 +6,13 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 12:46:52 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/02 13:12:23 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:22:31 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool is_builtin(char *cmd)
+/*bool is_builtin(char *cmd)
 {
 	if (ft_strncmp(cmd, "echo", 5) == 0)
 		ejecutas echo;
@@ -32,3 +32,4 @@ bool is_builtin(char *cmd)
 		return (false);
 	return (true);
 }
+*/
