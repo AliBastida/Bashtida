@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:51:12 by pabastid          #+#    #+#             */
-/*   Updated: 2024/01/30 14:11:09 by abastida         ###   ########.fr       */
+/*   Updated: 2024/01/31 12:43:25 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,11 @@ char *clean_vble(char *node, int idx)
 /* Esta funcioon getenv recibe un char *(con el nombre qque queremos comparar) y qque junto con el "=" lo meeteremos en vble y es lo que usaremos para comparar*/
 char *ft_getenv(const char *name, t_list *env, int idx)
 {
-	int i;
 	char *vble;
 	int vble_len;
 	t_list *tmp;
 	const char *new_name;
 
-	i = 0;
 	tmp = env;
 	new_name = clean_vble((char *)name, idx);
 	vble = ft_strjoin(new_name, "="); // le unimos el "=" para asegurar todos los casos.

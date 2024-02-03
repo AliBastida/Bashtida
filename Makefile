@@ -6,7 +6,7 @@
 #    By: abastida <abastida@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/20 11:24:34 by abastida          #+#    #+#              #
-#    Updated: 2024/02/02 16:03:17 by abastida         ###   ########.fr        #
+#    Updated: 2024/02/03 08:03:38 by abastida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC :=  0_main/main.c 0_main/utils.c\
 			4_check_nodes/utils_envp.c 5_nodes/split_words.c 6_builtins/env.c \
 			6_builtins/builtins.c \
 			7_commands/cmd.c 7_commands/execve.c 7_commands/cmd_list_utils.c  \
-			7_commands/cmd_errors.c 8_redir/redir.c 8_redir/input.c 8_redir/output.c\
+			7_commands/cmd_errors.c \
+			8_redir/redir.c 8_redir/redir_utils.c 8_redir/input.c 8_redir/output.c
 
 SRC_DIR := src/
 BUILD_DIR := build/

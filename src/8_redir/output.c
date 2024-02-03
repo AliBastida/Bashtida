@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:34:06 by pabastid          #+#    #+#             */
-/*   Updated: 2024/02/02 16:37:11 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/03 07:00:31 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@ void redir_output(t_word *redir, t_master *master)
 	filename = redir->next->word;
 	// TODO hacer el access con el archivo antes de hacer open
 	fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644); // permisos full seria esto: S_IRWXU
-	// else if (!filename)
-	// {
-	// 	fd = open(file, O_CREAT | O_WRONLY | O_APPEND, 0644); // permisos solo cuando se crea
-	// }
 	if (fd == -1)
 	{
 		master->cmds->ok = 4;

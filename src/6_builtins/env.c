@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:01:59 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/30 14:11:09 by abastida         ###   ########.fr       */
+/*   Updated: 2024/01/31 12:43:41 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void print_env(t_master *master)
 {
 	while (master->env)
 	{
-		printf("===%s===\n", master->env->content);
+		printf("===%s===\n", (char *)master->env->content);
 		master->env = master->env->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/02 16:07:07 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/03 07:21:08 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,10 @@ void lst_add_back_cmd(t_cmd *list, t_cmd *node);
 t_cmd *lst_last_cmd(t_cmd *list);
 
 //******CMD_ERROR******//
+//******CMD_UTILS******//
+char *filename_path(char **path, char *filename);
+char **take_path(t_master *path);
+int ft_access(char *filename);
 
 //******EXECVE******//
 int execute_cmds(t_master *master);
