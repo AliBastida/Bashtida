@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:35:20 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/04 09:54:23 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/04 12:51:16 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,11 @@ t_cmd *create_node_cmd(t_word *words, t_master *master)
 		}
 		tmp = tmp->next;
 	}
-	new->cmd = ft_strdup(new->args[0]);
-	ft_take_cmd(new, words, master);
+	if (new->args[0])
+	{
+		new->cmd = ft_strdup(new->args[0]);
+		ft_take_cmd(new, words, master);
+	}
 	return (new);
 }
 

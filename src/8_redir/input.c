@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:27:43 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/04 09:57:39 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/04 12:36:39 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void redir_input(t_word *redir, t_master *master)
 
 	fd = 0;
 	filename = redir->next->word;
-	printf("%s\n", filename);
+	printf("Word: %s\n", filename);
 	filename = filename_path(take_path(master), filename);
-	printf("filename: %s\n", filename);
+	printf("After filename: %s\n", filename);
 	if (ft_access(filename) == 0)
 	{
 		fd = open(filename, O_RDONLY);

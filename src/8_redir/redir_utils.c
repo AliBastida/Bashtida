@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 08:04:03 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/04 10:11:18 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/04 12:40:02 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ char *filename_path(char **path, char *name)
 		printf("filename %s\n", filename);
 		if (ft_access(filename) == 0)
 			return (filename);
-		else
-			i++;
+		i++;
 	}
 	//*ok = 0;
 	return (name);

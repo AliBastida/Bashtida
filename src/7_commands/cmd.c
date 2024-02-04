@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 12:21:32 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/04 11:08:29 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/04 12:16:50 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char *checking_path(char **path, char *cmd, int *ok)
 		{
 			printf("este es mi cmd: %s \n", new_path);
 			*ok = 0;
-			// FIXME free(cmd); va aqui???
+			free(cmd);
 			return (new_path);
 		}
 		else if (access(new_path, F_OK) == 0)
@@ -57,6 +57,7 @@ void ft_take_cmd(t_cmd *new, t_word *words, t_master *master)
 		cmd = ft_strdup(words->word);
 	split = ft_split(get_path(master), ':');
 	new->cmd = checking_path(split, cmd, &new->ok);
+//	free(cmd);
 	ft_free_double(split);
 }
 
