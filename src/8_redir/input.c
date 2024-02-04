@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:27:43 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/03 07:59:04 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/04 09:57:39 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void redir_input(t_word *redir, t_master *master)
 	if (ft_access(filename) == 0)
 	{
 		fd = open(filename, O_RDONLY);
+		printf("fd: %d\n", fd);
 		if (fd == -1)
 		{
 			master->cmds->ok = 4;
@@ -33,6 +34,8 @@ void redir_input(t_word *redir, t_master *master)
 		}
 		master->cmds->in_fd = fd;
 	}
+	else
+		printf("file not found\n");
 }
 
 // TODO hacer el access con el archivo antes de hacer open

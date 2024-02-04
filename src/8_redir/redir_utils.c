@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 08:04:03 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/03 08:04:05 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/04 10:11:18 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,43 +26,27 @@ char *filename_path(char **path, char *name)
 		printf("newpath %s\n", filename);
 		filename = ft_strjoin(filename, name);
 		printf("filename %s\n", filename);
-
 		if (ft_access(filename) == 0)
-		{
-			printf("este filename existe: %s \n", filename);
-			//*ok = 0;
 			return (filename);
-		}
 		else
-		{
-			printf("este filename no existe\n");
-			return (NULL);
-		}
-
-		/*if (access(filename, F_OK) == 0)
-{
-*ok = ;
-printf("%s", filename);
-// free(new_filename);
-// return (filename);
-}*/
-		i++;
+			i++;
 	}
-	return (filename);
+	//*ok = 0;
+	return (name);
 }
 
 char **take_path(t_master *path)
 {
 	char **split;
 
-	int i = 0;
+	// int i = 0;
 
 	split = ft_split(get_path(path), ':');
-	while (split[i])
-	{
-		printf("%s\n", split[i]);
-		i++;
-	}
+	// while (split[i])
+	//{
+	//	printf("%s\n", split[i]);
+	//	i++;
+	// }
 	return (split);
 }
 

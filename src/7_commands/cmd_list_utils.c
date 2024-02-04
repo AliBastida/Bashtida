@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:35:20 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/02 14:28:39 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/04 09:54:23 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_cmd *create_node_cmd(t_word *words, t_master *master)
 	new->args = ft_calloc(sizeof(char *), n_args(words) + 1);
 	if (!new)
 		return (NULL);
-	while (tmp)
+	while (tmp) // && tmp->next)
 	{
 		if (tmp->type == 1 || tmp->type == 2 || tmp->type == 3 || tmp->type == 4)
 		{
