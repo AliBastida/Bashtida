@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:52:12 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/05 08:05:43 by vduchi           ###   ########.fr       */
+/*   Updated: 2024/02/05 18:28:50 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,26 @@ int execute_cmds(t_master *master)
 		else if (pid == 0)
 		{
 			env = converting(master->env);
+			// si es un builtin ejecuta el builtin; si no, ejecuta exeve;
+			// cada funcion debe devolver un int, y ese int (valor de salida) lo ponemos como argumento en el exit)
+			if (is_builtin(tmp->cmd) == true)
+			{
+				/*if (ft_strncmp(cmd, "echo", 5) == 0)
+					ejecuta funcion echo;
+				else if (ft_strcmp(cmd, "pwd", 4) == 0)
+					ejecuta funcion pwd;*/
+				if (ft_strncmp(tmp->cmd, "cd", 3) == 0) //
+					builtin_cd(tmp->args[1]);
+				/*else if (ft_strcmp(cmd, "export", 7) == 0)
+					ejecuta funcion export;
+				else if (ft_strcmp(cmd, "unset", 6) == 0)
+					ejecuta funcion unset;
+				else if (ft_strcmp(cmd, "env", 4) == 0)
+					ejecuta funcion env;
+				else if (ft_strcmp(cmd, "exit", 5) == 0)
+					ejecuta funcion exit;*/
+				exit(0);
+			}
 			execve(tmp->cmd, tmp->args, env);
 			perror("Execve error");
 			exit(1);
