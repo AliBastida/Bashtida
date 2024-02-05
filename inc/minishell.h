@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/03 07:21:08 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/05 08:08:59 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,24 @@ while (cadena[random_i] != NULL) { \
     printf("cadena: %s\n", cadena[random_i]); \
     random_i++; } printf("----------------------\n");
 
-#define PRINT_CMD(list)                                       \
-	t_cmd *random_tmp = list;                                 \
-	printf("----------------------\n");                       \
-	while (random_tmp != NULL)                                \
-	{                                                         \
-		printf("tmp_cmd: *%p\n", random_tmp);                 \
-		printf("cmd: *%s*\n", random_tmp->cmd);               \
-		int i = 0;                                            \
-		while (random_tmp->args[i])                           \
-		{                                                     \
-			printf("arg %d: *%s*\n", i, random_tmp->args[i]); \
-			i++;                                              \
-		}                                                     \
-		random_tmp = random_tmp->next;                        \
-	}                                                         \
+#define PRINT_CMD(list)                                                       \
+	t_cmd *random_tmp = list;                                                 \
+	printf("----------------------\n");                                       \
+	while (random_tmp != NULL)                                                \
+	{                                                                         \
+		printf("tmp_cmd: *%p\n", random_tmp);                                 \
+		printf("cmd: *%s*\n", random_tmp->cmd);                               \
+		printf("in fd: *%i*\n", random_tmp->in_fd);                           \
+		printf("out fd: *%i*\n", random_tmp->out_fd);                         \
+		int i = 0;                                                            \
+		while (random_tmp->args[i])                                           \
+		{                                                                     \
+			printf("arg %d: *%s*\n", i, random_tmp->args[i]);                 \
+			i++;                                                              \
+		}                                                                     \
+		printf("has heredoc: *%s*\n", random_tmp->hd != NULL ? "YES" : "NO"); \
+		random_tmp = random_tmp->next;                                        \
+	}                                                                         \
 	printf("----------------------\n");
 
 //=====0_MAIN =====//
@@ -183,26 +186,27 @@ t_cmd *lst_last_cmd(t_cmd *list);
 
 //******CMD_ERROR******//
 //******CMD_UTILS******//
-char *filename_path(char **path, char *filename);
+char *filename_path(char *name);
 char **take_path(t_master *path);
-int ft_access(char *filename);
+int ft_access(char *filename, int mod);
 
 //******EXECVE******//
 int execute_cmds(t_master *master);
-void exec_cmd(t_cmd *cmd, t_master *master);
 char **converting(t_list *env);
+void ft_take_heredoc(t_cmd *cmd);
 
 //===== 8_REDIR =====//
 //******REDIR.C ******//
-void manage_redir(t_word *redir, t_master *master);
+void manage_redir(t_word *redir, t_cmd *cmd);
 
 //******INPUT < ******//
-void redir_input(t_word *redir, t_master *master);
+void redir_input(t_word *redir, t_cmd *cmd);
 
 //******OUTPUT > ******//
-void redir_output(t_word *redir, t_master *master);
+void redir_output(t_word *redir, t_cmd *cmd);
 
 //******HEREDOC << ******//
+void redir_heredoc(t_word *redir, t_cmd *cmd);
 
 //******APPEND_MODE >> ******//
 

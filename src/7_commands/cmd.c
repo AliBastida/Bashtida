@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 12:21:32 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/04 12:16:50 by vduchi           ###   ########.fr       */
+/*   Updated: 2024/02/05 08:10:51 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ char *checking_path(char **path, char *cmd, int *ok)
 		else if (access(new_path, F_OK) == 0)
 		{
 			*ok = 3;
-			printf("%s", g_error_array[*ok - 1]);
+//			printf("%s", g_error_array[*ok - 1]);
 			free(new_path);
 			return (cmd);
 		}
 		i++;
 	}
 	*ok = 2;
-	printf("%s", g_error_array[*ok - 1]);
+//	printf("%s", g_error_array[*ok - 1]);
 	free(new_path);
 	return (cmd);
 }
@@ -57,7 +57,6 @@ void ft_take_cmd(t_cmd *new, t_word *words, t_master *master)
 		cmd = ft_strdup(words->word);
 	split = ft_split(get_path(master), ':');
 	new->cmd = checking_path(split, cmd, &new->ok);
-//	free(cmd);
 	ft_free_double(split);
 }
 

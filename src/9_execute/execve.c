@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:52:12 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/02 12:33:18 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/05 08:05:43 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,6 @@ char **converting(t_list *env)
 	return (env_char);
 }
 
-// void exec_cmd(t_cmd *cmd, t_master *master)
-// {
-// 	char **env = converting(master->env);
-// 	printf("Cmd: %s\n", cmd->cmd);
-// 	printf("Arg 0: %s\n", cmd->args[0]);
-// 	printf("Arg 1: %s\n", cmd->args[1]);
-// 	if (execve(cmd->cmd, cmd->args, env) == -1)
-// 		printf("%s", g_error_array[1]);
-// }
-
 // TODO gestionar la vable global $?
 int execute_cmds(t_master *master)
 {
@@ -56,22 +46,35 @@ int execute_cmds(t_master *master)
 	tmp = master->cmds;
 	while (tmp)
 	{
-		// TODO checkear la vbl ok, si está mal, no hacer fork
+		if (tmp->hd)
+			ft_take_heredoc(tmp);
+		tmp = tmp->next;
+	}
+	tmp = master->cmds;
+	while (tmp)
+	{
+		if (tmp->ok)
+		{
+			printf("%s\n", g_error_array[tmp->ok - 1]);
+			tmp = tmp->next;
+			continue ;
+		}
 		pid = fork();
 		if (pid == -1)
 		{
+			printf("Fork error\n");
 			return (0);
-			// TODO gestionar el error del fork
 		}
 		else if (pid == 0)
 		{
 			env = converting(master->env);
 			execve(tmp->cmd, tmp->args, env);
 			perror("Execve error");
-			exit(0);
+			exit(1);
 		}
 		waitpid(pid, &status, 0);
 		printf("Exit status: %d\n", WEXITSTATUS(status));
+		g_err = WEXITSTATUS(status);
 		tmp = tmp->next;
 	}
 	return (1);

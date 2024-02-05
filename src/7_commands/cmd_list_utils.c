@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:35:20 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/04 12:51:16 by vduchi           ###   ########.fr       */
+/*   Updated: 2024/02/05 08:09:57 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,16 @@ t_cmd *create_node_cmd(t_word *words, t_master *master)
 	i = 0;
 	tmp = words;
 	new = ft_calloc(sizeof(t_cmd), 1);
+	new->out_fd = 1;
 	new->next = NULL;
 	new->args = ft_calloc(sizeof(char *), n_args(words) + 1);
 	if (!new)
 		return (NULL);
-	while (tmp) // && tmp->next)
+	while (tmp)
 	{
 		if (tmp->type == 1 || tmp->type == 2 || tmp->type == 3 || tmp->type == 4)
 		{
-			manage_redir(tmp, master);
-			//  TODO gestionar las redirecciones--> manage redir.
+			manage_redir(tmp, new);
 			tmp = tmp->next;
 		}
 		else
