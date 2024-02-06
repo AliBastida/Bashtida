@@ -35,30 +35,35 @@ char **converting(t_list *env)
 	return (env_char);
 }
 
-// TODO gestionar la vable global $?
-int execute_cmds(t_master *master)
+void execute_heredoc(t_cmd *cmds)
 {
-	int status;
-	pid_t pid;
 	t_cmd *tmp;
-	char **env;
 
-	tmp = master->cmds;
+	tmp = cmds;
 	while (tmp)
 	{
 		if (tmp->hd)
 			ft_take_heredoc(tmp);
 		tmp = tmp->next;
 	}
+}
+
+// TODO gestionar la vable global $?
+int execute_cmds(t_master *master)
+{
+	int		status;
+	char	**env;
+	pid_t	pid;
+	t_cmd	*tmp;
+	t_pipes	pipes;
+
+	pipes->fd = -1;
+	execute_heredoc(master->cmds);
 	tmp = master->cmds;
 	while (tmp)
 	{
-		if (tmp->ok)
-		{
-			printf("%s\n", g_error_array[tmp->ok - 1]);
-			tmp = tmp->next;
-			continue ;
-		}
+		if (check_cmd_and_pipes(tmp))
+			continue;
 		pid = fork();
 		if (pid == -1)
 		{
@@ -67,6 +72,7 @@ int execute_cmds(t_master *master)
 		}
 		else if (pid == 0)
 		{
+			check_pipes(tmp, &pipes);
 			env = converting(master->env);
 			// si es un builtin ejecuta el builtin; si no, ejecuta exeve;
 			// cada funcion debe devolver un int, y ese int (valor de salida) lo ponemos como argumento en el exit)
