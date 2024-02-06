@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:30:51 by pabastid          #+#    #+#             */
-/*   Updated: 2024/02/06 13:39:11 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/06 14:03:18 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,3 +24,5 @@ int builtin_cd(char *dir)
 		return (4);
 	return (0);
 }
+
+//no hace falta cd /
