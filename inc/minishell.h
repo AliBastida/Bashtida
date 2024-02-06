@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/05 08:08:59 by vduchi           ###   ########.fr       */
+/*   Updated: 2024/02/05 18:17:17 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,8 +163,11 @@ t_word *create_nodeandlist_word(t_master *master, t_token *token);
 char *divide_if_redir(t_token *node);
 
 //===== 6_BUILTINS =====//
+//******BUILTINS_CD******//
+int builtin_cd(char *dir);
+
 //******BUILTINS******//
-bool is_builtin(char *cmd);
+int is_builtin(char *cmd);
 
 //******ENV******//
 void print_env(t_master *master);

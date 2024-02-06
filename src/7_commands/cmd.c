@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 12:21:32 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/05 08:10:51 by vduchi           ###   ########.fr       */
+/*   Updated: 2024/02/05 18:25:48 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ char *checking_path(char **path, char *cmd, int *ok)
 	int i;
 
 	i = 0;
-	// if (is_builtin(cmd) == TRUE)
-	//	return (cmd);
+	if (is_builtin(cmd) == 1)
+		return (cmd);
 	while (path[i])
 	{
 		new_path = ft_strjoin(path[i], "/");
