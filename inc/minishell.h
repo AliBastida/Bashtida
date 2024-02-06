@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/06 12:18:30 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:34:17 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ int	ft_strchar(char *s, int c);
 void check_to_expand(t_word *node, t_list *env);
 void check_dollar(t_token *token, t_list *env);
 void ft_expand_dollar(t_word *node, t_list *env, int idx);
+char *line_without_quo(t_word *node, int *i);
 
 //******UTILS_NODES******//
 int len_nodes(char *token);
@@ -169,7 +170,7 @@ int builtin_cd(char *dir);
 //******BUILTINS******//
 int is_builtin(char *cmd);
 
-//******ENV******//
+//******BUILTINS_ENV******//
 void print_env(t_master *master);
 
 //===== 7_COMMANDS =====//
