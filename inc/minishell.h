@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
 /*   Updated: 2024/02/06 13:40:13 by pabastid         ###   ########.fr       */
@@ -215,5 +215,6 @@ void redir_output(t_word *redir, t_cmd *cmd);
 void redir_heredoc(t_word *redir, t_cmd *cmd);
 
 //******APPEND_MODE >> ******//
+void append_mode(t_word *redir, t_cmd *cmd);
 
 #endif
