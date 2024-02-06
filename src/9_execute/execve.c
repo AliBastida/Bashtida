@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:52:12 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/05 18:36:33 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:59:52 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int execute_cmds(t_master *master)
 		}
 		else if (pid == 0)
 		{
+			check_pipes(tmp, pipes);
 			env = converting(master->env);
 			// si es un builtin ejecuta el builtin; si no, ejecuta exeve;
 			// cada funcion debe devolver un int, y ese int (valor de salida) lo ponemos como argumento en el exit)

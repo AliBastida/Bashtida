@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:35:20 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/05 08:09:57 by vduchi           ###   ########.fr       */
+/*   Updated: 2024/02/06 11:36:50 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int n_args(t_word *words)
 // despues, en otra funcion, copiamos la posicion [0] del char en char *cmd y en otra funcion comprobamos si el path existe y es ejecutable o no.
 // otra funcion que ejecute el cmd.
 
-t_cmd *create_node_cmd(t_word *words, t_master *master)
+t_cmd *create_node_cmd(t_word *words, t_master *master, int n)
 {
 	t_cmd *new;
 	t_word *tmp;
@@ -43,6 +43,7 @@ t_cmd *create_node_cmd(t_word *words, t_master *master)
 	i = 0;
 	tmp = words;
 	new = ft_calloc(sizeof(t_cmd), 1);
+	new->n = n;
 	new->out_fd = 1;
 	new->next = NULL;
 	new->args = ft_calloc(sizeof(char *), n_args(words) + 1);
@@ -98,14 +99,16 @@ void lst_add_back_cmd(t_cmd *list, t_cmd *node)
 
 t_cmd *create_list_cmd(t_token *token, t_master *master)
 {
-	t_cmd *list;
-	t_cmd *node;
-	t_token *tmp;
+	int		i;
+	t_cmd	*list;
+	t_cmd	*node;
+	t_token	*tmp;
 
+	i = 0;
 	tmp = token;
 	while (tmp)
 	{
-		node = create_node_cmd(tmp->words, master);
+		node = create_node_cmd(tmp->words, master, i);
 		if (!node)
 			return (NULL);
 		if (list == NULL)
@@ -113,6 +116,7 @@ t_cmd *create_list_cmd(t_token *token, t_master *master)
 		else
 			lst_add_back_cmd(list, node);
 		tmp = tmp->next;
+		i++;
 	}
 	return (list);
 }
