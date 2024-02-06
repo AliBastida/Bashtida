@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   redir_append_mode.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/02 13:27:43 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/05 17:28:22 by abastida         ###   ########.fr       */
+/*   Created: 2024/02/05 16:22:34 by abastida          #+#    #+#             */
+/*   Updated: 2024/02/05 17:38:08 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void redir_input(t_word *redir, t_cmd *cmd)
+void append_mode(t_word *redir, t_cmd *cmd)
 {
 	int fd;
 	int res;
@@ -22,20 +22,19 @@ void redir_input(t_word *redir, t_cmd *cmd)
 	if (cmd->ok != 0)
 		return;
 	filename = filename_path(redir->next->word);
-	printf("Complete Filename: %s\n", filename);
-	res = ft_access(filename, 0);
-	if (!res)
+	res = ft_access(filename, 1);
+	if (!res || res == FILE_NOT_FOUND)
 	{
-		fd = open(filename, O_RDONLY);
-		printf("fd: %d\n", fd);
+		fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0664);
 		if (fd == -1)
 		{
 			cmd->ok = 4;
 			printf("%s\n", g_error_array[cmd->ok - 1]);
-			return ;
+			return;
 		}
-		cmd->in_fd = fd;
+		else
+			cmd->out_fd = fd;
 	}
 	cmd->ok = res;
-	printf("Input error: %i\n", res);
+	printf("Output error: %i\n", res);
 }

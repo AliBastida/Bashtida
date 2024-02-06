@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 08:04:03 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/04 17:29:32 by vduchi           ###   ########.fr       */
+/*   Updated: 2024/02/05 16:21:58 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ char **take_path(t_master *path)
 
 int ft_access(char *filename, int mod)
 {
-	if ((!mod && access(filename, R_OK) == 0)
-		|| (mod == 1 && access(filename, W_OK) == 0)
-		|| (mod == 2 && access(filename, X_OK) == 0))
+	if ((!mod && access(filename, R_OK) == 0) || (mod == 1 && access(filename, W_OK) == 0) || (mod == 2 && access(filename, X_OK) == 0)) // cmd
 		return (0);
 	if ((!mod || mod == 1) && access(filename, F_OK) == 0)
 	{
@@ -59,3 +57,6 @@ int ft_access(char *filename, int mod)
 	}
 	return (FILE_NOT_FOUND);
 }
+// el primer if lo que hace es chequear que mod es cero y si el archivo se puede leer, o si el mod es 1(output) y se puede escribir, o si mod es 2 y es ejecutable (es cmd), retorna 0.
+// el resto de los if gestionar errores. El primer if de errores, si mod es 0 o 1 y el archivo existe, puede ser que no se pueda leer o que no se pueda escribir.
+// Si es un cmd (mod = 2) si el archivo existe puede que no sea ejecutable, si no, puede ser que no sea ejecutable. Y por ultimo, el ultimo error puede ser que el archivo no exista.

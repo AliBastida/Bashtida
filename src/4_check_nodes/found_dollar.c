@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:05:23 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/02 11:33:08 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/05 18:42:35 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void ft_expand_dollar(t_word *node, t_list *env, int idx)
 	free(node->word);
 	printf("Getenv: -%s-\n", ft_getenv(tmp, env, idx));
 	node->word = ft_strdup(ft_getenv(tmp, env, idx));
+	printf("Here: %p\t%p\n", tmp, node->word); // TODO: tenemos que mirar porque da segfault si $VBLE y la vble no existe.
 	free(tmp);
 }
 
