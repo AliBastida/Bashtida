@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/05 18:17:17 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:40:13 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,9 @@ t_word *create_nodeandlist_word(t_master *master, t_token *token);
 char *divide_if_redir(t_token *node);
 
 //===== 6_BUILTINS =====//
+//******BUILTINS_PWD******//
+int builtin_pwd(void);
+
 //******BUILTINS_CD******//
 int builtin_cd(char *dir);
 

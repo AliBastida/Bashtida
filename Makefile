@@ -6,7 +6,7 @@
 #    By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/20 11:24:34 by abastida          #+#    #+#              #
-#    Updated: 2024/02/05 16:34:14 by pabastid         ###   ########.fr        #
+#    Updated: 2024/02/06 13:38:15 by pabastid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC :=  0_main/main.c 0_main/utils.c\
 			3_split_per_pipes/list_utils.c 3_split_per_pipes/split_utils.c  \
 			4_check_nodes/found_dollar.c 4_check_nodes/utils_nodes.c \
 			4_check_nodes/utils_envp.c 5_nodes/split_words.c 6_builtins/env.c \
-			6_builtins/builtins.c 6_builtins/builtin_cd.c\
+			6_builtins/builtins.c 6_builtins/builtin_pwd.c 6_builtins/builtin_cd.c\
 			7_commands/cmd.c 7_commands/cmd_list_utils.c 7_commands/cmd_errors.c \
 			8_redir/redir.c 8_redir/redir_utils.c 8_redir/input.c 8_redir/output.c \
 			8_redir/redir_heredoc.c \

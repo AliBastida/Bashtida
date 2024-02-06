@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:52:12 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/05 18:36:33 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:47:30 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ int execute_cmds(t_master *master)
 			if (is_builtin(tmp->cmd) == true)
 			{
 				/*if (ft_strncmp(cmd, "echo", 5) == 0)
-					ejecuta funcion echo;
-				else if (ft_strcmp(cmd, "pwd", 4) == 0)
-					ejecuta funcion pwd;*/
-				if (ft_strncmp(tmp->cmd, "cd", 3) == 0) //
+					ejecuta funcion echo;*/
+				else if (ft_strcmp(tmp->cmd, "pwd", 4) == 0)
+					builtin_pwd(tmp->args[0]);
+				if (ft_strncmp(tmp->cmd, "cd", 3) == 0)
 					builtin_cd(tmp->args[1]);
 				/*else if (ft_strcmp(cmd, "export", 7) == 0)
 					ejecuta funcion export;
