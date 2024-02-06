@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:47:58 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/06 11:34:37 by vduchi           ###   ########.fr       */
+/*   Updated: 2024/02/06 18:12:14 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ const static char *g_error_array[] = {
 	"FILE NOT READABLE\n",
 	"FILE NOT WRITEABLE\n",
 };
+
+typedef struct s_pipes
+{
+	int p[2];
+	int tmp_fd;
+} t_pipes;
 
 typedef struct s_heredoc
 {
