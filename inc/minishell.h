@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/06 13:34:17 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/06 18:53:53 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,10 +138,12 @@ int	ft_strchar(char *s, int c);
 
 //===== 4_CHECK_NODES =====//
 //******FOUND_DOLLAR******//
-void check_to_expand(t_word *node, t_list *env);
+char *check_to_expand(t_word *node, t_list *env);
 void check_dollar(t_token *token, t_list *env);
-void ft_expand_dollar(t_word *node, t_list *env, int idx);
-char *line_without_quo(t_word *node, int *i);
+char *ft_expand_dollar(t_word *node, t_list *env, int idx);
+char *line_without_quo(t_word *node);
+char *line_dollar_expanded(t_word *node);
+char *extract_dollar(t_word *node, t_list *env);
 
 //******UTILS_NODES******//
 int len_nodes(char *token);
@@ -153,6 +155,10 @@ char *substr_words(t_token *tmp, int start, int i);
 void ft_dup_env(t_master *token, const char **env);
 char *ft_getenv(const char *name, t_list *env, int idx);
 char *clean_vble(char *str, int idx);
+
+//******UTILS******//
+
+char *no_se_nombre_aun(t_word *node, t_list *env);
 
 //===== 5_NODES =====//
 //******SPLIT_WORDS******//

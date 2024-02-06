@@ -6,12 +6,13 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:05:23 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/06 13:52:39 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/06 19:00:50 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// TODO change name per favore
 void check_dollar(t_token *token, t_list *env)
 {
 	t_token *tmp;
@@ -22,78 +23,154 @@ void check_dollar(t_token *token, t_list *env)
 		node = token->words;
 		while (node)
 		{
-			printf("Categorize: -%s-\t-%p-\n", node->word, node);
-			categorizing_words(node);
-			check_to_expand(node, env);
-			printf("--%d--\n", node->type);
+			// printf("Categorize: -%s-\t-%p-\n", node->word, node);
+			// categorizing_words(node);
+			// extract_line(node, env);
+			printf("Dollar expanded: ----%s----\n", extract_dollar(node, env));
+			printf("Quotes deleted: ----%s----\n", line_without_quo(node));
 			node = node->next;
 		}
 		tmp = tmp->next;
 	}
 }
 
-void ft_expand_dollar(t_word *node, t_list *env, int idx)
-{
-	char *tmp;
+// char *ft_expand_dollar(t_word *node, t_list *env, int idx)
+// {
+// 	char *tmp;
 
-	tmp = ft_strdup(node->word);
-	free(node->word);
-	printf("Getenv: -%s-\n", ft_getenv(tmp, env, idx));
-	node->word = ft_strdup(ft_getenv(tmp, env, idx));
-	printf("Here: %p\t%p\n", tmp, node->word); // TODO: tenemos que mirar porque da segfault si $VBLE y la vble no existe.
-	free(tmp);
+// 	tmp = ft_strdup(node->word);
+// 	free(node->word);
+// 	printf("Getenv: -%s-\n", ft_getenv(tmp, env, idx));
+// 	node->word = ft_strdup(ft_getenv(tmp, env, idx));
+// 	printf("Here: %p\t%p\n", tmp, node->word); // TODO: tenemos que mirar porque da segfault si $VBLE y la vble no existe.
+// 	free(tmp);
+// 	return (node->word);
+// }
+
+// int checking_quotes(char *line)
+// {
+// 	int i;
+// 	int flag;
+
+// 	i = 0;
+// 	flag = 0;
+// 	while (line[i])
+// 	{
+// 		if (line[i] == '\'' && flag == 0)
+// 			flag = 1;
+// 		else if (line[i] == '\"' && flag == 0)
+// 			flag = 2;
+// 	}
+// 	return (flag);
+// }
+
+// return nde->word si no han habido cambios;
+// char *check_to_expand(t_word *node, t_list *env)
+// {
+// 	int i;
+// 	// char *word;
+// 	int start;
+
+// 	i = 0;
+// 	start = 0;
+// 	node->flag_quote = 0;
+// 	printf("Node word: %s\n", node->word);
+// 	while (node->word[i])
+// 	{
+// 		// if (node->word[i] == '\'' && node->flag_quote == 0)
+// 		//{
+// 		//	node->flag_quote = 1;
+// 		//	start = next_quote(node->word, i + 1, node->word[i]);
+// 		//	printf("node->flag_quote %d **el valor de i: %d\n", node->flag_quote, i);
+// 		// }
+// 		// else if (node->word[i] == '\"' && node->flag_quote == 0)
+// 		//	node->flag_quote = 2;
+// 		if
+// 			//	else if ((node->word[i] == '$' && (is_space(node->word[i + 1]) == 0) && node->word[i + 1] != '\0' && node->flag_quote == 1))
+// 			//	{
+// 			//		node->flag_quote = 0;
+// 			//		printf("word_quoted: ----%s------,end_node->flag_quote %d ----> el valor de i: %d\n", ft_substr(node->word, i, start - i), node->flag_quote, i);
+// 			//		return (ft_substr(node->word, i, start - i));
+// 			//	}
+// 			i
+// 			++;
+// 	}
+// 	return (node->word);
+// }
+
+int next_start(char *word, int i)
+{
+	while (ft_isalpha(word[i]) || word[i] == '_')
+		i++;
+	return (i);
 }
 
-void check_to_expand(t_word *node, t_list *env)
+static int check_quotes(t_word *node, int *i)
+{
+	if (node->word[*i] == '\'' && node->flag_quote == 0)
+	{
+		*i = next_quote(node->word, *i + 1, node->word[*i]) + 1;
+		printf("node->flag_quote %d **el valor de i: %d\n", node->flag_quote, *i);
+		return (1);
+	}
+	if (node->word[*i] == '\"' && node->flag_quote == 0)
+		node->flag_quote = 2;
+	if (node->word[*i] == '\"' && node->flag_quote == 2)
+		node->flag_quote = 0;
+	return (0);
+}
+
+char *extract_dollar(t_word *node, t_list *env)
 {
 	int i;
-	char *word_quoted;
 	int start;
+	char *line;
+	// char *var;
 
 	i = 0;
 	start = 0;
-	node->flag_quote = 0;
-	printf("Node word: %s\n", node->word);
+	line = ft_strdup("");
 	while (node->word[i])
 	{
-		if (node->word[i] == '\'' && node->flag_quote == 0)
+		if (check_quotes(node, &i))
+			continue;
+		if (node->word[i] == '$')
 		{
-			printf("line sin comillas: ****%s***\n", line_without_quo(node, &i));
-			node->flag_quote = 1;
-			start = next_quote(node->word, i + 1, node->word[i]);
-			printf("node->flag_quote %d **el valor de i: %d\n", node->flag_quote, i);
-		}
-		else if (node->word[i] == '\"' && node->flag_quote == 0)
-			node->flag_quote = 2;
-		else if (node->word[i] == '$' && (is_space(node->word[i + 1]) == 0) && node->word[i + 1] != '\0' && node->flag_quote != 1) // gestiona que $este en comillas dobles o sin comillas
-			ft_expand_dollar(node, env, i);
-		else if ((node->word[i] == '$' && (is_space(node->word[i + 1]) == 0) && node->word[i + 1] != '\0' && node->flag_quote == 1)) // gestiona quue el dolar este en comillas simples
-		{
-			word_quoted = ft_substr(node->word, i, start - i);
-			node->flag_quote = 0;
-			printf("word_quoted: ----%s------,end_node->flag_quote %d ----> el valor de i: %d\n", word_quoted, node->flag_quote, i);
+			line = ft_strjoin(line, ft_substr(node->word, start, i - start));
+			// var = ft_getenv(&node->word[i], env, 0);
+			line = ft_strjoin(line, ft_getenv(&node->word[i], env, 0));
+			start = next_start(node->word, i + 1);
+			i = start;
+			continue;
 		}
 		i++;
 	}
+	line = ft_strjoin(line, ft_substr(node->word, start, i - start));
+	free(node->word);
+	node->word = line;
+	return (line);
 }
 
-char *line_without_quo(t_word *node, int *i)
+char *line_without_quo(t_word *node)
 {
 	char *clean_line;
+	char *new_line;
 	int start;
+	int end;
 
 	clean_line = "\0";
+	end = 0;
 	start = 0;
-	while (node->word[*i])
+	if (node->word[*i + 1] && (node->word[*i] == '\'' || node->word[*i] == '\"') && node->flag_quote == 0)
 	{
-		if ((node->word[*i] == '\'' || node->word[*i] == '\"') && node->flag_quote == 0)
-		{
-			start = *i + 1;
-			*i = next_quote(node->word, *i + 1, node->word[*i]);
-			clean_line = ft_substr(node->word, start, (*i - 1) - start);
-		}
-		i++;
+		start = *i + 1;
+		end = next_quote(node->word, *i + 1, node->word[*i]);
+		clean_line = ft_substr(node->word, start, end - start);
+		*i = end;
 	}
+	new_line = ft_substr(node->word, end + 1, ft_strlen(node->word));
+	// node->word = ft_strjoin(clean_line, new_line);
+	//	printf("*new_nodeword:%s*\n", node->word);
 	return (clean_line);
 }
 // TODO: despues de un $ solo puede ir una vble de entorno. + metacaracterres. redir o |

@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:31:30 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/02 15:52:41 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:58:49 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ bool is_space(unsigned char c)
 {
 	if (c == ' ' || c == '\t') //|| c == '\n' || c == '\v' || c == '\f'
 							   // || c == '\r')
-		return (true);
+		return (true);		   // diferente a 0
 	else
-        return (false);
+		return (false); // igual a 0
 }
 
 void *free_all(t_master *line)
