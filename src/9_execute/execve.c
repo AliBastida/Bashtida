@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:52:12 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/05 18:36:33 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:47:53 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char **converting(t_list *env)
 	while (env && env->content)
 	{
 		env_char[i] = ft_strdup(env->content);
-		printf("env-char[i]: %s\n", env_char[i]);
+		// printf("env-char[i]: %s\n", env_char[i]);
 		env = env->next;
 		i++;
 	}
