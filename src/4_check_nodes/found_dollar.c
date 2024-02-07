@@ -6,16 +6,18 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:05:23 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/07 10:43:41 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/07 13:17:26 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// TODO change name per favore
-void check_dollar(t_token *token, t_list *env)
+// Esta funcion recibe t_token y guarda cada nodo limpio de comillas y con dollar expandido
+void line_ready_to_use(t_token *token, t_master *master)
 {
 	t_token *tmp;
+	char *var_con_dolar_expandido;
+	// char *line_cleaned;
 	t_word *node;
 	tmp = token;
 	while (tmp)
@@ -26,8 +28,12 @@ void check_dollar(t_token *token, t_list *env)
 			// printf("Categorize: -%s-\t-%p-\n", node->word, node);
 			// categorizing_words(node);
 			// extract_line(node, env);
-			printf("Dollar expanded: ----%s----\n", extract_dollar(node, env));
-			printf("Quotes deleted: ----%s----\n", line_without_quo(node));
+			var_con_dolar_expandido = extract_dollar(node, master->env);
+			printf("Dollar expanded: ----%s----\n", var_con_dolar_expandido);
+			printf("Clean line: %s\n", master->clean_line);
+			// line_cleaned = clean_line(var_con_dolar_expandido, master);
+			clean_line(var_con_dolar_expandido, master);
+			printf("Quotes deleted: ----%s----\n", master->clean_line);
 			node = node->next;
 		}
 		tmp = tmp->next;

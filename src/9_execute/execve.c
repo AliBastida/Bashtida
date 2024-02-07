@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:52:12 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/07 10:49:08 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/07 13:22:08 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ int execute_cmds(t_master *master)
 	while (tmp)
 	{
 		if (check_cmd_and_pipes(tmp, &pipes))
+		{
+			tmp = tmp->next;
 			continue;
+		}
 		pid = fork();
 		if (pid == -1)
 		{

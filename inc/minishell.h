@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/07 10:48:39 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/07 13:18:09 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ bool check_syntax_pipes(char *str);
 //******QUOTES_SYNTAX******//
 bool paired_quotes(char *line);
 char *clean_line(char *line, t_master *master);
-char *memory_alloc(t_master *master);
 
 //******REDIR_SYNTAX******//
 int check_redir_1(char *str);
@@ -145,7 +144,7 @@ int ft_strchar(char *s, int c);
 //===== 4_CHECK_NODES =====//
 //******FOUND_DOLLAR******//
 char *check_to_expand(t_word *node, t_list *env);
-void check_dollar(t_token *token, t_list *env);
+void line_ready_to_use(t_token *token, t_master *master);
 char *ft_expand_dollar(t_word *node, t_list *env, int idx);
 char *line_without_quo(t_word *node);
 char *line_dollar_expanded(t_word *node);

@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:35:41 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/07 10:48:25 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:49:17 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ t_word *create_nodeandlist_word(t_master *master, t_token *token)
 		}
 		PRINT_WORD(new_list);
 		tmp->words = new_list;
-		check_dollar(tmp, master->env);
+		line_ready_to_use(tmp, master);
 		tmp = tmp->next;
 	}
 	master->cmds = create_list_cmd(token, master);
