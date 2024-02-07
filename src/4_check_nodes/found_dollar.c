@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:05:23 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/07 13:47:24 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/07 14:02:11 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void line_ready_to_use(t_token *token, t_master *master)
 {
 	t_token *tmp;
 	char *var_con_dolar_expandido;
-	// char *line_cleaned;
 	t_word *node;
 	tmp = token;
 	while (tmp)
@@ -25,16 +24,14 @@ void line_ready_to_use(t_token *token, t_master *master)
 		node = token->words;
 		while (node)
 		{
-			// printf("Categorize: -%s-\t-%p-\n", node->word, node);
-			// categorizing_words(node);
-			// extract_line(node, env);
 			var_con_dolar_expandido = extract_dollar(node, master->env);
-			printf("Dollar expanded: ----%s----\n", var_con_dolar_expandido);
-			printf("Clean line: %s\n", master->clean_line);
-			// line_cleaned = clean_line(var_con_dolar_expandido, master);
+			printf("Dollar expanded: ----%s----\n", var_con_dolar_expandido); // es para borrar
 			clean_line(var_con_dolar_expandido, master);
-			printf("Quotes deleted: ----%s----\n", master->clean_line);
-
+			printf("Quotes deleted: ----%s----\n", master->clean_line); // es para borrar
+			free(node->word);
+			node->word = ft_strdup(master->clean_line);
+			free(master->clean_line);
+			master->clean_line = NULL;
 			node = node->next;
 		}
 		tmp = tmp->next;
