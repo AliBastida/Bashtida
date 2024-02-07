@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:05:23 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/07 13:17:26 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/07 13:47:24 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void line_ready_to_use(t_token *token, t_master *master)
 			// line_cleaned = clean_line(var_con_dolar_expandido, master);
 			clean_line(var_con_dolar_expandido, master);
 			printf("Quotes deleted: ----%s----\n", master->clean_line);
+
 			node = node->next;
 		}
 		tmp = tmp->next;
