@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   found_dollar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:05:23 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/06 19:00:50 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/07 10:43:41 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,26 +151,27 @@ char *extract_dollar(t_word *node, t_list *env)
 	return (line);
 }
 
+// TODO rehacer esta funcion
 char *line_without_quo(t_word *node)
 {
-	char *clean_line;
-	char *new_line;
-	int start;
-	int end;
+	// char *clean_line;
+	// char *new_line;
+	// int start;
+	// int end;
 
-	clean_line = "\0";
-	end = 0;
-	start = 0;
-	if (node->word[*i + 1] && (node->word[*i] == '\'' || node->word[*i] == '\"') && node->flag_quote == 0)
-	{
-		start = *i + 1;
-		end = next_quote(node->word, *i + 1, node->word[*i]);
-		clean_line = ft_substr(node->word, start, end - start);
-		*i = end;
-	}
-	new_line = ft_substr(node->word, end + 1, ft_strlen(node->word));
-	// node->word = ft_strjoin(clean_line, new_line);
-	//	printf("*new_nodeword:%s*\n", node->word);
-	return (clean_line);
+	// clean_line = "\0";
+	// end = 0;
+	// start = 0;
+	// if (node->word[*i + 1] && (node->word[*i] == '\'' || node->word[*i] == '\"') && node->flag_quote == 0)
+	// {
+	// 	start = *i + 1;
+	// 	end = next_quote(node->word, *i + 1, node->word[*i]);
+	// 	clean_line = ft_substr(node->word, start, end - start);
+	// 	*i = end;
+	// }
+	// new_line = ft_substr(node->word, end + 1, ft_strlen(node->word));
+	// // node->word = ft_strjoin(clean_line, new_line);
+	// //	printf("*new_nodeword:%s*\n", node->word);
+	return (node->word);
 }
 // TODO: despues de un $ solo puede ir una vble de entorno. + metacaracterres. redir o |
