@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/07 14:35:55 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:18:09 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,8 @@ int is_builtin(char *cmd);
 
 //******BUILTINS_ENV******//
 void print_env(t_master *master);
+
+//******BUILTINS_UNSET******//
 
 //===== 7_COMMANDS =====//
 //******CMD******//
