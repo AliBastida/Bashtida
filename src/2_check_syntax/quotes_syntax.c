@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:50:19 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/07 13:21:09 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/07 14:46:07 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ bool paired_quotes(char *line)
             status = 1;
         }
         i++;
-    }
-    return (status);
+		printf("%d\n", status);
+	}
+	return (status);
 }
 
 static char *memory_alloc(t_master *master, char *str)
@@ -44,7 +45,7 @@ static char *memory_alloc(t_master *master, char *str)
 	int len;
 
 	len = ft_strlen(str);
-	master->clean_line = ft_calloc(len + 1, sizeof(char));
+	master->clean_line = ft_calloc(len + 1, sizeof(char)); // estamos allocando mas memoria, xq estamos contando memoria incluyenddo las comillas.
 	if (!master->clean_line)
 		return (NULL);
 	return (master->clean_line);
@@ -73,9 +74,8 @@ char *clean_line(char *str, t_master *master)
 				simple_quote = !simple_quote;
 			i++;
 		}
-		master->clean_line[j++] = str[i];
-		if (str[i] != '\0')
-			i++;
+		else if (str[i] != '\0')
+			master->clean_line[j++] = str[i++];
 	}
 	return (master->clean_line);
 }
