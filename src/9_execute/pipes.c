@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:27:43 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/06 18:23:14 by vduchi           ###   ########.fr       */
+/*   Updated: 2024/02/07 10:27:46 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/minishell.h"
+#include "minishell.h"
 
 int check_cmd_and_pipes(t_cmd *cmd, t_pipes *pipes)
 {

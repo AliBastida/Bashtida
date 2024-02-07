@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/06 13:40:13 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/07 10:26:28 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ char *checking_path(char **path, char *cmd, int *ok);
 
 //******CMD_LIST_UTILS******//
 int n_args(t_word *words);
-t_cmd *create_node_cmd(t_word *words, t_master *master);
+t_cmd *create_node_cmd(t_word *words, t_master *master, int i);
 t_cmd *create_list_cmd(t_token *token, t_master *master);
 void lst_add_back_cmd(t_cmd *list, t_cmd *node);
 t_cmd *lst_last_cmd(t_cmd *list);
@@ -216,5 +216,7 @@ void redir_heredoc(t_word *redir, t_cmd *cmd);
 
 //******APPEND_MODE >> ******//
 void append_mode(t_word *redir, t_cmd *cmd);
+
+int check_cmd_and_pipes(t_cmd *cmd, t_pipes *pipes);
 
 #endif

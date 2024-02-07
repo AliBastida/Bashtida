@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:52:12 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/06 13:47:30 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/07 10:37:16 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ int execute_cmds(t_master *master)
 	t_cmd	*tmp;
 	t_pipes	pipes;
 
-	pipes->fd = -1;
+	pipes.tmp_fd = -1;
 	execute_heredoc(master->cmds);
 	tmp = master->cmds;
 	while (tmp)
 	{
-		if (check_cmd_and_pipes(tmp))
+		if (check_cmd_and_pipes(tmp, &pipes))
 			continue;
 		pid = fork();
 		if (pid == -1)
@@ -72,7 +72,7 @@ int execute_cmds(t_master *master)
 		}
 		else if (pid == 0)
 		{
-			check_pipes(tmp, &pipes);
+			// check_pipes(tmp, &pipes);
 			env = converting(master->env);
 			// si es un builtin ejecuta el builtin; si no, ejecuta exeve;
 			// cada funcion debe devolver un int, y ese int (valor de salida) lo ponemos como argumento en el exit)
@@ -80,9 +80,10 @@ int execute_cmds(t_master *master)
 			{
 				/*if (ft_strncmp(cmd, "echo", 5) == 0)
 					ejecuta funcion echo;*/
-				else if (ft_strcmp(tmp->cmd, "pwd", 4) == 0)
-					builtin_pwd(tmp->args[0]);
-				if (ft_strncmp(tmp->cmd, "cd", 3) == 0)
+				if (ft_strncmp(tmp->cmd, "pwd", 4) == 0)
+					printf("Here\n");
+				// builtin_pwd();
+				else if (ft_strncmp(tmp->cmd, "cd", 3) == 0)
 					builtin_cd(tmp->args[1]);
 				/*else if (ft_strcmp(cmd, "export", 7) == 0)
 					ejecuta funcion export;
