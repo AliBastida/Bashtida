@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/pabastid/Desktop/Bashtida/src/6_builtins",
-      "program": "/Users/pabastid/Desktop/Bashtida/src/6_builtins/build/Debug/outDebug"
+      "cwd": "/Users/pabastid/Desktop/Bashtida/src/4_check_nodes",
+      "program": "/Users/pabastid/Desktop/Bashtida/src/4_check_nodes/build/Debug/outDebug"
     }
   ]
 }
