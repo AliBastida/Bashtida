@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/07 16:18:09 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:43:14 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,9 @@ int is_builtin(char *cmd);
 void print_env(t_master *master);
 
 //******BUILTINS_UNSET******//
+t_list *get_envnode(t_list **env, char *arg);
+void delete_node(t_list *env);
+int builtin_unset(t_list **env, char **args);
 
 //===== 7_COMMANDS =====//
 //******CMD******//

@@ -6,37 +6,63 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:17:07 by pabastid          #+#    #+#             */
-/*   Updated: 2024/02/08 13:43:19 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:46:29 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// comprobar si unset tira error cuando usamos caracteres especiales (@) -> hay que crear una funcion que comprueba que no hay caracteres especiales >> que usaremos en export tambien
-int builtin_unset(**env_char, t_cmd[array de args]) // recibe el **env_char que resulta de execve.c->converting la lista env y el array de args que van detras <UNSET hola holaaaa ciao pescao>
+/* Esta funcion get_envnode recibe la lista donde tenemos env, la lista que contiene los args y que junto con el "=" sera lo que meteremos en vble y es lo que usaremos para comparar. Nos devuelve el nodo anterior a la coincidencia y si no lo encuentra devuelve NULL*/
+t_list *get_envnode(t_list **env, char *arg)
+{
+	int arg_len;
+	t_list *tmp;
+
+	tmp = *env;
+	arg_len = ft_strlen(arg);
+	while (tmp && tmp->next != NULL)
+	{
+		if (ft_strncmp((char *)tmp->next->content, arg, arg_len) == 0)
+		{
+			return (tmp);
+		}
+		tmp = tmp->next;
+	}
+	return (NULL); // nos tiene que devolver el anterior a la coincidencia, con lo que el rdo de la coincidencia sera tmp->next y el anterior sera tmp que es lo que devuelve si encuentra;
+}
+// esta borra el nodo siguiente al que te pasan (la coincidencia)
+void delete_node(t_list *env)
+{
+	t_list *aux;
+
+	if (env)
+	{
+		aux = env->next;
+		env->next = aux->next;
+		free(aux);
+	}
+}
+
+int builtin_unset(t_list **env, char **args) // recibe el **env el array de args que van detras <UNSET hola holaaaa ciao pescao>
 {
 	int i;
+	char *arg;
+	t_list *aux;
 
 	i = 1;
-	if (!t_cmd ![array[1]]) // si ponemos solo unset no hace nada
-		return (0);
-	else
+	while (args[i]) // mientras haya argumentos que borrar;
 	{
-		while (args[i]) // mientras haya argumentos que borrar;
+		arg = ft_strjoin(args[i], "=");									   // le unimos el "=" para asegurar todos los casos.
+		if (ft_strncmp((char *)(*env)->content, arg, ft_strlen(arg)) == 0) // en el caso de que la coincidenccia sea el primer nodo
 		{
-			puntero del nodo anterior = get_envnode(arg[i]);
-			{
-				if (get_envnode no encuetra nada)
-					return (0);
-				if (existe puntero del nodo anterior = get_envnode(arg[i]))
-					1 - si el resultado de get_envnode es el primer nodo->swap con free del primero
-							tmp = master->env->next;
-				free(master->env) ojo que free de todo
-					master->env = tmp;
-
-				2 - si tmp->next != NULL->get_envnode tiene que devolver el anterior(tmp) y hacer free de(tmp->next);
-			}
+			aux = (*env)->next;
+			free(*env);
+			*env = aux;
 		}
-		return (0);
+		else
+			delete_node(get_envnode(env, arg));
+		free(arg);
+		i++;
 	}
+	return (0);
 }

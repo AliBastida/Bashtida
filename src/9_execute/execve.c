@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:52:12 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/07 15:29:20 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:45:12 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,10 @@ int execute_cmds(t_master *master)
 				else if (ft_strncmp(tmp->cmd, "cd", 3) == 0)
 					builtin_cd(tmp->args[1]);
 				/*else if (ft_strncmp(cmd, "export", 7) == 0)
-					ejecuta funcion export;
-				else if (ft_strncmp(cmd, "unset", 6) == 0)
-					ejecuta funcion unset;
-				else if (ft_strncmp(cmd, "env", 4) == 0)
+					ejecuta funcion export;*/
+				else if (ft_strncmp(tmp->cmd, "unset", 6) == 0)
+					builtin_unset(&master->env, master->cmds->args);
+				/*else if (ft_strncmp(cmd, "env", 4) == 0)
 					ejecuta funcion env;
 				else if (ft_strncmp(cmd, "exit", 5) == 0)
 					ejecuta funcion exit;*/
