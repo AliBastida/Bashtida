@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:17:06 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/08 17:10:45 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/08 17:19:51 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,21 @@ void categorizing_words(t_word *node)
 	int i;
 
 	i = 0;
-
-		if (node->word[i] == '<' && node->word[i + 1] == '<')
-		{
-			node->type = REDIR_A;
-			i++;
-		}
-		else if (node->word[i] == '>' && node->word[i + 1] == '>')
-		{
-			node->type = REDIR_B;
-			i++;
-		}
-		else if (node->word[i] == '<')
-			node->type = REDIR_C;
-		else if (node->word[i] == '>')
-			node->type = REDIR_D;
-		else
-			i++;
+	if (node->word[i] == '<' && node->word[i + 1] == '<')
+	{
+		node->type = REDIR_A;
+		i++;
+	}
+	else if (node->word[i] == '>' && node->word[i + 1] == '>')
+	{
+		node->type = REDIR_B;
+		i++;
+	}
+	else if (node->word[i] == '<')
+		node->type = REDIR_C;
+	else if (node->word[i] == '>')
+		node->type = REDIR_D;
+	i++;
 }
 
 char *substr_words(t_token *tmp, int start, int i)
