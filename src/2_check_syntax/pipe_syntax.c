@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_syntax.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:38:29 by abastida          #+#    #+#             */
-/*   Updated: 2023/11/08 16:07:40 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/08 12:40:34 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "minishell.h"
+#include "minishell.h"
 
 bool something_before(char *str)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (str[i] == ' ')
-        i++;
-    if (str[i] == '|')
-        return (0);
-    return (1);
+	i = 0;
+	while (str[i] == ' ')
+		i++;
+	if (str[i] == '|')
+		return (0);
+	return (1);
 }
 
 bool there_is_sth(char *str)
@@ -31,15 +31,15 @@ bool there_is_sth(char *str)
     str = ft_strchr(str, '|');
 
     while (str != NULL)
-    {  
-        if (str == str + 1)
-            return (syntax_error(3));
-        str = str + 1;
-        if(!something_before(str))
-            return (0);
+	{
+		if (str == str + 1)
+			return (syntax_error(3));
+		str = str + 1;
+		if (!something_before(str))
+			return (0);
         str = ft_strchr(str, '|');
-    }
-    return (1);
+	}
+	return (1);
 }
 
 bool something_after(char *str)
@@ -58,15 +58,14 @@ bool check_syntax_pipes(char *str)
 {
     if (!str)
     {
-        printf("hola\n"); 
-        return (0);
-    }
-      
-    if (!there_is_sth(str))
-        return (0);
-    if (!something_after(str))
-        return (0);   
-    return (1);
+		printf("hola\n");
+		return (0);
+	}
+	if (!there_is_sth(str))
+		return (0);
+	if (!something_after(str))
+		return (0);
+	return (1);
 }
 
 //TODO: tenemos que revisar el caso en el que haya un | seguido de "". Eso deberia dar error tb.

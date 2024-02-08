@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:13:11 by abastida          #+#    #+#             */
-/*   Updated: 2024/01/08 13:08:03 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/08 12:36:54 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int read_line(t_master *master)
 {
-    int i;
+	int i;
 
-    i = 0;
-    master->line = readline(BBLU "Bashtida: "RESET);
+	i = 0;
+	master->line = readline(BBLU "Bashtida: "RESET);
 	if (!master->line)
 	{
 		printf("Exit\n");
@@ -30,13 +30,13 @@ int read_line(t_master *master)
 			i++;
 		if (master->line[i] == '\0')
 		{
-			free(master->line); // Para quitar el leak del readline
+			free(master->line); // TODO Para quitar el leak del readline
 			return (1);
 		}
 	}
 	else if (!ft_strncmp(master->line, "", 1))
 	{
-		free(master->line); // Para quitar el leak del readline
+		free(master->line); // TODO Para quitar el leak del readline
 		return (1);
 	}
 	return (0);
