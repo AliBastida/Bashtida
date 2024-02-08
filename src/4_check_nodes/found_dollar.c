@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   found_dollar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:05:23 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/07 14:02:11 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/08 08:29:53 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ void line_ready_to_use(t_token *token, t_master *master)
 	tmp = token;
 	while (tmp)
 	{
+
 		node = token->words;
 		while (node)
 		{
+			categorizing_words(node); // FIXME: TENEMOS QUE ENCONTRAR DONDE COLOCAR Y REVISAR ESTA FUNCION PORQUE SE QUEDA EN BUCLE.
 			var_con_dolar_expandido = extract_dollar(node, master->env);
 			printf("Dollar expanded: ----%s----\n", var_con_dolar_expandido); // es para borrar
 			clean_line(var_con_dolar_expandido, master);
