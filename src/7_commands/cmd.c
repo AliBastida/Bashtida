@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 12:21:32 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/05 18:25:48 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/08 07:40:07 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,17 @@ char *checking_path(char **path, char *cmd, int *ok)
 	free(new_path);
 	return (cmd);
 }
-
+// FIXME: tenemos que ver por que no coge el cmd si hay redirecciones.
 void ft_take_cmd(t_cmd *new, t_word *words, t_master *master)
 {
 	char *cmd;
 	char **split;
 
 	if (words->type == 1 || words->type == 2 || words->type == 3 || words->type == 4)
+	{
 		cmd = ft_strdup(words->next->next->word);
+		printf("el next next->word: %s y cmd: %s\n", words->next->next->word, cmd);
+	}
 	else
 		cmd = ft_strdup(words->word);
 	split = ft_split(get_path(master), ':');

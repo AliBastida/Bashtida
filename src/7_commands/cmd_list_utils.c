@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_list_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:35:20 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/07 10:48:16 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/08 07:48:39 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ t_cmd *create_node_cmd(t_word *words, t_master *master, int n)
 		return (NULL);
 	while (tmp)
 	{
+		printf("ENTRA AQUI\n"); // FIXME: NO FUNCIONAN LAS CONDICIONES AQUI.
 		if (tmp->type == 1 || tmp->type == 2 || tmp->type == 3 || tmp->type == 4)
 		{
+			ft_take_cmd(new, words, master);
 			manage_redir(tmp, new);
 			tmp = tmp->next;
 		}
