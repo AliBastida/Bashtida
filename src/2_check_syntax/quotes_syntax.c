@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_syntax.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:50:19 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/07 14:46:07 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:14:47 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ bool paired_quotes(char *line)
             j = -1;
             status = 1;
         }
-        i++;
-		printf("%d\n", status);
+		i++;
 	}
 	return (status);
 }

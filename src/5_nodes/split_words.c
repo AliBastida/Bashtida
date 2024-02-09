@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_words.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:35:41 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/08 17:06:00 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:27:06 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,10 @@ char *divided_by_word(t_token *tmp)
 	}
 	return (NULL);
 }
-
+// TODO: HAY QUE CHEQUEAR SI EL N++ SE PUEDE PONER DONDE LO HE PUESTO O DEBE IR ABAJO
 t_word *create_nodeandlist_word(t_master *master, t_token *token)
 {
 	int n;
-	int n_words;
 	t_word *new_list;
 	t_word *new;
 	t_token *tmp;
@@ -87,8 +86,7 @@ t_word *create_nodeandlist_word(t_master *master, t_token *token)
 	{
 		n = 0;
 		new_list = NULL;
-		n_words = len_nodes(tmp->content_token);
-		while (n_words > n)
+		while (len_nodes(tmp->content_token) > n++)
 		{
 			new = ft_newnode_word(divided_by_word(tmp));
 			if (!new)
@@ -97,7 +95,7 @@ t_word *create_nodeandlist_word(t_master *master, t_token *token)
 				new_list = new;
 			else
 				lst_add_back_word(&new_list, new);
-			n++;
+			// n++;
 		}
 		PRINT_WORD(new_list);
 		tmp->words = new_list;

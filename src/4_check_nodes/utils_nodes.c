@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:17:06 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/08 17:19:51 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:43:57 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int len_nodes(char *token)
 
 	len = 1;
 	i = 0;
-
 	while (token[i])
 	{
 		if (token[i + 1] && (token[i] == '\'' || token[i] == '\"'))
@@ -53,7 +52,7 @@ int len_nodes(char *token)
 	}
 	return (len);
 }
-// FIXME: arreglar esta funcion
+
 void categorizing_words(t_word *node)
 {
 	int i;
@@ -76,14 +75,13 @@ void categorizing_words(t_word *node)
 	i++;
 }
 
+// hemos hecho un sbstr de new y obtendremos rest que es lo que usaremos como nuevo tmp en la funcion create_nodeand list_word
 char *substr_words(t_token *tmp, int start, int i)
 {
 	char *new;
 	char *rest;
-	new = ft_substr(tmp->content_token, start, i - start + 1); // hemos hecho un sbstr de new y obtendremos rest que es lo que usaremos como nuevo tmp en la funcion create_nodeand list_word
-	printf("new: ***%s***\n", new);
+	new = ft_substr(tmp->content_token, start, i - start + 1);
 	rest = ft_substr(tmp->content_token, i + 1, ft_strlen(tmp->content_token));
-	printf("resto: -%s-\n", rest);
 	free(tmp->content_token);
 	tmp->content_token = rest;
 	return new;

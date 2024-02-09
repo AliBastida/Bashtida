@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:30:51 by pabastid          #+#    #+#             */
-/*   Updated: 2024/02/07 15:31:56 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:39:06 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,3 @@ int builtin_cd(char *dir)
 		return (4);
 	return (0);
 }
-
-//no hace falta cd /

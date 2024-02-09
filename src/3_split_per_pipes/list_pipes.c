@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:40:43 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/01 12:05:14 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:20:54 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,3 @@ t_token *create_nodeandlist(t_master *master, char *str)
     master->node = new_list;
     return (new_list);
 }
-
-//FIXME: BORRAR TMP Y EL WHILE QUE IMPRIME LA LISTA

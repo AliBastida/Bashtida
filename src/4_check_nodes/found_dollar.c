@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:05:23 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/08 17:21:29 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:28:35 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void line_ready_to_use(t_token *token, t_master *master)
 	while (tmp)
 	{
 		node = token->words;
-		categorizing_words(node); // FIXME: TENEMOS QUE ENCONTRAR DONDE COLOCAR Y REVISAR ESTA FUNCION PORQUE SE QUEDA EN BUCLE.
+		categorizing_words(node);
 		while (node)
 		{
 
 			var_con_dolar_expandido = extract_dollar(node, master->env);
-			printf("Dollar expanded: ----%s----\n", var_con_dolar_expandido); // es para borrar
+			// printf("Dollar expanded: ----%s----\n", var_con_dolar_expandido); // es para borrar
 			clean_line(var_con_dolar_expandido, master);
-			printf("Quotes deleted: ----%s----\n", master->clean_line); // es para borrar
+			//	printf("Quotes deleted: ----%s----\n", master->clean_line); // es para borrar
 			free(node->word);
 			node->word = ft_strdup(master->clean_line);
 			free(master->clean_line);
@@ -52,7 +52,6 @@ static int check_quotes(t_word *node, int *i)
 	if (node->word[*i] == '\'' && node->flag_quote == 0)
 	{
 		*i = next_quote(node->word, *i + 1, node->word[*i]) + 1;
-		printf("node->flag_quote %d **el valor de i: %d\n", node->flag_quote, *i);
 		return (1);
 	}
 	if (node->word[*i] == '\"' && node->flag_quote == 0)
@@ -67,7 +66,6 @@ char *extract_dollar(t_word *node, t_list *env)
 	int i;
 	int start;
 	char *line;
-	// char *var;
 
 	i = 0;
 	start = 0;
@@ -79,7 +77,6 @@ char *extract_dollar(t_word *node, t_list *env)
 		if (node->word[i] == '$')
 		{
 			line = ft_strjoin(line, ft_substr(node->word, start, i - start));
-			// var = ft_getenv(&node->word[i], env, 0);
 			line = ft_strjoin(line, ft_getenv(&node->word[i], env, 0));
 			start = next_start(node->word, i + 1);
 			i = start;
