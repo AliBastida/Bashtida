@@ -56,11 +56,8 @@ bool something_after(char *str)
 
 bool check_syntax_pipes(char *str)
 {
-    if (!str)
-    {
-		printf("hola\n");
+	if (!str)
 		return (0);
-	}
 	if (!there_is_sth(str))
 		return (0);
 	if (!something_after(str))

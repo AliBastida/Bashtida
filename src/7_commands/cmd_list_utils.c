@@ -45,22 +45,19 @@ t_cmd *create_node_cmd(t_word *words, t_master *master, int n)
 	new = ft_calloc(sizeof(t_cmd), 1);
 	new->n = n;
 	new->out_fd = 1;
-	new->next = NULL;
 	new->args = ft_calloc(sizeof(char *), n_args(words) + 1);
 	if (!new)
 		return (NULL);
 	while (tmp)
 	{
+		printf("Tmp: %s\tType: %d\n", tmp->word, tmp->type);
 		if (tmp->type == 1 || tmp->type == 2 || tmp->type == 3 || tmp->type == 4)
 		{
 			manage_redir(tmp, new);
 			tmp = tmp->next;
 		}
 		else
-		{
-			new->args[i] = ft_strdup(tmp->word);
-			i++;
-		}
+			new->args[i++] = ft_strdup(tmp->word);
 		tmp = tmp->next;
 	}
 	if (new->args[0])

@@ -34,8 +34,7 @@ bool paired_quotes(char *line)
             j = -1;
             status = 1;
         }
-        i++;
-		printf("%d\n", status);
+		i++;
 	}
 	return (status);
 }

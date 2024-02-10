@@ -88,9 +88,9 @@ typedef struct s_token
 
 typedef struct s_master
 {
-	char *line;
-    char *clean_line;
 	int n_pipes;
+	char *line;
+	char *clean_line;
 	t_cmd *cmds;
 	t_token *node;
 	t_list *env;

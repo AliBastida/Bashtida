@@ -60,6 +60,7 @@ int execute_cmds(t_master *master)
 	pipes.tmp_fd = -1;
 	execute_heredoc(master->cmds);
 	tmp = master->cmds;
+	printf("N commands: %d\n", master->n_pipes);
 	while (tmp)
 	{
 		if (check_cmd_and_pipes(tmp, &pipes))
@@ -75,7 +76,7 @@ int execute_cmds(t_master *master)
 		}
 		else if (pid == 0)
 		{
-			// check_pipes(tmp, &pipes);
+			redirect_pipes(tmp, &pipes);
 			env = converting(master->env);
 			// si es un builtin ejecuta el builtin; si no, ejecuta exeve;
 			// cada funcion debe devolver un int, y ese int (valor de salida) lo ponemos como argumento en el exit)
@@ -106,5 +107,8 @@ int execute_cmds(t_master *master)
 		g_err = WEXITSTATUS(status);
 		tmp = tmp->next;
 	}
+	close(pipes.p[0]);
+	close(pipes.p[1]);
+	close(pipes.tmp_fd);
 	return (1);
 }

@@ -37,19 +37,19 @@ t_token	*ft_newnode(void *content)
 // Esta es nuestra funcion para crear la lista con el rdo de line_divided_in_tokens nos lo guardara en un nuevo nodo
 // (new_node) en funcion de los pipes que encuentra (n).
 
+// TODO: aqui he borrado la variable n_pipes y estoy utilizando la n_pipes de master
 t_token *create_nodeandlist(t_master *master, char *str)
 {
+	int n;
+	char **line_divided;
 	t_token *new_node;
 	t_token *new_list;
-	int n_pipes;
-	char **line_divided;
-    int n;
 
 	n = 0;
 	new_list = NULL;
-	n_pipes = how_many_pipes(str) + 1;
+	master->n_pipes = how_many_pipes(str) + 1;
 	line_divided = line_divided_in_tokens(str);
-	while (n_pipes > n)
+	while (master->n_pipes > n)
 	{
 		new_node = ft_newnode(clean_word(line_divided[n]));
         if (new_list == NULL)

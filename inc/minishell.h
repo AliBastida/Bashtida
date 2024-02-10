@@ -28,7 +28,7 @@
 
 #define PRINT_LIST(list)                                   \
 	t_list *random_tmp = list;                             \
-	printf("----------------------\n");                    \
+	printf("------------LIST----------\n");                \
 	while (random_tmp != NULL)                             \
 	{                                                      \
 		printf("random_tmp: *%s*\n", random_tmp->content); \
@@ -36,14 +36,14 @@
 	}                                                      \
 	printf("----------------------\n");
 
-#define PRINT_WORD(list)                                                \
-	t_word *random_tmp = list;                                          \
-	printf("----------------------\n");                                 \
-	while (random_tmp != NULL)                                          \
-	{                                                                   \
-		printf("random_tmp: *%s*\t%p\n", random_tmp->word, random_tmp); \
-		random_tmp = random_tmp->next;                                  \
-	}                                                                   \
+#define PRINT_WORD(list)                                                                            \
+	t_word *random_tmp = list;                                                                      \
+	printf("-----------WORDS-----------\n");                                                        \
+	while (random_tmp != NULL)                                                                      \
+	{                                                                                               \
+		printf("random_tmp: *%s*\t%p\tType: %d\n", random_tmp->word, random_tmp, random_tmp->type); \
+		random_tmp = random_tmp->next;                                                              \
+	}                                                                                               \
 	printf("----------------------\n");
 
 #define PRINT_TOKENS(list)                                         \
@@ -58,7 +58,7 @@
 	printf("----------------------\n");
 
 #define PRINT_ARRAY(cadena)                       \
-	printf("----------------------\n");           \
+	printf("------------ARRAY----------\n");      \
 	int random_i = 0;                             \
 	while (cadena[random_i] != NULL)              \
 	{                                             \
@@ -69,7 +69,7 @@
 
 #define PRINT_CMD(list)                                                       \
 	t_cmd *random_tmp = list;                                                 \
-	printf("----------------------\n");                                       \
+	printf("-----------CMD-----------\n");                                    \
 	while (random_tmp != NULL)                                                \
 	{                                                                         \
 		printf("tmp_cmd: *%p\n", random_tmp);                                 \
@@ -234,6 +234,7 @@ void redir_heredoc(t_word *redir, t_cmd *cmd);
 //******APPEND_MODE >> ******//
 void append_mode(t_word *redir, t_cmd *cmd);
 
+void redirect_pipes(t_cmd *cmd, t_pipes *pipes);
 int check_cmd_and_pipes(t_cmd *cmd, t_pipes *pipes);
 
 #endif
