@@ -84,9 +84,9 @@ t_word *create_nodeandlist_word(t_master *master, t_token *token)
 	tmp = token;
 	while (tmp)
 	{
-		n = 0;
+		n = -1;
 		new_list = NULL;
-		while (len_nodes(tmp->content_token) > n++)
+		while (len_nodes(tmp->content_token) > ++n)
 		{
 			new = ft_newnode_word(divided_by_word(tmp));
 			if (!new)
@@ -95,7 +95,6 @@ t_word *create_nodeandlist_word(t_master *master, t_token *token)
 				new_list = new;
 			else
 				lst_add_back_word(&new_list, new);
-			// n++;
 		}
 		PRINT_WORD(new_list);
 		tmp->words = new_list;
