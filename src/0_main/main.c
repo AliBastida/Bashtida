@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/09 12:42:31 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/10 16:41:18 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static void minishell_starts(t_master *master)
 				add_history(master->line);
 		}
 		free(master->line);
+		// system("leaks minishell");
+		// exit(0);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 12:21:32 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/08 07:49:47 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/10 16:33:28 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char *checking_path(char **path, char *cmd, int *ok)
 	free(new_path);
 	return (cmd);
 }
-// FIXME: tenemos que ver por que no coge el cmd si hay redirecciones.(NO ENTRA AQUI)
+
 void ft_take_cmd(t_cmd *new, t_word *words, t_master *master)
 {
 	char *cmd;
