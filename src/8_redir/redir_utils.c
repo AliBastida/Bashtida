@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 08:04:03 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/05 16:21:58 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:39:55 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,13 @@ char **take_path(t_master *path)
 {
 	char **split;
 
-	// int i = 0;
-
 	split = ft_split(get_path(path), ':');
-	// while (split[i])
-	//{
-	//	printf("%s\n", split[i]);
-	//	i++;
-	// }
 	return (split);
 }
 
 int ft_access(char *filename, int mod)
 {
-	if ((!mod && access(filename, R_OK) == 0) || (mod == 1 && access(filename, W_OK) == 0) || (mod == 2 && access(filename, X_OK) == 0)) // cmd
+	if ((!mod && access(filename, R_OK) == 0) || (mod == 1 && access(filename, W_OK) == 0) || (mod == 2 && access(filename, X_OK) == 0))
 		return (0);
 	if ((!mod || mod == 1) && access(filename, F_OK) == 0)
 	{

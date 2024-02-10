@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_list_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:35:20 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/07 10:48:16 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:48:35 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ int n_args(t_word *words)
 // tenemos que, con strdup copiar en el char **los args (incluido el cmd).
 // despues, en otra funcion, copiamos la posicion [0] del char en char *cmd y en otra funcion comprobamos si el path existe y es ejecutable o no.
 // otra funcion que ejecute el cmd.
+// FIXME: SE PASA DE LINEAS
 
+// FIXME: ME DA LA SENSACION DE QUE NO EXPANDE $VBLE SI ES ARG Y NO CMD. HAY QUE REVISARLO
 t_cmd *create_node_cmd(t_word *words, t_master *master, int n)
 {
 	t_cmd *new;
@@ -53,6 +55,7 @@ t_cmd *create_node_cmd(t_word *words, t_master *master, int n)
 		printf("Tmp: %s\tType: %d\n", tmp->word, tmp->type);
 		if (tmp->type == 1 || tmp->type == 2 || tmp->type == 3 || tmp->type == 4)
 		{
+			ft_take_cmd(new, words, master);
 			manage_redir(tmp, new);
 			tmp = tmp->next;
 		}

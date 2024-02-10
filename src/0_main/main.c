@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/05 08:03:06 by vduchi           ###   ########.fr       */
+/*   Updated: 2024/02/09 12:42:31 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,8 @@
 
 unsigned char	g_err = 0;
 
-int main(int ac, char **av, const char **env)
+static void minishell_starts(t_master *master)
 {
-	(void)ac;
-	(void)av;
-
-	t_master *master;
-	master = ft_calloc(1, sizeof(t_master));
-	ft_dup_env(master, env);
-	// PRINT_LIST(master->env);
 	while (1)
 	{
 		if (read_line(master) == 1)
@@ -40,6 +33,17 @@ int main(int ac, char **av, const char **env)
 		}
 		free(master->line);
 	}
+}
+
+int main(int ac, char **av, const char **env)
+{
+	(void)ac;
+	(void)av;
+
+	t_master *master;
+	master = ft_calloc(1, sizeof(t_master));
+	ft_dup_env(master, env);
+	minishell_starts(master);
 	ft_lstclear(&master->env, &free);
 	free(master);
 	return (0);

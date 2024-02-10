@@ -20,7 +20,7 @@ SRC :=  0_main/main.c 0_main/utils.c\
 			3_split_per_pipes/general_split.c 3_split_per_pipes/list_pipes.c \
 			3_split_per_pipes/list_utils.c 3_split_per_pipes/split_utils.c  \
 			4_check_nodes/found_dollar.c 4_check_nodes/utils_nodes.c \
-			4_check_nodes/utils.c 4_check_nodes/utils_envp.c 5_nodes/split_words.c \
+			4_check_nodes/utils_envp.c 5_nodes/split_words.c \
 			6_builtins/builtin_env.c 6_builtins/builtins.c 6_builtins/builtin_cd.c \
 			6_builtins/builtin_pwd.c 6_builtins/builtin_unset.c\
 			7_commands/cmd.c 7_commands/cmd_list_utils.c 7_commands/cmd_errors.c \

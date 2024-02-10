@@ -58,9 +58,10 @@ int execute_cmds(t_master *master)
 	t_pipes pipes;
 
 	pipes.tmp_fd = -1;
+	pipe(pipes.p);
 	execute_heredoc(master->cmds);
 	tmp = master->cmds;
-	printf("N commands: %d\n", master->n_pipes);
+	printf("N commands: %d\n", master->n_cmds);
 	while (tmp)
 	{
 		if (check_cmd_and_pipes(tmp, &pipes))

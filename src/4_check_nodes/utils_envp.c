@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:51:12 by pabastid          #+#    #+#             */
-/*   Updated: 2024/01/31 12:43:25 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:46:34 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ char *clean_vble(char *node, int idx)
 
 	j = 0;
 	len = 0;
-	// DONDE ESTA EL DOLAR EN LA NODE->WORD
 	i = idx + 1;
 	while (ft_isalpha(node[i]))
 	{
@@ -61,6 +60,7 @@ char *clean_vble(char *node, int idx)
 	new_line[j] = '\0';
 	return (new_line);
 }
+
 /* Esta funcioon getenv recibe un char *(con el nombre qque queremos comparar) y qque junto con el "=" lo meeteremos en vble y es lo que usaremos para comparar*/
 char *ft_getenv(const char *name, t_list *env, int idx)
 {

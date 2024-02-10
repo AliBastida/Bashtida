@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:25:30 by abastida          #+#    #+#             */
-/*   Updated: 2023/12/04 14:38:37 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:43:11 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int ft_copy_line(char **line, char *str)
 {
 	int len;
 
-	len = ft_strchar(str, '|') + 1; // Porque el calloc y el strlcpy necesitan un valor mas para funcionar
+	len = ft_strchar(str, '|') + 1;
 	*line = ft_calloc(sizeof(char), len);
 	ft_strlcpy(*line, str, len);
 	return (len);
@@ -81,7 +81,7 @@ char **line_divided_in_tokens(char *str)
     while (n_box > j)
 	{
 		position += ft_copy_line(&line_divided[j], str + position);
-		printf("line divided: =====%s======\n", line_divided[j]);
+		// printf("line divided: =====%s======\n", line_divided[j]);
 		j++;
 	}
 	line_divided[j] = NULL;
