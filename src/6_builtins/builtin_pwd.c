@@ -14,8 +14,8 @@
 
 int builtin_pwd(void)
 {
-	char cwd[1024];
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
+	char cwd[1024]; //le damos un maximo de 1024 para que aloque memoria de eso.
+	if (getcwd(cwd, sizeof(cwd)) != NULL) 
 	{
 		printf("%s\n", cwd);
 	}

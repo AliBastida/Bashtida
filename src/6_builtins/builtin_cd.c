@@ -15,7 +15,7 @@
 int builtin_cd(char *dir)
 {
 	if (dir == NULL)
-		chdir(ft_getenv("HOME", NULL, 0));
+		chdir(ft_getenv("HOME", NULL, 0)); //la funcion chdir cambia de directorio
 	else if (!ft_strncmp(dir, "-", 2))
 		chdir(ft_getenv("OLDPWD", NULL, 0));
 	else if (chdir(dir) == -1)

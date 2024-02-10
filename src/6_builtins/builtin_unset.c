@@ -6,24 +6,63 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:17:07 by pabastid          #+#    #+#             */
-/*   Updated: 2024/02/07 16:36:45 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:46:29 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*#include "minishell.h"
+#include "minishell.h"
 
-// comprobar si unset tira error cuando usamos caracteres especiales (@) -> hay que crear una funcion que comprueba que no hay caracteres especiales >> que usaremos en export tambien
-int builtin_unset(**env_char, [array de args]) // recibe el **env_char que resulta de execve.c->converting la lista env y el array de args que van detras <UNSET hola holaaaa ciao pescao>
+/* Esta funcion get_envnode recibe la lista donde tenemos env, la lista que contiene los args y que junto con el "=" sera lo que meteremos en vble y es lo que usaremos para comparar. Nos devuelve el nodo anterior a la coincidencia y si no lo encuentra devuelve NULL*/
+t_list *get_envnode(t_list **env, char *arg)
 {
-	// si ponemos solo unset no hace nada
-	while (args) // mientras haya argumentos que borrar;
+	int arg_len;
+	t_list *tmp;
+
+	tmp = *env;
+	arg_len = ft_strlen(arg);
+	while (tmp && tmp->next != NULL)
 	{
-		1 - comprobamos si hay carcateres especiales para que tire error
-		2 - t_env nodo = con la funcion ft_getenv(que le daremos el arg que esta analizando comprueba si esta en la lista * *env y si la encuentra devolvera el nodo) if (!el nodo)->continue;
-				if (existe el nodo)
-						->lo borra;
-						Al borrar hay que comprobar :
-								1 - Si es el primer nodo de la lista->hay que ponerlo en NULL porque al borrarlo se queda vacio;
-								2 - Si no es el primer nodo->hay que cambiar el prev y el next, y el prev del prev y del next que acabara en null.
+		if (ft_strncmp((char *)tmp->next->content, arg, arg_len) == 0)
+		{
+			return (tmp);
+		}
+		tmp = tmp->next;
 	}
-}*/
+	return (NULL); // nos tiene que devolver el anterior a la coincidencia, con lo que el rdo de la coincidencia sera tmp->next y el anterior sera tmp que es lo que devuelve si encuentra;
+}
+// esta borra el nodo siguiente al que te pasan (la coincidencia)
+void delete_node(t_list *env)
+{
+	t_list *aux;
+
+	if (env)
+	{
+		aux = env->next;
+		env->next = aux->next;
+		free(aux);
+	}
+}
+
+int builtin_unset(t_list **env, char **args) // recibe el **env el array de args que van detras <UNSET hola holaaaa ciao pescao>
+{
+	int i;
+	char *arg;
+	t_list *aux;
+
+	i = 1;
+	while (args[i]) // mientras haya argumentos que borrar;
+	{
+		arg = ft_strjoin(args[i], "=");									   // le unimos el "=" para asegurar todos los casos.
+		if (ft_strncmp((char *)(*env)->content, arg, ft_strlen(arg)) == 0) // en el caso de que la coincidenccia sea el primer nodo
+		{
+			aux = (*env)->next;
+			free(*env);
+			*env = aux;
+		}
+		else
+			delete_node(get_envnode(env, arg));
+		free(arg);
+		i++;
+	}
+	return (0);
+}

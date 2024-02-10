@@ -14,10 +14,10 @@
 
 int read_line(t_master *master)
 {
-    int i;
+	int i;
 
-    i = 0;
-    master->line = readline(BBLU "Bashtida: "RESET);
+	i = 0;
+	master->line = readline(BBLU "Bashtida: " RESET);
 	if (!master->line)
 		exit(1);
 	else if (master->line[0] == ' ')
@@ -26,13 +26,13 @@ int read_line(t_master *master)
 			i++;
 		if (master->line[i] == '\0')
 		{
-			free(master->line); // Para quitar el leak del readline
+			free(master->line); // TODO Para quitar el leak del readline
 			return (1);
 		}
 	}
 	else if (!ft_strncmp(master->line, "", 1))
 	{
-		free(master->line); // Para quitar el leak del readline
+		free(master->line); // TODO Para quitar el leak del readline
 		return (1);
 	}
 	return (0);
