@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:35:41 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/09 12:27:06 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/11 08:25:57 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,18 @@ char *divided_by_word(t_token *tmp)
 t_word *create_nodeandlist_word(t_master *master, t_token *token)
 {
 	int n;
+	int n_words;
 	t_word *new_list;
 	t_word *new;
 	t_token *tmp;
 
 	tmp = token;
+	n_words = len_nodes(tmp->content_token);
 	while (tmp)
 	{
 		n = -1;
 		new_list = NULL;
-		int n_words = len_nodes(tmp->content_token);
+
 		while (n_words > ++n)
 		{
 			new = ft_newnode_word(divided_by_word(tmp));

@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:59:32 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/10 18:27:30 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/11 08:47:05 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,17 @@ static int checking_format(char *str)
 	last_one = ft_strlen(str);
 	while (str[i])
 	{
-		if ((!ft_isalpha(str[0]) && str[0] != '_') || (i > 0 && (!ft_isdigit(str[i]) && !ft_isalpha(str[i]) && str[i] != '_')))
+		if (ft_isalpha(str[0]) || (i > 0 && (ft_isdigit(str[i]) || ft_isalpha(str[i]) || str[i] == '_' || str[last_one - 1] == '+')))
+			return (0);
+		else
 		{
-			printf("not a valid identifier\n");
-			// hay que guardar el error!!
+			printf("NO esta bien escrito\n");
+			// guardar el error en algun sitio;
 			return (1);
 		}
-		else
-			i++;
+		i++;
 	}
 	return (0);
-	// TODO: TENEEMOS QUE CONTEMPLAR EL CASO DEL'+' antes de =
-	//	el resto esta mal.
 }
 
 int builtin_export(t_list **env, char **args)
@@ -93,3 +92,10 @@ int builtin_export(t_list **env, char **args)
 	free(arg);
 	return (0);
 }
+
+if (strncmp == 0)
+	--->existe la vv de entorno.Tenemos que coger ese nodo y cambiar el valor por lo que hay detras del igual con strdup;
+buscar el nodo de t_list.cambiar el content desde el igual hasta el final.
+
+	if (strncmp != 0)--->no existe.Hay que crearlo y darle valores nuevos.crea el nodo.añadelo al final de la lista.dale el valor de args[i]
+		.
