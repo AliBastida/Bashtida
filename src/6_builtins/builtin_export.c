@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:59:32 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/11 08:47:05 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/11 13:22:26 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int builtin_export(t_list **env, char **args)
 {
 	char *arg;
 	int i;
-	(void)env;
 	int len;
 
 	i = 1;
@@ -80,11 +79,17 @@ int builtin_export(t_list **env, char **args)
 	{
 		len = len_hastaeligual(args[i]);
 		arg = copyvble(args[i], len);
+		printf("arg: ---%s----   ////%s////\n", args[i], (char *)(*env)->content); // FIXME: PORQUE NO TIENE VALOR???
 		if (checking_format(arg) == 0)
 		{
 			arg = ft_strjoin(arg, "=");
+			printf("arg: ---%s----   ////%s////\n", arg, (char *)(*env)->content);
 			if (ft_strncmp((char *)(*env)->content, arg, ft_strlen(arg)) == 0)
-				printf("%s\t %s\n", (char *)(*env)->content, arg);
+			{
+				printf("***%s\t %s***\n", (char *)(*env)->content, arg);
+			}
+			else
+				printf("No hay match\n");
 		}
 		i++;
 	}
@@ -92,10 +97,11 @@ int builtin_export(t_list **env, char **args)
 	free(arg);
 	return (0);
 }
-
+/*
 if (strncmp == 0)
 	--->existe la vv de entorno.Tenemos que coger ese nodo y cambiar el valor por lo que hay detras del igual con strdup;
 buscar el nodo de t_list.cambiar el content desde el igual hasta el final.
 
 	if (strncmp != 0)--->no existe.Hay que crearlo y darle valores nuevos.crea el nodo.añadelo al final de la lista.dale el valor de args[i]
 		.
+*/

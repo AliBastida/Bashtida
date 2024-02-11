@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:52:12 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/10 15:41:08 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/11 13:10:28 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ int execute_cmds(t_master *master)
 					builtin_export(&master->env, master->cmds->args);
 				else if (ft_strncmp(tmp->cmd, "unset", 6) == 0)
 					builtin_unset(&master->env, master->cmds->args);
-				/*else if (ft_strncmp(cmd, "env", 4) == 0)
-					ejecuta funcion env;
-				else if (ft_strncmp(cmd, "exit", 5) == 0)
+				else if (ft_strncmp(tmp->cmd, "env", 4) == 0)
+					print_env(master);
+				/*else if (ft_strncmp(cmd, "exit", 5) == 0)
 					ejecuta funcion exit;*/
 				exit(0);
 			}
