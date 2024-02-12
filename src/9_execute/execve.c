@@ -83,13 +83,13 @@ int execute_cmds(t_master *master)
 	printf("N commands: %d\n", master->n_cmds);
 	while (tmp)
 	{
-		if (check_cmd_and_pipes(tmp, &pipes))
-		{
-			tmp = tmp->next;
+		if (check_cmd_and_pipes(&tmp, &pipes))
 			continue;
-		}
 		if (!tmp->next && is_builtin(tmp->cmd))
-			run_builtin(master, tmp);
+		{
+			g_err = run_builtin(master, tmp);
+			break;
+		}
 		pid = fork();
 		if (pid == -1)
 		{
@@ -111,7 +111,7 @@ int execute_cmds(t_master *master)
 			perror("Execve error");
 			exit(1);
 		}
-		waitpid(pid, &status, 0);
+		// waitpid(pid, &status, 0);
 		printf("\nExit status: %d\n", WEXITSTATUS(status));
 		g_err = WEXITSTATUS(status);
 		tmp = tmp->next;

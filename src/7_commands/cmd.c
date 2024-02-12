@@ -12,10 +12,34 @@
 
 #include "minishell.h"
 
+char *check_full_path(char **new_path, char **cmd, int *ok)
+{
+	int res;
+
+	res = ft_access(*new_path, 2);
+	if (!res)
+	{
+		printf("este es mi cmd: %s \n", *new_path);
+		// *ok = 0;
+		free(*cmd);
+		return (*new_path);
+	}
+	else if (res == 2)
+	{
+		if (!*ok)
+			*ok = 3;
+		//		printf("%s", g_error_array[*ok - 1]);
+		free(*new_path);
+		return (*cmd);
+	}
+	return (NULL);
+}
+
 char *checking_path(char **path, char *cmd, int *ok)
 {
-	char *new_path;
 	int i;
+	char *ret;
+	char *new_path;
 
 	i = 0;
 	if (is_builtin(cmd) == 1)
@@ -24,24 +48,30 @@ char *checking_path(char **path, char *cmd, int *ok)
 	{
 		new_path = ft_strjoin(path[i], "/");
 		new_path = ft_strjoin(new_path, cmd);
-		if (access(new_path, X_OK) == 0)
-		{
-			printf("este es mi cmd: %s \n", new_path);
-			*ok = 0;
-			free(cmd);
-			return (new_path);
-		}
-		else if (access(new_path, F_OK) == 0)
-		{
-			*ok = 3;
-//			printf("%s", g_error_array[*ok - 1]);
-			free(new_path);
-			return (cmd);
-		}
+		ret = check_full_path(&new_path, &cmd, ok);
+		if (ret)
+			return (ret);
+		// res = ft_access(new_path, 2);
+		// 		if (access(new_path, X_OK) == 0)
+		// 		{
+		// 			printf("este es mi cmd: %s \n", new_path);
+		// 			// *ok = 0;
+		// 			free(cmd);
+		// 			return (new_path);
+		// 		}
+		// 		else if (access(new_path, F_OK) == 0)
+		// 		{
+		// 			if (!*ok)
+		// 				*ok = 3;
+		//			printf("%s", g_error_array[*ok - 1]);
+		// 			free(new_path);
+		// 			return (cmd);
+		// 		}
 		i++;
 	}
-	*ok = 2;
-//	printf("%s", g_error_array[*ok - 1]);
+	if (!*ok)
+		*ok = 2;
+	//	printf("%s", g_error_array[*ok - 1]);
 	free(new_path);
 	return (cmd);
 }
@@ -49,6 +79,7 @@ char *checking_path(char **path, char *cmd, int *ok)
 void ft_take_cmd(t_cmd *new, t_word *words, t_master *master)
 {
 	char *cmd;
+	char *path;
 	char **split;
 
 	if (words->type == 1 || words->type == 2 || words->type == 3 || words->type == 4)
@@ -58,14 +89,16 @@ void ft_take_cmd(t_cmd *new, t_word *words, t_master *master)
 	}
 	else
 		cmd = ft_strdup(words->word);
-	split = ft_split(get_path(master), ':');
+	path = ft_strdup(ft_getenv("PATH", master->env, -1));
+	split = ft_split(path, ':');
+	free(path);
 	new->cmd = checking_path(split, cmd, &new->ok);
 	ft_free_double(split);
 }
 
-char *get_path(t_master *master)
-{
-	char *path;
-	path = ft_strdup(ft_getenv("PATH", master->env, -1));
-	return (path);
-}
+// char *get_path(t_master *master)
+// {
+// 	char *path;
+// 	path = ft_strdup(ft_getenv("PATH", master->env, -1));
+// 	return (path);
+// }

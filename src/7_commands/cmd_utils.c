@@ -12,26 +12,62 @@
 
 #include "minishell.h"
 
-char **take_path(t_master *path)
+// Aqui averiguamos el len para el malloc de la lista de args
+int n_args(t_word *words)
 {
+	int i;
+
+	i = 0;
+	while (words)
+	{
+		if (words->type == 1 || words->type == 2 || words->type == 3 || words->type == 4)
+			words = words->next;
+		else
+			i++;
+		words = words->next;
+	}
+	return (i);
+}
+
+char **take_path(t_master *master)
+{
+	char *path;
 	char **split;
 
 	int i = 0;
-
-	split = ft_split(get_path(path), ':');
+	path = ft_strdup(ft_getenv("PATH", master->env, -1));
+	split = ft_split(path, ':');
 	while (split[i])
 	{
 		printf("%s\n", split[i]);
 		i++;
 	}
+	free(path);
 	return (split);
 }
 
-int ft_access(char *filename)
+t_cmd *lst_last_cmd(t_cmd *list)
 {
-	if (access(filename, R_OK) == 0)
-		return (0);
-	else if (access(filename, F_OK) == 0)
-		return (FILE_NOT_READ);
-	return (FILE_NOT_FOUND);
+	t_cmd *tmp;
+
+	tmp = list;
+	if (tmp != NULL)
+	{
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+	}
+	return (tmp);
+}
+
+void lst_add_back_cmd(t_cmd *list, t_cmd *node)
+{
+	t_cmd *tmp;
+
+	if (list == NULL)
+		list = node;
+	else
+	{
+		tmp = lst_last_cmd(list);
+		tmp->next = node;
+	}
 }

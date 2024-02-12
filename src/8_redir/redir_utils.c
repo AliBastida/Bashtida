@@ -23,13 +23,13 @@ char *filename_path(char *name)
 	return (filename);
 }
 
-char **take_path(t_master *path)
-{
-	char **split;
+// char **take_path(t_master *path)
+// {
+// 	char **split;
 
-	split = ft_split(get_path(path), ':');
-	return (split);
-}
+// 	split = ft_split(get_path(path), ':');
+// 	return (split);
+// }
 
 int ft_access(char *filename, int mod)
 {
