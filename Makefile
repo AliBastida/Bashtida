@@ -23,8 +23,9 @@ SRC :=  0_main/main.c 0_main/utils.c\
 			4_check_nodes/utils_envp.c 5_nodes/split_words.c \
 			6_builtins/builtin_env.c 6_builtins/builtins.c 6_builtins/builtin_cd.c \
 			6_builtins/builtin_pwd.c 6_builtins/builtin_unset.c \
-			6_builtins/builtin_export.c 7_commands/cmd.c 7_commands/cmd_list_utils.c\
-			7_commands/cmd_errors.c 8_redir/redir.c 8_redir/redir_utils.c 8_redir/input.c \
+			6_builtins/builtin_export.c \
+			7_commands/cmd.c 7_commands/cmd_list_utils.c 7_commands/cmd_utils.c \
+			8_redir/redir.c 8_redir/redir_utils.c 8_redir/input.c \
 			8_redir/output.c 8_redir/redir_heredoc.c 8_redir/redir_append_mode.c \
 			9_execute/execve.c 9_execute/run_heredoc.c 9_execute/pipes.c
 

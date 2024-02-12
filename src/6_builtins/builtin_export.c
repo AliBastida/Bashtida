@@ -98,7 +98,7 @@ int builtin_export(t_master *master, char **args)
 	{
 		len = len_hastaeligual(args[i]);
 		arg = copyvble(args[i], len);
-		printf("arg: ---%s----   ////%s////\n", args[i], (char *)(*env)->content); // FIXME: PORQUE NO TIENE VALOR???
+		// printf("arg: ---%s----   ////%s////\n", args[i], (char *)(*env)->content); // FIXME: PORQUE NO TIENE VALOR???
 		if (checking_format(arg) == 0)
 		{
 			arg = ft_strjoin(arg, "=");

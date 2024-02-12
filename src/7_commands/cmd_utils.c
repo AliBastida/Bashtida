@@ -29,7 +29,7 @@ int n_args(t_word *words)
 	return (i);
 }
 
-char **take_path(t_master *path)
+char **take_path(t_master *master)
 {
 	char *path;
 	char **split;

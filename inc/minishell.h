@@ -238,6 +238,6 @@ void redir_heredoc(t_word *redir, t_cmd *cmd);
 void append_mode(t_word *redir, t_cmd *cmd);
 
 void redirect_pipes(t_cmd *cmd, t_pipes *pipes);
-int check_cmd_and_pipes(t_cmd *cmd, t_pipes *pipes);
+int check_cmd_and_pipes(t_cmd **cmd, t_pipes *pipes);
 
 #endif
