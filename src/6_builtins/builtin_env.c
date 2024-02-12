@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:01:59 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/05 18:13:42 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/12 14:02:24 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void print_env(t_master *master)
+void print_env(t_list *env)
 {
-	t_master *tmp;
+	t_list *tmp;
 
-	tmp = master;
-	while (tmp->env)
+	tmp = env;
+	while (tmp)
 	{
-		printf("%s\n", (char *)tmp->env->content);
-		tmp->env = tmp->env->next;
+		printf("%s\n", (char *)tmp->content);
+		tmp = tmp->next;
+		// printf("%s\n", (char *)tmp->env->content);
 	}
 }

@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:17:07 by pabastid          #+#    #+#             */
-/*   Updated: 2024/02/08 16:46:29 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:47:21 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* Esta funcion get_envnode recibe la lista donde tenemos env, la lista que contiene los args y que junto con el "=" sera lo que meteremos en vble y es lo que usaremos para comparar. Nos devuelve el nodo anterior a la coincidencia y si no lo encuentra devuelve NULL*/
-t_list *get_envnode(t_list **env, char *arg)
+/* Esta funcion get_envnode recibe la lista donde tenemos env,
+	la lista que contiene los args y que junto con el "=" sera lo que meteremos en vble y es lo que usaremos para comparar. Nos devuelve el nodo anterior a la coincidencia y si no lo encuentra devuelve NULL*/
+static t_list *get_envnode_unset(t_list **env, char *arg)
 {
 	int arg_len;
 	t_list *tmp;
@@ -43,7 +44,8 @@ void delete_node(t_list *env)
 	}
 }
 
-int builtin_unset(t_list **env, char **args) // recibe el **env el array de args que van detras <UNSET hola holaaaa ciao pescao>
+int builtin_unset(t_list **env, char **args)
+// recibe el **env el array de args que van detras <UNSET hola holaaaa ciao pescao>
 {
 	int i;
 	char *arg;
@@ -52,15 +54,17 @@ int builtin_unset(t_list **env, char **args) // recibe el **env el array de args
 	i = 1;
 	while (args[i]) // mientras haya argumentos que borrar;
 	{
-		arg = ft_strjoin(args[i], "=");									   // le unimos el "=" para asegurar todos los casos.
-		if (ft_strncmp((char *)(*env)->content, arg, ft_strlen(arg)) == 0) // en el caso de que la coincidenccia sea el primer nodo
+		arg = ft_strjoin(args[i], "=");
+		// le unimos el "=" para asegurar todos los casos.
+		if (ft_strncmp((char *)(*env)->content, arg, ft_strlen(arg)) == 0)
+		// en el caso de que la coincidenccia sea el primer nodo
 		{
 			aux = (*env)->next;
 			free(*env);
 			*env = aux;
 		}
 		else
-			delete_node(get_envnode(env, arg));
+			delete_node(get_envnode_unset(env, arg));
 		free(arg);
 		i++;
 	}

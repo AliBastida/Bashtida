@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:05:23 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/09 12:28:35 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:55:16 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void line_ready_to_use(t_token *token, t_master *master)
 	while (tmp)
 	{
 		node = token->words;
-		categorizing_words(node);
+		// categorizing_words(node);
 		while (node)
 		{
 

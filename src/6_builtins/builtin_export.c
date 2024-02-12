@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:59:32 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/11 08:47:05 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/12 14:36:10 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char *copyvble(char *str, int size)
 	int i;
 	char *copy;
 
-	copy = ft_calloc(size, sizeof(char));
+	copy = ft_calloc(size + 1, sizeof(char));
 	if (!copy)
 		return (NULL);
 
@@ -68,12 +68,30 @@ static int checking_format(char *str)
 	return (0);
 }
 
-int builtin_export(t_list **env, char **args)
+static t_list *get_envnode_export(t_list *env, char *arg)
+{
+	int arg_len;
+	t_list *tmp;
+
+	tmp = env;
+	arg_len = ft_strlen(arg);
+	while (tmp) //&& tmp->next != NULL)
+	{
+		if (ft_strncmp((char *)tmp->content, arg, arg_len) == 0)
+		{
+			return (tmp);
+		}
+		tmp = tmp->next;
+	}
+	return (NULL); // nos tiene que devolver el nodo de la coincidencia.
+}
+
+int builtin_export(t_master *master, char **args)
 {
 	char *arg;
 	int i;
-	(void)env;
 	int len;
+	// t_list *aux;
 
 	i = 1;
 	while (args[i])
@@ -83,19 +101,36 @@ int builtin_export(t_list **env, char **args)
 		if (checking_format(arg) == 0)
 		{
 			arg = ft_strjoin(arg, "=");
-			if (ft_strncmp((char *)(*env)->content, arg, ft_strlen(arg)) == 0)
-				printf("%s\t %s\n", (char *)(*env)->content, arg);
+			printf("arg: ---%s----\n", args[i]);
+			if (get_envnode_export(master->env, arg))
+			{
+				printf("hola\n");
+			}
+			else
+			{
+				// aux = ft_lstnew((char *)args[i]);
+				// printf("aux: ==%s==\n", aux->content);
+				// ft_lstadd_back(env, aux);
+				ft_lstadd_back(&master->env, ft_lstnew(ft_strdup(args[i])));
+				PRINT_LIST(master->env);
+
+				//
+				//  crea nodo + strdup de todo args[i]
+				//  lst_add_back
+			}
+			// aux = get_envnode_export(env, arg);
+			// printf("AUX: ///%s///\n", aux->content);
 		}
 		i++;
 	}
-	printf("arg: ---%s----\n", arg);
 	free(arg);
 	return (0);
 }
-
+/*
 if (strncmp == 0)
 	--->existe la vv de entorno.Tenemos que coger ese nodo y cambiar el valor por lo que hay detras del igual con strdup;
 buscar el nodo de t_list.cambiar el content desde el igual hasta el final.
 
 	if (strncmp != 0)--->no existe.Hay que crearlo y darle valores nuevos.crea el nodo.añadelo al final de la lista.dale el valor de args[i]
 		.
+*/

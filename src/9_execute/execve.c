@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:52:12 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/10 15:41:08 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/12 14:42:28 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,25 @@
 // execve(cmd, args, env);
 // tengo que hacer una funcion que me convierta la lista del env a char ** para pasarsela a la funcion exec_ve. Esta funcion sera llamada por exec_cmd y el retorno de la transformacion
 // es lo que le pasare a execve.
+
+int run_builtin(t_master *master, t_cmd *tmp)
+{
+	/*if (ft_strncmp(cmd, "echo", 5) == 0)
+		ejecuta funcion echo;*/
+	if (ft_strncmp(tmp->cmd, "pwd", 4) == 0)
+		builtin_pwd();
+	else if (ft_strncmp(tmp->cmd, "cd", 3) == 0)
+		builtin_cd(tmp->args[1]);
+	else if (ft_strncmp(tmp->cmd, "export", 7) == 0)
+		builtin_export(master, tmp->args);
+	else if (ft_strncmp(tmp->cmd, "unset", 6) == 0)
+		builtin_unset(&master->env, tmp->args);
+	else if (ft_strncmp(tmp->cmd, "env", 4) == 0)
+		print_env(master->env);
+	/*else if (ft_strncmp(cmd, "exit", 5) == 0)
+		ejecuta funcion exit;*/
+	return (0);
+}
 
 char **converting(t_list *env)
 {
@@ -69,6 +88,8 @@ int execute_cmds(t_master *master)
 			tmp = tmp->next;
 			continue;
 		}
+		if (!tmp->next && is_builtin(tmp->cmd))
+			run_builtin(master, tmp);
 		pid = fork();
 		if (pid == -1)
 		{
@@ -81,30 +102,17 @@ int execute_cmds(t_master *master)
 			env = converting(master->env);
 			// si es un builtin ejecuta el builtin; si no, ejecuta exeve;
 			// cada funcion debe devolver un int, y ese int (valor de salida) lo ponemos como argumento en el exit)
-			if (is_builtin(tmp->cmd) == true)
+			if (is_builtin(tmp->cmd))
 			{
-				/*if (ft_strncmp(cmd, "echo", 5) == 0)
-					ejecuta funcion echo;*/
-				if (ft_strncmp(tmp->cmd, "pwd", 4) == 0)
-					builtin_pwd();
-				else if (ft_strncmp(tmp->cmd, "cd", 3) == 0)
-					builtin_cd(tmp->args[1]);
-				else if (ft_strncmp(tmp->cmd, "export", 7) == 0)
-					builtin_export(&master->env, master->cmds->args);
-				else if (ft_strncmp(tmp->cmd, "unset", 6) == 0)
-					builtin_unset(&master->env, master->cmds->args);
-				/*else if (ft_strncmp(cmd, "env", 4) == 0)
-					ejecuta funcion env;
-				else if (ft_strncmp(cmd, "exit", 5) == 0)
-					ejecuta funcion exit;*/
-				exit(0);
+				g_err = run_builtin(master, tmp);
+				exit(g_err);
 			}
 			execve(tmp->cmd, tmp->args, env);
 			perror("Execve error");
 			exit(1);
 		}
 		waitpid(pid, &status, 0);
-		printf("Exit status: %d\n", WEXITSTATUS(status));
+		printf("\nExit status: %d\n", WEXITSTATUS(status));
 		g_err = WEXITSTATUS(status);
 		tmp = tmp->next;
 	}
