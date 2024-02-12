@@ -36,11 +36,11 @@ void redirect_pipes(t_cmd *cmd, t_pipes *pipes)
 	close(pipes->p[1]);
 }
 
-int check_cmd_and_pipes(t_cmd *cmd, t_pipes *pipes)
+int check_cmd_and_pipes(t_cmd **cmd, t_pipes *pipes)
 {
-	if (cmd->n == 0 && cmd->next)
+	if ((*cmd)->n == 0 && (*cmd)->next)
 		pipe(pipes->p);
-	else if (cmd->n > 0 && cmd->in_fd == 0 && cmd->next && !cmd->hd)
+	else if ((*cmd)->n > 0 && (*cmd)->in_fd == 0 && (*cmd)->next && !(*cmd)->hd)
 	{
 		if (pipes->tmp_fd != -1)
 			close(pipes->tmp_fd);
@@ -49,10 +49,12 @@ int check_cmd_and_pipes(t_cmd *cmd, t_pipes *pipes)
 		close(pipes->p[1]);
 		pipe(pipes->p);
 	}
-	if (cmd->ok)
+	if ((*cmd)->ok)
 	{
-		printf("%s\n", g_error_array[cmd->ok - 1]);
-		cmd = cmd->next;
+		printf("Before: %p\n", *cmd);
+		printf("%s\n", g_error_array[(*cmd)->ok - 1]);
+		(*cmd) = (*cmd)->next;
+		printf("After: %p\n", *cmd);
 		return (1);
 	}
 	return (0);
