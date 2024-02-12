@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:59:32 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/12 14:46:56 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:52:07 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ static char *copyvble(char *str, int size)
 	i = 0;
 	while ((str[i] && str[i] != '=') && (i <= size))
 	{
-		copy[i] = str[i];
+		if (str[i] == '+')
+		{
+			return (copy);
+		}
+		else
+			copy[i] = str[i];
 		printf("%d \t %d\n", i, size);
 		i++;
 	}
@@ -59,7 +64,7 @@ static int checking_format(char *str)
 			return (0);
 		else
 		{
-			printf("NO esta bien escrito\n");
+			printf("NO esta bien escrito\n"); // TODO: TENEMOS QUE GUARDAR EL ERROR EN LA V_GLOBAL.
 			// guardar el error en algun sitio;
 			return (1);
 		}
@@ -91,20 +96,24 @@ int builtin_export(t_master *master, char **args)
 	char *arg;
 	int i;
 	int len;
-	// t_list *aux;
+	char *checking_mas
+		// t_list *aux;
 
-	i = 1;
+		i = 1;
 	while (args[i])
 	{
 		len = len_hastaeligual(args[i]);
+		printf("len hasta el igual: %d", len);
 		arg = copyvble(args[i], len);
-		printf("arg: ---%s----   ////%s////\n", args[i], (char *)(*env)->content); // FIXME: PORQUE NO TIENE VALOR???
 		if (checking_format(arg) == 0)
 		{
+			// si arg[len-1]=='+'
+			//{arg = ft_}
 			arg = ft_strjoin(arg, "=");
 			printf("arg: ---%s----\n", args[i]);
 			if (get_envnode_export(master->env, arg))
 			{
+				//	master->env->content = ft_strdup(args[i]);
 				printf("hola\n");
 			}
 			else
@@ -113,12 +122,12 @@ int builtin_export(t_master *master, char **args)
 				// printf("aux: ==%s==\n", aux->content);
 				// ft_lstadd_back(env, aux);
 				ft_lstadd_back(&master->env, ft_lstnew(ft_strdup(args[i])));
-				PRINT_LIST(master->env);
 
 				//
 				//  crea nodo + strdup de todo args[i]
 				//  lst_add_back
 			}
+			PRINT_LIST(master->env);
 			// aux = get_envnode_export(env, arg);
 			// printf("AUX: ///%s///\n", aux->content);
 		}

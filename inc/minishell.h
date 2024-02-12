@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/12 14:31:40 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:14:42 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#define PRINT_LIST(list)                                                                              \
-	t_list *random_tmp = list;                                                                        \
-	printf("------------LIST----------\n");                                                           \
-	while (random_tmp != NULL)                                                                        \
-	{                                                                                                 \
-		printf("random_tmp: *%p*---*%s*--*%p*\n", random_tmp, random_tmp->content, random_tmp->next); \
-		random_tmp = random_tmp->next;                                                                \
-	}                                                                                                 \
+#define PRINT_LIST(list)                                                       \
+	t_list *random_tmp = list;                                                 \
+	printf("------------LIST----------\n");                                    \
+	while (random_tmp != NULL)                                                 \
+	{                                                                          \
+		printf("random_tmp: *%p*---*%s*-\n", random_tmp, random_tmp->content); \
+		random_tmp = random_tmp->next;                                         \
+	}                                                                          \
 	printf("----------------------\n");
 
 #define PRINT_WORD(list)                                                                            \
