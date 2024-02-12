@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 12:07:27 by abastida          #+#    #+#             */
-/*   Updated: 2022/11/17 10:39:49 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/12 17:46:17 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
+	struct s_list *prev;
 }				t_list;
 
 int		ft_isalpha(int c);
