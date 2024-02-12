@@ -73,6 +73,8 @@
 	while (random_tmp != NULL)                                                \
 	{                                                                         \
 		printf("tmp_cmd: *%p\n", random_tmp);                                 \
+		printf("n: *%i\n", random_tmp->n);                                    \
+		printf("ok: *%i\n", random_tmp->ok);                                  \
 		printf("cmd: *%s*\n", random_tmp->cmd);                               \
 		printf("in fd: *%i*\n", random_tmp->in_fd);                           \
 		printf("out fd: *%i*\n", random_tmp->out_fd);                         \
@@ -237,7 +239,11 @@ void redir_heredoc(t_word *redir, t_cmd *cmd);
 //******APPEND_MODE >> ******//
 void append_mode(t_word *redir, t_cmd *cmd);
 
-void redirect_pipes(t_cmd *cmd, t_pipes *pipes);
+void redirect_pipes(t_cmd *cmd, t_pipes pipes);
 int check_cmd_and_pipes(t_cmd **cmd, t_pipes *pipes);
+
+void close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes);
+int run_builtin(t_master *master, t_cmd *tmp);
+pid_t loop_cmds(t_master *master, t_cmd *tmp, t_pipes pipes);
 
 #endif

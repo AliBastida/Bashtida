@@ -96,10 +96,10 @@ int builtin_export(t_master *master, char **args)
 	char *arg;
 	int i;
 	int len;
-	char *checking_mas
-		// t_list *aux;
+	// char *checking_mas;
+	// t_list *aux;
 
-		i = 1;
+	i = 1;
 	while (args[i])
 	{
 		len = len_hastaeligual(args[i]);

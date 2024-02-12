@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void redirect_pipes(t_cmd *cmd, t_pipes *pipes)
+void redirect_pipes(t_cmd *cmd, t_pipes pipes)
 {
 	if (cmd->in_fd != 0 && !cmd->hd)
 		((dup2(cmd->in_fd, 0)) && (close(cmd->in_fd)));
@@ -24,16 +24,16 @@ void redirect_pipes(t_cmd *cmd, t_pipes *pipes)
 			((close(cmd->hd->fd[0])) && (close(cmd->hd->fd[1])));
 		}
 		else if (cmd->n > 0 && cmd->next)
-			((dup2(pipes->tmp_fd, 0)) && (close(pipes->tmp_fd)));
+			((dup2(pipes.tmp_fd, 0)) && (close(pipes.tmp_fd)));
 		else if (cmd->n > 0 && !cmd->next)
-			dup2(pipes->p[0], 0);
+			dup2(pipes.p[0], 0);
 	}
-	close(pipes->p[0]);
+	close(pipes.p[0]);
 	if (cmd->out_fd != 1)
 		((dup2(cmd->out_fd, 1)) && (close(cmd->out_fd)));
 	else if (cmd->out_fd == 1 && cmd->next)
-		dup2(pipes->p[1], 1);
-	close(pipes->p[1]);
+		dup2(pipes.p[1], 1);
+	close(pipes.p[1]);
 }
 
 int check_cmd_and_pipes(t_cmd **cmd, t_pipes *pipes)
@@ -51,10 +51,8 @@ int check_cmd_and_pipes(t_cmd **cmd, t_pipes *pipes)
 	}
 	if ((*cmd)->ok)
 	{
-		printf("Before: %p\n", *cmd);
 		printf("%s\n", g_error_array[(*cmd)->ok - 1]);
 		(*cmd) = (*cmd)->next;
-		printf("After: %p\n", *cmd);
 		return (1);
 	}
 	return (0);
