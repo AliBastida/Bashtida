@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:59:32 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/12 18:25:28 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/12 18:56:12 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,12 @@ static void swapping_nodes(t_list **env)
 	t_list *second;
 
 	first = *env;
-	if (!first->next)
+	if (!first || !first->next)
 		return;
 	second = first->next;
-	first = second->next;
+	first->next = second->next;
 	second->next = first;
+	second = *env;
 }
 
 static void ordering_alphabetic(t_list **env)
