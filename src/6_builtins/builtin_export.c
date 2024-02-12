@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:59:32 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/12 14:36:10 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/12 14:46:56 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int builtin_export(t_master *master, char **args)
 	{
 		len = len_hastaeligual(args[i]);
 		arg = copyvble(args[i], len);
+		printf("arg: ---%s----   ////%s////\n", args[i], (char *)(*env)->content); // FIXME: PORQUE NO TIENE VALOR???
 		if (checking_format(arg) == 0)
 		{
 			arg = ft_strjoin(arg, "=");
