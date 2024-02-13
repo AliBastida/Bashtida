@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 20:13:00 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/13 20:38:04 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:56:21 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void builtin_echo(char **args)
 	bool found_n;
 
 	i = 1;
-	found_n = false;
+	found_n = true;
 
 	if (!args[i])
 		printf("\n");
-	while (args[i] && finding_n(args[i]) == false)
+	while (args[i] && finding_n(args[i]) == true)
 	{
-		found_n = true;
+		found_n = false;
 		i++;
 	}
 	while (args[i])

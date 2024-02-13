@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execve.c                                           :+:      :+:    :+:   */
+/*   execute_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:52:12 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/12 14:46:40 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:53:39 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 int run_builtin(t_master *master, t_cmd *tmp)
 {
-	/*if (ft_strncmp(cmd, "echo", 5) == 0)
-		ejecuta funcion echo;*/
+	if (ft_strncmp(tmp->cmd, "echo", 5) == 0)
+		builtin_echo(tmp->args);
 	if (ft_strncmp(tmp->cmd, "pwd", 4) == 0)
 		builtin_pwd();
 	else if (ft_strncmp(tmp->cmd, "cd", 3) == 0)
