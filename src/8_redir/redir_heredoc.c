@@ -21,5 +21,4 @@ void redir_heredoc(t_word *redir, t_cmd *cmd)
 	pipe(hd->fd);
 	hd->first = 1;
 	cmd->hd = hd;
-	printf("Heredoc\n");
 }

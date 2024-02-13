@@ -49,21 +49,25 @@ static void swapping_nodes(t_list **env)
 	if (!first || !first->next)
 		return;
 	second = first->next;
-	first->next = second->next;
-	second->next = first;
-	second = *env;
+	first = second->next;
+	*env = second;
+	// second->next = first;
+	// second = *env;
 }
 
 static void ordering_alphabetic(t_list **env)
 {
+	// t_list one;
 	t_list *tmp;
 
+	// one = *env;
 	tmp = *env;
 	while (tmp && tmp->next)
 	{
 		if (ft_strncmp(tmp->content, tmp->next->content, ft_strlen(tmp->content)) > 0)
 		{
 			swapping_nodes(&tmp);
+			tmp = *env;
 		}
 		else
 			tmp = tmp->next;
@@ -87,7 +91,7 @@ int builtin_export(t_master *master, char **args)
 		ordering_alphabetic(&master->env);
 		PRINT_LIST(master->env);
 	}
-	printf("declare -x\n"); // FIXME: TIENE QUE IMPRIMIR TODAS LAS VV DE ENTORNO EN ORDEN ALFABETICO CON ESA LINEA DELANTE.
+	printf("declare -x "); // FIXME: TIENE QUE IMPRIMIR TODAS LAS VV DE ENTORNO EN ORDEN ALFABETICO CON ESA LINEA DELANTE.
 	while (args[i])
 	{
 		adding_export(master, args, i);

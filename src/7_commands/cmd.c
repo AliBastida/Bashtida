@@ -82,13 +82,15 @@ void ft_take_cmd(t_cmd *new, t_word *words, t_master *master)
 	char *path;
 	char **split;
 
-	if (words->type == 1 || words->type == 2 || words->type == 3 || words->type == 4)
-	{
-		cmd = ft_strdup(words->next->next->word);
-		printf("el next next->word: %s y cmd: %s\n", words->next->next->word, cmd);
-	}
-	else
-		cmd = ft_strdup(words->word);
+	(void)words;
+
+	// if (words->type == 1 || words->type == 2 || words->type == 3 || words->type == 4)
+	// {
+	// 	cmd = ft_strdup(words->next->next->word);
+	// 	printf("el next next->word: %s y cmd: %s\n", words->next->next->word, cmd);
+	// }
+	// else
+	cmd = ft_strdup(new->args[0]);
 	path = ft_strdup(ft_getenv("PATH", master->env, -1));
 	split = ft_split(path, ':');
 	free(path);

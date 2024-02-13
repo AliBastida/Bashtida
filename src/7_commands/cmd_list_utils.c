@@ -35,9 +35,10 @@ t_cmd *create_node_cmd(t_word *words, t_master *master, int n)
 		return (NULL);
 	while (tmp)
 	{
-		printf("Tmp: %s\tType: %d\n", tmp->word, tmp->type);
+		// printf("Tmp: %s\tType: %d\n", tmp->word, tmp->type);
 		if (tmp->type == 1 || tmp->type == 2 || tmp->type == 3 || tmp->type == 4)
 		{
+			// printf("Here\n");
 			// ft_take_cmd(new, words, master);
 			manage_redir(tmp, new);
 			tmp = tmp->next;

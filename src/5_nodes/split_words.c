@@ -76,21 +76,21 @@ char *divided_by_word(t_token *tmp)
 // TODO: HAY QUE CHEQUEAR SI EL N++ SE PUEDE PONER DONDE LO HE PUESTO O DEBE IR ABAJO
 t_word *create_nodeandlist_word(t_master *master, t_token *token)
 {
-	int n;
-	int n_words;
+	// int n;
+	// int n_words;
 	t_word *new_list;
 	t_word *new;
 	t_token *tmp;
 
 	tmp = token;
-	n_words = len_nodes(tmp->content_token);
 	while (tmp)
 	{
-		n = -1;
+		// n = -1;
 		new_list = NULL;
-
-		while (n_words > ++n)
+		// n_words = len_nodes(tmp->content_token);
+		while (tmp->content_token)
 		{
+			// printf("Len words: %d\t-%s-\n", len_nodes(tmp->content_token), tmp->content_token);
 			new = ft_newnode_word(divided_by_word(tmp));
 			if (!new)
 				return (NULL);

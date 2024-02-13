@@ -83,6 +83,12 @@ char *substr_words(t_token *tmp, int start, int i)
 	new = ft_substr(tmp->content_token, start, i - start + 1);
 	rest = ft_substr(tmp->content_token, i + 1, ft_strlen(tmp->content_token));
 	free(tmp->content_token);
-	tmp->content_token = rest;
+	if (!ft_strncmp(rest, "", 1))
+	{
+		free(rest);
+		tmp->content_token = NULL;
+	}
+	else
+		tmp->content_token = rest;
 	return new;
 }

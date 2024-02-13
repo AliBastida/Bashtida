@@ -33,7 +33,10 @@ bool there_is_sth(char *str)
     while (str != NULL)
 	{
 		if (str == str + 1)
+		{
+			printf("Here\n");
 			return (syntax_error(3));
+		}
 		str = str + 1;
 		if (!something_before(str))
 			return (0);
