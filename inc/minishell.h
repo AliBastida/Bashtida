@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/13 16:10:21 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/13 20:34:42 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,9 @@ char *copyvble(char *str, int size);
 int checking_format(char *str);
 t_list *get_envnode_export(t_list *env, char *arg);
 char *ft_strchr_export(char *str, char c);
+
+//******BUILTINS_ECHO******//
+void builtin_echo(char **args);
 
 //===== 7_COMMANDS =====//
 //******CMD******//
