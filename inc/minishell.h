@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/12 16:52:19 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:10:21 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,7 @@ int builtin_unset(t_list **env, char **args);
 
 //******BUILTINS_EXPORT******//
 int builtin_export(t_master *master, char **args);
+int ft_len_dptr(char **arr);
 
 //******BUILTINS_EXPORT_UTILS******//
 int len_hastaeligualymas(char *str);

@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:59:32 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/12 18:56:12 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:55:06 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void adding_export(t_master *master, char **args, int i)
 	if (checking_format(arg) == 0)
 	{
 		arg = ft_strjoin(arg, "=");
-		printf("arg: ---%s----\n", args[i]);
 		if (get_envnode_export(master->env, arg))
 		{
 			aux = get_envnode_export(master->env, arg);
@@ -35,63 +34,72 @@ static void adding_export(t_master *master, char **args, int i)
 			arg = ft_strjoin(arg, ft_strchr_export(args[i], '='));
 			ft_lstadd_back(&master->env, ft_lstnew(ft_strdup(arg)));
 		}
-		PRINT_LIST(master->env);
 	}
 	free(arg);
 }
 
-static void swapping_nodes(t_list **env)
+void static print_export(char **arr)
 {
-	t_list *first;
-	t_list *second;
+	int i;
 
-	first = *env;
-	if (!first || !first->next)
+	i = 0;
+	if (arr == NULL)
 		return;
-	second = first->next;
-	first = second->next;
-	*env = second;
-	// second->next = first;
-	// second = *env;
+	while (arr[i] != NULL)
+	{
+		printf("declare -x %s\n", arr[i]);
+		i++;
+	}
+}
+int ft_len_dptr(char **arr)
+{
+	int i;
+
+	i = -1;
+	while (arr[++i] != NULL)
+		;
+	return (i);
 }
 
-static void ordering_alphabetic(t_list **env)
+static void swapping(char **env, size_t size)
 {
-	// t_list one;
-	t_list *tmp;
+	char *tmp;
+	size_t i;
+	size_t j;
+	size_t j_min;
 
-	// one = *env;
-	tmp = *env;
-	while (tmp && tmp->next)
+	i = -1;
+	while (++i < size - 1)
 	{
-		if (ft_strncmp(tmp->content, tmp->next->content, ft_strlen(tmp->content)) > 0)
+		j_min = i;
+		j = i;
+		while (++j < size)
 		{
-			swapping_nodes(&tmp);
-			tmp = *env;
+			if (env[j_min] && env[j] && ft_strcmp(env[j], env[j_min]) < 0)
+				j_min = j;
 		}
-		else
-			tmp = tmp->next;
+		if (j_min != i)
+		{
+			tmp = env[i];
+			env[i] = env[j_min];
+			env[j_min] = tmp;
+		}
 	}
-	// if (ft_strncmp (env->content, env->next->content) > 0)
-	//	swap(env->content, env->next->content)
-	// env = env->next;
+	print_export(env);
 }
 
 int builtin_export(t_master *master, char **args)
 {
-	// char *arg;
-	// t_list *aux;
 	int i;
-	// int len;
+	char **list_char; // int len;
 
 	i = 1;
-	// aux = master->env;
 	if (!args[i])
 	{
-		ordering_alphabetic(&master->env);
-		PRINT_LIST(master->env);
+		list_char = converting(master->env);
+		swapping(list_char, ft_len_dptr(list_char));
+		free(list_char);
 	}
-	printf("declare -x "); // FIXME: TIENE QUE IMPRIMIR TODAS LAS VV DE ENTORNO EN ORDEN ALFABETICO CON ESA LINEA DELANTE.
 	while (args[i])
 	{
 		adding_export(master, args, i);

@@ -23,7 +23,7 @@ SRC := /src/ft_atoi.c  /src/ft_bzero.c /src/ft_calloc.c /src/ft_hexa.c /src/ft_i
 	/src/ft_putnbr_fd.c /src/ft_putstr_fd.c /src/ft_split.c /src/ft_src.c /src/ft_strchr.c \
 	/src/ft_strdup.c /src/ft_striteri.c /src/ft_strjoin.c /src/ft_strlcat.c /src/ft_strlcpy.c \
 	/src/ft_strlen.c /src/ft_strmapi.c /src/ft_strncmp.c /src/ft_strnstr.c /src/ft_strrchr.c \
-	/src/ft_strtrim.c /src/ft_substr.c /src/ft_tolower.c /src/ft_toupper.c
+	/src/ft_strtrim.c /src/ft_substr.c /src/ft_tolower.c /src/ft_toupper.c /src/ft_strcmp.c
 
 .OBJ := $(addprefix .,$(addsuffix .o,$(notdir $(basename $(SRC)))))
 .DEP := $(addprefix .,$(addsuffix .d, $(basename $(SRC))))

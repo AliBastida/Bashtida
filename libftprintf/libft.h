@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 12:07:27 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/12 17:46:17 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:37:20 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ int		ft_printf(const char *str, ...);
 int		ft_puthexa_low(unsigned long num);
 int		ft_puthexa_upper(unsigned long num);
 int		ft_ptrhexa(unsigned long pointer);
+int ft_strcmp(char *s1, char *s2);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:51:12 by pabastid          #+#    #+#             */
-/*   Updated: 2024/02/09 12:46:34 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:35:36 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void ft_dup_env(t_master *master, const char **env)
 {
 	int i;
 	char *dup;
-	(void)master;
 
 	i = 0;
 	while (env != NULL && env[i])
