@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:52:12 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/13 21:53:39 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:14:26 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int run_builtin(t_master *master, t_cmd *tmp)
 		builtin_unset(&master->env, tmp->args);
 	else if (ft_strncmp(tmp->cmd, "env", 4) == 0)
 		print_env(master->env);
-	/*else if (ft_strncmp(cmd, "exit", 5) == 0)
-		ejecuta funcion exit;*/
+	else if (ft_strncmp(tmp->cmd, "exit", 5) == 0)
+		builtin_exit(tmp->args);
 	return (0);
 }
 

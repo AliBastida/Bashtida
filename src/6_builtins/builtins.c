@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 12:46:52 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/10 15:38:05 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:43:00 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,14 @@ int is_builtin(char *cmd)
 	else if (ft_strncmp(cmd, "exit", 5) == 0)
 		return (1);
 	return (0);
+}
+
+int ft_len_dptr(char **arr)
+{
+	int i;
+
+	i = -1;
+	while (arr[++i] != NULL)
+		;
+	return (i);
 }

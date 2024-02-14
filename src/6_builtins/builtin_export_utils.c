@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:50:02 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/12 17:03:18 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:21:11 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,17 @@ int checking_format(char *str)
 	last_one = ft_strlen(str);
 	while (str[i])
 	{
-		if (ft_isalpha(str[0]) || (i > 0 && (ft_isdigit(str[i]) || ft_isalpha(str[i]) || str[i] == '_' || str[last_one - 1] == '+')))
-			return (0);
-		else
+		if (str[last_one - 1] == '+')
 		{
 			printf("NO esta bien escrito\n"); // TODO: TENEMOS QUE GUARDAR EL ERROR EN LA V_GLOBAL.
-			// guardar el error en algun sitio;
+			return (1);
+		}
+		else if (ft_isalpha(str[0]) || (i > 0 && (ft_isdigit(str[i]) || ft_isalpha(str[i]) || str[i] == '_')))
+			return (0);
+
+		else
+		{
+			printf("NO esta bien escrito\n"); // TODO: TENEMOS QUE GUARDAR EL ERROR EN LA V_GLOBAL
 			return (1);
 		}
 		i++;
@@ -80,7 +85,7 @@ t_list *get_envnode_export(t_list *env, char *arg)
 
 	tmp = env;
 	arg_len = ft_strlen(arg);
-	while (tmp) //&& tmp->next != NULL)
+	while (tmp)
 	{
 		if (ft_strncmp((char *)tmp->content, arg, arg_len) == 0)
 		{
@@ -88,7 +93,7 @@ t_list *get_envnode_export(t_list *env, char *arg)
 		}
 		tmp = tmp->next;
 	}
-	return (NULL); // nos tiene que devolver el nodo de la coincidencia.
+	return (NULL);
 }
 
 // este strchar nos retorna la posicion siguiente del igual para hacer en builtin export un strjoin y asi no duplica el igual.

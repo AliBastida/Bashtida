@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/13 20:34:42 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:24:07 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 #include "../libftprintf/libft.h"
 #include "colors.h"
 #include "struct.h"
+#include <fcntl.h>
+#include <readline/history.h>
+#include <readline/readline.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <stdbool.h>
-#include <fcntl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <unistd.h>
 
 #define PRINT_LIST(list)                                                       \
 	t_list *random_tmp = list;                                                 \
@@ -177,22 +177,18 @@ t_word *create_nodeandlist_word(t_master *master, t_token *token);
 char *divide_if_redir(t_token *node);
 
 //===== 6_BUILTINS =====//
-//******BUILTINS_PWD******//
-int builtin_pwd(void);
-
 //******BUILTINS_CD******//
 int builtin_cd(char *dir);
 
-//******BUILTINS******//
-int is_builtin(char *cmd);
+//******BUILTINS_ECHO******//
+void builtin_echo(char **args);
 
 //******BUILTINS_ENV******//
 void print_env(t_list *env);
 
-//******BUILTINS_UNSET******//
-
-void delete_node(t_list *env);
-int builtin_unset(t_list **env, char **args);
+//******BUILTINS_EXIT******//
+long long int ft_atol(const char *str);
+void builtin_exit(char **args);
 
 //******BUILTINS_EXPORT******//
 int builtin_export(t_master *master, char **args);
@@ -205,8 +201,16 @@ int checking_format(char *str);
 t_list *get_envnode_export(t_list *env, char *arg);
 char *ft_strchr_export(char *str, char c);
 
-//******BUILTINS_ECHO******//
-void builtin_echo(char **args);
+//******BUILTINS_PWD******//
+int builtin_pwd(void);
+
+//******BUILTINS_UNSET******//
+void delete_node(t_list *env);
+int builtin_unset(t_list **env, char **args);
+
+//******BUILTINS******//
+int is_builtin(char *cmd);
+int ft_len_dptr(char **arr);
 
 //===== 7_COMMANDS =====//
 //******CMD******//

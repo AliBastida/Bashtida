@@ -6,15 +6,15 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:38:29 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/08 12:40:34 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:37:15 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool something_before(char *str)
+bool	something_before(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] == ' ')
@@ -24,13 +24,12 @@ bool something_before(char *str)
 	return (1);
 }
 
-bool there_is_sth(char *str)
+bool	there_is_sth(char *str)
 {
-    if(!something_before(str))
-        return (0);
-    str = ft_strchr(str, '|');
-
-    while (str != NULL)
+	if (!something_before(str))
+		return (0);
+	str = ft_strchr(str, '|');
+	while (str != NULL)
 	{
 		if (str == str + 1)
 		{
@@ -40,24 +39,24 @@ bool there_is_sth(char *str)
 		str = str + 1;
 		if (!something_before(str))
 			return (0);
-        str = ft_strchr(str, '|');
+		str = ft_strchr(str, '|');
 	}
 	return (1);
 }
 
-bool something_after(char *str)
+bool	something_after(char *str)
 {
-    int len;
+	int	len;
 
-    len = ft_strlen(str);
-    while (str[len] == ' ')
-        len--;
-    if (str[len] == '|')
-        return (syntax_error(0));
-    return (1);
+	len = ft_strlen(str);
+	while (str[len] == ' ')
+		len--;
+	if (str[len] == '|')
+		return (syntax_error(0));
+	return (1);
 }
 
-bool check_syntax_pipes(char *str)
+bool	check_syntax_pipes(char *str)
 {
 	if (!str)
 		return (0);
@@ -68,4 +67,4 @@ bool check_syntax_pipes(char *str)
 	return (1);
 }
 
-//TODO: tenemos que revisar el caso en el que haya un | seguido de "". Eso deberia dar error tb.
+// TODO: tenemos que revisar el caso en el que haya un | seguido de "". Eso deberia dar error tb.

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abastida <abastida@student.42barcel>       +#+  +:+       +#+         #
+#    By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/20 11:24:34 by abastida          #+#    #+#              #
-#    Updated: 2024/02/13 20:12:43 by abastida         ###   ########.fr        #
+#    Updated: 2024/02/14 18:07:15 by pabastid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC :=  0_main/main.c 0_main/utils.c\
 			4_check_nodes/utils_envp.c 5_nodes/split_words.c \
 			6_builtins/builtin_env.c 6_builtins/builtins.c 6_builtins/builtin_cd.c \
 			6_builtins/builtin_pwd.c 6_builtins/builtin_unset.c  6_builtins/builtin_echo.c\
-			6_builtins/builtin_export.c 6_builtins/builtin_export_utils.c \
+			6_builtins/builtin_export.c 6_builtins/builtin_export_utils.c 6_builtins/builtin_exit.c \
 			7_commands/cmd.c 7_commands/cmd_list_utils.c 7_commands/cmd_utils.c \
 			8_redir/redir.c 8_redir/redir_utils.c 8_redir/input.c \
 			8_redir/output.c 8_redir/redir_heredoc.c 8_redir/redir_append_mode.c \
