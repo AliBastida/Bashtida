@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 20:13:00 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/13 21:56:21 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:47:50 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 // TRUE SI HAY N
 // FALSE NO HAY N
-static bool finding_n(char *arg)
+static bool	finding_n(char *arg)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (arg[0] == '-' && arg[1] == 'n')
@@ -26,20 +26,19 @@ static bool finding_n(char *arg)
 			while (arg[i] == 'n' && arg[i])
 				i++;
 			if (arg[i] == '\0')
-				return true;
+				return (true);
 		}
 	}
-	return false;
+	return (false);
 }
 
-int builtin_echo(char **args)
+int	builtin_echo(char **args)
 {
-	int i;
-	bool found_n;
+	int		i;
+	bool	found_n;
 
 	i = 1;
 	found_n = true;
-
 	if (!args[i])
 		printf("\n");
 	while (args[i] && finding_n(args[i]) == true)

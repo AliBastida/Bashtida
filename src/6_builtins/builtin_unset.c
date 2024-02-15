@@ -3,21 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:17:07 by pabastid          #+#    #+#             */
-/*   Updated: 2024/02/12 13:47:21 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/15 18:03:32 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /* Esta funcion get_envnode recibe la lista donde tenemos env,
-	la lista que contiene los args y que junto con el "=" sera lo que meteremos en vble y es lo que usaremos para comparar. Nos devuelve el nodo anterior a la coincidencia y si no lo encuentra devuelve NULL*/
-static t_list *get_envnode_unset(t_list **env, char *arg)
+	la lista que contiene los args y que junto con el "="
+	sera lo que meteremos en vble y es lo que usaremos para comparar.
+	Nos devuelve el nodo anterior a la coincidencia y si no lo encuentra devuelve NULL*/
+/* Nos tiene que devolver el anterior a la coincidencia,
+	con lo que el rdo de la coincidencia sera tmp->next y el anterior sera tmp que es lo que devuelve si encuentra;*/
+static t_list	*get_envnode_unset(t_list **env, char *arg)
 {
-	int arg_len;
-	t_list *tmp;
+	int		arg_len;
+	t_list	*tmp;
 
 	tmp = *env;
 	arg_len = ft_strlen(arg);
@@ -29,12 +33,13 @@ static t_list *get_envnode_unset(t_list **env, char *arg)
 		}
 		tmp = tmp->next;
 	}
-	return (NULL); // nos tiene que devolver el anterior a la coincidencia, con lo que el rdo de la coincidencia sera tmp->next y el anterior sera tmp que es lo que devuelve si encuentra;
+	return (NULL);
 }
+
 // esta borra el nodo siguiente al que te pasan (la coincidencia)
-void delete_node(t_list *env)
+void	delete_node(t_list *env)
 {
-	t_list *aux;
+	t_list	*aux;
 
 	if (env)
 	{
@@ -44,12 +49,12 @@ void delete_node(t_list *env)
 	}
 }
 
-int builtin_unset(t_list **env, char **args)
 // recibe el **env el array de args que van detras <UNSET hola holaaaa ciao pescao>
+int	builtin_unset(t_list **env, char **args)
 {
-	int i;
-	char *arg;
-	t_list *aux;
+	int		i;
+	char	*arg;
+	t_list	*aux;
 
 	i = 1;
 	while (args[i]) // mientras haya argumentos que borrar;

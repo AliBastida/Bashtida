@@ -6,15 +6,15 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:50:02 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/14 14:21:11 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:52:36 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int len_hastaeligualymas(char *str)
+int	len_hastaeligualymas(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -26,15 +26,14 @@ int len_hastaeligualymas(char *str)
 	return (i);
 }
 
-char *copyvble(char *str, int size)
+char	*copyvble(char *str, int size)
 {
-	int i;
-	char *copy;
+	int		i;
+	char	*copy;
 
 	copy = ft_calloc(size + 1, sizeof(char));
 	if (!copy)
 		return (NULL);
-
 	i = 0;
 	while ((str[i] && str[i] != '=') && (i <= size))
 	{
@@ -51,10 +50,10 @@ char *copyvble(char *str, int size)
 	return (copy);
 }
 
-int checking_format(char *str)
+int	checking_format(char *str)
 {
-	int i;
-	size_t last_one;
+	int		i;
+	size_t	last_one;
 
 	i = 0;
 	last_one = ft_strlen(str);
@@ -62,15 +61,17 @@ int checking_format(char *str)
 	{
 		if (str[last_one - 1] == '+')
 		{
-			printf("NO esta bien escrito\n"); // TODO: TENEMOS QUE GUARDAR EL ERROR EN LA V_GLOBAL.
+			printf("NO esta bien escrito\n");
+				// TODO: TENEMOS QUE GUARDAR EL ERROR EN LA V_GLOBAL.
 			return (1);
 		}
-		else if (ft_isalpha(str[0]) || (i > 0 && (ft_isdigit(str[i]) || ft_isalpha(str[i]) || str[i] == '_')))
+		else if (ft_isalpha(str[0]) || (i > 0 && (ft_isdigit(str[i])
+					|| ft_isalpha(str[i]) || str[i] == '_')))
 			return (0);
-
 		else
 		{
-			printf("NO esta bien escrito\n"); // TODO: TENEMOS QUE GUARDAR EL ERROR EN LA V_GLOBAL
+			printf("NO esta bien escrito\n");
+				// TODO: TENEMOS QUE GUARDAR EL ERROR EN LA V_GLOBAL
 			return (1);
 		}
 		i++;
@@ -78,10 +79,10 @@ int checking_format(char *str)
 	return (0);
 }
 
-t_list *get_envnode_export(t_list *env, char *arg)
+t_list	*get_envnode_export(t_list *env, char *arg)
 {
-	int arg_len;
-	t_list *tmp;
+	int		arg_len;
+	t_list	*tmp;
 
 	tmp = env;
 	arg_len = ft_strlen(arg);
@@ -97,7 +98,7 @@ t_list *get_envnode_export(t_list *env, char *arg)
 }
 
 // este strchar nos retorna la posicion siguiente del igual para hacer en builtin export un strjoin y asi no duplica el igual.
-char *ft_strchr_export(char *str, char c)
+char	*ft_strchr_export(char *str, char c)
 {
 	while (*str != '\0')
 	{

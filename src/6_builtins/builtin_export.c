@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:59:32 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/15 08:56:20 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:58:30 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void adding_export_continue(t_master *master, char **args, int i)
+static void	adding_export_continue(t_master *master, char **args, int i)
 {
-	char *arg;
-	t_list *aux;
-	int len;
+	char	*arg;
+	t_list	*aux;
+	int		len;
 
 	aux = master->env;
 	len = len_hastaeligualymas(args[i]);
@@ -26,43 +26,45 @@ static void adding_export_continue(t_master *master, char **args, int i)
 	if (get_envnode_export(master->env, arg))
 	{
 		aux = get_envnode_export(master->env, arg);
-		aux->content = ft_strdup(ft_strjoin(arg, ft_strchr_export(args[i], '=')));
+		aux->content = ft_strdup(ft_strjoin(arg, ft_strchr_export(args[i],
+						'=')));
 	}
-		else
-		{
-			arg = ft_strjoin(arg, ft_strchr_export(args[i], '='));
-			ft_lstadd_back(&master->env, ft_lstnew(ft_strdup(arg)));
-		}
-		free(arg);
+	else
+	{
+		arg = ft_strjoin(arg, ft_strchr_export(args[i], '='));
+		ft_lstadd_back(&master->env, ft_lstnew(ft_strdup(arg)));
+	}
+	free(arg);
 }
 
-// esta funcion hace trabajar realmente export: trabaja en el caso concreto de que nos den la vble con =, sin =, con el +=
-// y si la vble la encuentra en el env la sustituimos por el nuevo valor con strdup si es nueva, la anade al final
-static void adding_export(t_master *master, char **args, int i)
+/* esta funcion hace trabajar realmente export: trabaja en el caso concreto de que nos den la vble con =,sin =,con el
+	+= y si la vble la encuentra en el env la sustituimos por el nuevo valor con strdup si es nueva,
+la anade al final */
+static void	adding_export(t_master *master, char **args, int i)
 {
-	char *arg;
-	int len;
+	char	*arg;
+	int		len;
 
 	len = len_hastaeligualymas(args[i]);
-	if (args[i][len] && (checking_format(args[i]) == 0) && ((args[i][len + 1] == '\0' || args[i][len + 2] == '\0')))
+	if (args[i][len] && (checking_format(args[i]) == 0) && ((args[i][len
+				+ 1] == '\0' || args[i][len + 2] == '\0')))
 	{
 		arg = copyvble(args[i], len);
 		arg = ft_strdup(ft_strjoin(arg, "=\"\""));
 		ft_lstadd_back(&master->env, ft_lstnew(ft_strdup(arg)));
 		free(arg);
 	}
-
 	else
 		adding_export_continue(master, args, i);
 }
 
-void static print_export(char **arr)
+void static	print_export(char **arr)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (arr == NULL)
-		return;
+		return ;
 	while (arr[i] != NULL)
 	{
 		printf("declare -x %s\n", arr[i]);
@@ -70,12 +72,12 @@ void static print_export(char **arr)
 	}
 }
 
-static void swapping(char **env, size_t size)
+static void	swapping(char **env, size_t size)
 {
-	char *tmp;
-	size_t i;
-	size_t j;
-	size_t j_min;
+	char	*tmp;
+	size_t	i;
+	size_t	j;
+	size_t	j_min;
 
 	i = -1;
 	while (++i < size - 1)
@@ -97,10 +99,10 @@ static void swapping(char **env, size_t size)
 	print_export(env);
 }
 
-int builtin_export(t_master *master, char **args)
+int	builtin_export(t_master *master, char **args)
 {
-	int i;
-	char **list_char; // int len;
+	int		i;
+	char	**list_char;
 
 	i = 1;
 	if (!args[i])
