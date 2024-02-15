@@ -73,11 +73,8 @@ int builtin_exit(char **args)
 {
 	if (!args[1])
 	{
-		if (isatty(STDIN_FILENO))
-		{
-			write(2, "exit\n", 6);
-			exit(0);
-		}
+		write(2, "exit\n", 5);
+		exit(0);
 	}
 	if (args[1] || args[2])
 	{
@@ -86,7 +83,10 @@ int builtin_exit(char **args)
 		else if (!args[2])
 			exit_valid_arguments(args[1]);
 		else if (args[2])
+		{
 			printf("bashtida: exit: too many arguments\n");
+			return (1);
+		}
 		exit(0);
 		// too many arguments
 		// funcion exit_error (args[i], long long int *value, int mode) -> funccioon que gestionara con el atol = value
