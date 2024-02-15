@@ -19,7 +19,10 @@ int read_line(t_master *master)
 	i = 0;
 	master->line = readline(BBLU "Bashtida: " RESET);
 	if (!master->line)
+	{
+		write(2, "exit\n", 5);
 		exit(1);
+	}
 	if (master->line[0] == ' ')
 	{
 		while (master->line[i] == ' ')

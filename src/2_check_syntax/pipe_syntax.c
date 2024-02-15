@@ -14,7 +14,7 @@
 
 // TODO: HABLAR SOBRE ESTAS FUNCIONES!!!
 
-bool	something_before(char *str)
+static bool something_before(char *str)
 {
 	int	i;
 
@@ -26,16 +26,15 @@ bool	something_before(char *str)
 	return (0);
 }
 
-bool	there_is_sth(char *str)
+static bool there_is_sth(char *str)
 {
 	if (something_before(str))
 		return (1);
 	str = ft_strchr(str, '|');
 	while (str != NULL)
 	{
-		// if (str == str + 1)
 		if (*str == *(str + 1))
-			return (syntax_error(3));
+			return (1);
 		str = str + 1;
 		if (something_before(str))
 			return (1);
@@ -44,19 +43,15 @@ bool	there_is_sth(char *str)
 	return (0);
 }
 
-// NO FUNCIONA NUNCA
-bool	something_after(char *str)
+static bool something_after(char *str)
 {
 	int	len;
 
-	len = ft_strlen(str);
-	printf("Something after: %d -> -%c-\n", len, str[len - 1]);
-	// while (str[len] == ' ')
-	len -= 1;
+	len = ft_strlen(str) - 1;
 	while (str[len] == ' ')
 		len--;
 	if (str[len] == '|')
-		return (syntax_error(3));
+		return (1);
 	return (0);
 }
 

@@ -12,6 +12,15 @@
 
 #include "minishell.h"
 
+void set_term(void)
+{
+	struct termios term;
+
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+}
+
 static void handle_signals(int sig)
 {
 	if (sig == SIGQUIT)
@@ -26,15 +35,6 @@ static void handle_signals(int sig)
 		rl_on_new_line();
 		rl_redisplay();
 	}
-}
-
-void set_term(void)
-{
-	struct termios term;
-
-	tcgetattr(STDIN_FILENO, &term);
-	term.c_lflag &= ~ECHOCTL;
-	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
 
 static void handle_signals_heredoc(int sig)

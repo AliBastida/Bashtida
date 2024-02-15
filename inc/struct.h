@@ -91,8 +91,7 @@ typedef struct s_master
 	int n_cmds;
 	char *line;
 	char *clean_line;
-	_Bool status;
-
+	// _Bool status;
 	t_cmd *cmds;
 	t_token *node;
 	t_list *env;

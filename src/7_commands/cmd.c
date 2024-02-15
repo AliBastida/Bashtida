@@ -28,7 +28,6 @@ char *check_full_path(char **new_path, char **cmd, int *ok)
 	{
 		if (!*ok)
 			*ok = 3;
-		//		printf("%s", g_error_array[*ok - 1]);
 		free(*new_path);
 		return (*cmd);
 	}

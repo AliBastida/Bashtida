@@ -99,33 +99,23 @@ void ft_free_double(char **str);
 // int     main(int ac, char **av);
 
 //******UTILS******//
-int syntax_error(int n);
+// int syntax_error(int n);
 void ft_free_single(char *str);
 bool is_space(unsigned char c);
 void *free_all(t_master *line);
 void ft_free_double(char **str);
 void exit_error(char *str);
-int return_error(char *str, int out);
+int syntax_error(char *str, char c, int out);
 
 //===== 1_READLINE =====//
 int read_line(t_master *master);
 
 //===== 2_CHECK_SYNTAX =====//
 //******PIPE_SYNTAX******//
-bool something_before(char *str);
-bool there_is_sth(char *str);
-bool something_after(char *str);
 bool check_syntax_pipes(char *str);
 
 //******QUOTES_SYNTAX******//
-bool paired_quotes(char *line);
-char *clean_line(char *line, t_master *master);
-
-//******REDIR_SYNTAX******//
-int check_redir_1(char *str);
-int check_redir_2(char *str);
-int error_redir(char *str);
-int redir(char *str);
+void clean_line(char *line, t_master *master);
 
 //******UTILS_SYNTAX******//
 int checking_syntax(char *str);

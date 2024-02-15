@@ -14,25 +14,88 @@
 
 /* Esta es la funcion en la que si todos los chequeos de sintaxis estan ok > devuelve la linea sin comillas*/
 
+// Function that checks if all quotes are closed Returns 0 if not closed;
+static bool paired_quotes(char *line)
+{
+	int i;
+	int j;
+	bool status;
+
+	i = 0;
+	j = -1;
+	status = 0;
+	while (line[i])
+	{
+		if (j < 0 && (line[i] == '\'' || line[i] == '\"'))
+		{
+			j = i;
+			status = 1;
+		}
+		else if (j >= 0 && line[i] == line[j])
+		{
+			j = -1;
+			status = 0;
+		}
+		i++;
+	}
+	return (status);
+}
+
+static int redir(char *str)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == '>' || str[i] == '<')
+		{
+			j = i + 1;
+			if (str[i] == str[j])
+				j++;
+			while (str[j] && str[j] != '<' && str[j] != '>' && str[j] != '|')
+				j++;
+			if (str[j] == '\0')
+				return (1);
+			else if (str[j] == '|')
+				return (2);
+			else if (str[j] == '<' || str[j] == '>')
+				return (str[j]);
+			i = j;
+		}
+		i++;
+	}
+	return (0);
+}
+
 int checking_syntax(char *str)
 {
+	int res;
+
 	if (paired_quotes(str))
-	{
-		return (return_error("SyntaxError_PairedQuotes\n", 1));
-		// printf("SyntaxError_PairedQuotes\n");
-		// return 0;
-	}
+		return (syntax_error("Syntax Error: quotes not closed\n", 0, 1));
 	else if (check_syntax_pipes(str))
-	{
-		return (return_error("SyntaxError\n", 1));
-		// printf("SyntaxError\n");
-		// return 0;
-	}
-	else if (redir(str))
-	{
-		return (return_error("SyntaxError_redir\n", 1));
-		// printf("SyntaxError_redir\n");
-		// return 0;
-	}
+		return (syntax_error("Bashtida: syntax error near "
+							 "unexpected token `|'\n",
+							 0,
+							 1));
+	res = redir(str);
+	if (res == 1)
+		return (syntax_error("Bashtida: syntax error near "
+							 "unexpected token `newline'\n",
+							 0,
+							 1));
+	else if (res == 2)
+		return (syntax_error("Bashtida: syntax error near "
+							 "unexpected token `|'\n",
+							 0,
+							 1));
+	else if (res > 2)
+		return (syntax_error("Bashtida: syntax error near "
+							 "unexpected token `",
+							 res,
+							 1));
 	return (0);
 }

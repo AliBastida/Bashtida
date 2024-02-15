@@ -18,20 +18,17 @@ void exit_error(char *str)
 	exit(1);
 }
 
-int return_error(char *str, int out)
+int syntax_error(char *str, char c, int out)
 {
 	ft_putstr_fd(str, 2);
+	if (c > 0)
+	{
+		ft_putchar_fd(c, 2);
+		ft_putchar_fd('\'', 2);
+		ft_putchar_fd('\n', 2);
+	}
+	g_err = 2;
 	return (out);
-}
-
-int syntax_error(int n)
-{
-    if (n == 3)
-        ft_putstr_fd("Syntax Error\n", 2);
-    else if (n == 0)
-        ft_putstr_fd("Syntax Error\n", 2);
-
-    return (n);
 }
 
 void ft_free_single(char *str)

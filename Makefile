@@ -16,7 +16,7 @@ CFLAGS := -Wall -Werror -Wextra -g -MMD -fsanitize='address,undefined'
 SRC :=  0_main/main.c 0_main/utils.c\
 			1_readline/read_line.c\
 			2_check_syntax/quotes_syntax.c 2_check_syntax/pipe_syntax.c \
-			2_check_syntax/redir_syntax.c 2_check_syntax/utils_syntax.c \
+			2_check_syntax/utils_syntax.c \
 			3_split_per_pipes/general_split.c 3_split_per_pipes/list_pipes.c \
 			3_split_per_pipes/list_utils.c 3_split_per_pipes/split_utils.c  \
 			4_check_nodes/found_dollar.c 4_check_nodes/utils_nodes.c \

@@ -67,24 +67,22 @@ int ft_copy_line(char **line, char *str)
 
 char **line_divided_in_tokens(char *str)
 {
-    char **line_divided;
-    int j;
-    int position;
-    int n_box;
+	int j;
+	int n_box;
+	int position;
+	char **line_divided;
 
-    n_box = how_many_pipes(str) + 1;
-    line_divided = ft_calloc(sizeof(char *), n_box + 1);
-    if(!line_divided)
-        return(NULL);
-    j = 0;
-    position = 0;
-    while (n_box > j)
+	j = 0;
+	position = 0;
+	n_box = how_many_pipes(str) + 1;
+	line_divided = ft_calloc(sizeof(char *), n_box + 1);
+	if (!line_divided)
+		return (NULL);
+	while (n_box > j)
 	{
 		position += ft_copy_line(&line_divided[j], str + position);
-		// printf("line divided: =====%s======\n", line_divided[j]);
 		j++;
 	}
 	line_divided[j] = NULL;
 	return (line_divided);
 }
-
