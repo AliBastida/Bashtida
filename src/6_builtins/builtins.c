@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 12:46:52 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/15 18:00:00 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/15 18:09:37 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// Esta funcion la llamamos en checking path y solo nos comprueba si es un builtin.
-int is_builtin(char *cmd)
+int	is_builtin(char *cmd)
 {
-
 	if (ft_strncmp(cmd, "echo", 5) == 0)
 		return (1);
 	else if (ft_strncmp(cmd, "pwd", 4) == 0)
@@ -33,9 +31,9 @@ int is_builtin(char *cmd)
 	return (0);
 }
 
-int ft_len_dptr(char **arr)
+int	ft_len_dptr(char **arr)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (arr[++i] != NULL)
