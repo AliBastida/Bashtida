@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/14 18:24:07 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/15 09:31:09 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <limits.h>
 
 #define PRINT_LIST(list)                                                       \
 	t_list *random_tmp = list;                                                 \
@@ -187,7 +188,7 @@ void builtin_echo(char **args);
 void print_env(t_list *env);
 
 //******BUILTINS_EXIT******//
-long long int ft_atol(const char *str);
+long long int ft_atol(char *str);
 void builtin_exit(char **args);
 
 //******BUILTINS_EXPORT******//

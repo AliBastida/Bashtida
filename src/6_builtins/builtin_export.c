@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:59:32 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/14 14:43:31 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/15 08:56:20 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ static void adding_export_continue(t_master *master, char **args, int i)
 static void adding_export(t_master *master, char **args, int i)
 {
 	char *arg;
-	t_list *aux;
 	int len;
 
-	aux = master->env;
 	len = len_hastaeligualymas(args[i]);
 	if (args[i][len] && (checking_format(args[i]) == 0) && ((args[i][len + 1] == '\0' || args[i][len + 2] == '\0')))
 	{
