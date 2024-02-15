@@ -6,19 +6,12 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:56:31 by pabastid          #+#    #+#             */
-/*   Updated: 2024/02/15 18:07:22 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/15 18:16:02 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// hacer funcion que reciba el valor y printea el error: ***no entiendo xq reccibe char *str como args[i]
-
-// hacer una funcion que chequea si args[i] es numero valido:
-// * ft_isdigit
-// * atoi
-// * max y min
-// 0 - 255
 long long int	ft_atol(char *str)
 {
 	int				sign;
@@ -61,6 +54,7 @@ static int	checking_numbers(char *str)
 	}
 	return (1);
 }
+
 static void	exit_valid_arguments(char *str)
 {
 	long long int	valid_num;
@@ -70,6 +64,7 @@ static void	exit_valid_arguments(char *str)
 	printf("exit\n");
 	exit(valid_num);
 }
+
 int	builtin_exit(char **args)
 {
 	if (!args[1])
@@ -81,11 +76,11 @@ int	builtin_exit(char **args)
 	{
 		if (checking_numbers(args[1]) == 1)
 		{
+			printf("bashtida: exit: %s: numeric argument required\n", args[1]);
 		}
 		//--> comprueba si el primer argumento es solo numero, si es,
 		// pasa al siguiente if y comprueba que no haya mas de un argumento,
-		// por lo que entra y gestiona argumentos validos.printf("bashtida: exit:
-		//	%s: numeric argument required\n", args[1]);
+		// por lo que entra y gestiona argumentos validos.
 		else if (!args[2])
 			exit_valid_arguments(args[1]);
 		else if (args[2])
@@ -94,9 +89,6 @@ int	builtin_exit(char **args)
 			return (1);
 		}
 		exit(0);
-		// too many arguments
-		// funcion exit_error (args[i], long long int *value, int mode)
-		//->funccioon que gestionara con el atol = value
 	}
 	return (0);
 }
