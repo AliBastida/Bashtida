@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/14 18:24:07 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/15 10:29:11 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <signal.h>
+#include <termios.h>
 #include <unistd.h>
 #include <limits.h>
 
@@ -93,6 +95,7 @@
 
 //=====0_MAIN =====//
 int main(int ac, char **av, const char **env);
+void ft_free_double(char **str);
 // int     main(int ac, char **av);
 
 //******UTILS******//
@@ -191,7 +194,7 @@ int builtin_echo(char **args);
 int print_env(t_list *env);
 
 //******BUILTINS_EXIT******//
-long long int ft_atol(const char *str);
+long long int ft_atol(char *str);
 int builtin_exit(char **args);
 
 //******BUILTINS_EXPORT******//
@@ -261,5 +264,9 @@ int check_cmd_and_pipes(t_cmd **cmd, t_pipes *pipes);
 void close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes);
 int run_builtin(t_master *master, t_cmd *tmp);
 pid_t one_cmd(t_master *master, t_cmd *tmp, t_pipes pipes);
+
+//===== 10_SIGNALS =====//
+void set_term(void);
+void init_signal(int mode, t_master *all);
 
 #endif

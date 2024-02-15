@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:31:30 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/09 12:12:16 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/15 10:27:22 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,6 @@ int syntax_error(int n)
         ft_putstr_fd("Syntax Error\n", 2);
 
     return (n);
-}
-
-void ft_free_double(char **str)
-{
-    int i;
-
-    i = 0;
-    if (str == NULL)
-        return ;
-    while (str[i])
-    {
-        if (str[i])
-			free(str[i]);
-		i++;
-	}
-	free(str);
 }
 
 void ft_free_single(char *str)
