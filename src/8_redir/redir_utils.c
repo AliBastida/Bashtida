@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 08:04:03 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/09 12:39:55 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:36:59 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,14 @@
 char *filename_path(char *name)
 {
 	char work_dir[256];
-	char *filename = NULL;
+	char *filename;
 
+	filename = NULL;
 	getcwd(work_dir, sizeof(work_dir));
 	filename = ft_strjoin(work_dir, "/");
 	filename = ft_strjoin(filename, name);
 	return (filename);
 }
-
-// char **take_path(t_master *path)
-// {
-// 	char **split;
-
-// 	split = ft_split(get_path(path), ':');
-// 	return (split);
-// }
 
 int ft_access(char *filename, int mod)
 {
@@ -50,6 +43,15 @@ int ft_access(char *filename, int mod)
 	}
 	return (FILE_NOT_FOUND);
 }
-// el primer if lo que hace es chequear que mod es cero y si el archivo se puede leer, o si el mod es 1(output) y se puede escribir, o si mod es 2 y es ejecutable (es cmd), retorna 0.
-// el resto de los if gestionar errores. El primer if de errores, si mod es 0 o 1 y el archivo existe, puede ser que no se pueda leer o que no se pueda escribir.
-// Si es un cmd (mod = 2) si el archivo existe puede que no sea ejecutable, si no, puede ser que no sea ejecutable. Y por ultimo, el ultimo error puede ser que el archivo no exista.
+/*// el primer if lo que hace es chequear que mod es cero y si el archivo se puede leer,
+o si el mod es 1(output)y se puede escribir,
+	o si mod es 2 y es ejecutable(es cmd),
+	retorna 0.
+	// el resto de los if gestionar errores. El primer if de errores,
+	si mod es 0 o 1 y el archivo existe,
+	puede ser que no se pueda leer o que no se pueda escribir.
+	// Si es un cmd (mod = 2) si el archivo existe puede que no sea ejecutable,
+	si no,
+	puede ser que no sea ejecutable.Y por ultimo,
+		el ultimo error puede ser que el archivo no exista.
+*/

@@ -6,13 +6,13 @@
 #    By: abastida <abastida@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/20 11:24:34 by abastida          #+#    #+#              #
-#    Updated: 2024/02/15 10:05:55 by abastida         ###   ########.fr        #
+#    Updated: 2024/02/15 17:57:46 by abastida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := minishell
 CC := gcc
-CFLAGS := -Wall -Werror -Wextra -g -MMD -fsanitize='address,undefined'
+CFLAGS := -Wall -Werror -Wextra -g -MMD -fsanitize='address,undefined' -DREADLINE_LIBRARY
 SRC :=  0_main/main.c 0_main/utils.c\
 			1_readline/read_line.c\
 			2_check_syntax/quotes_syntax.c 2_check_syntax/pipe_syntax.c \
@@ -28,7 +28,8 @@ SRC :=  0_main/main.c 0_main/utils.c\
 			8_redir/redir.c 8_redir/redir_utils.c 8_redir/input.c \
 			8_redir/output.c 8_redir/redir_heredoc.c 8_redir/redir_append_mode.c \
 			9_execute/execve.c 9_execute/run_heredoc.c 9_execute/pipes.c \
-			9_execute/execute_cmds.c 10_signals/signals.c
+			9_execute/execute_cmds.c \
+			10_signals/signals.c
 
 SRC_DIR := src/
 BUILD_DIR := build/
@@ -36,8 +37,9 @@ OBJ := $(addprefix $(BUILD_DIR), $(SRC:.c=.o))
 DEP := $(addprefix $(BUILD_DIR), $(SRC:.c=.d))
 LIBS := libftprintf/libftprint.a
 LIBPATH := -L libftprintf -lftprintf
-HEADER := inc/
-INCLUDE := -I $(HEADER)
+LIBREAD := -L readline -lreadline -lncurses
+HEADER := inc/ readline/
+INCLUDE := $(addprefix -I , $(HEADER))
 RM := rm -rf
 
 ###################
@@ -67,7 +69,7 @@ $(LIBS):
 
 -include $(DEP)
 $(NAME): $(LIBS) $(OBJ) Makefile
-	@$(CC) $(CFLAGS) $(LIBPATH) $(OBJ) -o $(NAME) -lreadline
+	@$(CC) $(CFLAGS) $(LIBPATH) $(LIBREAD) $(OBJ) -o $(NAME)
 	@echo "$(COLOR_BOLD)$(COLOR_GREEN)=== 🤩 Minishell compiled 🤩 === $(COLOR_RESET)"
 
 clean:

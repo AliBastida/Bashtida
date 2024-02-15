@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/15 10:29:11 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:52:14 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 #include "colors.h"
 #include "struct.h"
 #include <fcntl.h>
-#include <readline/history.h>
-#include <readline/readline.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "readline.h"
+#include "history.h"
+#include <stdbool.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
@@ -256,7 +256,10 @@ int run_builtin(t_master *master, t_cmd *tmp);
 pid_t one_cmd(t_master *master, t_cmd *tmp, t_pipes pipes);
 
 //===== 10_SIGNALS =====//
-void set_term(void);
-void init_signal(int mode, t_master *all);
+void set_signals(int mode);
+void ign_signal(int signal);
+void heredoc_handler(int sig);
+void interact_handler(int sig);
+void norm_handler(int sig);
 
 #endif

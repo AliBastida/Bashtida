@@ -6,15 +6,15 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:46:43 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/04 17:47:41 by vduchi           ###   ########.fr       */
+/*   Updated: 2024/02/15 16:44:09 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void redir_heredoc(t_word *redir, t_cmd *cmd)
+void	redir_heredoc(t_word *redir, t_cmd *cmd)
 {
-	t_heredoc *hd;
+	t_heredoc	*hd;
 
 	hd = ft_calloc(sizeof(t_heredoc), 1);
 	hd->word = ft_strdup(redir->next->word);

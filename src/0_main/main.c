@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/15 10:37:35 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:45:53 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,20 @@ void ft_free_double(char **str)
 
 static void minishell_magic(t_master *master)
 {
-	if (line_divided_in_tokens(master->line) == NULL || (!create_nodeandlist(master, master->line)) || !create_nodeandlist_word(master, master->node) || !execute_cmds(master))
+	if ((!create_nodeandlist(master, master->line)) || !create_nodeandlist_word(master, master->node) || !execute_cmds(master))
 	{
 		// TODO hacer control, cambiar los mallloc por Calloc.
 		free_all(master);
 		exit(1);
 	}
-	// return (0) // todo ha ido bien;
+	// return ((0) // todo ha ido bien);
 }
 
 static void minishell_starts(t_master *master)
 {
 	while (1)
 	{
-		set_term();
-		init_signal(0, master);
+		set_signals(0);
 		if (read_line(master) == 1)
 			continue;
 		add_history(master->line);
@@ -60,12 +59,12 @@ static void minishell_starts(t_master *master)
 
 int main(int ac, char **av, const char **env)
 {
-	(void)av;
+	t_master *master;
 
+	(void)av;
 	if (ac > 1)
 		exit_error("Minishell doesn't require any argument\n!");
 	g_err = 0;
-	t_master *master;
 	master = ft_calloc(1, sizeof(t_master));
 	ft_dup_env(master, env);
 	minishell_starts(master);
