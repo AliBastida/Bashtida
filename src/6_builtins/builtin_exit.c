@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:56:31 by pabastid          #+#    #+#             */
-/*   Updated: 2024/02/15 18:16:02 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/15 18:33:01 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,6 @@ int	builtin_exit(char **args)
 		{
 			printf("bashtida: exit: %s: numeric argument required\n", args[1]);
 		}
-		//--> comprueba si el primer argumento es solo numero, si es,
-		// pasa al siguiente if y comprueba que no haya mas de un argumento,
-		// por lo que entra y gestiona argumentos validos.
 		else if (!args[2])
 			exit_valid_arguments(args[1]);
 		else if (args[2])
