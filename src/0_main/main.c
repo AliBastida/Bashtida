@@ -6,13 +6,22 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/15 17:45:53 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/15 18:52:38 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 unsigned char g_err = 0;
+
+void set_term(void)
+{
+	struct termios term;
+
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+}
 
 void ft_free_double(char **str)
 {
@@ -65,6 +74,7 @@ int main(int ac, char **av, const char **env)
 	if (ac > 1)
 		exit_error("Minishell doesn't require any argument\n!");
 	g_err = 0;
+	set_term();
 	master = ft_calloc(1, sizeof(t_master));
 	ft_dup_env(master, env);
 	minishell_starts(master);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:27:43 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/07 10:27:46 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/15 18:56:07 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ int check_cmd_and_pipes(t_cmd **cmd, t_pipes *pipes)
 		close(pipes->p[0]);
 		close(pipes->p[1]);
 		pipe(pipes->p);
+	}
+	if (!(*cmd)->cmd)
+	{
+		(*cmd) = (*cmd)->next;
+		return (1);
 	}
 	if ((*cmd)->ok) // Aqui miramos si el comando está bien o hay un error
 	{

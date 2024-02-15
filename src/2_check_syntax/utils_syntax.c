@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:32:26 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/09 12:16:30 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/15 19:07:34 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,16 @@ static int redir(char *str)
 	int i;
 	int j;
 
-	i = 0;
+	i = -1;
 	j = 0;
-	while (str[i])
+	while (str[++i])
 	{
 		if (str[i] == '>' || str[i] == '<')
 		{
 			j = i + 1;
 			if (str[i] == str[j])
 				j++;
-			while (str[j] && str[j] != '<' && str[j] != '>' && str[j] != '|')
+			while (str[j] && str[j] == ' ')
 				j++;
 			if (str[j] == '\0')
 				return (1);
@@ -65,7 +65,6 @@ static int redir(char *str)
 				return (str[j]);
 			i = j;
 		}
-		i++;
 	}
 	return (0);
 }
