@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_words.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
+/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:35:41 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/11 08:25:57 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/15 18:27:53 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ t_word	*ft_newnode_word(void *content)
 	if (!new)
 		return (NULL);
 	new->word = content;
-	new -> next = NULL;
+	new->next = NULL;
 	return (new);
 }
 
-char *divided_by_word(t_token *tmp)
+char	*divided_by_word(t_token *tmp)
 {
-	int i;
-	int start;
-	int ret;
+	int	i;
+	int	start;
+	int	ret;
 
 	i = 0;
 	while (tmp->content_token[i] == ' ')
@@ -67,45 +67,42 @@ char *divided_by_word(t_token *tmp)
 	{
 		if (tmp->content_token[i] == '\'' || tmp->content_token[i] == '\"')
 			i = next_quote(tmp->content_token, i + 1, tmp->content_token[i]);
-		if (ret || (!is_space(tmp->content_token[i]) && (is_space(tmp->content_token[i + 1]) || is_redir(tmp->content_token, i + 1) || tmp->content_token[i + 1] == '\0')))
+		if (ret || (!is_space(tmp->content_token[i])
+				&& (is_space(tmp->content_token[i + 1])
+					|| is_redir(tmp->content_token, i + 1)
+					|| tmp->content_token[i + 1] == '\0')))
 			return (substr_words(tmp, start, i));
 		i++;
 	}
 	return (NULL);
 }
+
 // TODO: HAY QUE CHEQUEAR SI EL N++ SE PUEDE PONER DONDE LO HE PUESTO O DEBE IR ABAJO
-t_word *create_nodeandlist_word(t_master *master, t_token *token)
+t_word	*create_nodeandlist_word(t_master *master, t_token *token)
 {
-	// int n;
-	// int n_words;
-	t_word *new_list;
-	t_word *new;
-	t_token *tmp;
+	t_word	*new_list;
+	t_word	*new;
+	t_token	*tmp;
 
 	tmp = token;
 	while (tmp)
 	{
-		// n = -1;
 		new_list = NULL;
-		// n_words = len_nodes(tmp->content_token);
 		while (tmp->content_token)
 		{
-			// printf("Len words: %d\t-%s-\n", len_nodes(tmp->content_token), tmp->content_token);
 			new = ft_newnode_word(divided_by_word(tmp));
 			if (!new)
-				return (NULL);
+				exit();
 			categorizing_words(new);
 			if (new_list == NULL)
 				new_list = new;
 			else
 				lst_add_back_word(&new_list, new);
 		}
-		PRINT_WORD(new_list);
 		tmp->words = new_list;
 		line_ready_to_use(tmp, master);
 		tmp = tmp->next;
 	}
 	master->cmds = create_list_cmd(token, master);
-	PRINT_CMD(master->cmds);
 	return (new_list);
 }
