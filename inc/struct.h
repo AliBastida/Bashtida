@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:47:58 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/06 18:12:14 by vduchi           ###   ########.fr       */
+/*   Updated: 2024/02/15 10:17:35 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ typedef struct s_master
 	int n_cmds;
 	char *line;
 	char *clean_line;
+	_Bool status;
+
 	t_cmd *cmds;
 	t_token *node;
 	t_list *env;

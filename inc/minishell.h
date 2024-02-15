@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:11:56 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/15 09:31:09 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/15 10:29:11 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <signal.h>
+#include <termios.h>
 #include <unistd.h>
 #include <limits.h>
 
@@ -92,6 +94,7 @@
 
 //=====0_MAIN =====//
 int main(int ac, char **av, const char **env);
+void ft_free_double(char **str);
 // int     main(int ac, char **av);
 
 //******UTILS******//
@@ -99,7 +102,6 @@ int syntax_error(int n);
 void ft_free_single(char *str);
 bool is_space(unsigned char c);
 void *free_all(t_master *line);
-void ft_free_double(char **str);
 
 //===== 1_READLINE =====//
 int read_line(t_master *master);
@@ -261,5 +263,9 @@ int check_cmd_and_pipes(t_cmd **cmd, t_pipes *pipes);
 void close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes);
 int run_builtin(t_master *master, t_cmd *tmp);
 pid_t loop_cmds(t_master *master, t_cmd *tmp, t_pipes pipes);
+
+//===== 10_SIGNALS =====//
+void set_term(void);
+void init_signal(int mode, t_master *all);
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+         #
+#    By: abastida <abastida@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/20 11:24:34 by abastida          #+#    #+#              #
-#    Updated: 2024/02/14 18:07:15 by pabastid         ###   ########.fr        #
+#    Updated: 2024/02/15 10:05:55 by abastida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC :=  0_main/main.c 0_main/utils.c\
 			8_redir/redir.c 8_redir/redir_utils.c 8_redir/input.c \
 			8_redir/output.c 8_redir/redir_heredoc.c 8_redir/redir_append_mode.c \
 			9_execute/execve.c 9_execute/run_heredoc.c 9_execute/pipes.c \
-			9_execute/execute_cmds.c
+			9_execute/execute_cmds.c 10_signals/signals.c
 
 SRC_DIR := src/
 BUILD_DIR := build/
