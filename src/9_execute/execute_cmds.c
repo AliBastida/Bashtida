@@ -18,21 +18,24 @@
 
 int run_builtin(t_master *master, t_cmd *tmp)
 {
+	int res;
+
+	res = 0;
 	if (ft_strncmp(tmp->cmd, "echo", 5) == 0)
-		builtin_echo(tmp->args);
-	if (ft_strncmp(tmp->cmd, "pwd", 4) == 0)
-		builtin_pwd();
+		res = builtin_echo(tmp->args);
+	else if (ft_strncmp(tmp->cmd, "pwd", 4) == 0)
+		res = builtin_pwd();
 	else if (ft_strncmp(tmp->cmd, "cd", 3) == 0)
-		builtin_cd(tmp->args[1]);
+		res = builtin_cd(tmp->args[1]);
 	else if (ft_strncmp(tmp->cmd, "export", 7) == 0)
-		builtin_export(master, tmp->args);
+		res = builtin_export(master, tmp->args);
 	else if (ft_strncmp(tmp->cmd, "unset", 6) == 0)
-		builtin_unset(&master->env, tmp->args);
+		res = builtin_unset(&master->env, tmp->args);
 	else if (ft_strncmp(tmp->cmd, "env", 4) == 0)
-		print_env(master->env);
+		res = print_env(master->env);
 	else if (ft_strncmp(tmp->cmd, "exit", 5) == 0)
-		builtin_exit(tmp->args);
-	return (0);
+		res = builtin_exit(tmp->args);
+	return (res);
 }
 
 char **converting(t_list *env)
@@ -70,27 +73,27 @@ void execute_heredoc(t_cmd *cmds)
 int execute_cmds(t_master *master)
 {
 	int i;
-	pid_t *pids;
 	t_cmd *tmp;
-	t_pipes pipes;
+	pid_t *pids;
+	t_pipes pipes; // Structura que tiene el pipe y el file descriptor temporal
 
 	i = 0;
 	pipes.p[0] = -1;
 	pipes.p[1] = -1;
 	pipes.tmp_fd = -1;
 	tmp = master->cmds;
-	execute_heredoc(master->cmds);
-	pids = ft_calloc(master->n_cmds, sizeof(pid_t));
+	execute_heredoc(master->cmds);					 // Aqui voy a ejecutar todos los heredocs
+	pids = ft_calloc(master->n_cmds, sizeof(pid_t)); // Aqui hago el malloc del puntero de todos los pids de los hijos
 	while (tmp)
 	{
-		if (check_cmd_and_pipes(&tmp, &pipes))
+		if (check_cmd_and_pipes(&tmp, &pipes)) // Aqui checkeo si el comando está bien y creo el pipe y gestiono el fd temporal
 			continue;
-		if (master->n_cmds == 1 && is_builtin(tmp->cmd))
+		if (master->n_cmds == 1 && is_builtin(tmp->cmd)) // Este es para mirar si hay solo un comando y es un builtin
 		{
 			g_err = run_builtin(master, tmp);
 			break;
 		}
-		pids[i] = loop_cmds(master, tmp, pipes);
+		pids[i] = one_cmd(master, tmp, pipes); // Este es la ejecucion del comando
 		tmp = tmp->next;
 		i++;
 	}

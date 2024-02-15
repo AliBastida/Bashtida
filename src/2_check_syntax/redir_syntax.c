@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+// TODO: Y TAMBIEN SOBRE ESTAS FUNCIONES!!!
+
 int check_redir_1(char *str)
 {
     int i;
@@ -79,12 +81,12 @@ int redir(char *str)
 	{
 
 		if (str[i] == '>' && check_redir_1(&str[i]) == 3)
-			return (3);
+			return (1);
 		else if (str[i] == '<' && check_redir_2(&str[i]) == 3)
-			return (3);
+			return (1);
 		else if ((str[i] == '>' || str[i] == '<') && error_redir(&str[i]) == 3)
-			return (3);
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }

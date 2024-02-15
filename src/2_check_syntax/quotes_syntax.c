@@ -21,19 +21,19 @@ bool paired_quotes(char *line)
 
     i = 0;
     j = -1;
-    status = 1;
-    while (line[i])
-    {
+	status = 0;
+	while (line[i])
+	{
         if (j < 0 && (line[i] == '\'' || line[i] == '\"'))
         {
             j = i;
-            status = 0;
-        }
-        else if (j >= 0 && line[i] == line[j])
+			status = 1;
+		}
+		else if (j >= 0 && line[i] == line[j])
         {
             j = -1;
-            status = 1;
-        }
+			status = 0;
+		}
 		i++;
 	}
 	return (status);

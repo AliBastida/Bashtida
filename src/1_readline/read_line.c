@@ -20,7 +20,7 @@ int read_line(t_master *master)
 	master->line = readline(BBLU "Bashtida: " RESET);
 	if (!master->line)
 		exit(1);
-	else if (master->line[0] == ' ')
+	if (master->line[0] == ' ')
 	{
 		while (master->line[i] == ' ')
 			i++;

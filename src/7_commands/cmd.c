@@ -51,45 +51,20 @@ char *checking_path(char **path, char *cmd, int *ok)
 		ret = check_full_path(&new_path, &cmd, ok);
 		if (ret)
 			return (ret);
-		// res = ft_access(new_path, 2);
-		// 		if (access(new_path, X_OK) == 0)
-		// 		{
-		// 			printf("este es mi cmd: %s \n", new_path);
-		// 			// *ok = 0;
-		// 			free(cmd);
-		// 			return (new_path);
-		// 		}
-		// 		else if (access(new_path, F_OK) == 0)
-		// 		{
-		// 			if (!*ok)
-		// 				*ok = 3;
-		//			printf("%s", g_error_array[*ok - 1]);
-		// 			free(new_path);
-		// 			return (cmd);
-		// 		}
 		i++;
 	}
 	if (!*ok)
 		*ok = 2;
-	//	printf("%s", g_error_array[*ok - 1]);
 	free(new_path);
 	return (cmd);
 }
 
-void ft_take_cmd(t_cmd *new, t_word *words, t_master *master)
+void ft_take_cmd(t_cmd *new, t_master *master)
 {
 	char *cmd;
 	char *path;
 	char **split;
 
-	(void)words;
-
-	// if (words->type == 1 || words->type == 2 || words->type == 3 || words->type == 4)
-	// {
-	// 	cmd = ft_strdup(words->next->next->word);
-	// 	printf("el next next->word: %s y cmd: %s\n", words->next->next->word, cmd);
-	// }
-	// else
 	cmd = ft_strdup(new->args[0]);
 	path = ft_strdup(ft_getenv("PATH", master->env, -1));
 	split = ft_split(path, ':');
@@ -97,10 +72,3 @@ void ft_take_cmd(t_cmd *new, t_word *words, t_master *master)
 	new->cmd = checking_path(split, cmd, &new->ok);
 	ft_free_double(split);
 }
-
-// char *get_path(t_master *master)
-// {
-// 	char *path;
-// 	path = ft_strdup(ft_getenv("PATH", master->env, -1));
-// 	return (path);
-// }

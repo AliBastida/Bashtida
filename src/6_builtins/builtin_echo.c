@@ -32,7 +32,7 @@ static bool finding_n(char *arg)
 	return false;
 }
 
-void builtin_echo(char **args)
+int builtin_echo(char **args)
 {
 	int i;
 	bool found_n;
@@ -56,4 +56,5 @@ void builtin_echo(char **args)
 	}
 	if (found_n == true)
 		printf("\n");
+	return (0);
 }

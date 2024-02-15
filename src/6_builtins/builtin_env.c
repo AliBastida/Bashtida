@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void print_env(t_list *env)
+int print_env(t_list *env)
 {
 	t_list *tmp;
 
@@ -22,4 +22,5 @@ void print_env(t_list *env)
 		printf("%s\n", (char *)tmp->content);
 		tmp = tmp->next;
 	}
+	return (0);
 }

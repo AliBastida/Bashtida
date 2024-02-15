@@ -47,28 +47,29 @@ long long int ft_atol(const char *str)
 	return (res);
 }
 
-void builtin_exit(char **args)
+int builtin_exit(char **args)
 {
 	long long int value;
 
 	value = 0;
 	if (!args[1])
-		-> // cuando es solo exit
-		{
-			if (isatty(STDIN_FILENO))
-			{
-				write(2, "exit\n", 6);
-				exit(0);
-			}
-		}
-	if (args[2] && atol(args[2] == 0))
+	// -> // cuando es solo exit
 	{
-		if (atol == 0)
-			-> // argument required
-				else
+		if (isatty(STDIN_FILENO))
+		{
+			write(2, "exit\n", 6);
+			exit(0);
+		}
+	}
+	if (args[2] && atol(args[2]) == 0)
+	{
+		// if (atol == 0)
+		// -> // argument required
+		// else
 		// too many arguments
 		// funcion exit_error (args[i], long long int *value, int mode) -> funccioon que gestionara con el atol = value
 	}
-	if (if (args[2] && atol(args[2] != 0)))
-		-> // success
+	// if (args[2] && atol(args[2] != 0))
+	// -> // success
+	return (0);
 }

@@ -20,7 +20,8 @@ static void minishell_starts(t_master *master)
 	{
 		if (read_line(master) == 1)
 			continue;
-		if (checking_syntax(master->line) == 1)
+		add_history(master->line);
+		if (!checking_syntax(master->line))
 		{
 			if (line_divided_in_tokens(master->line) == NULL || (!create_nodeandlist(master, master->line)) || !create_nodeandlist_word(master, master->node) || !execute_cmds(master))
 			{
@@ -28,8 +29,6 @@ static void minishell_starts(t_master *master)
 				free_all(master);
 				exit(1);
 			}
-			if (master->line && *master->line != '\0')
-				add_history(master->line);
 		}
 		free(master->line);
 		// system("leaks minishell");
@@ -42,6 +41,8 @@ int main(int ac, char **av, const char **env)
 	(void)ac;
 	(void)av;
 
+	if (ac > 1)
+		exit_error("Minishell doesn't require any argument\n!");
 	t_master *master;
 	master = ft_calloc(1, sizeof(t_master));
 	ft_dup_env(master, env);

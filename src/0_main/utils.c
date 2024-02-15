@@ -12,6 +12,18 @@
 
 #include "minishell.h"
 
+void exit_error(char *str)
+{
+	ft_putstr_fd(str, 2);
+	exit(1);
+}
+
+int return_error(char *str, int out)
+{
+	ft_putstr_fd(str, 2);
+	return (out);
+}
+
 int syntax_error(int n)
 {
     if (n == 3)

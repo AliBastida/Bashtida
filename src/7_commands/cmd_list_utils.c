@@ -19,6 +19,22 @@
 // FIXME: SE PASA DE LINEAS -> VALERIO: LO ARREGLO YO
 
 // FIXME: ME DA LA SENSACION DE QUE NO EXPANDE $VBLE SI ES ARG Y NO CMD. HAY QUE REVISARLO
+
+t_cmd *new_cmd(t_word *words, int n)
+{
+	t_cmd *new;
+
+	new = ft_calloc(sizeof(t_cmd), 1);
+	if (!new)
+		exit_error("Malloc error");
+	new->n = n;
+	new->out_fd = 1;
+	new->args = ft_calloc(sizeof(char *), n_args(words) + 1);
+	if (!new->args)
+		exit_error("Malloc error");
+	return (new);
+}
+
 t_cmd *create_node_cmd(t_word *words, t_master *master, int n)
 {
 	int i;
@@ -27,19 +43,13 @@ t_cmd *create_node_cmd(t_word *words, t_master *master, int n)
 
 	i = 0;
 	tmp = words;
-	new = ft_calloc(sizeof(t_cmd), 1);
-	new->n = n;
-	new->out_fd = 1;
-	new->args = ft_calloc(sizeof(char *), n_args(words) + 1);
+	new = new_cmd(words, n);
 	if (!new)
 		return (NULL);
 	while (tmp)
 	{
-		// printf("Tmp: %s\tType: %d\n", tmp->word, tmp->type);
 		if (tmp->type == 1 || tmp->type == 2 || tmp->type == 3 || tmp->type == 4)
 		{
-			// printf("Here\n");
-			// ft_take_cmd(new, words, master);
 			manage_redir(tmp, new);
 			tmp = tmp->next;
 		}
@@ -48,11 +58,7 @@ t_cmd *create_node_cmd(t_word *words, t_master *master, int n)
 		tmp = tmp->next;
 	}
 	if (new->args[0])
-	{
-		// new->cmd = ft_strdup(new->args[0]);
-		// printf("Pointer: %p\n", new->cmd);
-		ft_take_cmd(new, words, master);
-	}
+		ft_take_cmd(new, master);
 	return (new);
 }
 

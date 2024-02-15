@@ -30,6 +30,8 @@ void close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes)
 			final = status;
 		if (!WIFSIGNALED(status))
 			g_err = WEXITSTATUS(status);
+		else
+			g_err = 0;
 		finished++;
 	}
 	if (pids)
@@ -37,7 +39,7 @@ void close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes)
 	g_err = final;
 }
 
-pid_t loop_cmds(t_master *master, t_cmd *tmp, t_pipes pipes)
+pid_t one_cmd(t_master *master, t_cmd *tmp, t_pipes pipes)
 {
 	pid_t pid;
 	char **env;
@@ -56,7 +58,5 @@ pid_t loop_cmds(t_master *master, t_cmd *tmp, t_pipes pipes)
 		}
 		execve(tmp->cmd, tmp->args, env);
 	}
-	// printf("\nExit status: %d\n", WEXITSTATUS(status));
-	// g_err = WEXITSTATUS(status);
 	return (pid);
 }

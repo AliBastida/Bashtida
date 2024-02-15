@@ -25,6 +25,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <limits.h>
 
 #define PRINT_LIST(list)                                                       \
 	t_list *random_tmp = list;                                                 \
@@ -85,6 +86,7 @@
 			i++;                                                              \
 		}                                                                     \
 		printf("has heredoc: *%s*\n", random_tmp->hd != NULL ? "YES" : "NO"); \
+		printf("\n");                                                         \
 		random_tmp = random_tmp->next;                                        \
 	}                                                                         \
 	printf("----------------------\n");
@@ -99,6 +101,8 @@ void ft_free_single(char *str);
 bool is_space(unsigned char c);
 void *free_all(t_master *line);
 void ft_free_double(char **str);
+void exit_error(char *str);
+int return_error(char *str, int out);
 
 //===== 1_READLINE =====//
 int read_line(t_master *master);
@@ -181,14 +185,14 @@ char *divide_if_redir(t_token *node);
 int builtin_cd(char *dir);
 
 //******BUILTINS_ECHO******//
-void builtin_echo(char **args);
+int builtin_echo(char **args);
 
 //******BUILTINS_ENV******//
-void print_env(t_list *env);
+int print_env(t_list *env);
 
 //******BUILTINS_EXIT******//
 long long int ft_atol(const char *str);
-void builtin_exit(char **args);
+int builtin_exit(char **args);
 
 //******BUILTINS_EXPORT******//
 int builtin_export(t_master *master, char **args);
@@ -214,10 +218,7 @@ int ft_len_dptr(char **arr);
 
 //===== 7_COMMANDS =====//
 //******CMD******//
-t_cmd *saving_arg(t_master *master);
-int node_counter(t_word *words);
-char *get_path(t_master *master);
-void ft_take_cmd(t_cmd *cmd, t_word *words, t_master *master);
+void ft_take_cmd(t_cmd *new, t_master *master);
 char *checking_path(char **path, char *cmd, int *ok);
 
 //******CMD_LIST_UTILS******//
@@ -259,6 +260,6 @@ int check_cmd_and_pipes(t_cmd **cmd, t_pipes *pipes);
 
 void close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes);
 int run_builtin(t_master *master, t_cmd *tmp);
-pid_t loop_cmds(t_master *master, t_cmd *tmp, t_pipes pipes);
+pid_t one_cmd(t_master *master, t_cmd *tmp, t_pipes pipes);
 
 #endif
