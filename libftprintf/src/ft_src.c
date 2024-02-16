@@ -12,31 +12,7 @@
 
 #include "libft.h"
 
-int	ft_putchar(int c)
-{
-	write (1, &c, 1);
-	return (1);
-}
-
-int	ft_putstr(char *str)
-{
-	int	i;
-	int	rst;
-
-	rst = 0;
-	if (str == NULL)
-	{
-		if (write (1, "(null)", 6) != 6)
-			return (-1);
-		return (6);
-	}
-	i = -1;
-	while (str[++i])
-		rst += write (1, &str[i], 1);
-	return (rst);
-}
-
-int	ft_putnbr(long long num, int signo)
+static int	ft_putnbr(long long num, int signo)
 {
 	char	c;
 
@@ -51,4 +27,28 @@ int	ft_printnbr(long long n)
 	if (n < 0)
 		return (ft_putnbr(n * -1, 1));
 	return (ft_putnbr(n, 0));
+}
+
+int	ft_putchar(int c)
+{
+	write(1, &c, 1);
+	return (1);
+}
+
+int	ft_putstr(char *str)
+{
+	int	i;
+	int	rst;
+
+	rst = 0;
+	if (str == NULL)
+	{
+		if (write(1, "(null)", 6) != 6)
+			return (-1);
+		return (6);
+	}
+	i = -1;
+	while (str[++i])
+		rst += write(1, &str[i], 1);
+	return (rst);
 }

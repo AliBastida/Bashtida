@@ -18,7 +18,7 @@ int	ft_puthexa_low(unsigned long num)
 	char	c;
 
 	base = "0123456789abcdef";
-	c = base [num % 16];
+	c = base[num % 16];
 	if (num >= 16)
 		return (ft_puthexa_low(num / 16) + write(1, &c, 1));
 	return (write(1, &c, 1));
@@ -30,7 +30,7 @@ int	ft_puthexa_upper(unsigned long num)
 	char	c;
 
 	base = "0123456789ABCDEF";
-	c = base [num % 16];
+	c = base[num % 16];
 	if (num >= 16)
 		return (ft_puthexa_upper(num / 16) + write(1, &c, 1));
 	return (write(1, &c, 1));

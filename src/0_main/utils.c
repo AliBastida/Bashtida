@@ -12,13 +12,13 @@
 
 #include "minishell.h"
 
-void exit_error(char *str)
+void	exit_error(char *str)
 {
 	ft_putstr_fd(str, 2);
 	exit(1);
 }
 
-int syntax_error(char *str, char c, int out)
+int	syntax_error(char *str, char c, int out)
 {
 	ft_putstr_fd(str, 2);
 	if (c > 0)
@@ -31,30 +31,9 @@ int syntax_error(char *str, char c, int out)
 	return (out);
 }
 
-void ft_free_single(char *str)
-{
-	if (str == NULL)
-		return;
-	free(str);
-}
-
-void ft_free_doble(char **str)
-{
-	int i;
-
-	i = 0;
-
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str[i]);
-	i++;
-}
 // true = diferente a 0
 // false = igual a 0
-bool is_space(unsigned char c)
+bool	is_space(unsigned char c)
 {
 	if (c == ' ' || c == '\t')
 		return (true);
@@ -62,22 +41,17 @@ bool is_space(unsigned char c)
 		return (false);
 }
 
-void *free_all(t_master *line)
+void	free_all(t_master *master)
 {
-    if (!line_divided_in_tokens(line->line))
-        {
-            free (line->line);
-            return (NULL);
-        }
-    if (!create_nodeandlist(line, line->line))
-        {
-            free (line);
-            return (NULL);
-        }
-    if (!divided_by_word(line->node))
-        {
-            free (line->node);
-            return (NULL);
-        }
-    return (NULL);
+	if (master->line)
+		free(master->line);
+	if (master->clean_line)
+		free(master->clean_line);
+	if (master->cmds)
+		free_cmds(master->cmds);
+	if (master->node)
+		free_tokens(master->node);
+	if (master->env)
+		ft_lstclear(&master->env, &free);
+	free(master);
 }

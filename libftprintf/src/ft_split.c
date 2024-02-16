@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	count_word(char const *s, char c)
+static int	count_word(char const *s, char c)
 {
 	int	i;
 	int	word;
@@ -27,7 +27,7 @@ int	count_word(char const *s, char c)
 	return (word);
 }
 
-int	ft_strlenchar(const char *s, char c)
+static int	ft_strlenchar(const char *s, char c)
 {
 	int	i;
 
@@ -37,7 +37,7 @@ int	ft_strlenchar(const char *s, char c)
 	return (i);
 }
 
-char	**ft_free(char **matrix)
+static char	**ft_free(char **matrix)
 {
 	int	contador;
 
@@ -45,8 +45,8 @@ char	**ft_free(char **matrix)
 	if (!matrix)
 		return (NULL);
 	while (matrix[++contador])
-		free (matrix[contador]);
-	free (matrix);
+		free(matrix[contador]);
+	free(matrix);
 	return (NULL);
 }
 
@@ -57,7 +57,7 @@ char	**ft_split(char const *s, char c)
 	int		i;
 	char	**matrix;
 
-	matrix = (char **) malloc (sizeof (char *) * (count_word(s, c) + 1));
+	matrix = (char **)malloc(sizeof(char *) * (count_word(s, c) + 1));
 	if (!matrix)
 		return (NULL);
 	i = -1;
@@ -69,7 +69,7 @@ char	**ft_split(char const *s, char c)
 			len = ft_strlenchar(&s[i], c);
 			matrix[n_word] = ft_substr(&s[i], 0, len);
 			if (!matrix[n_word])
-				return (ft_free (matrix));
+				return (ft_free(matrix));
 			n_word++;
 			i = i + len - 1;
 		}

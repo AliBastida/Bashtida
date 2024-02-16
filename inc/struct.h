@@ -15,7 +15,7 @@
 
 extern unsigned char	g_err;
 
-enum e_token_type
+enum					e_token_type
 {
 	WORD,
 	REDIR_A,
@@ -25,7 +25,7 @@ enum e_token_type
 	DOLLAR,
 };
 
-enum e_error_type
+enum					e_error_type
 {
 	OPEN_FAILED,
 	COMMAND_NOT_FOUND,
@@ -35,7 +35,7 @@ enum e_error_type
 	FILE_NOT_WRITE,
 };
 
-const static char *g_error_array[] = {
+const static char		*g_error_array[] = {
 	"OPEN ERROR\n",
 	"COMMAND NOT FOUND\n",
 	"PERMISSION DENIED\n",
@@ -46,55 +46,54 @@ const static char *g_error_array[] = {
 
 typedef struct s_pipes
 {
-	int p[2];
-	int tmp_fd;
-} t_pipes;
+	int					p[2];
+	int					tmp_fd;
+}						t_pipes;
 
 typedef struct s_heredoc
 {
-	int fd[2];
-	int first;
-	char *word;
-} t_heredoc;
+	int					fd[2];
+	int					first;
+	char				*word;
+}						t_heredoc;
 
 typedef struct s_cmd
 {
-	int n;
-	int ok;
-	int in_fd;
-	int out_fd;
-	char *cmd;
-	char **args;
-	t_heredoc *hd;
-	struct s_cmd *next;
-} t_cmd;
+	int					n;
+	int					ok;
+	int					in_fd;
+	int					out_fd;
+	char				*cmd;
+	char				**args;
+	t_heredoc			*hd;
+	struct s_cmd		*next;
+}						t_cmd;
 
 typedef struct s_word
 {
-	char *word;
-	int single_quotes;
-	int type;
-	int flag_quote;
-	struct s_word *next;
-} t_word;
+	char				*word;
+	int					single_quotes;
+	int					type;
+	int					flag_quote;
+	struct s_word		*next;
+}						t_word;
 
 typedef struct s_token
 {
-	char *content_token;
-	char **word_node;
-	t_word *words;
-	struct s_token *next;
-} t_token;
+	char				*content_token;
+	char				**word_node;
+	t_word				*words;
+	struct s_token		*next;
+}						t_token;
 
 typedef struct s_master
 {
-	int n_cmds;
-	char *line;
-	char *clean_line;
-	// _Bool status;
-	t_cmd *cmds;
-	t_token *node;
-	t_list *env;
-}t_master;
+	int					n_cmds;
+	char				*line;
+	char				*clean_line;
+	t_cmd				*cmds;
+	t_token				*node;
+	t_list				*env;
+}						t_master;
 
 #endif

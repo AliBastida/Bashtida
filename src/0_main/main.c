@@ -12,51 +12,35 @@
 
 #include "minishell.h"
 
-unsigned char g_err = 0;
+unsigned char	g_err = 0;
 
-void set_term(void)
+void	set_term(void)
 {
-	struct termios term;
+	struct termios	term;
 
 	tcgetattr(STDIN_FILENO, &term);
 	term.c_lflag &= ~ECHOCTL;
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
 
-void ft_free_double(char **str)
+static void	minishell_magic(t_master *master)
 {
-	int i;
-
-	i = 0;
-	if (str == NULL)
-		return;
-	while (str[i])
+	if ((!create_nodeandlist(master, master->line))
+		|| !create_nodeandlist_word(master, master->node)
+		|| !execute_cmds(master))
 	{
-		if (str[i])
-			free(str[i]);
-		i++;
-	}
-	free(str);
-}
-
-static void minishell_magic(t_master *master)
-{
-	if ((!create_nodeandlist(master, master->line)) || !create_nodeandlist_word(master, master->node) || !execute_cmds(master))
-	{
-		// TODO hacer control, cambiar los mallloc por Calloc.
 		free_all(master);
 		exit(1);
 	}
-	// return ((0) // todo ha ido bien);
 }
 
-static void minishell_starts(t_master *master)
+static void	minishell_starts(t_master *master)
 {
 	while (1)
 	{
 		set_signals(0);
 		if (read_line(master) == 1)
-			continue;
+			continue ;
 		add_history(master->line);
 		if (!checking_syntax(master->line))
 			minishell_magic(master);
@@ -66,9 +50,9 @@ static void minishell_starts(t_master *master)
 	}
 }
 
-int main(int ac, char **av, const char **env)
+int	main(int ac, char **av, const char **env)
 {
-	t_master *master;
+	t_master	*master;
 
 	(void)av;
 	if (ac > 1)
@@ -78,7 +62,6 @@ int main(int ac, char **av, const char **env)
 	master = ft_calloc(1, sizeof(t_master));
 	ft_dup_env(master, env);
 	minishell_starts(master);
-	ft_lstclear(&master->env, &free);
-	free(master);
+	free_all(master);
 	return (0);
 }

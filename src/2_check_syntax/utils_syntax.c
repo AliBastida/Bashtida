@@ -15,11 +15,11 @@
 /* Esta es la funcion en la que si todos los chequeos de sintaxis estan ok > devuelve la linea sin comillas*/
 
 // Function that checks if all quotes are closed Returns 0 if not closed;
-static bool paired_quotes(char *line)
+static bool	paired_quotes(char *line)
 {
-	int i;
-	int j;
-	bool status;
+	int		i;
+	int		j;
+	bool	status;
 
 	i = 0;
 	j = -1;
@@ -41,10 +41,10 @@ static bool paired_quotes(char *line)
 	return (status);
 }
 
-static int redir(char *str)
+static int	redir(char *str)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	j = 0;
@@ -69,32 +69,32 @@ static int redir(char *str)
 	return (0);
 }
 
-int checking_syntax(char *str)
+int	checking_syntax(char *str)
 {
-	int res;
+	int	res;
 
 	if (paired_quotes(str))
 		return (syntax_error("Syntax Error: quotes not closed\n", 0, 1));
 	else if (check_syntax_pipes(str))
 		return (syntax_error("Bashtida: syntax error near "
-							 "unexpected token `|'\n",
-							 0,
-							 1));
+								"unexpected token `|'\n",
+								0,
+								1));
 	res = redir(str);
 	if (res == 1)
 		return (syntax_error("Bashtida: syntax error near "
-							 "unexpected token `newline'\n",
-							 0,
-							 1));
+								"unexpected token `newline'\n",
+								0,
+								1));
 	else if (res == 2)
 		return (syntax_error("Bashtida: syntax error near "
-							 "unexpected token `|'\n",
-							 0,
-							 1));
+								"unexpected token `|'\n",
+								0,
+								1));
 	else if (res > 2)
 		return (syntax_error("Bashtida: syntax error near "
-							 "unexpected token `",
-							 res,
-							 1));
+								"unexpected token `",
+								res,
+								1));
 	return (0);
 }

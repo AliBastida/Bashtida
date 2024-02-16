@@ -92,7 +92,8 @@ t_word	*create_nodeandlist_word(t_master *master, t_token *token)
 		{
 			new = ft_newnode_word(divided_by_word(tmp));
 			if (!new)
-				exit();
+				// exit(); // QUE ES ESTO?
+				exit_error("Malloc error");
 			categorizing_words(new);
 			if (new_list == NULL)
 				new_list = new;

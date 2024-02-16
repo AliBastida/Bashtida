@@ -12,23 +12,25 @@
 
 #include "minishell.h"
 
-static void memory_alloc(t_master *master, char *str)
+static void	memory_alloc(t_master *master, char *str)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(str);
-	master->clean_line = ft_calloc(len + 1, sizeof(char)); // estamos allocando mas memoria, xq estamos contando memoria incluyenddo las comillas.
+	master->clean_line = ft_calloc(len + 1, sizeof(char));
+	// estamos allocando mas memoria,
+	// xq estamos contando memoria incluyenddo las comillas.
 	if (!master->clean_line)
 		exit_error("Malloc error\n");
 }
 
 // Esta funcion detecta si hay comillas y las quita de la linea.
-void clean_line(char *str, t_master *master)
+void	clean_line(char *str, t_master *master)
 {
-    int i;
-    int j;
-    bool double_quote;
-    bool simple_quote;
+	int		i;
+	int		j;
+	bool	double_quote;
+	bool	simple_quote;
 
 	i = 0;
 	j = 0;
@@ -37,7 +39,8 @@ void clean_line(char *str, t_master *master)
 	memory_alloc(master, str);
 	while (str[i])
 	{
-		if ((str[i] == '\"' && simple_quote == false) || (str[i] == '\'' && double_quote == false))
+		if ((str[i] == '\"' && simple_quote == false) || (str[i] == '\''
+				&& double_quote == false))
 		{
 			if (str[i] == '\"')
 				double_quote = !double_quote;
@@ -49,4 +52,3 @@ void clean_line(char *str, t_master *master)
 			master->clean_line[j++] = str[i++];
 	}
 }
-

@@ -13,21 +13,21 @@
 #ifndef MINISHELL_H
 #define MINISHELL_H
 
-#include "../libftprintf/libft.h"
-#include "colors.h"
-#include "struct.h"
-#include <fcntl.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include "readline.h"
-#include "history.h"
+#include <fcntl.h>
+#include <limits.h>
+#include <signal.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <signal.h>
 #include <termios.h>
 #include <unistd.h>
-#include <limits.h>
+#include "../libftprintf/libft.h"
+#include "colors.h"
+#include "history.h"
+#include "readline.h"
+#include "struct.h"
 
 #define PRINT_LIST(list)                                                       \
 	t_list *random_tmp = list;                                                 \
@@ -93,19 +93,21 @@
 	}                                                                         \
 	printf("----------------------\n");
 
-//=====0_MAIN =====//
+//=====0_MAIN=====//
 int main(int ac, char **av, const char **env);
-void ft_free_double(char **str);
 // int     main(int ac, char **av);
 
-//******UTILS******//
+//=====0_UTILS=====//
 // int syntax_error(int n);
-void ft_free_single(char *str);
 bool is_space(unsigned char c);
-void *free_all(t_master *line);
+void free_all(t_master *master);
 void ft_free_double(char **str);
 void exit_error(char *str);
 int syntax_error(char *str, char c, int out);
+
+//=====0_FREE=====//
+void free_cmds(t_cmd *cmds);
+void free_tokens(t_token *tk);
 
 //===== 1_READLINE =====//
 int read_line(t_master *master);
@@ -171,7 +173,7 @@ char *divided_by_word(t_token *node);
 t_word *lst_last_word(t_word **lst);
 void lst_add_back_word(t_word **first, t_word *new_node);
 t_word *create_nodeandlist_word(t_master *master, t_token *token);
-char *divide_if_redir(t_token *node);
+// char *divide_if_redir(t_token *node);
 
 //===== 6_BUILTINS =====//
 //******BUILTINS_CD******//

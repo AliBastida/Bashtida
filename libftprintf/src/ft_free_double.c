@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_free_double.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/25 13:36:13 by abastida          #+#    #+#             */
-/*   Updated: 2022/05/26 13:46:03 by abastida         ###   ########.fr       */
+/*   Created: 2022/05/30 11:13:53 by abastida          #+#    #+#             */
+/*   Updated: 2022/05/30 12:40:55 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, void const *src, size_t len)
+void	ft_free_double(char **str)
 {
-	if ((dst == src) || (!len))
-		return (dst);
-	if (dst > src)
+	int	i;
+
+	i = 0;
+	if (str == NULL)
+		return ;
+	while (str[i])
 	{
-		while (len)
-		{
-			((unsigned char *)dst)[len - 1] = ((unsigned char *)src)[len - 1];
-			len--;
-		}
-		return (dst);
+		if (str[i])
+			free(str[i]);
+		i++;
 	}
-	ft_memcpy(dst, src, len);
-	return (dst);
+	free(str);
 }

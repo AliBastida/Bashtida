@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	ft_format(va_list arg, const char type)
+static int	ft_format(va_list arg, const char type)
 {
 	int	len;
 
@@ -42,7 +42,7 @@ int	ft_printf(const char *str, ...)
 	int		i;
 	int		len;
 
-	va_start (arg, str);
+	va_start(arg, str);
 	i = 0;
 	len = 0;
 	while (str[i])

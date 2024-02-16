@@ -10,10 +10,25 @@
 #                                                                              #
 # **************************************************************************** #
 
+###################
+
+#COLORS
+
+COLOR_RESET = \033[0m
+COLOR_BOLD = \033[1m
+COLOR_UNDERLINE = \033[4m
+COLOR_RED = \033[31m
+COLOR_GREEN = \033[32m
+COLOR_YELLOW = \033[33m
+COLOR_BLUE = \033[34m
+COLOR_MAGENTA = \033[35m
+COLOR_CYAN = \033[36m
+
+###################
+
 NAME := minishell
-CC := gcc
-CFLAGS := -Wall -Werror -Wextra -g -MMD -fsanitize='address,undefined' -DREADLINE_LIBRARY
-SRC :=  0_main/main.c 0_main/utils.c\
+
+SRC :=  0_main/main.c 0_main/utils.c 0_main/free.c \
 			1_readline/read_line.c\
 			2_check_syntax/quotes_syntax.c 2_check_syntax/pipe_syntax.c \
 			2_check_syntax/utils_syntax.c \
@@ -32,58 +47,49 @@ SRC :=  0_main/main.c 0_main/utils.c\
 			10_signals/signals.c
 
 SRC_DIR := src/
-BUILD_DIR := build/
+BUILD_DIR := .build/
+
 OBJ := $(addprefix $(BUILD_DIR), $(SRC:.c=.o))
 DEP := $(addprefix $(BUILD_DIR), $(SRC:.c=.d))
-LIBS := libftprintf/libftprint.a
-LIBPATH := -L libftprintf -lftprintf
-LIBREAD := -L readline -lreadline -lncurses
-HEADER := inc/ readline/
-INCLUDE := $(addprefix -I , $(HEADER))
+
+CC := gcc
 RM := rm -rf
 
-###################
-#COLORS
+LIBS := libftprintf/libftprintf.a
+LIBPATH := -L libftprintf -lftprintf
+LIBREAD := -L readline -lreadline -lncurses
 
-COLOR_RESET = \033[0m
-COLOR_BOLD = \033[1m
-COLOR_UNDERLINE = \033[4m
-COLOR_RED = \033[31m
-COLOR_GREEN = \033[32m
-COLOR_YELLOW = \033[33m
-COLOR_BLUE = \033[34m
-COLOR_MAGENTA = \033[35m
-COLOR_CYAN = \033[36m
+HEADER := inc/ readline/
+INCLUDE := $(addprefix -I , $(HEADER))
 
-###################
+CFLAGS := -Wall -Werror -Wextra -g -MMD -DREADLINE_LIBRARY -fsanitize='address,undefined'
 
 $(BUILD_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
-all: $(OBJ)
-	@$(MAKE) $(NAME)
+all: $(NAME)
 
 $(LIBS):
 	@$(MAKE) -C libftprintf
 
--include $(DEP)
 $(NAME): $(LIBS) $(OBJ) Makefile
 	@$(CC) $(CFLAGS) $(LIBPATH) $(LIBREAD) $(OBJ) -o $(NAME)
 	@echo "$(COLOR_BOLD)$(COLOR_GREEN)=== 🤩 Minishell compiled 🤩 === $(COLOR_RESET)"
 
 clean:
 	@$(RM) $(BUILD_DIR)
-	@$(MAKE) clean -C libftprintf
-	@echo "$(COLOR_BOLD)$(COLOR_CYAN)=== 🗑️  Objects and Dependencies are being removed 🗑️  === $(COLOR_RESET)"
+	@echo "$(COLOR_BOLD)$(COLOR_CYAN)=== 🗑️  Objects and Dependencies from minishell are being removed 🗑️  === $(COLOR_RESET)"
 
-fclean:
-	@$(MAKE) clean
+fclean: clean
 	@$(RM) $(NAME)
 	@$(MAKE) fclean -C libftprintf
+#	@$(MAKE) clean
 
-re:
-	@$(MAKE) fclean
-	$(MAKE) all
+re: fclean all
+# @$(MAKE) fclean
+# $(MAKE) all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
+
+-include $(DEP)
