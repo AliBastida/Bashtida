@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	ft_strchar(char *str, int c)
+int ft_strchr_quotes(char *str, int c)
 {
     int i;
 

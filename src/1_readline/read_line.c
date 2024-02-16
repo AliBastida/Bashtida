@@ -23,9 +23,9 @@ int read_line(t_master *master)
 		write(2, "exit\n", 5);
 		exit(1);
 	}
-	if (master->line[0] == ' ')
+	if (master->line[0] == ' ' || master->line[0] == '\t')
 	{
-		while (master->line[i] == ' ')
+		while (master->line[i] == ' ' || master->line[0] == '\t')
 			i++;
 		if (master->line[i] == '\0')
 		{

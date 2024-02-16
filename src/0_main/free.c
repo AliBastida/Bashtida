@@ -38,7 +38,7 @@ static void	free_words(t_word *words)
 	}
 }
 
-void	free_cmds(t_cmd *cmds)
+static void free_cmds(t_cmd *cmds)
 {
 	t_cmd	*tmp;
 	t_cmd	*next;
@@ -60,7 +60,7 @@ void	free_cmds(t_cmd *cmds)
 	}
 }
 
-void	free_tokens(t_token *tk)
+static void free_tokens(t_token *tk)
 {
 	t_token	*tmp;
 	t_token	*next;
@@ -80,4 +80,19 @@ void	free_tokens(t_token *tk)
 		if (tmp)
 			next = tmp->next;
 	}
+}
+
+void free_all(t_master *master)
+{
+	if (master->line)
+		free(master->line);
+	if (master->clean_line)
+		free(master->clean_line);
+	if (master->cmds)
+		free_cmds(master->cmds);
+	if (master->node)
+		free_tokens(master->node);
+	if (master->env)
+		ft_lstclear(&master->env, &free);
+	free(master);
 }

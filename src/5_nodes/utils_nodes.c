@@ -12,47 +12,6 @@
 
 #include "minishell.h"
 
-// Esta funcion retorna 1 si es redireccion y 0 si no es.
-int is_redir(char *str, int i)
-{
-	if (str[i] != '\0' && (str[i] == '>' || str[i] == '<'))
-	{
-		if ((str[i + 1]) != '\0' && (str[i + 1] == str[i]))
-			return (2);
-		return (1);
-	}
-	return (0);
-}
-
-/* len_nodes calcula cuantos palabras hay entre pipes. Recoge una char * (content_token) y nos retorna la len que vamos a necesitar para crear los nodos nuevos de t_word*/
-int len_nodes(char *token)
-{
-    int len;
-    int i;
-
-	len = 1;
-	i = 0;
-	while (token[i])
-	{
-		if (token[i + 1] && (token[i] == '\'' || token[i] == '\"'))
-			i = next_quote(token, i + 1, token[i]);
-		if (!is_space(token[i]) && is_space(token[i + 1]) && !is_redir(token, i))
-			len++;
-		if (is_redir(token, i) != 0)
-		{
-			if (i != 0 && !is_space(token[i - 1]))
-				len++;
-			if (is_redir(token, i) == 2)
-				i++;
-			if (token[i + 1] == '\0')
-				len--;
-			len++;
-		}
-		i++;
-	}
-	return (len);
-}
-
 void categorizing_words(t_word *node)
 {
 	int i;
@@ -73,6 +32,43 @@ void categorizing_words(t_word *node)
 	else if (node->word[i] == '>')
 		node->type = REDIR_D;
 	i++;
+}
+
+// Esta funcion recibe t_token y guarda cada nodo limpio de comillas y con dollar expandido
+void line_ready_to_use(t_token *token, t_master *master)
+{
+	t_word *node;
+	t_token *tmp;
+	char *var_con_dolar_expandido;
+
+	tmp = token;
+	while (tmp)
+	{
+		node = token->words;
+		while (node)
+		{
+			var_con_dolar_expandido = extract_dollar(node, master->env);
+			clean_line(var_con_dolar_expandido, master);
+			free(node->word);
+			node->word = ft_strdup(master->clean_line);
+			free(master->clean_line);
+			master->clean_line = NULL;
+			node = node->next;
+		}
+		tmp = tmp->next;
+	}
+}
+
+// Esta funcion retorna 1 si es redireccion y 0 si no es.
+int is_redir(char *str, int i)
+{
+	if (str[i] != '\0' && (str[i] == '>' || str[i] == '<'))
+	{
+		if ((str[i + 1]) != '\0' && (str[i + 1] == str[i]))
+			return (2);
+		return (1);
+	}
+	return (0);
 }
 
 // hemos hecho un sbstr de new y obtendremos rest que es lo que usaremos como nuevo tmp en la funcion create_nodeand list_word

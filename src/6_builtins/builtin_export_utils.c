@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	len_hastaeligualymas(char *str)
+int len_until_equal(char *str)
 {
 	int	i;
 
@@ -89,9 +89,7 @@ t_list	*get_envnode_export(t_list *env, char *arg)
 	while (tmp)
 	{
 		if (ft_strncmp((char *)tmp->content, arg, arg_len) == 0)
-		{
 			return (tmp);
-		}
 		tmp = tmp->next;
 	}
 	return (NULL);
@@ -103,9 +101,7 @@ char	*ft_strchr_export(char *str, char c)
 	while (*str != '\0')
 	{
 		if (*str == c)
-		{
 			return (str + 1);
-		}
 		str++;
 	}
 	return (str);

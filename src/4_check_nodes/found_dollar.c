@@ -12,31 +12,7 @@
 
 #include "minishell.h"
 
-// Esta funcion recibe t_token y guarda cada nodo limpio de comillas y con dollar expandido
-void line_ready_to_use(t_token *token, t_master *master)
-{
-	t_token *tmp;
-	char *var_con_dolar_expandido;
-	t_word *node;
-	tmp = token;
-	while (tmp)
-	{
-		node = token->words;
-		while (node)
-		{
-			var_con_dolar_expandido = extract_dollar(node, master->env);
-			clean_line(var_con_dolar_expandido, master);
-			free(node->word);
-			node->word = ft_strdup(master->clean_line);
-			free(master->clean_line);
-			master->clean_line = NULL;
-			node = node->next;
-		}
-		tmp = tmp->next;
-	}
-}
-
-int next_start(char *word, int i)
+static int next_start(char *word, int i)
 {
 	while (ft_isalpha(word[i]) || word[i] == '_')
 		i++;

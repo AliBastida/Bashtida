@@ -14,7 +14,25 @@
 
 unsigned char	g_err = 0;
 
-void	set_term(void)
+/* Necesitamos dduplicar la vble const char **envp para poder trabajar con ella. En esta funcion, hacemos una lista dentro de t_master donde meteremos el dulicado de envp.*/
+static void ft_dup_env(t_master *master, const char **env)
+{
+	int i;
+	char *dup;
+
+	i = 0;
+	while (env != NULL && env[i])
+	{
+		dup = ft_strdup(env[i]);
+		if (master->env == NULL)
+			master->env = ft_lstnew(dup);
+		else
+			ft_lstadd_back(&master->env, ft_lstnew(dup));
+		i++;
+	}
+}
+
+static void set_term(void)
 {
 	struct termios	term;
 

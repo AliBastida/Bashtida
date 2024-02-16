@@ -28,7 +28,7 @@ COLOR_CYAN = \033[36m
 
 NAME := libftprintf.a
 
-SRC := src/ft_atoi.c  src/ft_bzero.c src/ft_calloc.c src/ft_hexa.c src/ft_isalnum \
+SRC := src/ft_atoi.c src/ft_atol.c src/ft_bzero.c src/ft_calloc.c src/ft_hexa.c src/ft_isalnum \
 	src/ft_isalpha.c src/ft_isascii.c src/ft_isdigit.c src/ft_isprint.c src/ft_itoa.c src/ft_lstadd_back_bonus.c \
 	src/ft_lstadd_front_bonus.c src/ft_lstclear_bonus.c src/ft_lstdelone_bonus.c \
 	src/ft_lstiter_bonus.c src/ft_lstlast_bonus.c src/ft_lstmap_bonus.c src/ft_lstnew_bonus.c \

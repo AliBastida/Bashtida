@@ -19,7 +19,7 @@ static void	adding_export(t_master *master, char **args, int i)
 	int		len;
 
 	aux = master->env;
-	len = len_hastaeligualymas(args[i]);
+	len = len_until_equal(args[i]);
 	arg = copyvble(args[i], len);
 	if (checking_format(arg) == 0)
 	{
@@ -39,7 +39,7 @@ static void	adding_export(t_master *master, char **args, int i)
 	free(arg);
 }
 
-void static	print_export(char **arr)
+static void print_export(char **arr)
 {
 	int	i;
 

@@ -37,7 +37,7 @@ static t_list	*get_envnode_unset(t_list **env, char *arg)
 }
 
 // esta borra el nodo siguiente al que te pasan (la coincidencia)
-void	delete_node(t_list *env)
+static void delete_node(t_list *env)
 {
 	t_list	*aux;
 

@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_word	*lst_last_word(t_word **lst)
+static t_word *lst_last_word(t_word **lst)
 {
 	t_word	*temp;
 
@@ -25,7 +25,7 @@ t_word	*lst_last_word(t_word **lst)
 	return (temp);
 }
 
-void	lst_add_back_word(t_word **first, t_word *new_node)
+static void lst_add_back_word(t_word **first, t_word *new_node)
 {
 	t_word	*temp;
 
@@ -38,7 +38,7 @@ void	lst_add_back_word(t_word **first, t_word *new_node)
 	}
 }
 
-t_word	*ft_newnode_word(void *content)
+static t_word *ft_newnode_word(void *content)
 {
 	t_word	*new;
 
@@ -50,7 +50,7 @@ t_word	*ft_newnode_word(void *content)
 	return (new);
 }
 
-char	*divided_by_word(t_token *tmp)
+static char *divided_by_word(t_token *tmp)
 {
 	int	i;
 	int	start;

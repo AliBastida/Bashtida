@@ -11,26 +11,45 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-// Con esta funcion crearemos el nuevo nodo
 
-char *clean_word(char *str)
+/*En esta funcion contamos los | que hay fuera de quotes*/
+static int how_many_pipes(char *str)
 {
-    char *clean_line;
+	int i;
+	int n_pipes;
 
-	clean_line = ft_strtrim(str, " ");
-    free(str);
-    return (clean_line);
+	i = 0;
+	n_pipes = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+			i = next_quote(str, i + 1, str[i]);
+		else if (str[i] == '|')
+			n_pipes++;
+		i++;
+	}
+	return (n_pipes);
 }
 
-t_token	*ft_newnode(void *content)
+// Con esta funcion crearemos el nuevo nodo
+static char *clean_word(char *str)
+{
+	char *clean_line;
+
+	clean_line = ft_strtrim(str, " ");
+	free(str);
+	return (clean_line);
+}
+
+static t_token *ft_newnode(void *content)
 {
 	t_token	*new;
 
 	new = ft_calloc(sizeof(t_token), 1);
 	if (!new)
 		return (NULL);
-	new ->content_token = content;
-	new -> next = NULL;
+	new->content_token = content;
+	new->next = NULL;
 	return (new);
 }
 
@@ -50,17 +69,17 @@ t_token *create_nodeandlist(t_master *master, char *str)
 	new_list = NULL;
 	n_pipes = how_many_pipes(str) + 1;
 	master->n_cmds = n_pipes;
-	line_divided = line_divided_in_tokens(str);
+	line_divided = line_divided_in_tokens(str, n_pipes);
 	while (n_pipes > n)
 	{
 		new_node = ft_newnode(clean_word(line_divided[n]));
-        if (new_list == NULL)
-            new_list = new_node;
-        else
+		if (new_list == NULL)
+			new_list = new_node;
+		else
 			lst_add_back(&new_list, new_node);
 		n++;
 	}
 	free(line_divided);
-    master->node = new_list;
-    return (new_list);
+	master->node = new_list;
+	return (new_list);
 }

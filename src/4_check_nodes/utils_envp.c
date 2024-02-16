@@ -12,25 +12,6 @@
 
 #include "minishell.h"
 
-/* Necesitamos dduplicar la vble const char **envp para poder trabajar con ella. En esta funcion, hacemos una lista dentro de t_master donde meteremos el dulicado de envp.*/
-void ft_dup_env(t_master *master, const char **env)
-{
-	int i;
-	char *dup;
-
-	i = 0;
-	while (env != NULL && env[i])
-	{
-		dup = ft_strdup(env[i]);
-		if (master->env == NULL)
-			master->env = ft_lstnew(dup);
-		else
-			ft_lstadd_back(&master->env, ft_lstnew(dup));
-		i++;
-	}
-	// print_env(master);
-}
-
 char *clean_vble(char *node, int idx)
 {
 	int i;
@@ -38,7 +19,7 @@ char *clean_vble(char *node, int idx)
 	int len;
 	char *new_line;
 
-	j = 0;
+	j = -1;
 	len = 0;
 	i = idx + 1;
 	while (ft_isalpha(node[i]))
@@ -48,25 +29,21 @@ char *clean_vble(char *node, int idx)
 	}
 	new_line = malloc(sizeof(char) * (len + 1)); // LEN DE EL NOMBRE DE LA VARIABLE HASTA QUE NO ENCUENTRAS UN CARACTER ALFABETICO
 	if (!new_line)
-		return (NULL);
+		exit_error("Malloc error\n");
 	i = idx + 1;
-	while (j < len)
-	{
-		new_line[j] = node[i];
-		j++;
-		i++;
-	}
+	while (++j < len)
+		new_line[j] = node[i++];
 	new_line[j] = '\0';
 	return (new_line);
 }
 
-/* Esta funcioon getenv recibe un char *(con el nombre qque queremos comparar) y qque junto con el "=" lo meeteremos en vble y es lo que usaremos para comparar*/
+/* Esta funcion getenv recibe un char *(con el nombre que queremos comparar) y que junto con el "=" lo meteremos en vble y es lo que usaremos para comparar*/
 char *ft_getenv(const char *name, t_list *env, int idx)
 {
-	char *vble;
 	int vble_len;
+	char *vble;
+	char *new_name;
 	t_list *tmp;
-	const char *new_name;
 
 	tmp = env;
 	new_name = clean_vble((char *)name, idx);
@@ -79,7 +56,7 @@ char *ft_getenv(const char *name, t_list *env, int idx)
 		if (ft_strncmp((char *)tmp->content, vble, vble_len) == 0)
 		{
 			free(vble);
-			return ((char *)tmp->content + vble_len); // casteamos el int; y devuelve el puntero a la vable + el = -> USER= pabastid
+			return ((char *)tmp->content + vble_len); // casteamos el int; y devuelve el puntero a la vable + el = -> USER=pabastid
 		}
 		tmp = tmp->next;
 	}

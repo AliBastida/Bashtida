@@ -30,12 +30,11 @@ NAME := minishell
 
 SRC :=  0_main/main.c 0_main/utils.c 0_main/free.c \
 			1_readline/read_line.c\
-			2_check_syntax/quotes_syntax.c 2_check_syntax/pipe_syntax.c \
-			2_check_syntax/utils_syntax.c \
+			2_check_syntax/pipe_syntax.c 2_check_syntax/utils_syntax.c \
 			3_split_per_pipes/general_split.c 3_split_per_pipes/list_pipes.c \
 			3_split_per_pipes/list_utils.c 3_split_per_pipes/split_utils.c  \
-			4_check_nodes/found_dollar.c 4_check_nodes/utils_nodes.c \
-			4_check_nodes/utils_envp.c 5_nodes/split_words.c \
+			4_check_nodes/found_dollar.c 4_check_nodes/utils_envp.c 4_check_nodes/clean_line.c \
+			5_nodes/split_words.c 5_nodes/utils_nodes.c \
 			6_builtins/builtin_env.c 6_builtins/builtins.c 6_builtins/builtin_cd.c \
 			6_builtins/builtin_pwd.c 6_builtins/builtin_unset.c  6_builtins/builtin_echo.c\
 			6_builtins/builtin_export.c 6_builtins/builtin_export_utils.c 6_builtins/builtin_exit.c \

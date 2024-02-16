@@ -41,17 +41,14 @@ bool	is_space(unsigned char c)
 		return (false);
 }
 
-void	free_all(t_master *master)
+/*esta funcion mira donde esta la siguiente quote para saltar todo lo que hay dentro*/
+int next_quote(char *str, int i, char c)
 {
-	if (master->line)
-		free(master->line);
-	if (master->clean_line)
-		free(master->clean_line);
-	if (master->cmds)
-		free_cmds(master->cmds);
-	if (master->node)
-		free_tokens(master->node);
-	if (master->env)
-		ft_lstclear(&master->env, &free);
-	free(master);
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (i);
+		i++;
+	}
+	return (i);
 }

@@ -13,11 +13,10 @@
 #ifndef MINISHELL_H
 #define MINISHELL_H
 
-#include <stdio.h>
 #include <fcntl.h>
-#include <limits.h>
 #include <signal.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -94,20 +93,20 @@
 	printf("----------------------\n");
 
 //=====0_MAIN=====//
-int main(int ac, char **av, const char **env);
-// int     main(int ac, char **av);
 
-//=====0_UTILS=====//
-// int syntax_error(int n);
-bool is_space(unsigned char c);
+//******FREE******//
+// void free_cmds(t_cmd *cmds);
+// void free_tokens(t_token *tk);
 void free_all(t_master *master);
-void ft_free_double(char **str);
-void exit_error(char *str);
-int syntax_error(char *str, char c, int out);
 
-//=====0_FREE=====//
-void free_cmds(t_cmd *cmds);
-void free_tokens(t_token *tk);
+//******MAIN******//
+int main(int ac, char **av, const char **env);
+
+//******UTILS******//
+int next_quote(char *str, int i, char c);
+int syntax_error(char *str, char c, int out);
+bool is_space(unsigned char c);
+void exit_error(char *str);
 
 //===== 1_READLINE =====//
 int read_line(t_master *master);
@@ -116,95 +115,71 @@ int read_line(t_master *master);
 //******PIPE_SYNTAX******//
 bool check_syntax_pipes(char *str);
 
-//******QUOTES_SYNTAX******//
-void clean_line(char *line, t_master *master);
-
 //******UTILS_SYNTAX******//
 int checking_syntax(char *str);
 
 //===== 3_SPLIT_PER_PIPES =====//
 //******GENERAL_SPLIT******//
-char *substr_token(char *str, int pipe, int i);
-int next_quote(char *str, int i, char c);
-char **line_divided_in_tokens(char *str);
-int how_many_pipes(char *str);
+char **line_divided_in_tokens(char *str, int n_pipes);
 
-//******LIST_PER_PIPES******//
-t_token *ft_newnode(void *content);
+//******LIST_PIPES******//
 t_token *create_nodeandlist(t_master *master, char *str);
 
 //******LIST_UTILS******//
-t_token *lst_last(t_token **lst);
 void lst_add_back(t_token **first, t_token *new_el);
-void lstdelone(t_token *lst, void (*del)(void *));
 void lstclear(t_token **lst, void (*del)(void *));
 
 //******SPLIT_UTILS******//
-int ft_strchar(char *s, int c);
+int ft_strchr_quotes(char *s, int c);
 
 //===== 4_CHECK_NODES =====//
+//******CLEAN_LINE******//
+void clean_line(char *line, t_master *master);
+
 //******FOUND_DOLLAR******//
-char *check_to_expand(t_word *node, t_list *env);
-void line_ready_to_use(t_token *token, t_master *master);
-char *ft_expand_dollar(t_word *node, t_list *env, int idx);
-char *line_without_quo(t_word *node);
-char *line_dollar_expanded(t_word *node);
 char *extract_dollar(t_word *node, t_list *env);
 
-//******UTILS_NODES******//
-int len_nodes(char *token);
-void categorizing_words(t_word *node);
-int is_redir(char *str, int i);
-char *substr_words(t_token *tmp, int start, int i);
-
 //******UTILS_ENV******//
-void ft_dup_env(t_master *token, const char **env);
-char *ft_getenv(const char *name, t_list *env, int idx);
 char *clean_vble(char *str, int idx);
+char *ft_getenv(const char *name, t_list *env, int idx);
 
-//******UTILS******//
-
-char *no_se_nombre_aun(t_word *node, t_list *env);
+//******UTILS_NODES******//
+int is_redir(char *str, int i);
+void categorizing_words(t_word *node);
+void line_ready_to_use(t_token *token, t_master *master);
+char *substr_words(t_token *tmp, int start, int i);
 
 //===== 5_NODES =====//
 //******SPLIT_WORDS******//
-t_word *ft_newnode_word(void *content);
-char *divided_by_word(t_token *node);
-t_word *lst_last_word(t_word **lst);
-void lst_add_back_word(t_word **first, t_word *new_node);
 t_word *create_nodeandlist_word(t_master *master, t_token *token);
-// char *divide_if_redir(t_token *node);
 
 //===== 6_BUILTINS =====//
-//******BUILTINS_CD******//
+//******BUILTIN_CD******//
 int builtin_cd(char *dir);
 
-//******BUILTINS_ECHO******//
+//******BUILTIN_ECHO******//
 int builtin_echo(char **args);
 
-//******BUILTINS_ENV******//
+//******BUILTIN_ENV******//
 int print_env(t_list *env);
 
-//******BUILTINS_EXIT******//
-long long int ft_atol(char *str);
+//******BUILTIN_EXIT******//
 int builtin_exit(char **args);
 
-//******BUILTINS_EXPORT******//
+//******BUILTIN_EXPORT******//
 int builtin_export(t_master *master, char **args);
-int ft_len_dptr(char **arr);
 
-//******BUILTINS_EXPORT_UTILS******//
-int len_hastaeligualymas(char *str);
-char *copyvble(char *str, int size);
+//******BUILTIN_EXPORT_UTILS******//
+int len_until_equal(char *str);
 int checking_format(char *str);
-t_list *get_envnode_export(t_list *env, char *arg);
+char *copyvble(char *str, int size);
 char *ft_strchr_export(char *str, char c);
+t_list *get_envnode_export(t_list *env, char *arg);
 
-//******BUILTINS_PWD******//
+//******BUILTIN_PWD******//
 int builtin_pwd(void);
 
-//******BUILTINS_UNSET******//
-void delete_node(t_list *env);
+//******BUILTIN_UNSET******//
 int builtin_unset(t_list **env, char **args);
 
 //******BUILTINS******//

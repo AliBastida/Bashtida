@@ -13,6 +13,7 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <limits.h>
 # include <stdarg.h>
 # include <stdlib.h>
 # include <string.h>
@@ -64,6 +65,7 @@ void				*ft_memchr(const void *s, int c, size_t n);
 /*=====CONV=====*/
 char				*ft_itoa(int n);
 int					ft_atoi(const char *str);
+long long int		ft_atol(char *str);
 
 /*=====MALLOC/FREE=====*/
 void				ft_free_double(char **str);
