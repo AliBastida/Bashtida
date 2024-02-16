@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:59:32 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/15 18:06:24 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/15 18:33:44 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ static void	swapping(char **env, size_t size)
 
 int	builtin_export(t_master *master, char **args)
 {
-	int	i;
+	int		i;
+	char	**list_char;
 
-	char **list_char; // int len;
 	i = 1;
 	if (!args[i])
 	{

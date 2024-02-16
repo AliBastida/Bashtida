@@ -6,7 +6,7 @@
 /*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:17:07 by pabastid          #+#    #+#             */
-/*   Updated: 2024/02/15 18:03:32 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/15 18:34:12 by pabastid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	delete_node(t_list *env)
 }
 
 // recibe el **env el array de args que van detras <UNSET hola holaaaa ciao pescao>
+// le unimos el "=" para asegurar todos los casos.
+// en el caso de que la coincidenccia sea el primer nodo hacemos el strncmp
 int	builtin_unset(t_list **env, char **args)
 {
 	int		i;
@@ -57,12 +59,10 @@ int	builtin_unset(t_list **env, char **args)
 	t_list	*aux;
 
 	i = 1;
-	while (args[i]) // mientras haya argumentos que borrar;
+	while (args[i])
 	{
 		arg = ft_strjoin(args[i], "=");
-		// le unimos el "=" para asegurar todos los casos.
 		if (ft_strncmp((char *)(*env)->content, arg, ft_strlen(arg)) == 0)
-		// en el caso de que la coincidenccia sea el primer nodo
 		{
 			aux = (*env)->next;
 			free(*env);
