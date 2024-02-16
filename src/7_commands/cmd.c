@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char *check_full_path(char **new_path, char **cmd, int *ok)
+static char *check_full_path(char **new_path, char **cmd, int *ok)
 {
 	int res;
 
@@ -34,7 +34,7 @@ char *check_full_path(char **new_path, char **cmd, int *ok)
 	return (NULL);
 }
 
-char *checking_path(char **path, char *cmd, int *ok)
+static char *checking_path(char **path, char *cmd, int *ok)
 {
 	int i;
 	char *ret;

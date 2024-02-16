@@ -20,7 +20,7 @@
 
 // FIXME: ME DA LA SENSACION DE QUE NO EXPANDE $VBLE SI ES ARG Y NO CMD. HAY QUE REVISARLO
 
-t_cmd *new_cmd(t_word *words, int n)
+static t_cmd *new_cmd(t_word *words, int n)
 {
 	t_cmd *new;
 
@@ -35,7 +35,7 @@ t_cmd *new_cmd(t_word *words, int n)
 	return (new);
 }
 
-t_cmd *create_node_cmd(t_word *words, t_master *master, int n)
+static t_cmd *create_node_cmd(t_word *words, t_master *master, int n)
 {
 	int i;
 	t_cmd *new;

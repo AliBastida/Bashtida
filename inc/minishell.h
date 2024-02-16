@@ -107,6 +107,7 @@ int next_quote(char *str, int i, char c);
 int syntax_error(char *str, char c, int out);
 bool is_space(unsigned char c);
 void exit_error(char *str);
+char **converting(t_list *env);
 
 //===== 1_READLINE =====//
 int read_line(t_master *master);
@@ -187,32 +188,17 @@ int is_builtin(char *cmd);
 int ft_len_dptr(char **arr);
 
 //===== 7_COMMANDS =====//
+//******CMD_LIST_UTILS******//
+t_cmd *create_list_cmd(t_token *token, t_master *master);
+
+//******CMD_UTILS******//
+int n_args(t_word *words);
+void lst_add_back_cmd(t_cmd *list, t_cmd *node);
+
 //******CMD******//
 void ft_take_cmd(t_cmd *new, t_master *master);
-char *checking_path(char **path, char *cmd, int *ok);
-
-//******CMD_LIST_UTILS******//
-int n_args(t_word *words);
-t_cmd *create_node_cmd(t_word *words, t_master *master, int i);
-t_cmd *create_list_cmd(t_token *token, t_master *master);
-void lst_add_back_cmd(t_cmd *list, t_cmd *node);
-t_cmd *lst_last_cmd(t_cmd *list);
-
-//******CMD_ERROR******//
-//******CMD_UTILS******//
-char *filename_path(char *name);
-char **take_path(t_master *path);
-int ft_access(char *filename, int mod);
-
-//******EXECVE******//
-int execute_cmds(t_master *master);
-char **converting(t_list *env);
-void ft_take_heredoc(t_cmd *cmd);
 
 //===== 8_REDIR =====//
-//******REDIR.C ******//
-void manage_redir(t_word *redir, t_cmd *cmd);
-
 //******INPUT < ******//
 void redir_input(t_word *redir, t_cmd *cmd);
 
@@ -225,12 +211,24 @@ void redir_heredoc(t_word *redir, t_cmd *cmd);
 //******APPEND_MODE >> ******//
 void append_mode(t_word *redir, t_cmd *cmd);
 
+//******REDIR_UTILS******//
+int ft_access(char *filename, int mod);
+void manage_redir(t_word *redir, t_cmd *cmd);
+char *filename_path(char *name);
+
+//===== 9_EXECUTE =====//
+//******EXECUTE_CMDS******//
+int execute_cmds(t_master *master);
+int run_builtin(t_master *master, t_cmd *tmp);
+
 void redirect_pipes(t_cmd *cmd, t_pipes pipes);
 int check_cmd_and_pipes(t_cmd **cmd, t_pipes *pipes);
 
 void close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes);
-int run_builtin(t_master *master, t_cmd *tmp);
 pid_t one_cmd(t_master *master, t_cmd *tmp, t_pipes pipes);
+
+//******EXECVE******//
+void ft_take_heredoc(t_cmd *cmd);
 
 //===== 10_SIGNALS =====//
 void set_signals(int mode);

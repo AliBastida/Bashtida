@@ -43,6 +43,19 @@ int ft_access(char *filename, int mod)
 	}
 	return (FILE_NOT_FOUND);
 }
+
+void manage_redir(t_word *redir, t_cmd *cmd)
+{
+	if (redir->type == 1)
+		redir_heredoc(redir, cmd);
+	else if (redir->type == 2)
+		append_mode(redir, cmd);
+	else if (redir->type == 3)
+		redir_input(redir, cmd);
+	else
+		redir_output(redir, cmd);
+}
+
 /*// el primer if lo que hace es chequear que mod es cero y si el archivo se puede leer,
 o si el mod es 1(output)y se puede escribir,
 	o si mod es 2 y es ejecutable(es cmd),

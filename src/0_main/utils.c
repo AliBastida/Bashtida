@@ -12,6 +12,24 @@
 
 #include "minishell.h"
 
+char **converting(t_list *env)
+{
+	char **env_char;
+	int i;
+
+	i = 0;
+	env_char = ft_calloc(sizeof(char *), (ft_lstsize(env) + 1));
+	if (!env_char)
+		exit_error("Malloc error\n");
+	while (env && env->content)
+	{
+		env_char[i] = ft_strdup(env->content);
+		env = env->next;
+		i++;
+	}
+	return (env_char);
+}
+
 void	exit_error(char *str)
 {
 	ft_putstr_fd(str, 2);

@@ -12,6 +12,19 @@
 
 #include "minishell.h"
 
+static t_cmd *lst_last_cmd(t_cmd *list)
+{
+	t_cmd *tmp;
+
+	tmp = list;
+	if (tmp != NULL)
+	{
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+	}
+	return (tmp);
+}
+
 // Aqui averiguamos el len para el malloc de la lista de args
 int n_args(t_word *words)
 {
@@ -29,35 +42,22 @@ int n_args(t_word *words)
 	return (i);
 }
 
-char **take_path(t_master *master)
-{
-	char *path;
-	char **split;
+// char **take_path(t_master *master)
+// {
+// 	char *path;
+// 	char **split;
 
-	int i = 0;
-	path = ft_strdup(ft_getenv("PATH", master->env, -1));
-	split = ft_split(path, ':');
-	while (split[i])
-	{
-		printf("%s\n", split[i]);
-		i++;
-	}
-	free(path);
-	return (split);
-}
-
-t_cmd *lst_last_cmd(t_cmd *list)
-{
-	t_cmd *tmp;
-
-	tmp = list;
-	if (tmp != NULL)
-	{
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-	}
-	return (tmp);
-}
+// 	int i = 0;
+// 	path = ft_strdup(ft_getenv("PATH", master->env, -1));
+// 	split = ft_split(path, ':');
+// 	while (split[i])
+// 	{
+// 		printf("%s\n", split[i]);
+// 		i++;
+// 	}
+// 	free(path);
+// 	return (split);
+// }
 
 void lst_add_back_cmd(t_cmd *list, t_cmd *node)
 {

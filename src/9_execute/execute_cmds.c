@@ -16,6 +16,19 @@
 // tengo que hacer una funcion que me convierta la lista del env a char ** para pasarsela a la funcion exec_ve. Esta funcion sera llamada por exec_cmd y el retorno de la transformacion
 // es lo que le pasare a execve.
 
+static void execute_heredoc(t_cmd *cmds)
+{
+	t_cmd *tmp;
+
+	tmp = cmds;
+	while (tmp)
+	{
+		if (tmp->hd)
+			ft_take_heredoc(tmp);
+		tmp = tmp->next;
+	}
+}
+
 int run_builtin(t_master *master, t_cmd *tmp)
 {
 	int res;
@@ -36,37 +49,6 @@ int run_builtin(t_master *master, t_cmd *tmp)
 	else if (ft_strncmp(tmp->cmd, "exit", 5) == 0)
 		res = builtin_exit(tmp->args);
 	return (res);
-}
-
-char **converting(t_list *env)
-{
-	char **env_char;
-	int i;
-
-	i = 0;
-	env_char = ft_calloc(sizeof(char *), (ft_lstsize(env) + 1));
-	if (!env_char)
-		return (NULL);
-	while (env && env->content)
-	{
-		env_char[i] = ft_strdup(env->content);
-		env = env->next;
-		i++;
-	}
-	return (env_char);
-}
-
-void execute_heredoc(t_cmd *cmds)
-{
-	t_cmd *tmp;
-
-	tmp = cmds;
-	while (tmp)
-	{
-		if (tmp->hd)
-			ft_take_heredoc(tmp);
-		tmp = tmp->next;
-	}
 }
 
 // TODO gestionar la vable global $?
