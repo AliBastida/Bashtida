@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:56:31 by pabastid          #+#    #+#             */
-/*   Updated: 2024/02/15 18:33:01 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/16 15:36:24 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,3 @@ int	builtin_exit(char **args)
 	}
 	return (0);
 }
-// TODO: SALIDA CON 255?

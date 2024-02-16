@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:27:43 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/05 17:28:22 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:13:04 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,13 @@ void redir_input(t_word *redir, t_cmd *cmd)
 		printf("fd: %d\n", fd);
 		if (fd == -1)
 		{
+			cmd->error = ft_strdup(redir->next->word);
 			cmd->ok = 4;
-			printf("%s\n", g_error_array[cmd->ok - 1]);
+			printf("bashtida: error: %s : %s\n", cmd->error, g_error_array[cmd->ok - 1]);
 			return ;
 		}
 		cmd->in_fd = fd;
+		return;
 	}
 	cmd->ok = res;
 	printf("Input error: %i\n", res);

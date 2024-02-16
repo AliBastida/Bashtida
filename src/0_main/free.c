@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/15 18:52:38 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/16 14:08:43 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static void free_cmds(t_cmd *cmds)
 			ft_free_double(tmp->args);
 		if (tmp->hd)
 			free_hd(tmp->hd);
+		if (tmp->error)
+			free(tmp->hd);
 		free(tmp);
 		tmp = next;
 		if (tmp)

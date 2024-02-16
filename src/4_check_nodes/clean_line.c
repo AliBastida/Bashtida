@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:50:19 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/09 12:14:47 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/16 15:25:18 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,6 @@ static void memory_alloc(t_master *master, char *str)
 
 	len = ft_strlen(str);
 	master->clean_line = ft_calloc(len_without_quotes(str) + 1, sizeof(char));
-	// printf("Len without quotes: %d\twith: %zu\n", len_without_quotes(str), ft_strlen(str));
-	// estamos allocando mas memoria,
-	// xq estamos contando memoria incluyenddo las comillas.
-	// TODO AHORA NO
 	if (!master->clean_line)
 		exit_error("Malloc error\n");
 }
@@ -78,5 +74,4 @@ void clean_line(char *str, t_master *master)
 		else if (str[i] != '\0')
 			master->clean_line[j++] = str[i++];
 	}
-	// printf("Master line: %s\n", master->clean_line);
 }

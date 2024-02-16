@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_words.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:35:41 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/15 18:27:53 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:01:15 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static t_word *ft_newnode_word(void *content)
 
 	new = ft_calloc(sizeof(t_token), 1);
 	if (!new)
-		return (NULL);
+		exit_error("Malloc error");
 	new->word = content;
 	new->next = NULL;
 	return (new);
@@ -92,7 +92,6 @@ t_word	*create_nodeandlist_word(t_master *master, t_token *token)
 		{
 			new = ft_newnode_word(divided_by_word(tmp));
 			if (!new)
-				// exit(); // QUE ES ESTO?
 				exit_error("Malloc error");
 			categorizing_words(new);
 			if (new_list == NULL)

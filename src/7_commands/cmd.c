@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 12:21:32 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/10 16:33:28 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:10:13 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static char *checking_path(char **path, char *cmd, int *ok)
 	{
 		new_path = ft_strjoin(path[i], "/");
 		new_path = ft_strjoin(new_path, cmd);
+		if (!new_path)
+			exit_error("Malloc error");
 		ret = check_full_path(&new_path, &cmd, ok);
 		if (ret)
 			return (ret);
@@ -67,6 +69,8 @@ void ft_take_cmd(t_cmd *new, t_master *master)
 	cmd = ft_strdup(new->args[0]);
 	path = ft_strdup(ft_getenv("PATH", master->env, -1));
 	split = ft_split(path, ':');
+	if (!cmd || !path || !split)
+		exit_error("Malloc error");
 	free(path);
 	new->cmd = checking_path(split, cmd, &new->ok);
 	ft_free_double(split);

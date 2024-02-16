@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:13:11 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/09 12:13:06 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/16 16:08:56 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,11 @@ int read_line(t_master *master)
 		while (master->line[i] == ' ' || master->line[0] == '\t')
 			i++;
 		if (master->line[i] == '\0')
-		{
-			free(master->line); // TODO Para quitar el leak del readline
-			return (1);
-		}
+			exit_error("Malloc error\n");
 	}
 	else if (!ft_strncmp(master->line, "", 1))
 	{
-		free(master->line); // TODO Para quitar el leak del readline
+		free(master->line);
 		return (1);
 	}
 	return (0);

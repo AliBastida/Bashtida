@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 11:40:00 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/15 18:52:38 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:55:55 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static void ft_dup_env(t_master *master, const char **env)
 	while (env != NULL && env[i])
 	{
 		dup = ft_strdup(env[i]);
+		if (!dup)
+			exit_error("Malloc error\n");
 		if (master->env == NULL)
 			master->env = ft_lstnew(dup);
 		else
@@ -48,7 +50,7 @@ static void	minishell_magic(t_master *master)
 		|| !execute_cmds(master))
 	{
 		free_all(master);
-		exit(1);
+		exit_error("Minishell couldn't do its magic\n");
 	}
 }
 
@@ -78,6 +80,8 @@ int	main(int ac, char **av, const char **env)
 	g_err = 0;
 	set_term();
 	master = ft_calloc(1, sizeof(t_master));
+	if (!master)
+		exit_error("Malloc error\n");
 	ft_dup_env(master, env);
 	minishell_starts(master);
 	free_all(master);

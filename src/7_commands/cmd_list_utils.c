@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:35:20 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/09 12:48:35 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:07:37 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static t_cmd *create_node_cmd(t_word *words, t_master *master, int n)
 	tmp = words;
 	new = new_cmd(words, n);
 	if (!new)
-		return (NULL);
+		exit_error("Malloc error");
 	while (tmp)
 	{
 		if (tmp->type == 1 || tmp->type == 2 || tmp->type == 3 || tmp->type == 4)
@@ -76,7 +76,7 @@ t_cmd *create_list_cmd(t_token *token, t_master *master)
 	{
 		node = create_node_cmd(tmp->words, master, i);
 		if (!node)
-			return (NULL);
+			exit_error("Malloc error");
 		if (list == NULL)
 			list = node;
 		else

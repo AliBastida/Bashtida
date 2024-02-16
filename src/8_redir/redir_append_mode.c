@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:22:34 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/05 17:38:08 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/16 14:05:37 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void append_mode(t_word *redir, t_cmd *cmd)
 		}
 		else
 			cmd->out_fd = fd;
+		return;
 	}
 	cmd->ok = res;
 	printf("Output error: %i\n", res);

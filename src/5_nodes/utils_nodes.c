@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:17:06 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/12 13:34:06 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:03:04 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void line_ready_to_use(t_token *token, t_master *master)
 			clean_line(var_con_dolar_expandido, master);
 			free(node->word);
 			node->word = ft_strdup(master->clean_line);
+			if (!node->word)
+				exit_error("malloc error\n");
 			free(master->clean_line);
 			master->clean_line = NULL;
 			node = node->next;
@@ -77,7 +79,11 @@ char *substr_words(t_token *tmp, int start, int i)
 	char *new;
 	char *rest;
 	new = ft_substr(tmp->content_token, start, i - start + 1);
+	if (!new)
+		exit_error("Malloc error");
 	rest = ft_substr(tmp->content_token, i + 1, ft_strlen(tmp->content_token));
+	if (!rest)
+		exit_error("Malloc error");
 	free(tmp->content_token);
 	if (!ft_strncmp(rest, "", 1))
 	{

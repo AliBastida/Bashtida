@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:31:30 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/15 10:27:22 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/16 15:19:47 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ int	syntax_error(char *str, char c, int out)
 	return (out);
 }
 
-// true = diferente a 0
-// false = igual a 0
 bool	is_space(unsigned char c)
 {
 	if (c == ' ' || c == '\t')

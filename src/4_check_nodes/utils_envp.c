@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:51:12 by pabastid          #+#    #+#             */
-/*   Updated: 2024/02/13 17:35:36 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/16 15:30:04 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ char *ft_getenv(const char *name, t_list *env, int idx)
 	tmp = env;
 	new_name = clean_vble((char *)name, idx);
 	vble = ft_strjoin(new_name, "="); // le unimos el "=" para asegurar todos los casos.
-	// printf("Vble: %s\n", vble);
+	if (!vble)
+		exit_error("Malloc error\n");
 	vble_len = ft_strlen(vble);
 	while (tmp && tmp->content)
 	{
-		// printf("Env: %s\n", (char *)tmp->content);
 		if (ft_strncmp((char *)tmp->content, vble, vble_len) == 0)
 		{
 			free(vble);
@@ -61,6 +61,8 @@ char *ft_getenv(const char *name, t_list *env, int idx)
 		tmp = tmp->next;
 	}
 	free(vble);
-	vble = ft_strdup(""); // Antes devolvia NULL, pero lo hemos cambiado para que nos de cadena vacia.
+	vble = ft_strdup("");
+	if (!vble)
+		exit_error("Malloc error\n"); // Antes devolvia NULL, pero lo hemos cambiado para que nos de cadena vacia.
 	return (vble);
 }

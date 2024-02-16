@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_syntax.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:38:29 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/14 16:37:15 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/16 15:13:37 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,3 @@ bool	check_syntax_pipes(char *str)
 		return (1);
 	return (0);
 }
-
-// TODO: tenemos que revisar el caso en el que haya un | seguido de "". Eso deberia dar error tb.

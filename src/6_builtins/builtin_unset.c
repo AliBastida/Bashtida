@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabastid <pabastid@student.42barcel>       +#+  +:+       +#+        */
+/*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:17:07 by pabastid          #+#    #+#             */
-/*   Updated: 2024/02/15 18:34:12 by pabastid         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:07:10 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	builtin_unset(t_list **env, char **args)
 	while (args[i])
 	{
 		arg = ft_strjoin(args[i], "=");
+		if (!arg)
+			exit_error("Malloc error");
 		if (ft_strncmp((char *)(*env)->content, arg, ft_strlen(arg)) == 0)
 		{
 			aux = (*env)->next;

@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:40:43 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/09 12:20:54 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/16 15:21:36 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static char *clean_word(char *str)
 	char *clean_line;
 
 	clean_line = ft_strtrim(str, " ");
+	if (!clean_line)
+		exit_error("Malloc error\n");
 	free(str);
 	return (clean_line);
 }
@@ -47,7 +49,7 @@ static t_token *ft_newnode(void *content)
 
 	new = ft_calloc(sizeof(t_token), 1);
 	if (!new)
-		return (NULL);
+		exit_error("Malloc error\n");
 	new->content_token = content;
 	new->next = NULL;
 	return (new);
