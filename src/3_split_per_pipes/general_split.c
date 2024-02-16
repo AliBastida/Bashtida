@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:25:30 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/09 12:43:11 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:51:27 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ static int ft_copy_line(char **line, char *str)
 
 char **line_divided_in_tokens(char *str, int n_pipes)
 {
-	int		j;
-	// int n_pipes;
+	int j;
 	int		position;
 	char	**line_divided;
 

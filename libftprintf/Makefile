@@ -6,7 +6,7 @@
 #    By: abastida <abastida@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/20 11:24:34 by abastida          #+#    #+#              #
-#    Updated: 2024/02/15 17:57:46 by abastida         ###   ########.fr        #
+#    Updated: 2024/02/16 13:51:21 by abastida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,8 +63,6 @@ all : $(NAME)
 $(NAME) : $(OBJ)
 	@$(AR) $(NAME) $(OBJ)
 	@echo "$(COLOR_GREEN)$(COLOR_BOLD)=== 🤩 Libft compiled 🤩 === $(COLOR_RESET)"
-
-# @ranlib $(NAME)
 
 clean :
 	@$(RM) $(BUILD_DIR)

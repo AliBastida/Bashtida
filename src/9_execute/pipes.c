@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:27:43 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/15 18:56:07 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:51:11 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int check_cmd_and_pipes(t_cmd **cmd, t_pipes *pipes)
 	}
 	if ((*cmd)->ok) // Aqui miramos si el comando está bien o hay un error
 	{
-		printf("%s\n", g_error_array[(*cmd)->ok - 1]);
+		printf("bash: %s: %s", (*cmd)->cmd, g_error_array[(*cmd)->ok - 1]);
+		// printf("%s\n", g_error_array[(*cmd)->ok - 1]);
 		(*cmd) = (*cmd)->next;
 		return (1);
 	}
