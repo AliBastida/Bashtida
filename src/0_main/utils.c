@@ -12,10 +12,10 @@
 
 #include "minishell.h"
 
-char **converting(t_list *env)
+char	**converting(t_list *env)
 {
-	char **env_char;
-	int i;
+	char	**env_char;
+	int		i;
 
 	i = 0;
 	env_char = ft_calloc(sizeof(char *), (ft_lstsize(env) + 1));
@@ -24,6 +24,8 @@ char **converting(t_list *env)
 	while (env && env->content)
 	{
 		env_char[i] = ft_strdup(env->content);
+		if (!env_char[i])
+			exit_error("Malloc error\n");
 		env = env->next;
 		i++;
 	}
@@ -57,8 +59,7 @@ bool	is_space(unsigned char c)
 		return (false);
 }
 
-/*esta funcion mira donde esta la siguiente quote para saltar todo lo que hay dentro*/
-int next_quote(char *str, int i, char c)
+int	next_quote(char *str, int i, char c)
 {
 	while (str[i])
 	{

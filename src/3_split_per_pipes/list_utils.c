@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static t_token *lst_last(t_token **lst)
+static t_token	*lst_last(t_token **lst)
 {
 	t_token	*temp;
 
@@ -25,10 +25,10 @@ static t_token *lst_last(t_token **lst)
 	return (temp);
 }
 
-static void lstdelone(t_token *lst, void (*del)(void *))
+static void	lstdelone(t_token *lst, void (*del)(void *))
 {
 	if (!lst)
-		return;
+		return ;
 	if (del)
 		del(lst->content_token);
 	free(lst);
@@ -47,7 +47,7 @@ void	lst_add_back(t_token **first, t_token *new_node)
 	}
 }
 
-void	lstclear(t_token **lst, void (*del)(void*))
+void	lstclear(t_token **lst, void (*del)(void *))
 {
 	t_token	*keeper;
 

@@ -32,7 +32,7 @@ SRC :=  0_main/main.c 0_main/utils.c 0_main/free.c \
 			1_readline/read_line.c\
 			2_check_syntax/pipe_syntax.c 2_check_syntax/utils_syntax.c \
 			3_split_per_pipes/general_split.c 3_split_per_pipes/list_pipes.c \
-			3_split_per_pipes/list_utils.c 3_split_per_pipes/split_utils.c  \
+			3_split_per_pipes/list_utils.c \
 			4_check_nodes/found_dollar.c 4_check_nodes/utils_envp.c 4_check_nodes/clean_line.c \
 			5_nodes/split_words.c 5_nodes/utils_nodes.c \
 			6_builtins/builtin_env.c 6_builtins/builtins.c 6_builtins/builtin_cd.c \
@@ -60,7 +60,7 @@ LIBREAD := -L readline -lreadline -lncurses
 HEADER := inc/ readline/
 INCLUDE := $(addprefix -I , $(HEADER))
 
-CFLAGS := -Wall -Werror -Wextra -g -MMD -DREADLINE_LIBRARY -fsanitize='address,undefined'
+CFLAGS := -Wall -Werror -Wextra -g -MMD -DREADLINE_LIBRARY #-fsanitize='address,undefined'
 
 $(BUILD_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(@D)

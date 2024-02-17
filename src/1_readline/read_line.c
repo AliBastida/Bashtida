@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-int read_line(t_master *master)
+int	read_line(t_master *master)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	master->line = readline(BBLU "Bashtida: " RESET);
@@ -28,7 +28,10 @@ int read_line(t_master *master)
 		while (master->line[i] == ' ' || master->line[0] == '\t')
 			i++;
 		if (master->line[i] == '\0')
-			exit_error("Malloc error\n");
+		{
+			free(master->line);
+			return (1);
+		}
 	}
 	else if (!ft_strncmp(master->line, "", 1))
 	{

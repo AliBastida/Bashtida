@@ -12,63 +12,112 @@
 
 #include "minishell.h"
 
-static void adding_export_continue(t_master *master, char **args, int i)
-{
-	char *arg;
-	int len;
-	t_list *aux;
+// static void adding_export_continue(t_master *master, char **args, int i)
+// {
+// 	int len;
+// 	char *arg;
+// 	t_list *aux;
 
-	len = len_until_equal(args[i]);
-	if (checking_format(args[i]) == 1)
+// 	len = len_until_equal(args[i]);
+// 	if (checking_format(args[i]) == 1)
+// 	{
+// 		printf("bashtida: export: %s': not a valid identifier\n", args[i]);
+// 		return ;
+// 	}
+// 	arg = copyvble(args[i], len);
+// 	if (checking_format(arg) == 0)
+// 		arg = ft_strjoin(arg, "=");
+// 	if (!arg)
+// 		exit_error("Malloc error");
+// 	if (get_envnode_export(master->env, arg))
+// 	{
+// 		aux = get_envnode_export(master->env, arg);
+// 		aux->content = ft_strdup(ft_strjoin(arg, ft_strchr_export(args[i],
+// 																	'=')));
+// 		if (!aux->content)
+// 			exit_error("Malloc error");
+// 	}
+// 	else if ((checking_format(arg) == 0))
+// 	{
+// 		arg = ft_strjoin(arg, ft_strchr_export(args[i], '='));
+// 		if (!arg)
+// 			exit_error("Malloc error");
+// 		ft_lstadd_back(&master->env, ft_lstnew(ft_strdup(arg)));
+// 	}
+// 	free(arg);
+// }
+
+// esta funcion hace trabajar realmente export: trabaja en el caso concreto de que nos den la vble con =,
+// sin =, con el +=
+// y si la vble la encuentra en el env la sustituimos por el nuevo valor con strdup si es nueva,
+// la anade al final
+// static void adding_export(t_master *master, char **args, int i)
+// {
+// 	int len;
+// 	char *arg;
+// 	t_list *aux;
+
+// 	aux = master->env;
+// 	len = len_until_equal(args[i]);
+// 	if (args[i][len] && (checking_format(args[i]) == 0) && ((args[i][len
+// + 1] == '\0' || args[i][len + 2] == '\0')))
+// 	{
+// 		arg = copyvble(args[i], len);
+// 		arg = ft_strdup(ft_strjoin(arg, "=\"\""));
+// 		if (!arg)
+// 			exit_error("Malloc error");
+// 		ft_lstadd_back(&master->env, ft_lstnew(ft_strdup(arg)));
+// 		free(arg);
+// 	}
+// 	else
+// 		adding_export_continue(master, args, i);
+// }
+
+static void	adding_export_continue(t_master *master, char *arg)
+{
+	int		i;
+	t_list	*aux;
+
+	i = 0;
+	aux = get_envnode_export(master->env, arg);
+	if (aux)
 	{
-		printf("bashtida: export: %s': not a valid identifier\n", args[i]);
-		return;
+		if (ft_strchr(arg, '+'))
+		{
+			while (arg[i] != '+')
+				i++;
+		}
+		else
+		{
+			free(aux->content);
+			aux->content = ft_strdup(arg);
+		}
 	}
-	arg = copyvble(args[i], len);
-	if (checking_format(arg) == 0)
-		arg = ft_strjoin(arg, "=");
-	if (!arg)
-		exit_error("Malloc error");
-	if (get_envnode_export(master->env, arg))
-	{
-		aux = get_envnode_export(master->env, arg);
-		aux->content = ft_strdup(ft_strjoin(arg, ft_strchr_export(args[i], '=')));
-		if (!aux->content)
-			exit_error("Malloc error");
-	}
-	else if ((checking_format(arg) == 0))
-	{
-		arg = ft_strjoin(arg, ft_strchr_export(args[i], '='));
-		if (!arg)
-			exit_error("Malloc error");
-		ft_lstadd_back(&master->env, ft_lstnew(ft_strdup(arg)));
-	}
-	free(arg);
 }
 
-// esta funcion hace trabajar realmente export: trabaja en el caso concreto de que nos den la vble con =, sin =, con el +=
-// y si la vble la encuentra en el env la sustituimos por el nuevo valor con strdup si es nueva, la anade al final
-static void adding_export(t_master *master, char **args, int i)
+static void	adding_export(t_master *master, char *arg)
 {
-	char *arg;
-	t_list *aux;
-	int len;
-	aux = master->env;
-	len = len_until_equal(args[i]);
-	if (args[i][len] && (checking_format(args[i]) == 0) && ((args[i][len + 1] == '\0' || args[i][len + 2] == '\0')))
+	int		len;
+	char	*new;
+
+	len = len_until_equal(arg);
+	if (checking_format(arg))
 	{
-		arg = copyvble(args[i], len);
-		arg = ft_strdup(ft_strjoin(arg, "=\"\""));
-		if (!arg)
-			exit_error("Malloc error");
-		ft_lstadd_back(&master->env, ft_lstnew(ft_strdup(arg)));
-		free(arg);
+		printf("bashtida: export: %s': not a valid identifier\n", arg);
+		return ;
+	}
+	if (!arg[len] || (arg[len] && arg[len + 1] == '\0'))
+	{
+		new = ft_strjoin(arg, "=\"\"");
+		if (!new)
+			exit_error("Malloc error\n");
+		ft_lstadd_back(&master->env, ft_lstnew(new));
 	}
 	else
-		adding_export_continue(master, args, i);
+		adding_export_continue(master, arg);
 }
 
-static void print_export(char **arr)
+static void	print_export(char **arr)
 {
 	int	i;
 
@@ -123,7 +172,8 @@ int	builtin_export(t_master *master, char **args)
 	}
 	while (args[i])
 	{
-		adding_export(master, args, i);
+		// adding_export(master, args, i);
+		adding_export(master, args[i]);
 		i++;
 	}
 	return (0);

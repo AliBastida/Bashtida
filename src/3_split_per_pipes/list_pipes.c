@@ -12,11 +12,10 @@
 
 #include "minishell.h"
 
-/*En esta funcion contamos los | que hay fuera de quotes*/
-static int how_many_pipes(char *str)
+static int	how_many_pipes(char *str)
 {
-	int i;
-	int n_pipes;
+	int	i;
+	int	n_pipes;
 
 	i = 0;
 	n_pipes = 0;
@@ -31,10 +30,9 @@ static int how_many_pipes(char *str)
 	return (n_pipes);
 }
 
-// Con esta funcion crearemos el nuevo nodo
-static char *clean_word(char *str)
+static char	*clean_word(char *str)
 {
-	char *clean_line;
+	char	*clean_line;
 
 	clean_line = ft_strtrim(str, " ");
 	if (!clean_line)
@@ -43,7 +41,7 @@ static char *clean_word(char *str)
 	return (clean_line);
 }
 
-static t_token *ft_newnode(void *content)
+static t_token	*ft_newnode(void *content)
 {
 	t_token	*new;
 
@@ -55,17 +53,13 @@ static t_token *ft_newnode(void *content)
 	return (new);
 }
 
-// Esta es nuestra funcion para crear la lista con el rdo de line_divided_in_tokens nos lo guardara en un nuevo nodo
-// (new_node) en funcion de los pipes que encuentra (n).
-
-// TODO: aqui he borrado la variable n_pipes y estoy utilizando la n_pipes de master
-t_token *create_nodeandlist(t_master *master, char *str)
+void	create_token_list(t_master *master, char *str)
 {
-	int n;
-	int n_pipes;
-	char **line_divided;
-	t_token *new_node;
-	t_token *new_list;
+	int		n;
+	int		n_pipes;
+	char	**line_divided;
+	t_token	*new_node;
+	t_token	*new_list;
 
 	n = 0;
 	new_list = NULL;
@@ -83,5 +77,5 @@ t_token *create_nodeandlist(t_master *master, char *str)
 	}
 	free(line_divided);
 	master->node = new_list;
-	return (new_list);
 }
+// return (new_list);

@@ -48,15 +48,14 @@
 	}                                                                                               \
 	printf("----------------------\n");
 
-#define PRINT_TOKENS(list)                                         \
-	t_token *random_tmp = list;                                    \
-	printf("----------------------\n");                            \
-	while (random_tmp != NULL)                                     \
-	{                                                              \
-		printf("random_tmp: *%s*\n", random_tmp->content_token);   \
-		printf("len: %d\n", len_nodes(random_tmp->content_token)); \
-		random_tmp = random_tmp->next;                             \
-	}                                                              \
+#define PRINT_TOKENS(list)                                       \
+	t_token *random_tmp = list;                                  \
+	printf("----------------------\n");                          \
+	while (random_tmp != NULL)                                   \
+	{                                                            \
+		printf("random_tmp: *%s*\n", random_tmp->content_token); \
+		random_tmp = random_tmp->next;                           \
+	}                                                            \
 	printf("----------------------\n");
 
 #define PRINT_ARRAY(cadena)                       \
@@ -124,14 +123,11 @@ int checking_syntax(char *str);
 char **line_divided_in_tokens(char *str, int n_pipes);
 
 //******LIST_PIPES******//
-t_token *create_nodeandlist(t_master *master, char *str);
+void create_token_list(t_master *master, char *str);
 
 //******LIST_UTILS******//
 void lst_add_back(t_token **first, t_token *new_el);
 void lstclear(t_token **lst, void (*del)(void *));
-
-//******SPLIT_UTILS******//
-int ft_strchr_quotes(char *s, int c);
 
 //===== 4_CHECK_NODES =====//
 //******CLEAN_LINE******//
@@ -152,7 +148,7 @@ char *substr_words(t_token *tmp, int start, int i);
 
 //===== 5_NODES =====//
 //******SPLIT_WORDS******//
-t_word *create_nodeandlist_word(t_master *master, t_token *token);
+t_word *create_word_list(t_master *master, t_token *token);
 
 //===== 6_BUILTINS =====//
 //******BUILTIN_CD******//

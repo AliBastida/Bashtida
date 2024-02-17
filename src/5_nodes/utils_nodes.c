@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-void categorizing_words(t_word *node)
+void	categorizing_words(t_word *node)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (node->word[i] == '<' && node->word[i + 1] == '<')
@@ -34,12 +34,11 @@ void categorizing_words(t_word *node)
 	i++;
 }
 
-// Esta funcion recibe t_token y guarda cada nodo limpio de comillas y con dollar expandido
-void line_ready_to_use(t_token *token, t_master *master)
+void	line_ready_to_use(t_token *token, t_master *master)
 {
-	t_word *node;
-	t_token *tmp;
-	char *var_con_dolar_expandido;
+	t_word	*node;
+	t_token	*tmp;
+	char	*var_con_dolar_expandido;
 
 	tmp = token;
 	while (tmp)
@@ -61,8 +60,7 @@ void line_ready_to_use(t_token *token, t_master *master)
 	}
 }
 
-// Esta funcion retorna 1 si es redireccion y 0 si no es.
-int is_redir(char *str, int i)
+int	is_redir(char *str, int i)
 {
 	if (str[i] != '\0' && (str[i] == '>' || str[i] == '<'))
 	{
@@ -73,11 +71,11 @@ int is_redir(char *str, int i)
 	return (0);
 }
 
-// hemos hecho un sbstr de new y obtendremos rest que es lo que usaremos como nuevo tmp en la funcion create_nodeand list_word
-char *substr_words(t_token *tmp, int start, int i)
+char	*substr_words(t_token *tmp, int start, int i)
 {
-	char *new;
-	char *rest;
+	char	*new;
+	char	*rest;
+
 	new = ft_substr(tmp->content_token, start, i - start + 1);
 	if (!new)
 		exit_error("Malloc error");
@@ -92,5 +90,5 @@ char *substr_words(t_token *tmp, int start, int i)
 	}
 	else
 		tmp->content_token = rest;
-	return new;
+	return (new);
 }

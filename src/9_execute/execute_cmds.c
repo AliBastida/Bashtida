@@ -59,6 +59,7 @@ int execute_cmds(t_master *master)
 	pid_t *pids;
 	t_pipes pipes; // Structura que tiene el pipe y el file descriptor temporal
 
+	PRINT_CMD(master->cmds);
 	i = 0;
 	pipes.p[0] = -1;
 	pipes.p[1] = -1;

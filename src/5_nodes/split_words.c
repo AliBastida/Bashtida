@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static t_word *lst_last_word(t_word **lst)
+static t_word	*lst_last_word(t_word **lst)
 {
 	t_word	*temp;
 
@@ -25,7 +25,7 @@ static t_word *lst_last_word(t_word **lst)
 	return (temp);
 }
 
-static void lst_add_back_word(t_word **first, t_word *new_node)
+static void	lst_add_back_word(t_word **first, t_word *new_node)
 {
 	t_word	*temp;
 
@@ -38,7 +38,7 @@ static void lst_add_back_word(t_word **first, t_word *new_node)
 	}
 }
 
-static t_word *ft_newnode_word(void *content)
+static t_word	*ft_newnode_word(void *content)
 {
 	t_word	*new;
 
@@ -50,7 +50,7 @@ static t_word *ft_newnode_word(void *content)
 	return (new);
 }
 
-static char *divided_by_word(t_token *tmp)
+static char	*divided_by_word(t_token *tmp)
 {
 	int	i;
 	int	start;
@@ -77,8 +77,7 @@ static char *divided_by_word(t_token *tmp)
 	return (NULL);
 }
 
-// TODO: HAY QUE CHEQUEAR SI EL N++ SE PUEDE PONER DONDE LO HE PUESTO O DEBE IR ABAJO
-t_word	*create_nodeandlist_word(t_master *master, t_token *token)
+t_word	*create_word_list(t_master *master, t_token *token)
 {
 	t_word	*new_list;
 	t_word	*new;

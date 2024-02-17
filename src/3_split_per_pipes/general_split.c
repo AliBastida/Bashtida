@@ -12,7 +12,25 @@
 
 #include "minishell.h"
 
-static int ft_copy_line(char **line, char *str)
+static int	ft_strchr_quotes(char *str, int c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+		{
+			i = next_quote(str, i + 1, str[i]);
+		}
+		if (str[i] == c)
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
+static int	ft_copy_line(char **line, char *str)
 {
 	int	len;
 
@@ -24,9 +42,9 @@ static int ft_copy_line(char **line, char *str)
 	return (len);
 }
 
-char **line_divided_in_tokens(char *str, int n_pipes)
+char	**line_divided_in_tokens(char *str, int n_pipes)
 {
-	int j;
+	int		j;
 	int		position;
 	char	**line_divided;
 

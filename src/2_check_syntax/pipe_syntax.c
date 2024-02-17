@@ -12,9 +12,7 @@
 
 #include "minishell.h"
 
-// TODO: HABLAR SOBRE ESTAS FUNCIONES!!!
-
-static bool something_before(char *str)
+static bool	something_before(char *str)
 {
 	int	i;
 
@@ -26,7 +24,7 @@ static bool something_before(char *str)
 	return (0);
 }
 
-static bool there_is_sth(char *str)
+static bool	there_is_sth(char *str)
 {
 	if (something_before(str))
 		return (1);
@@ -43,7 +41,7 @@ static bool there_is_sth(char *str)
 	return (0);
 }
 
-static bool something_after(char *str)
+static bool	something_after(char *str)
 {
 	int	len;
 

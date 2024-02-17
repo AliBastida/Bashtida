@@ -12,12 +12,12 @@
 
 #include "minishell.h"
 
-char *clean_vble(char *node, int idx)
+char	*clean_vble(char *node, int idx)
 {
-	int i;
-	int j;
-	int len;
-	char *new_line;
+	int		i;
+	int		j;
+	int		len;
+	char	*new_line;
 
 	j = -1;
 	len = 0;
@@ -27,7 +27,7 @@ char *clean_vble(char *node, int idx)
 		i++;
 		len++;
 	}
-	new_line = malloc(sizeof(char) * (len + 1)); // LEN DE EL NOMBRE DE LA VARIABLE HASTA QUE NO ENCUENTRAS UN CARACTER ALFABETICO
+	new_line = malloc(sizeof(char) * (len + 1));
 	if (!new_line)
 		exit_error("Malloc error\n");
 	i = idx + 1;
@@ -37,17 +37,16 @@ char *clean_vble(char *node, int idx)
 	return (new_line);
 }
 
-/* Esta funcion getenv recibe un char *(con el nombre que queremos comparar) y que junto con el "=" lo meteremos en vble y es lo que usaremos para comparar*/
-char *ft_getenv(const char *name, t_list *env, int idx)
+char	*ft_getenv(const char *name, t_list *env, int idx)
 {
-	int vble_len;
-	char *vble;
-	char *new_name;
-	t_list *tmp;
+	int		vble_len;
+	char	*vble;
+	char	*new_name;
+	t_list	*tmp;
 
 	tmp = env;
 	new_name = clean_vble((char *)name, idx);
-	vble = ft_strjoin(new_name, "="); // le unimos el "=" para asegurar todos los casos.
+	vble = ft_strjoin(new_name, "=");
 	if (!vble)
 		exit_error("Malloc error\n");
 	vble_len = ft_strlen(vble);
@@ -56,13 +55,13 @@ char *ft_getenv(const char *name, t_list *env, int idx)
 		if (ft_strncmp((char *)tmp->content, vble, vble_len) == 0)
 		{
 			free(vble);
-			return ((char *)tmp->content + vble_len); // casteamos el int; y devuelve el puntero a la vable + el = -> USER=pabastid
+			return ((char *)tmp->content + vble_len);
 		}
 		tmp = tmp->next;
 	}
 	free(vble);
 	vble = ft_strdup("");
 	if (!vble)
-		exit_error("Malloc error\n"); // Antes devolvia NULL, pero lo hemos cambiado para que nos de cadena vacia.
+		exit_error("Malloc error\n");
 	return (vble);
 }

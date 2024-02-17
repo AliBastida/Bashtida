@@ -12,14 +12,6 @@
 
 #include "minishell.h"
 
-// tenemos que hacer un malloc con el numero de nodos de t_word qye no son redirecciones ni lo siguiente para crear el char ** del nodo.
-// tenemos que, con strdup copiar en el char **los args (incluido el cmd).
-// despues, en otra funcion, copiamos la posicion [0] del char en char *cmd y en otra funcion comprobamos si el path existe y es ejecutable o no.
-// otra funcion que ejecute el cmd.
-// FIXME: SE PASA DE LINEAS -> VALERIO: LO ARREGLO YO
-
-// FIXME: ME DA LA SENSACION DE QUE NO EXPANDE $VBLE SI ES ARG Y NO CMD. HAY QUE REVISARLO
-
 static t_cmd *new_cmd(t_word *words, int n)
 {
 	t_cmd *new;
@@ -74,6 +66,7 @@ t_cmd *create_list_cmd(t_token *token, t_master *master)
 	list = NULL;
 	while (tmp)
 	{
+		// PRINT_WORD(tmp->words);
 		node = create_node_cmd(tmp->words, master, i);
 		if (!node)
 			exit_error("Malloc error");

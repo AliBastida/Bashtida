@@ -38,7 +38,7 @@ static void	free_words(t_word *words)
 	}
 }
 
-static void free_cmds(t_cmd *cmds)
+static void	free_cmds(t_cmd *cmds)
 {
 	t_cmd	*tmp;
 	t_cmd	*next;
@@ -62,7 +62,7 @@ static void free_cmds(t_cmd *cmds)
 	}
 }
 
-static void free_tokens(t_token *tk)
+static void	free_tokens(t_token *tk)
 {
 	t_token	*tmp;
 	t_token	*next;
@@ -84,7 +84,7 @@ static void free_tokens(t_token *tk)
 	}
 }
 
-void free_all(t_master *master)
+void	free_all(t_master *master)
 {
 	if (master->line)
 		free(master->line);

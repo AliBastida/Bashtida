@@ -12,14 +12,14 @@
 
 #include "minishell.h"
 
-static int next_start(char *word, int i)
+static int	next_start(char *word, int i)
 {
 	while (ft_isalpha(word[i]) || word[i] == '_')
 		i++;
 	return (i);
 }
 
-static int check_quotes(t_word *node, int *i)
+static int	check_quotes(t_word *node, int *i)
 {
 	if (node->word[*i] == '\'' && node->flag_quote == 0)
 	{
@@ -33,36 +33,55 @@ static int check_quotes(t_word *node, int *i)
 	return (0);
 }
 
-char *extract_dollar(t_word *node, t_list *env)
+static char	*get_last_line(t_word *node, char *line, int start, int i)
 {
-	int i;
-	int start;
-	char *line;
+	char	*tmp;
+
+	if (!line)
+		tmp = ft_substr(node->word, start, i - start);
+	else
+		tmp = ft_strjoin(line, ft_substr(node->word, start, i - start));
+	if (!tmp)
+		exit_error("Malloc error\n");
+	free(line);
+	return (tmp);
+}
+
+static char	*get_env_var(t_word *node, t_list *env, char *line, int i)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(line, ft_getenv(&node->word[i], env, 0));
+	if (!tmp)
+		exit_error("Malloc error\n");
+	free(line);
+	return (tmp);
+}
+
+char	*extract_dollar(t_word *node, t_list *env)
+{
+	int		i;
+	int		start;
+	char	*line;
 
 	i = 0;
 	start = 0;
-	line = ft_strdup("");
-	if (!line)
-		exit_error("Malloc error\n");
+	line = NULL;
 	while (node->word[i])
 	{
 		if (check_quotes(node, &i))
-			continue;
+			continue ;
 		if (node->word[i] == '$')
 		{
-			line = ft_strjoin(line, ft_substr(node->word, start, i - start));
-			line = ft_strjoin(line, ft_getenv(&node->word[i], env, 0));
-			if (!line)
-				exit_error("Malloc error\n");
+			line = get_last_line(node, line, start, i);
+			line = get_env_var(node, env, line, i);
 			start = next_start(node->word, i + 1);
 			i = start;
-			continue;
+			continue ;
 		}
 		i++;
 	}
-	line = ft_strjoin(line, ft_substr(node->word, start, i - start));
-	if (!line)
-		exit_error("Malloc error\n");
+	line = get_last_line(node, line, start, i);
 	free(node->word);
 	node->word = line;
 	return (line);

@@ -14,11 +14,10 @@
 
 unsigned char	g_err = 0;
 
-/* Necesitamos dduplicar la vble const char **envp para poder trabajar con ella. En esta funcion, hacemos una lista dentro de t_master donde meteremos el dulicado de envp.*/
-static void ft_dup_env(t_master *master, const char **env)
+static void	ft_dup_env(t_master *master, const char **env)
 {
-	int i;
-	char *dup;
+	int		i;
+	char	*dup;
 
 	i = 0;
 	while (env != NULL && env[i])
@@ -34,7 +33,7 @@ static void ft_dup_env(t_master *master, const char **env)
 	}
 }
 
-static void set_term(void)
+static void	set_term(void)
 {
 	struct termios	term;
 
@@ -45,9 +44,8 @@ static void set_term(void)
 
 static void	minishell_magic(t_master *master)
 {
-	if ((!create_nodeandlist(master, master->line))
-		|| !create_nodeandlist_word(master, master->node)
-		|| !execute_cmds(master))
+	create_token_list(master, master->line);
+	if (!create_word_list(master, master->node) || !execute_cmds(master))
 	{
 		free_all(master);
 		exit_error("Minishell couldn't do its magic\n");
@@ -65,7 +63,6 @@ static void	minishell_starts(t_master *master)
 		if (!checking_syntax(master->line))
 			minishell_magic(master);
 		free(master->line);
-		// system("leaks minishell");
 		// exit(0);
 	}
 }

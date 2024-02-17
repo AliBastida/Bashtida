@@ -12,9 +12,6 @@
 
 #include "minishell.h"
 
-/* Esta es la funcion en la que si todos los chequeos de sintaxis estan ok > devuelve la linea sin comillas*/
-
-// Function that checks if all quotes are closed Returns 0 if not closed;
 static bool	paired_quotes(char *line)
 {
 	int		i;
