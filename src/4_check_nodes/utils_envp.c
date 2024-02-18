@@ -39,7 +39,6 @@ char	*clean_vble(char *node, int idx)
 
 char	*ft_getenv(const char *name, t_list *env, int idx)
 {
-	int		vble_len;
 	char	*vble;
 	char	*new_name;
 	t_list	*tmp;
@@ -49,13 +48,13 @@ char	*ft_getenv(const char *name, t_list *env, int idx)
 	vble = ft_strjoin(new_name, "=");
 	if (!vble)
 		exit_error("Malloc error\n");
-	vble_len = ft_strlen(vble);
+	free(new_name);
 	while (tmp && tmp->content)
 	{
-		if (ft_strncmp((char *)tmp->content, vble, vble_len) == 0)
+		if (ft_strncmp((char *)tmp->content, vble, ft_strlen(vble)) == 0)
 		{
 			free(vble);
-			return ((char *)tmp->content + vble_len);
+			return ((char *)tmp->content + ft_strlen(vble));
 		}
 		tmp = tmp->next;
 	}

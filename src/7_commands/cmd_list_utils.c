@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-static t_cmd *new_cmd(t_word *words, int n)
+static t_cmd	*new_cmd(t_word *words, int n)
 {
-	t_cmd *new;
+	t_cmd	*new;
 
 	new = ft_calloc(sizeof(t_cmd), 1);
 	if (!new)
@@ -27,11 +27,11 @@ static t_cmd *new_cmd(t_word *words, int n)
 	return (new);
 }
 
-static t_cmd *create_node_cmd(t_word *words, t_master *master, int n)
+static t_cmd	*create_node_cmd(t_word *words, t_master *master, int n)
 {
-	int i;
-	t_cmd *new;
-	t_word *tmp;
+	int		i;
+	t_cmd	*new;
+	t_word	*tmp;
 
 	i = 0;
 	tmp = words;
@@ -40,7 +40,8 @@ static t_cmd *create_node_cmd(t_word *words, t_master *master, int n)
 		return (NULL);
 	while (tmp)
 	{
-		if (tmp->type == 1 || tmp->type == 2 || tmp->type == 3 || tmp->type == 4)
+		if (tmp->type == 1 || tmp->type == 2 || tmp->type == 3
+			|| tmp->type == 4)
 		{
 			manage_redir(tmp, new);
 			tmp = tmp->next;
@@ -54,7 +55,7 @@ static t_cmd *create_node_cmd(t_word *words, t_master *master, int n)
 	return (new);
 }
 
-t_cmd *create_list_cmd(t_token *token, t_master *master)
+t_cmd	*create_list_cmd(t_token *token, t_master *master)
 {
 	int		i;
 	t_cmd	*list;
@@ -66,7 +67,6 @@ t_cmd *create_list_cmd(t_token *token, t_master *master)
 	list = NULL;
 	while (tmp)
 	{
-		// PRINT_WORD(tmp->words);
 		node = create_node_cmd(tmp->words, master, i);
 		if (!node)
 			exit_error("Malloc error");

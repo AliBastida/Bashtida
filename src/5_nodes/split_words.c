@@ -77,7 +77,7 @@ static char	*divided_by_word(t_token *tmp)
 	return (NULL);
 }
 
-t_word	*create_word_list(t_master *master, t_token *token)
+void	create_word_list(t_master *master, t_token *token)
 {
 	t_word	*new_list;
 	t_word	*new;
@@ -103,5 +103,5 @@ t_word	*create_word_list(t_master *master, t_token *token)
 		tmp = tmp->next;
 	}
 	master->cmds = create_list_cmd(token, master);
-	return (new_list);
+	// return (new_list);
 }

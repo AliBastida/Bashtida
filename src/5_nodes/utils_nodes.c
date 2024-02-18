@@ -38,22 +38,19 @@ void	line_ready_to_use(t_token *token, t_master *master)
 {
 	t_word	*node;
 	t_token	*tmp;
-	char	*var_con_dolar_expandido;
+	char	*str_expanded;
 
 	tmp = token;
+	str_expanded = NULL;
 	while (tmp)
 	{
 		node = token->words;
 		while (node)
 		{
-			var_con_dolar_expandido = extract_dollar(node, master->env);
-			clean_line(var_con_dolar_expandido, master);
-			free(node->word);
-			node->word = ft_strdup(master->clean_line);
-			if (!node->word)
-				exit_error("malloc error\n");
-			free(master->clean_line);
-			master->clean_line = NULL;
+			str_expanded = extract_dollar(node, master->env);
+			clean_line(str_expanded, node);
+			free(str_expanded);
+			str_expanded = NULL;
 			node = node->next;
 		}
 		tmp = tmp->next;

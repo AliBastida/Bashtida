@@ -45,15 +45,16 @@ static void	set_term(void)
 static void	minishell_magic(t_master *master)
 {
 	create_token_list(master, master->line);
-	if (!create_word_list(master, master->node) || !execute_cmds(master))
-	{
-		free_all(master);
-		exit_error("Minishell couldn't do its magic\n");
-	}
+	create_word_list(master, master->node);
+	execute_cmds(master);
+	free_all(master, 0);
 }
 
 static void	minishell_starts(t_master *master)
 {
+	int i;
+
+	i = 0;
 	while (1)
 	{
 		set_signals(0);
@@ -62,8 +63,9 @@ static void	minishell_starts(t_master *master)
 		add_history(master->line);
 		if (!checking_syntax(master->line))
 			minishell_magic(master);
-		free(master->line);
+		// free(master->line);
 		// exit(0);
+		i++;
 	}
 }
 
@@ -81,6 +83,6 @@ int	main(int ac, char **av, const char **env)
 		exit_error("Malloc error\n");
 	ft_dup_env(master, env);
 	minishell_starts(master);
-	free_all(master);
+	free_all(master, 1);
 	return (0);
 }

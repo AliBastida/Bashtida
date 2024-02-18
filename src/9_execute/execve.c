@@ -12,11 +12,27 @@
 
 #include "minishell.h"
 
-void close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes)
+void	close_here_doc(t_master *master)
 {
-	int final;
-	int status;
-	int finished;
+	t_cmd	*tmp;
+
+	tmp = master->cmds;
+	while (tmp)
+	{
+		if (tmp->hd)
+		{
+			close(tmp->hd->fd[0]);
+			close(tmp->hd->fd[1]);
+		}
+		tmp = tmp->next;
+	}
+}
+
+void	close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes)
+{
+	int	final;
+	int	status;
+	int	finished;
 
 	final = 0;
 	status = 0;
@@ -39,20 +55,37 @@ void close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes)
 	g_err = final;
 }
 
-pid_t one_cmd(t_master *master, t_cmd *tmp, t_pipes pipes)
+void	one_builtin(t_master *master, t_cmd *cmd, char **env)
 {
-	pid_t pid;
-	char **env;
+	int	out_fd;
+
+	out_fd = -1;
+	if (cmd->out_fd != 1)
+	{
+		out_fd = dup(1);
+		dup2(cmd->out_fd, 1);
+		close(cmd->out_fd);
+	}
+	ft_free_double(env);
+	take_exit_value(cmd);
+	g_err = run_builtin(master, cmd);
+	if (out_fd != -1)
+	{
+		dup2(out_fd, 1);
+		close(out_fd);
+	}
+}
+
+pid_t	one_cmd(t_master *master, t_cmd *tmp, t_pipes pipes, char **env)
+{
+	pid_t	pid;
 
 	set_signals(1);
 	pid = fork();
 	if (pid == 0)
 	{
 		redirect_pipes(tmp, pipes);
-		env = converting(master->env);
-		// si es un builtin ejecuta el builtin; si no, ejecuta exeve;
-		// cada funcion debe devolver un int,
-		//	y ese int (valor de salida) lo ponemos como argumento en el exit)
+		close_here_doc(master);
 		if (is_builtin(tmp->cmd))
 		{
 			g_err = run_builtin(master, tmp);

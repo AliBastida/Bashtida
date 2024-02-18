@@ -27,8 +27,7 @@ enum					e_token_type
 
 enum					e_error_type
 {
-	OPEN_FAILED,
-	COMMAND_NOT_FOUND,
+	COMMAND_NOT_FOUND = 1,
 	COMMAND_FOUND_NOT_EX,
 	FILE_NOT_FOUND,
 	FILE_NOT_READ,
@@ -36,7 +35,6 @@ enum					e_error_type
 };
 
 const static char		*g_error_array[] = {
-	"OPEN ERROR\n",
 	"COMMAND NOT FOUND\n",
 	"PERMISSION DENIED\n",
 	"NO SUCH FILE OR DIRECTORY\n",

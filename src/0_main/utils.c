@@ -14,8 +14,8 @@
 
 char	**converting(t_list *env)
 {
-	char	**env_char;
 	int		i;
+	char	**env_char;
 
 	i = 0;
 	env_char = ft_calloc(sizeof(char *), (ft_lstsize(env) + 1));

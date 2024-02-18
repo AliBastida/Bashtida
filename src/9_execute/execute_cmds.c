@@ -12,13 +12,9 @@
 
 #include "minishell.h"
 
-// execve(cmd, args, env);
-// tengo que hacer una funcion que me convierta la lista del env a char ** para pasarsela a la funcion exec_ve. Esta funcion sera llamada por exec_cmd y el retorno de la transformacion
-// es lo que le pasare a execve.
-
-static void execute_heredoc(t_cmd *cmds)
+static void	execute_heredoc(t_cmd *cmds)
 {
-	t_cmd *tmp;
+	t_cmd	*tmp;
 
 	tmp = cmds;
 	while (tmp)
@@ -29,9 +25,56 @@ static void execute_heredoc(t_cmd *cmds)
 	}
 }
 
-int run_builtin(t_master *master, t_cmd *tmp)
+static void	take_more_exit(char **str, int i)
 {
-	int res;
+	int		j;
+	char	*last;
+
+	j = 1;
+	last = ft_strdup(ft_itoa(g_err));
+	while (str[i][++j])
+	{
+		if (str[i][j] == '$' && str[i][j + 1] == '?')
+			((last = ft_strjoin(last, ft_strdup(ft_itoa(g_err)))) && (++j));
+		else if (ft_strchr(str[i] + j, '$'))
+		{
+			last = ft_strjoin(last, ft_substr(str[i], j, ft_strchr(str[i] + j,
+							'$') - &str[i][j]));
+			j += ft_strchr(str[i] + j, '$') - &str[i][j] - 1;
+		}
+		else if (!ft_strchr(str[i] + j, '$'))
+		{
+			last = ft_strjoin(last, ft_substr(str[i], j, ft_strlen(str[i])
+						- j));
+			break ;
+		}
+	}
+	free(str[i]);
+	str[i] = ft_strdup(last);
+	free(last);
+}
+
+void	take_exit_value(t_cmd *cmd)
+{
+	int	i;
+
+	i = -1;
+	while (cmd->args[++i])
+	{
+		if (!ft_strncmp(cmd->args[i], "$?", 3))
+		{
+			free(cmd->args[i]);
+			cmd->args[i] = ft_strdup(ft_itoa(g_err));
+		}
+		else if (!ft_strncmp(cmd->args[i], "$?", 2))
+			take_more_exit(cmd->args, i);
+	}
+	g_err = 0;
+}
+
+int	run_builtin(t_master *master, t_cmd *tmp)
+{
+	int	res;
 
 	res = 0;
 	if (ft_strncmp(tmp->cmd, "echo", 5) == 0)
@@ -51,35 +94,34 @@ int run_builtin(t_master *master, t_cmd *tmp)
 	return (res);
 }
 
-// TODO gestionar la vable global $?
-int execute_cmds(t_master *master)
+void	execute_cmds(t_master *master)
 {
-	int i;
-	t_cmd *tmp;
-	pid_t *pids;
-	t_pipes pipes; // Structura que tiene el pipe y el file descriptor temporal
+	int		i;
+	t_cmd	*tmp;
+	pid_t	*pids;
+	t_pipes	pipes;
+	char	**env;
 
-	PRINT_CMD(master->cmds);
-	i = 0;
-	pipes.p[0] = -1;
-	pipes.p[1] = -1;
+	i = -1;
 	pipes.tmp_fd = -1;
 	tmp = master->cmds;
-	execute_heredoc(master->cmds);					 // Aqui voy a ejecutar todos los heredocs
-	pids = ft_calloc(master->n_cmds, sizeof(pid_t)); // Aqui hago el malloc del puntero de todos los pids de los hijos
+	// PRINT_CMD(master->cmds);
+	execute_heredoc(master->cmds);
+	env = converting(master->env);
+	if (master->n_cmds == 1 && is_builtin(tmp->cmd) && !check_ok(&tmp))
+	{
+		// g_err = run_builtin(master, tmp);
+		one_builtin(master, tmp, env);
+		return ;
+	}
+	pids = ft_calloc(master->n_cmds, sizeof(pid_t));
 	while (tmp)
 	{
-		if (check_cmd_and_pipes(&tmp, &pipes)) // Aqui checkeo si el comando está bien y creo el pipe y gestiono el fd temporal
-			continue;
-		if (master->n_cmds == 1 && is_builtin(tmp->cmd)) // Este es para mirar si hay solo un comando y es un builtin
-		{
-			g_err = run_builtin(master, tmp);
-			break;
-		}
-		pids[i] = one_cmd(master, tmp, pipes); // Este es la ejecucion del comando
+		take_exit_value(tmp);
+		if (check_cmd_and_pipes(&tmp, &pipes))
+			continue ;
+		pids[++i] = one_cmd(master, tmp, pipes, env);
 		tmp = tmp->next;
-		i++;
 	}
 	close_all_pipes(master, pids, pipes);
-	return (1);
 }

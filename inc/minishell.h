@@ -38,14 +38,14 @@
 	}                                                                          \
 	printf("----------------------\n");
 
-#define PRINT_WORD(list)                                                                            \
-	t_word *random_tmp = list;                                                                      \
-	printf("-----------WORDS-----------\n");                                                        \
-	while (random_tmp != NULL)                                                                      \
-	{                                                                                               \
-		printf("random_tmp: *%s*\t%p\tType: %d\n", random_tmp->word, random_tmp, random_tmp->type); \
-		random_tmp = random_tmp->next;                                                              \
-	}                                                                                               \
+#define PRINT_WORD(list)                                                \
+	t_word *tmp = list;                                                 \
+	printf("-----------WORDS-----------\n");                            \
+	while (tmp != NULL)                                                 \
+	{                                                                   \
+		printf("tmp: *%s*\t%p\tType: %d\n", tmp->word, tmp, tmp->type); \
+		tmp = tmp->next;                                                \
+	}                                                                   \
 	printf("----------------------\n");
 
 #define PRINT_TOKENS(list)                                       \
@@ -96,7 +96,9 @@
 //******FREE******//
 // void free_cmds(t_cmd *cmds);
 // void free_tokens(t_token *tk);
-void free_all(t_master *master);
+void free_cmds(t_cmd *cmds);
+void free_tokens(t_token *tk);
+void free_all(t_master *master, int mode);
 
 //******MAIN******//
 int main(int ac, char **av, const char **env);
@@ -131,7 +133,7 @@ void lstclear(t_token **lst, void (*del)(void *));
 
 //===== 4_CHECK_NODES =====//
 //******CLEAN_LINE******//
-void clean_line(char *line, t_master *master);
+void clean_line(char *line, t_word *node);
 
 //******FOUND_DOLLAR******//
 char *extract_dollar(t_word *node, t_list *env);
@@ -148,7 +150,7 @@ char *substr_words(t_token *tmp, int start, int i);
 
 //===== 5_NODES =====//
 //******SPLIT_WORDS******//
-t_word *create_word_list(t_master *master, t_token *token);
+void create_word_list(t_master *master, t_token *token);
 
 //===== 6_BUILTINS =====//
 //******BUILTIN_CD******//
@@ -169,8 +171,9 @@ int builtin_export(t_master *master, char **args);
 //******BUILTIN_EXPORT_UTILS******//
 int len_until_equal(char *str);
 int checking_format(char *str);
-char *copyvble(char *str, int size);
-char *ft_strchr_export(char *str, char c);
+void join_var(t_list *aux, char *arg);
+// char *copyvble(char *str, int size);
+// char *ft_strchr_export(char *str, char c);
 t_list *get_envnode_export(t_list *env, char *arg);
 
 //******BUILTIN_PWD******//
@@ -214,19 +217,26 @@ char *filename_path(char *name);
 
 //===== 9_EXECUTE =====//
 //******EXECUTE_CMDS******//
-int execute_cmds(t_master *master);
 int run_builtin(t_master *master, t_cmd *tmp);
-
-void redirect_pipes(t_cmd *cmd, t_pipes pipes);
-int check_cmd_and_pipes(t_cmd **cmd, t_pipes *pipes);
-
-void close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes);
-pid_t one_cmd(t_master *master, t_cmd *tmp, t_pipes pipes);
+void take_exit_value(t_cmd *cmd);
+void execute_cmds(t_master *master);
 
 //******EXECVE******//
+void close_here_doc(t_master *master);
+void one_builtin(t_master *master, t_cmd *cmd, char **env);
+void close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes);
+pid_t one_cmd(t_master *master, t_cmd *tmp, t_pipes pipes, char **env);
+
+//******PIPES******//
+int check_ok(t_cmd **cmd);
+int check_cmd_and_pipes(t_cmd **cmd, t_pipes *pipes);
+void redirect_pipes(t_cmd *cmd, t_pipes pipes);
+
+//******RUN_HEREDOC******//
 void ft_take_heredoc(t_cmd *cmd);
 
 //===== 10_SIGNALS =====//
+//******SIGNALS******//
 void set_signals(int mode);
 void ign_signal(int signal);
 void heredoc_handler(int sig);

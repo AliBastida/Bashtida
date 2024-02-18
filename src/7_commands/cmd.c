@@ -12,15 +12,13 @@
 
 #include "minishell.h"
 
-static char *check_full_path(char **new_path, char **cmd, int *ok)
+static char	*check_full_path(char **new_path, char **cmd, int *ok)
 {
-	int res;
+	int	res;
 
 	res = ft_access(*new_path, 2);
 	if (!res)
 	{
-		printf("este es mi cmd: %s \n", *new_path);
-		// *ok = 0;
 		free(*cmd);
 		return (*new_path);
 	}
@@ -31,28 +29,32 @@ static char *check_full_path(char **new_path, char **cmd, int *ok)
 		free(*new_path);
 		return (*cmd);
 	}
+	free(*new_path);
 	return (NULL);
 }
 
-static char *checking_path(char **path, char *cmd, int *ok)
+static char	*checking_path(char **path, char *cmd, int *ok)
 {
-	int i;
-	char *ret;
-	char *new_path;
+	int		i;
+	char	*ret;
+	char	*tmp;
+	char	*new_path;
 
-	i = 0;
+	i = -1;
 	if (is_builtin(cmd) == 1)
 		return (cmd);
-	while (path[i])
+	while (path[++i])
 	{
-		new_path = ft_strjoin(path[i], "/");
-		new_path = ft_strjoin(new_path, cmd);
+		tmp = ft_strjoin(path[i], "/");
+		if (!tmp)
+			exit_error("Malloc error");
+		new_path = ft_strjoin(tmp, cmd);
 		if (!new_path)
 			exit_error("Malloc error");
+		free(tmp);
 		ret = check_full_path(&new_path, &cmd, ok);
 		if (ret)
 			return (ret);
-		i++;
 	}
 	if (!*ok)
 		*ok = 2;
@@ -60,11 +62,11 @@ static char *checking_path(char **path, char *cmd, int *ok)
 	return (cmd);
 }
 
-void ft_take_cmd(t_cmd *new, t_master *master)
+void	ft_take_cmd(t_cmd *new, t_master *master)
 {
-	char *cmd;
-	char *path;
-	char **split;
+	char	*cmd;
+	char	*path;
+	char	**split;
 
 	cmd = ft_strdup(new->args[0]);
 	path = ft_strdup(ft_getenv("PATH", master->env, -1));

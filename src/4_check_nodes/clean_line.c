@@ -39,17 +39,7 @@ static int	len_without_quotes(char *str)
 	return (len);
 }
 
-static void	memory_alloc(t_master *master, char *str)
-{
-	int	len;
-
-	len = ft_strlen(str);
-	master->clean_line = ft_calloc(len_without_quotes(str) + 1, sizeof(char));
-	if (!master->clean_line)
-		exit_error("Malloc error\n");
-}
-
-void	clean_line(char *str, t_master *master)
+void	clean_line(char *str, t_word *node)
 {
 	int		i;
 	int		j;
@@ -60,7 +50,8 @@ void	clean_line(char *str, t_master *master)
 	j = 0;
 	double_quote = false;
 	simple_quote = false;
-	memory_alloc(master, str);
+	free(node->word);
+	node->word = ft_calloc(len_without_quotes(str) + 1, sizeof(char));
 	while (str[i])
 	{
 		if ((str[i] == '\"' && simple_quote == false) || (str[i] == '\''
@@ -73,6 +64,6 @@ void	clean_line(char *str, t_master *master)
 			i++;
 		}
 		else if (str[i] != '\0')
-			master->clean_line[j++] = str[i++];
+			node->word[j++] = str[i++];
 	}
 }

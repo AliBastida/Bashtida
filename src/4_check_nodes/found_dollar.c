@@ -37,6 +37,8 @@ static char	*get_last_line(t_word *node, char *line, int start, int i)
 {
 	char	*tmp;
 
+	if (start == i)
+		return (line);
 	if (!line)
 		tmp = ft_substr(node->word, start, i - start);
 	else
@@ -47,11 +49,17 @@ static char	*get_last_line(t_word *node, char *line, int start, int i)
 	return (tmp);
 }
 
-static char	*get_env_var(t_word *node, t_list *env, char *line, int i)
+static char	*get_env_var(t_word *node, t_list *env, char *line, int *i)
 {
 	char	*tmp;
 
-	tmp = ft_strjoin(line, ft_getenv(&node->word[i], env, 0));
+	if (node->word[*i + 1] == '?' && !ft_isalnum(node->word[*i + 2]))
+	{
+		tmp = ft_strdup("$?");
+		(*i)++;
+	}
+	else
+		tmp = ft_strjoin(line, ft_getenv(&node->word[*i], env, 0));
 	if (!tmp)
 		exit_error("Malloc error\n");
 	free(line);
@@ -74,7 +82,7 @@ char	*extract_dollar(t_word *node, t_list *env)
 		if (node->word[i] == '$')
 		{
 			line = get_last_line(node, line, start, i);
-			line = get_env_var(node, env, line, i);
+			line = get_env_var(node, env, line, &i);
 			start = next_start(node->word, i + 1);
 			i = start;
 			continue ;
@@ -82,7 +90,9 @@ char	*extract_dollar(t_word *node, t_list *env)
 		i++;
 	}
 	line = get_last_line(node, line, start, i);
-	free(node->word);
-	node->word = line;
+	// free(node->word);
+	// node->word = line;
+	// Este free me ha causado muchos problemas,
+	// porque el puntero de node->word y de str_expanded era lo mismo
 	return (line);
 }

@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void norm_handler(int sig)
+void	norm_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
@@ -22,10 +22,10 @@ void norm_handler(int sig)
 		rl_redisplay();
 		g_err = 1;
 	}
-	return;
+	return ;
 }
 
-void interact_handler(int sig)
+void	interact_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
@@ -37,10 +37,10 @@ void interact_handler(int sig)
 		ft_putstr_fd("Quit: 3\n", 1);
 		g_err = 131;
 	}
-	return;
+	return ;
 }
 
-void heredoc_handler(int sig)
+void	heredoc_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
@@ -48,12 +48,12 @@ void heredoc_handler(int sig)
 		g_err = 130;
 		exit(130);
 	}
-	return;
+	return ;
 }
 
-void ign_signal(int signal)
+void	ign_signal(int signal)
 {
-	struct sigaction sa;
+	struct sigaction	sa;
 
 	sa.sa_handler = SIG_IGN;
 	sa.sa_flags = SA_RESTART;
@@ -62,9 +62,9 @@ void ign_signal(int signal)
 		exit(1);
 }
 
-void set_signals(int mode)
+void	set_signals(int mode)
 {
-	struct sigaction sa;
+	struct sigaction	sa;
 
 	sa.sa_flags = SA_RESTART;
 	sigemptyset(&sa.sa_mask);
