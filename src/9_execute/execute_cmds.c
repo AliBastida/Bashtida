@@ -103,6 +103,8 @@ int	execute_cmds(t_master *master)
 	char	**env;
 
 	i = -1;
+	pipes.p[0] = -1;
+	pipes.p[1] = -1;
 	pipes.tmp_fd = -1;
 	tmp = master->cmds;
 	execute_heredoc(master->cmds);
