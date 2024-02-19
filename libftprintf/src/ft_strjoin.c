@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:09:08 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/16 17:51:38 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:28:14 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,5 @@ char	*ft_strjoin(const char *s1, const char *s2)
 		j++;
 	}
 	new[i + j] = '\0';
-	// free((char *)s1);
 	return (new);
 }

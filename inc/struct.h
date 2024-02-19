@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:47:58 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/16 14:07:51 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:32:49 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ enum					e_error_type
 	FILE_NOT_READ,
 	FILE_NOT_WRITE,
 };
+
+// FIXME: NORM DA ERROR POR DOS VV GLOBALES
 
 const static char		*g_error_array[] = {
 	"COMMAND NOT FOUND\n",

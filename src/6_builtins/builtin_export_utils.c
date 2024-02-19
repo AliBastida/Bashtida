@@ -6,11 +6,26 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:50:02 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/16 17:44:17 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:30:08 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*take_out_plus(char *str)
+{
+	char	*new;
+	char	*tmp;
+
+	tmp = ft_substr(str, 0, ft_strchr(str, '+') - str);
+	if (!tmp)
+		exit_error("Malloc error\n");
+	new = ft_strjoin(tmp, ft_strchr(str, '+') + 1);
+	if (!new)
+		exit_error("Malloc error\n");
+	free(tmp);
+	return (new);
+}
 
 int	len_until_equal(char *str)
 {

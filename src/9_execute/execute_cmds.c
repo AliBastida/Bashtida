@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:52:12 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/15 18:57:32 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:31:51 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ int	execute_cmds(t_master *master)
 	pipes.p[1] = -1;
 	pipes.tmp_fd = -1;
 	tmp = master->cmds;
-	PRINT_CMD(master->cmds);
 	execute_heredoc(master->cmds);
 	env = converting(master->env);
 	if (master->n_cmds == 1 && is_builtin(tmp->cmd) && !check_ok(&tmp))

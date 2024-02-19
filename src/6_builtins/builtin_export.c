@@ -6,26 +6,11 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:59:32 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/16 18:06:53 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:29:38 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*take_out_plus(char *str)
-{
-	char	*new;
-	char	*tmp;
-
-	tmp = ft_substr(str, 0, ft_strchr(str, '+') - str);
-	if (!tmp)
-		exit_error("Malloc error\n");
-	new = ft_strjoin(tmp, ft_strchr(str, '+') + 1);
-	if (!new)
-		exit_error("Malloc error\n");
-	free(tmp);
-	return (new);
-}
 
 static void	adding_export_continue(t_master *master, char *arg)
 {
@@ -54,6 +39,15 @@ static void	adding_export_continue(t_master *master, char *arg)
 	}
 }
 
+static void	check_format(char *arg) // FIXME: ARREGLANDO LOS ROTOS DE VALERIO
+{
+	if (checking_format(arg))
+	{
+		printf("bashtida: export: %s': not a valid identifier\n", arg);
+		return ;
+	}
+}
+
 // esta funcion hace trabajar realmente export: trabaja en el caso
 // concreto de que nos den la vble con =, sin =, con el +=
 // y si la vble la encuentra en el env la sustituimos por el nuevo
@@ -62,19 +56,25 @@ static void	adding_export(t_master *master, char *arg)
 {
 	int		len;
 	char	*new;
+	t_list	*aux;
 
 	len = len_until_equal(arg);
-	if (checking_format(arg))
-	{
-		printf("bashtida: export: %s': not a valid identifier\n", arg);
-		return ;
-	}
+	check_format(arg);
 	if (!arg[len] || (arg[len] && arg[len + 1] == '\0'))
 	{
-		new = ft_strjoin(arg, "=\"\"");
-		if (!new)
-			exit_error("Malloc error\n");
-		ft_lstadd_back(&master->env, ft_lstnew(new));
+		if (arg[len - 1] == '+')
+			arg = ft_substr(arg, 0, len - 1);
+		if (arg[len] != '=')
+		{
+			new = ft_strjoin(arg, "=");
+			if (!new)
+				exit_error("Malloc error\n");
+		}
+		else
+			new = ft_strdup(arg);
+		aux = get_envnode_export(master->env, new);
+		if (!aux)
+			ft_lstadd_back(&master->env, ft_lstnew(new));
 	}
 	else
 		adding_export_continue(master, arg);
