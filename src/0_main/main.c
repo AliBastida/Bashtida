@@ -74,7 +74,6 @@ int	main(int ac, char **av, const char **env)
 	(void)av;
 	if (ac > 1)
 		exit_error("Minishell doesn't require any argument\n!");
-	g_err = 0;
 	set_term();
 	master = ft_calloc(1, sizeof(t_master));
 	if (!master)

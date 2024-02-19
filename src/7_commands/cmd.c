@@ -22,14 +22,15 @@ static char	*check_full_path(char **new_path, char **cmd, int *ok)
 		free(*cmd);
 		return (*new_path);
 	}
-	else if (res == 2)
+	else if (res == COMMAND_FOUND_NOT_EX)
 	{
 		if (!*ok)
-			*ok = 3;
+			*ok = res;
 		free(*new_path);
 		return (*cmd);
 	}
 	free(*new_path);
+	*new_path = NULL;
 	return (NULL);
 }
 
@@ -57,7 +58,7 @@ static char	*checking_path(char **path, char *cmd, int *ok)
 			return (ret);
 	}
 	if (!*ok)
-		*ok = 2;
+		*ok = COMMAND_NOT_FOUND;
 	free(new_path);
 	return (cmd);
 }
@@ -69,11 +70,20 @@ void	ft_take_cmd(t_cmd *new, t_master *master)
 	char	**split;
 
 	cmd = ft_strdup(new->args[0]);
-	path = ft_strdup(ft_getenv("PATH", master->env, -1));
+	path = ft_getenv("PATH", master->env, -1);
+	if (path[0] == '\0' && !is_builtin(cmd))
+	{
+		free(path);
+		new->cmd = cmd;
+		new->ok = 1;
+		return ;
+	}
 	split = ft_split(path, ':');
 	if (!cmd || !path || !split)
 		exit_error("Malloc error");
-	free(path);
-	new->cmd = checking_path(split, cmd, &new->ok);
+	if (cmd[0] == '/')
+		new->cmd = cmd;
+	else
+		new->cmd = checking_path(split, cmd, &new->ok);
 	ft_free_double(split);
 }

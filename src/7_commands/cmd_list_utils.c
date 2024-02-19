@@ -36,8 +36,6 @@ static t_cmd	*create_node_cmd(t_word *words, t_master *master, int n)
 	i = 0;
 	tmp = words;
 	new = new_cmd(words, n);
-	if (!new)
-		return (NULL);
 	while (tmp)
 	{
 		if (tmp->type == 1 || tmp->type == 2 || tmp->type == 3

@@ -21,6 +21,12 @@ int	check_ok(t_cmd **cmd)
 				- 1]);
 		else
 			printf("bash: %s: %s", (*cmd)->cmd, g_error_array[(*cmd)->ok - 1]);
+		if ((*cmd)->ok == COMMAND_NOT_FOUND)
+			g_err = 127;
+		else if ((*cmd)->ok == COMMAND_FOUND_NOT_EX)
+			g_err = 126;
+		else
+			g_err = 1;
 		(*cmd) = (*cmd)->next;
 		return (1);
 	}

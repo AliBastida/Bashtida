@@ -107,6 +107,7 @@ int	execute_cmds(t_master *master)
 	pipes.p[1] = -1;
 	pipes.tmp_fd = -1;
 	tmp = master->cmds;
+	PRINT_CMD(master->cmds);
 	execute_heredoc(master->cmds);
 	env = converting(master->env);
 	if (master->n_cmds == 1 && is_builtin(tmp->cmd) && !check_ok(&tmp))

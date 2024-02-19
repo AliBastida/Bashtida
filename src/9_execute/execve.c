@@ -46,14 +46,9 @@ int	close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes, char **env)
 	{
 		if (waitpid(-1, &status, 0) == pids[master->n_cmds - 1])
 			final = status;
-		if (!WIFSIGNALED(status))
-			g_err = WEXITSTATUS(status);
-		else
-			g_err = 0;
 		finished++;
 	}
 	free(pids);
-	g_err = final;
 	return (0);
 }
 
@@ -68,8 +63,8 @@ int	one_builtin(t_master *master, t_cmd *cmd, char **env)
 		dup2(cmd->out_fd, 1);
 		close(cmd->out_fd);
 	}
-	ft_free_double(env);
 	take_exit_value(cmd);
+	ft_free_double(env);
 	g_err = run_builtin(master, cmd);
 	if (out_fd != -1)
 	{

@@ -56,12 +56,17 @@ static char	*get_env_var(t_word *node, t_list *env, char *line, int *i)
 
 	if (node->word[*i + 1] == '?' && !ft_isalnum(node->word[*i + 2]))
 	{
-		tmp = ft_strdup("$?");
+		if (!line)
+			tmp = ft_strdup("$?");
+		else
+			tmp = ft_strjoin(line, "$?");
 		(*i)++;
 	}
 	else
 	{
-		env_var = ft_getenv(&node->word[*i], env, 0);
+		env_var = ft_strdup(ft_getenv(&node->word[*i], env, 0));
+		if (!line)
+			return (env_var);
 		tmp = ft_strjoin(line, env_var);
 		free(env_var);
 	}
