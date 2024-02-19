@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 20:32:26 by abastida          #+#    #+#             */
-/*   Updated: 2024/02/15 19:07:34 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/19 12:03:45 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,24 +74,16 @@ int	checking_syntax(char *str)
 		return (syntax_error("Syntax Error: quotes not closed\n", 0, 1));
 	else if (check_syntax_pipes(str))
 		return (syntax_error("Bashtida: syntax error near "
-								"unexpected token `|'\n",
-								0,
-								1));
+				"unexpected token `|'\n", 0, 1));
 	res = redir(str);
 	if (res == 1)
 		return (syntax_error("Bashtida: syntax error near "
-								"unexpected token `newline'\n",
-								0,
-								1));
+				"unexpected token `newline'\n", 0, 1));
 	else if (res == 2)
 		return (syntax_error("Bashtida: syntax error near "
-								"unexpected token `|'\n",
-								0,
-								1));
+				"unexpected token `|'\n", 0, 1));
 	else if (res > 2)
 		return (syntax_error("Bashtida: syntax error near "
-								"unexpected token `",
-								res,
-								1));
+				"unexpected token `", res, 1));
 	return (0);
 }

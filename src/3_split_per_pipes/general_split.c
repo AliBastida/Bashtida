@@ -20,9 +20,7 @@ static int	ft_strchr_quotes(char *str, int c)
 	while (str[i] != '\0')
 	{
 		if (str[i] == '\'' || str[i] == '\"')
-		{
 			i = next_quote(str, i + 1, str[i]);
-		}
 		if (str[i] == c)
 			return (i);
 		i++;

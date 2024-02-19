@@ -89,7 +89,6 @@ typedef struct s_master
 {
 	int					n_cmds;
 	char				*line;
-	char				*clean_line;
 	t_cmd				*cmds;
 	t_token				*node;
 	t_list				*env;

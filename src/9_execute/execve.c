@@ -28,7 +28,7 @@ void	close_here_doc(t_master *master)
 	}
 }
 
-void	close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes)
+int	close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes, char **env)
 {
 	int	final;
 	int	status;
@@ -40,6 +40,8 @@ void	close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes)
 	close(pipes.p[0]);
 	close(pipes.p[1]);
 	close(pipes.tmp_fd);
+	close_here_doc(master);
+	ft_free_double(env);
 	while (finished < master->n_cmds)
 	{
 		if (waitpid(-1, &status, 0) == pids[master->n_cmds - 1])
@@ -50,12 +52,12 @@ void	close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes)
 			g_err = 0;
 		finished++;
 	}
-	if (pids)
-		free(pids);
+	free(pids);
 	g_err = final;
+	return (0);
 }
 
-void	one_builtin(t_master *master, t_cmd *cmd, char **env)
+int	one_builtin(t_master *master, t_cmd *cmd, char **env)
 {
 	int	out_fd;
 
@@ -74,6 +76,7 @@ void	one_builtin(t_master *master, t_cmd *cmd, char **env)
 		dup2(out_fd, 1);
 		close(out_fd);
 	}
+	return (0);
 }
 
 pid_t	one_cmd(t_master *master, t_cmd *tmp, t_pipes pipes, char **env)

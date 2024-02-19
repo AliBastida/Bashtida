@@ -26,7 +26,6 @@ int	len_until_equal(char *str)
 	return (i);
 }
 
-// printf("Join var: Name->-%s- Value->-%s-\n", aux->content, cont);
 void	join_var(t_list *aux, char *arg)
 {
 	int		i;

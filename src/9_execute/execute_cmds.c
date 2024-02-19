@@ -94,7 +94,7 @@ int	run_builtin(t_master *master, t_cmd *tmp)
 	return (res);
 }
 
-void	execute_cmds(t_master *master)
+int	execute_cmds(t_master *master)
 {
 	int		i;
 	t_cmd	*tmp;
@@ -105,15 +105,10 @@ void	execute_cmds(t_master *master)
 	i = -1;
 	pipes.tmp_fd = -1;
 	tmp = master->cmds;
-	// PRINT_CMD(master->cmds);
 	execute_heredoc(master->cmds);
 	env = converting(master->env);
 	if (master->n_cmds == 1 && is_builtin(tmp->cmd) && !check_ok(&tmp))
-	{
-		// g_err = run_builtin(master, tmp);
-		one_builtin(master, tmp, env);
-		return ;
-	}
+		return (one_builtin(master, tmp, env));
 	pids = ft_calloc(master->n_cmds, sizeof(pid_t));
 	while (tmp)
 	{
@@ -123,5 +118,5 @@ void	execute_cmds(t_master *master)
 		pids[++i] = one_cmd(master, tmp, pipes, env);
 		tmp = tmp->next;
 	}
-	close_all_pipes(master, pids, pipes);
+	return (close_all_pipes(master, pids, pipes, env));
 }

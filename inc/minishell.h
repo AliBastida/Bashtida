@@ -92,10 +92,7 @@
 	printf("----------------------\n");
 
 //=====0_MAIN=====//
-
 //******FREE******//
-// void free_cmds(t_cmd *cmds);
-// void free_tokens(t_token *tk);
 void free_cmds(t_cmd *cmds);
 void free_tokens(t_token *tk);
 void free_all(t_master *master, int mode);
@@ -172,8 +169,6 @@ int builtin_export(t_master *master, char **args);
 int len_until_equal(char *str);
 int checking_format(char *str);
 void join_var(t_list *aux, char *arg);
-// char *copyvble(char *str, int size);
-// char *ft_strchr_export(char *str, char c);
 t_list *get_envnode_export(t_list *env, char *arg);
 
 //******BUILTIN_PWD******//
@@ -217,14 +212,14 @@ char *filename_path(char *name);
 
 //===== 9_EXECUTE =====//
 //******EXECUTE_CMDS******//
+int execute_cmds(t_master *master);
 int run_builtin(t_master *master, t_cmd *tmp);
 void take_exit_value(t_cmd *cmd);
-void execute_cmds(t_master *master);
 
 //******EXECVE******//
+int one_builtin(t_master *master, t_cmd *cmd, char **env);
+int close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes, char **env);
 void close_here_doc(t_master *master);
-void one_builtin(t_master *master, t_cmd *cmd, char **env);
-void close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes);
 pid_t one_cmd(t_master *master, t_cmd *tmp, t_pipes pipes, char **env);
 
 //******PIPES******//

@@ -35,5 +35,4 @@ void	redir_output(t_word *redir, t_cmd *cmd)
 	free(filename);
 	cmd->ok = res;
 	cmd->error = ft_strdup(redir->next->word);
-	printf("Output error: %i\n", res);
 }

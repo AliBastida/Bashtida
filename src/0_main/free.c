@@ -88,8 +88,6 @@ void	free_all(t_master *master, int mode)
 {
 	if (master->line)
 		free(master->line);
-	if (master->clean_line)
-		free(master->clean_line);
 	if (master->cmds)
 		free_cmds(master->cmds);
 	if (master->node)
@@ -103,7 +101,6 @@ void	free_all(t_master *master, int mode)
 	else
 	{
 		master->line = NULL;
-		master->clean_line = NULL;
 		master->cmds = NULL;
 		master->node = NULL;
 	}

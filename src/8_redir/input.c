@@ -37,5 +37,4 @@ void	redir_input(t_word *redir, t_cmd *cmd)
 	free(filename);
 	cmd->ok = res;
 	cmd->error = ft_strdup(redir->next->word);
-	printf("Input error: %i\n", res);
 }

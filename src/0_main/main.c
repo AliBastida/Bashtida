@@ -52,7 +52,7 @@ static void	minishell_magic(t_master *master)
 
 static void	minishell_starts(t_master *master)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (1)
@@ -63,8 +63,6 @@ static void	minishell_starts(t_master *master)
 		add_history(master->line);
 		if (!checking_syntax(master->line))
 			minishell_magic(master);
-		// free(master->line);
-		// exit(0);
 		i++;
 	}
 }
