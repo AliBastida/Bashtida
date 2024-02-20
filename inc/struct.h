@@ -34,8 +34,6 @@ enum					e_error_type
 	FILE_NOT_WRITE,
 };
 
-// FIXME: NORM DA ERROR POR DOS VV GLOBALES
-
 const static char		*g_error_array[] = {
 	"COMMAND NOT FOUND\n",
 	"PERMISSION DENIED\n",
