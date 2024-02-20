@@ -104,4 +104,3 @@ void	create_word_list(t_master *master, t_token *token)
 	}
 	master->cmds = create_list_cmd(token, master);
 }
-// return (new_list);

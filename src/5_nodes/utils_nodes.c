@@ -44,7 +44,7 @@ void	line_ready_to_use(t_token *token, t_master *master)
 	str_expanded = NULL;
 	while (tmp)
 	{
-		node = token->words;
+		node = tmp->words;
 		while (node)
 		{
 			str_expanded = extract_dollar(node, master->env);

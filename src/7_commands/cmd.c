@@ -12,6 +12,27 @@
 
 #include "minishell.h"
 
+static char	*take_relative_cmd(char *cmd)
+{
+	char	*tmp;
+	char	*new;
+	char	cwd[1024];
+
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+	{
+		tmp = ft_strjoin(cwd, "/");
+		if (!tmp)
+			exit_error("Malloc error\n");
+		new = ft_strjoin(tmp, cmd);
+		if (!new)
+			exit_error("Malloc error\n");
+		free(tmp);
+		return (new);
+	}
+	exit_error("Getcwd error\n");
+	return (NULL);
+}
+
 static char	*check_full_path(char **new_path, char **cmd, int *ok)
 {
 	int	res;
@@ -83,6 +104,8 @@ void	ft_take_cmd(t_cmd *new, t_master *master)
 		exit_error("Malloc error");
 	if (cmd[0] == '/')
 		new->cmd = cmd;
+	else if (cmd[0] == '.' && cmd[1] == '/')
+		new->cmd = take_relative_cmd(cmd);
 	else
 		new->cmd = checking_path(split, cmd, &new->ok);
 	ft_free_double(split);
