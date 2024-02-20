@@ -6,7 +6,7 @@
 /*   By: abastida <abastida@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:34:06 by pabastid          #+#    #+#             */
-/*   Updated: 2024/02/16 14:05:24 by abastida         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:31:53 by abastida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	redir_output(t_word *redir, t_cmd *cmd)
 	res = ft_access(filename, 1);
 	if (!res || res == FILE_NOT_FOUND)
 	{
-		fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
+		fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd == -1)
 			exit_error("Open error\n");
 		free(filename);
