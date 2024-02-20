@@ -92,13 +92,6 @@ void	ft_take_cmd(t_cmd *new, t_master *master)
 
 	cmd = ft_strdup(new->args[0]);
 	path = ft_getenv("PATH", master->env, -1);
-	if (path[0] == '\0' && !is_builtin(cmd))
-	{
-		free(path);
-		new->cmd = cmd;
-		new->ok = 1;
-		return ;
-	}
 	split = ft_split(path, ':');
 	if (!cmd || !path || !split)
 		exit_error("Malloc error");
@@ -107,6 +100,15 @@ void	ft_take_cmd(t_cmd *new, t_master *master)
 	else if (cmd[0] == '.' && cmd[1] == '/')
 		new->cmd = take_relative_cmd(cmd);
 	else
+	{
+		if (path[0] == '\0' && !is_builtin(cmd))
+		{
+			free(path);
+			new->cmd = cmd;
+			new->ok = 1;
+			return ;
+		}
 		new->cmd = checking_path(split, cmd, &new->ok);
+	}
 	ft_free_double(split);
 }
