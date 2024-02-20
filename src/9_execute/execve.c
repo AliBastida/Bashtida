@@ -49,6 +49,8 @@ int	close_all_pipes(t_master *master, pid_t *pids, t_pipes pipes, char **env)
 		finished++;
 	}
 	free(pids);
+	if (final)
+		g_err = WEXITSTATUS(final);
 	return (0);
 }
 

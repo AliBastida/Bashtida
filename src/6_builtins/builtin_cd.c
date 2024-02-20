@@ -12,25 +12,25 @@
 
 #include "minishell.h"
 
-int	builtin_cd(char *dir)
+int builtin_cd(t_master *master, char *dir)
 {
 	if (dir == NULL)
 	{
-		if (!ft_strcmp(ft_getenv("HOME", NULL, 0), ""))
+		if (!ft_strcmp(ft_getenv("HOME", master->env, -1), ""))
 		{
 			printf("bash: cd: HOME not set\n");
 			return (1);
 		}
-		chdir(ft_getenv("HOME", NULL, 0));
+		chdir(ft_getenv("HOME", master->env, -1));
 	}
 	else if (!ft_strncmp(dir, "-", 2))
 	{
-		if (!ft_strcmp(ft_getenv("OLDPWD", NULL, 0), ""))
+		if (!ft_strcmp(ft_getenv("OLDPWD", master->env, -1), ""))
 		{
 			printf("bash: cd: OLDPWD not set\n");
 			return (1);
 		}
-		chdir(ft_getenv("OLDPWD", NULL, 0));
+		chdir(ft_getenv("OLDPWD", master->env, -1));
 	}
 	else if (chdir(dir) == -1)
 		return (4);

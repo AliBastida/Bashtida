@@ -82,7 +82,7 @@ int	run_builtin(t_master *master, t_cmd *tmp)
 	else if (ft_strncmp(tmp->cmd, "pwd", 4) == 0)
 		res = builtin_pwd();
 	else if (ft_strncmp(tmp->cmd, "cd", 3) == 0)
-		res = builtin_cd(tmp->args[1]);
+		res = builtin_cd(master, tmp->args[1]);
 	else if (ft_strncmp(tmp->cmd, "export", 7) == 0)
 		res = builtin_export(master, tmp->args);
 	else if (ft_strncmp(tmp->cmd, "unset", 6) == 0)

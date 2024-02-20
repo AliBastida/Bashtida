@@ -88,7 +88,7 @@ void	create_word_list(t_master *master, t_token *token);
 
 //===== 6_BUILTINS =====//
 //******BUILTIN_CD******//
-int		builtin_cd(char *dir);
+int builtin_cd(t_master *master, char *dir);
 
 //******BUILTIN_ECHO******//
 int		builtin_echo(char **args);
