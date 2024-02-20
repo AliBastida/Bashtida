@@ -168,6 +168,7 @@ int builtin_export(t_master *master, char **args);
 //******BUILTIN_EXPORT_UTILS******//
 int len_until_equal(char *str);
 int checking_format(char *str);
+char *take_out_plus(char *str);
 void join_var(t_list *aux, char *arg);
 t_list *get_envnode_export(t_list *env, char *arg);
 

@@ -39,7 +39,7 @@ void	redirect_pipes(t_cmd *cmd, t_pipes pipes)
 		((dup2(cmd->in_fd, 0)) && (close(cmd->in_fd)));
 	else
 	{
-		if (cmd->hd)
+		if (cmd->hd && cmd->hd->first)
 		{
 			dup2(cmd->hd->fd[0], 0);
 			((close(cmd->hd->fd[0])) && (close(cmd->hd->fd[1])));
@@ -61,7 +61,7 @@ int	check_cmd_and_pipes(t_cmd **cmd, t_pipes *pipes)
 {
 	if ((*cmd)->n == 0 && (*cmd)->next)
 		pipe(pipes->p);
-	else if ((*cmd)->n > 0 && (*cmd)->in_fd == 0 && (*cmd)->next && !(*cmd)->hd)
+	else if ((*cmd)->n > 0 && (*cmd)->next)
 	{
 		if (pipes->tmp_fd != -1)
 			close(pipes->tmp_fd);

@@ -12,12 +12,10 @@
 
 #include "minishell.h"
 
-static void	adding_export_continue(t_master *master, char *arg)
+static void	adding_export_continue(t_master *master, t_list *aux, char *arg)
 {
 	char	*new;
-	t_list	*aux;
 
-	aux = get_envnode_export(master->env, arg);
 	if (aux)
 	{
 		if (ft_strchr(arg, '+'))
@@ -35,17 +33,36 @@ static void	adding_export_continue(t_master *master, char *arg)
 		else
 			new = ft_strdup(arg);
 		aux = ft_lstnew(new);
+		if (!aux)
+			exit_error("Malloc error\n");
 		ft_lstadd_back(&master->env, aux);
 	}
 }
 
-static void	check_format(char *arg) // FIXME: ARREGLANDO LOS ROTOS DE VALERIO
+static int	check_format(t_master *master, t_list **aux, char *arg, int len)
 {
+	char	*new;
+
 	if (checking_format(arg))
 	{
 		printf("bashtida: export: %s': not a valid identifier\n", arg);
-		return ;
+		return (1);
 	}
+	if (!arg[len])
+	{
+		new = ft_strjoin(arg, "=");
+		if (!new)
+			exit_error("Malloc error\n");
+		*aux = get_envnode_export(master->env, new);
+		if (!*aux)
+			ft_lstadd_back(&master->env, ft_lstnew(ft_strdup(new)));
+		else
+			free(new);
+		return (1);
+	}
+	else
+		*aux = get_envnode_export(master->env, arg);
+	return (0);
 }
 
 // esta funcion hace trabajar realmente export: trabaja en el caso
@@ -59,25 +76,25 @@ static void	adding_export(t_master *master, char *arg)
 	t_list	*aux;
 
 	len = len_until_equal(arg);
-	check_format(arg);
-	if (!arg[len] || (arg[len] && arg[len + 1] == '\0'))
+	if (check_format(master, &aux, arg, len))
+		return ;
+	if (arg[len - 1] != '+' && arg[len] == '=' && arg[len + 1] == '\0')
 	{
-		if (arg[len - 1] == '+')
-			arg = ft_substr(arg, 0, len - 1);
-		if (arg[len] != '=')
+		if (!aux)
 		{
-			new = ft_strjoin(arg, "=");
+			new = ft_strdup(arg);
 			if (!new)
 				exit_error("Malloc error\n");
+			ft_lstadd_back(&master->env, ft_lstnew(new));
 		}
 		else
-			new = ft_strdup(arg);
-		aux = get_envnode_export(master->env, new);
-		if (!aux)
-			ft_lstadd_back(&master->env, ft_lstnew(new));
+		{
+			free(aux->content);
+			aux->content = ft_strdup(arg);
+		}
 	}
 	else
-		adding_export_continue(master, arg);
+		adding_export_continue(master, aux, arg);
 }
 
 static void	swapping(char **env, size_t size)
